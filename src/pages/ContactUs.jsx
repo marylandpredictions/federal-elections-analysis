@@ -43,14 +43,21 @@ export default function ContactUs() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] px-4 py-16 sm:py-24">
+    <div 
+      className="min-h-[calc(100vh-4rem)] px-4 py-16 sm:py-24 bg-black"
+      style={{
+        backgroundImage: 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/493863590_FEA3.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
       <div className="max-w-2xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-black font-inter font-bold text-3xl sm:text-4xl text-center mb-8">
+          <h1 className="text-white font-inter font-bold text-3xl sm:text-4xl text-center mb-8 text-shadow-teal">
             Contact Us
           </h1>
 
@@ -112,7 +119,7 @@ export default function ContactUs() {
             </Button>
           </form>
 
-          <p className="text-black text-center mt-6 text-sm sm:text-base">
+          <p className="text-white text-center mt-6 text-sm sm:text-base text-shadow-teal">
             Send an email to us at federalelectionsanalysis@gmail.com
           </p>
         </motion.div>
