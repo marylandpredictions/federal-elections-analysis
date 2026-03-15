@@ -71,27 +71,38 @@ export default function PollingTable({ polls, type }) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {currentPolls.map((poll, index) => (
-              <TableRow key={index} className="border-white/10 hover:bg-white/5">
-                <TableCell className="text-white">{poll.pollster}</TableCell>
-                <TableCell className="text-white">{poll.date}</TableCell>
-                <TableCell className="text-white">{poll.sampleSize > 0 ? poll.sampleSize.toLocaleString() : '–'}</TableCell>
-                {isApproval ? (
-                  <>
-                    <TableCell className="text-green-400 font-semibold">{poll.approve}%</TableCell>
-                    <TableCell className="text-red-400 font-semibold">{poll.disapprove}%</TableCell>
-                  </>
-                ) : (
-                  <>
-                    <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.cornyn}%</TableCell>
-                    <TableCell style={{ color: '#CC5500' }} className="font-semibold">{poll.paxton}%</TableCell>
-                    <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
-                    <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
-                  </>
-                )}
-                <TableCell className="text-white font-semibold">{poll.margin}</TableCell>
-              </TableRow>
-            ))}
+            {currentPolls.map((poll, index) => {
+              let marginColor = 'text-white';
+              if (!isApproval) {
+                if (poll.margin.includes('Cornyn')) {
+                  marginColor = '#8B0000';
+                } else if (poll.margin.includes('Paxton')) {
+                  marginColor = '#CC5500';
+                }
+              }
+              
+              return (
+                <TableRow key={index} className="border-white/10 hover:bg-white/5">
+                  <TableCell className="text-white">{poll.pollster}</TableCell>
+                  <TableCell className="text-white">{poll.date}</TableCell>
+                  <TableCell className="text-white">{poll.sampleSize > 0 ? poll.sampleSize.toLocaleString() : '–'}</TableCell>
+                  {isApproval ? (
+                    <>
+                      <TableCell className="text-green-400 font-semibold">{poll.approve}%</TableCell>
+                      <TableCell className="text-red-400 font-semibold">{poll.disapprove}%</TableCell>
+                    </>
+                  ) : (
+                    <>
+                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.cornyn}%</TableCell>
+                      <TableCell style={{ color: '#CC5500' }} className="font-semibold">{poll.paxton}%</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+                    </>
+                  )}
+                  <TableCell style={{ color: marginColor }} className="font-semibold">{poll.margin}</TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </div>

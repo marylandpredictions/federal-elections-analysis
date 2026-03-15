@@ -5,7 +5,7 @@ import PollingChart from '../components/polling/PollingChart';
 import PollingTable from '../components/polling/PollingTable';
 
 const pollingOptions = [
-  { value: '2026-senate-generic', label: '2026 Senate Generic Ballot' },
+  { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff' },
   { value: '2026-house-generic', label: '2026 House Generic Ballot' },
   { value: 'presidential-approval', label: 'Presidential Approval Rating' },
   { value: 'congress-approval', label: 'Congress Approval Rating' }

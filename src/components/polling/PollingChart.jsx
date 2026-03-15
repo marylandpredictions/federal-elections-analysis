@@ -35,6 +35,7 @@ export default function PollingChart({ data, type }) {
               borderRadius: '8px',
               color: 'white'
             }}
+            formatter={(value) => `${value}%`}
           />
           <Legend wrapperStyle={{ color: 'white' }} />
           {isApproval ? (
