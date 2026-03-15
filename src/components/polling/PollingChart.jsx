@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 export default function PollingChart({ data, type, polls }) {
   const formattedData = data.map(item => ({
     ...item,
-    date: format(new Date(item.date), 'MMM d, yyyy'),
+    date: format(new Date(item.date), 'MMMM d, yyyy'),
     timestamp: new Date(item.date).getTime()
   }));
 
@@ -30,7 +30,7 @@ export default function PollingChart({ data, type, polls }) {
             type="number"
             domain={['dataMin', 'dataMax']}
             scale="time"
-            tickFormatter={(timestamp) => format(new Date(timestamp), 'MMM d, yyyy')}
+            tickFormatter={(timestamp) => format(new Date(timestamp), 'MMMM d, yyyy')}
             stroke="white" 
             style={{ fontSize: '10px' }}
             angle={-45}
