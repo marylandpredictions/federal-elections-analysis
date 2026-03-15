@@ -16,7 +16,7 @@ const teamMembers = [
   description: 'Description coming soon.'
 },
 {
-  name: 'Denn',
+  name: 'Ryker',
   description: 'Description coming soon.'
 }];
 
