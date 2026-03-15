@@ -5,19 +5,19 @@ import TeamMember from '../components/about/TeamMember';
 const teamMembers = [
 {
   name: 'Nathan',
-  description: 'Description coming soon.'
+  description: 'The founder, CEO of Federal Elections Analysis, and the leading producer of content for FEA. Deeply involved and expert of regional Maryland and DC politics and is from the Greater DC Area.'
 },
 {
   name: 'Darrius',
-  description: 'Description coming soon.'
+  description: 'The chief of Democratic political affairs at FEA and the second to join the channel, another leading producer of content for the channel. Is from Southwestern Georgia.'
 },
 {
   name: 'Cyrus',
-  description: 'Description coming soon.'
+  description: 'Chief of Republican political affairs at FEA and an expert in the populist movement for the right and the left. Is from the Albuquerque Metro.'
 },
 {
   name: 'Ryker',
-  description: 'Description coming soon.'
+  description: 'Chief historical analyst at FEA. The newest addition to the team. Ryker is from the Greater NYC Area and deeply involved in local NY and NJ politics.'
 }];
 
 
