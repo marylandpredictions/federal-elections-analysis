@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import InteractiveMap from '../components/forecasts/InteractiveMap';
 import SenateControl from '../components/forecasts/SenateControl';
+import SeatCounter from '../components/forecasts/SeatCounter';
 
 const governorsRatings = {
   'Alabama': 'Safe R',
@@ -138,8 +139,9 @@ export default function Forecasts() {
             <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
               Senate Forecast
             </h2>
+            <SeatCounter ratings={senateRatings} />
             <InteractiveMap ratings={senateRatings} />
-            <SenateControl democratChance={45} republicanChance={55} />
+            <SenateControl democratChance={42} republicanChance={58} />
           </motion.div>
 
           <motion.div
@@ -150,6 +152,7 @@ export default function Forecasts() {
             <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
               Governors Forecast
             </h2>
+            <SeatCounter ratings={governorsRatings} />
             <InteractiveMap ratings={governorsRatings} />
           </motion.div>
         </div>
