@@ -38,7 +38,7 @@ export default function AboutUs() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-white font-inter font-bold text-3xl sm:text-4xl text-center mb-8 text-shadow-teal"
+          className="text-white font-inter font-bold text-7xl sm:text-8xl md:text-9xl text-center mb-8 text-shadow-teal"
         >
           About Us
         </motion.h1>
