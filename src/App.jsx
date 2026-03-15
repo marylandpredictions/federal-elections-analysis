@@ -10,6 +10,7 @@ import SiteLayout from './components/layout/SiteLayout';
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
+import Forecasts from './pages/Forecasts';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -38,6 +39,7 @@ const AuthenticatedApp = () => {
         <Route path="/Home" element={<Home />} />
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/ContactUs" element={<ContactUs />} />
+        <Route path="/Forecasts" element={<Forecasts />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
