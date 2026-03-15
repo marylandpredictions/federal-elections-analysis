@@ -17,6 +17,16 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-primary shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+        {/* Membership Button */}
+        <a 
+          href="https://www.youtube.com/@FedElections/membership" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="hidden md:block bg-white text-primary font-inter font-semibold text-sm px-4 py-2 rounded-lg hover:bg-white/90 transition-all"
+        >
+          Membership
+        </a>
+
         {/* Logo */}
         <Link to="/Home" className="flex items-center gap-3">
           <img
