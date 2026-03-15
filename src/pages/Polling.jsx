@@ -266,7 +266,7 @@ export default function Polling() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <PollingChart data={currentData.chartData} type={selectedPoll} />
+          <PollingChart data={currentData.chartData} type={selectedPoll} polls={currentData.polls} />
         </motion.div>
 
         <motion.div

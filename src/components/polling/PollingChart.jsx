@@ -1,12 +1,18 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, Scatter } from 'recharts';
 import { format } from 'date-fns';
 
-export default function PollingChart({ data, type }) {
+export default function PollingChart({ data, type, polls }) {
   const formattedData = data.map(item => ({
     ...item,
     date: format(new Date(item.date), 'MMM d, yyyy')
   }));
+
+  const pollDots = polls ? polls.map(poll => ({
+    date: poll.date,
+    cornyn: poll.cornyn,
+    paxton: poll.paxton
+  })) : [];
 
   const isApproval = type.includes('approval');
 
@@ -103,6 +109,22 @@ export default function PollingChart({ data, type }) {
                 name="Paxton"
                 dot={false}
               />
+              {pollDots.map((poll, idx) => (
+                <React.Fragment key={idx}>
+                  <Scatter
+                    data={[{ date: poll.date, value: poll.cornyn }]}
+                    fill="#8B0000"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ date: poll.date, value: poll.paxton }]}
+                    fill="#CC5500"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                </React.Fragment>
+              ))}
             </>
           )}
         </LineChart>
