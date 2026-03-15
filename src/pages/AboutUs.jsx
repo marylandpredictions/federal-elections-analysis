@@ -50,9 +50,7 @@ export default function AboutUs() {
         transition={{ duration: 0.6, delay: 0.2 }} className="bg-transparent text-white text-base font-inter text-center normal-case leading-relaxed opacity-100 sm:text-lg md:text-xl text-shadow-teal">
 
 
-          At Federal Elections Analysis, we give data-driven takes and predictions to deliver the most
-          recent and important news about our political and electoral atmosphere to election fanatics
-          and people who are just trying to stay in the bubble to our nation's politics.
+          Here at Federal Elections Analysis, our priority is to deliver data-driven analysis, information, and results as fast as we can and as accurate as we can. We have been on this mission since June of 2024. Since then, not only our community has grown, but so has the team that makes this possible. Check them out below!
         </motion.p>
 
         {/* Our Team */}
@@ -100,6 +98,15 @@ export default function AboutUs() {
             </motion.div>
           }
         </AnimatePresence>
+
+        {/* Community Section */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-16 bg-transparent text-white text-base font-inter text-center normal-case leading-relaxed opacity-100 sm:text-lg md:text-xl text-shadow-teal">
+          All four of us share something in common with elections. Its not just the numbers and data, its the people involved. The community and service. We want to make that easier for you and you can check that out on our Youtube and this site. If you want to help us out further, you can subscribe to our channel and like our videos, to go a step further, buy our Youtube membership starting at just $1.99 a piece!
+        </motion.p>
       </div>
     </div>);
 
