@@ -37,6 +37,7 @@ export default function PollingChart({ data, type, polls }) {
   })) : [];
 
   const isApproval = type.includes('approval');
+  const isGenericBallot = type === 'generic-congressional-ballot';
   const isIllinois = type === 'illinois-dem-primary';
   const isTexas = type === '2026-senate-generic';
   const isIllinois9th = type === 'illinois-9th-house';
@@ -46,7 +47,9 @@ export default function PollingChart({ data, type, polls }) {
 
   // Calculate dynamic Y-axis domain based on poll type
   let yDomain = [0, 100];
-  if (isTexas) {
+  if (isGenericBallot) {
+    yDomain = [25, 60];
+  } else if (isTexas) {
     yDomain = [15, 65];
   } else if (isIllinois) {
     yDomain = [5, 50];
@@ -98,7 +101,26 @@ export default function PollingChart({ data, type, polls }) {
             labelFormatter={(timestamp) => format(new Date(timestamp), 'MMMM d, yyyy')}
           />
           <Legend wrapperStyle={{ color: 'white' }} />
-          {isSouthCarolina ? (
+          {isGenericBallot ? (
+            <>
+              <Line 
+                type="monotone" 
+                dataKey="democrat" 
+                stroke="#0047AB" 
+                strokeWidth={3}
+                name="Democrat"
+                dot={{ fill: '#0047AB', r: 4 }}
+              />
+              <Line 
+                type="monotone" 
+                dataKey="republican" 
+                stroke="#8B0000" 
+                strokeWidth={3}
+                name="Republican"
+                dot={{ fill: '#8B0000', r: 4 }}
+              />
+            </>
+          ) : isSouthCarolina ? (
             <>
               <Line 
                 type="linear" 

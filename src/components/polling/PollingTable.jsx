@@ -13,6 +13,7 @@ export default function PollingTable({ polls, type }) {
   const currentPolls = polls.slice(startIndex, endIndex);
 
   const isApproval = type.includes('approval');
+  const isGenericBallot = type === 'generic-congressional-ballot';
   const isIllinois = type === 'illinois-dem-primary';
   const isIllinois9th = type === 'illinois-9th-house';
   const isFlorida = type === 'florida-gop-governor';
@@ -59,7 +60,12 @@ export default function PollingTable({ polls, type }) {
               <TableHead className="text-white font-bold">Pollster</TableHead>
               <TableHead className="text-white font-bold">Date</TableHead>
               <TableHead className="text-white font-bold">Sample Size</TableHead>
-              {isApproval ? (
+              {isGenericBallot ? (
+                <>
+                  <TableHead className="text-white font-bold">Democrat</TableHead>
+                  <TableHead className="text-white font-bold">Republican</TableHead>
+                </>
+              ) : isApproval ? (
                 <>
                   <TableHead className="text-white font-bold">Approve</TableHead>
                   <TableHead className="text-white font-bold">Disapprove</TableHead>
@@ -126,7 +132,13 @@ export default function PollingTable({ polls, type }) {
           <TableBody>
             {currentPolls.map((poll, index) => {
               let marginColor = 'text-white';
-              if (isSouthCarolina) {
+              if (isGenericBallot) {
+                if (poll.margin.includes('Generic D')) {
+                  marginColor = '#0047AB';
+                } else if (poll.margin.includes('Generic R')) {
+                  marginColor = '#8B0000';
+                }
+              } else if (isSouthCarolina) {
                 if (poll.margin.includes('Mace')) {
                   marginColor = '#8B0000';
                 } else if (poll.margin.includes('Wilson')) {
@@ -191,7 +203,12 @@ export default function PollingTable({ polls, type }) {
                   <TableCell className="text-white">{poll.pollster}</TableCell>
                   <TableCell className="text-white">{poll.date}</TableCell>
                   <TableCell className="text-white">{poll.sampleSize > 0 ? poll.sampleSize.toLocaleString() : '–'}</TableCell>
-                  {isApproval ? (
+                  {isGenericBallot ? (
+                    <>
+                      <TableCell style={{ color: '#0047AB' }} className="font-semibold">{poll.democrat}%</TableCell>
+                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.republican}%</TableCell>
+                    </>
+                  ) : isApproval ? (
                     <>
                       <TableCell className="text-green-400 font-semibold">{poll.approve}%</TableCell>
                       <TableCell className="text-red-400 font-semibold">{poll.disapprove}%</TableCell>
