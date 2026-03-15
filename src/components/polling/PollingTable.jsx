@@ -14,6 +14,7 @@ export default function PollingTable({ polls, type }) {
 
   const isApproval = type.includes('approval');
   const isIllinois = type === 'illinois-dem-primary';
+  const isIllinois9th = type === 'illinois-9th-house';
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
@@ -60,6 +61,17 @@ export default function PollingTable({ polls, type }) {
                   <TableHead className="text-white font-bold">Approve</TableHead>
                   <TableHead className="text-white font-bold">Disapprove</TableHead>
                 </>
+              ) : isIllinois9th ? (
+                <>
+                  <TableHead className="text-white font-bold">Biss</TableHead>
+                  <TableHead className="text-white font-bold">Fine</TableHead>
+                  <TableHead className="text-white font-bold">Abughazaleh</TableHead>
+                  <TableHead className="text-white font-bold">Simmons</TableHead>
+                  <TableHead className="text-white font-bold">Amiwala</TableHead>
+                  <TableHead className="text-white font-bold">Andrew</TableHead>
+                  <TableHead className="text-white font-bold">Other</TableHead>
+                  <TableHead className="text-white font-bold">Undecided</TableHead>
+                </>
               ) : isIllinois ? (
                 <>
                   <TableHead className="text-white font-bold">Kelly</TableHead>
@@ -82,7 +94,7 @@ export default function PollingTable({ polls, type }) {
           <TableBody>
             {currentPolls.map((poll, index) => {
               let marginColor = 'text-white';
-              if (!isApproval && !isIllinois) {
+              if (!isApproval && !isIllinois && !isIllinois9th) {
                 if (poll.margin.includes('Cornyn')) {
                   marginColor = '#8B0000';
                 } else if (poll.margin.includes('Paxton')) {
@@ -96,6 +108,20 @@ export default function PollingTable({ polls, type }) {
                 } else if (poll.margin.includes('Kelly')) {
                   marginColor = '#008080';
                 }
+              } else if (isIllinois9th) {
+                if (poll.margin.includes('Biss')) {
+                  marginColor = '#008080';
+                } else if (poll.margin.includes('Fine')) {
+                  marginColor = '#8B0000';
+                } else if (poll.margin.includes('Abughazaleh')) {
+                  marginColor = '#C71585';
+                } else if (poll.margin.includes('Simmons')) {
+                  marginColor = '#006400';
+                } else if (poll.margin.includes('Amiwala')) {
+                  marginColor = '#4B0082';
+                } else if (poll.margin.includes('Andrew')) {
+                  marginColor = '#FFD700';
+                }
               }
               
               return (
@@ -107,6 +133,17 @@ export default function PollingTable({ polls, type }) {
                     <>
                       <TableCell className="text-green-400 font-semibold">{poll.approve}%</TableCell>
                       <TableCell className="text-red-400 font-semibold">{poll.disapprove}%</TableCell>
+                    </>
+                  ) : isIllinois9th ? (
+                    <>
+                      <TableCell style={{ color: '#008080' }} className="font-semibold">{poll.biss}%</TableCell>
+                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.fine}%</TableCell>
+                      <TableCell style={{ color: '#C71585' }} className="font-semibold">{poll.abughazaleh}%</TableCell>
+                      <TableCell style={{ color: '#006400' }} className="font-semibold">{poll.simmons}%</TableCell>
+                      <TableCell style={{ color: '#4B0082' }} className="font-semibold">{poll.amiwala}%</TableCell>
+                      <TableCell style={{ color: '#FFD700' }} className="font-semibold">{poll.andrew}%</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
                     </>
                   ) : isIllinois ? (
                     <>

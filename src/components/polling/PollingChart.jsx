@@ -15,12 +15,19 @@ export default function PollingChart({ data, type, polls }) {
     paxton: poll.paxton,
     kelly: poll.kelly,
     raja: poll.raja,
-    stratton: poll.stratton
+    stratton: poll.stratton,
+    biss: poll.biss,
+    fine: poll.fine,
+    abughazaleh: poll.abughazaleh,
+    simmons: poll.simmons,
+    amiwala: poll.amiwala,
+    andrew: poll.andrew
   })) : [];
 
   const isApproval = type.includes('approval');
   const isIllinois = type === 'illinois-dem-primary';
   const isTexas = type === '2026-senate-generic';
+  const isIllinois9th = type === 'illinois-9th-house';
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
@@ -58,7 +65,98 @@ export default function PollingChart({ data, type, polls }) {
             labelFormatter={(timestamp) => format(new Date(timestamp), 'MMMM d, yyyy')}
           />
           <Legend wrapperStyle={{ color: 'white' }} />
-          {isApproval ? (
+          {isIllinois9th ? (
+            <>
+              <Line 
+                type="linear" 
+                dataKey="biss" 
+                stroke="#008080" 
+                strokeWidth={3}
+                name="Daniel Biss"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="fine" 
+                stroke="#8B0000" 
+                strokeWidth={3}
+                name="Laura Fine"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="abughazaleh" 
+                stroke="#C71585" 
+                strokeWidth={3}
+                name="Kat Abughazaleh"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="simmons" 
+                stroke="#006400" 
+                strokeWidth={3}
+                name="Mike Simmons"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="amiwala" 
+                stroke="#4B0082" 
+                strokeWidth={3}
+                name="Bushra Amiwala"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="andrew" 
+                stroke="#FFD700" 
+                strokeWidth={3}
+                name="Phil Andrew"
+                dot={false}
+              />
+              {pollDots.map((poll, idx) => (
+                <React.Fragment key={idx}>
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.biss }]}
+                    fill="#008080"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.fine }]}
+                    fill="#8B0000"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.abughazaleh }]}
+                    fill="#C71585"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.simmons }]}
+                    fill="#006400"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.amiwala }]}
+                    fill="#4B0082"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.andrew }]}
+                    fill="#FFD700"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                </React.Fragment>
+              ))}
+            </>
+          ) : isApproval ? (
             <>
               <Line 
                 type="monotone" 

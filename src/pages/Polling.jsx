@@ -7,7 +7,7 @@ import PollingTable from '../components/polling/PollingTable';
 const pollingOptions = [
   { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff' },
   { value: 'illinois-dem-primary', label: 'Illinois Democratic Senate Primary' },
-  { value: 'presidential-approval', label: 'Presidential Approval Rating' },
+  { value: 'illinois-9th-house', label: 'Illinois 9th Democratic House Primary' },
   { value: 'congress-approval', label: 'Congress Approval Rating' }
 ];
 
@@ -223,17 +223,28 @@ const mockPollingData = {
       { pollster: 'GBAO (D)', date: 'June 5–10, 2025', sampleSize: 1200, kelly: 14, raja: 32, stratton: 19, other: 4, undecided: 31, margin: 'Raja +13' }
     ]
   },
-  'presidential-approval': {
+  'illinois-9th-house': {
     chartData: [
-      { date: '2026-01-15', approve: 42, disapprove: 53 },
-      { date: '2026-02-01', approve: 43, disapprove: 52 },
-      { date: '2026-02-15', approve: 41, disapprove: 54 },
-      { date: '2026-03-01', approve: 42, disapprove: 53 },
-      { date: '2026-03-15', approve: 43, disapprove: 52 }
+      { date: '2025-06-12', biss: 17, fine: 8, abughazaleh: 10, simmons: 4, amiwala: 2, andrew: 0 },
+      { date: '2025-10-14', biss: 18, fine: 9, abughazaleh: 13, simmons: 4, amiwala: 2, andrew: 2 },
+      { date: '2025-10-29', biss: 18, fine: 10, abughazaleh: 18, simmons: 6, amiwala: 6, andrew: 1 },
+      { date: '2025-11-04', biss: 31, fine: 10, abughazaleh: 17, simmons: 6, amiwala: 3, andrew: 3 },
+      { date: '2026-01-26', biss: 21, fine: 21, abughazaleh: 14, simmons: 7, amiwala: 4, andrew: 4 },
+      { date: '2026-02-05', biss: 31, fine: 18, abughazaleh: 18, simmons: 7, amiwala: 4, andrew: 7 },
+      { date: '2026-02-15', biss: 31, fine: 14, abughazaleh: 13, simmons: 9, amiwala: 7, andrew: 4 },
+      { date: '2026-02-20', biss: 24, fine: 16, abughazaleh: 17, simmons: 6, amiwala: 4, andrew: 5 },
+      { date: '2026-03-09', biss: 24, fine: 14, abughazaleh: 20, simmons: 10, amiwala: 6, andrew: 7 }
     ],
     polls: [
-      { pollster: 'Gallup', date: '3/15/2026', sampleSize: 1502, approve: 43, disapprove: 52, margin: '-9' },
-      { pollster: 'ABC News/Washington Post', date: '3/12/2026', sampleSize: 1234, approve: 42, disapprove: 53, margin: '-11' }
+      { pollster: 'Public Policy Polling (D)', date: 'March 9–10, 2026', sampleSize: 741, abughazaleh: 20, amiwala: 6, andrew: 7, biss: 24, fine: 14, simmons: 10, other: 2, undecided: 17, margin: 'Biss +4' },
+      { pollster: 'Public Policy Polling (D)', date: 'February 20–21, 2026', sampleSize: 501, abughazaleh: 17, amiwala: 4, andrew: 5, biss: 24, fine: 16, simmons: 6, other: 6, undecided: 22, margin: 'Biss +7' },
+      { pollster: 'Community Pulse/Molitico (D)', date: 'February 15–20, 2026', sampleSize: 638, abughazaleh: 13, amiwala: 7, andrew: 4, biss: 31, fine: 14, simmons: 9, other: 3, undecided: 21, margin: 'Biss +17' },
+      { pollster: 'Impact Research (D)', date: 'February 5–10, 2026', sampleSize: 500, abughazaleh: 18, amiwala: 4, andrew: 7, biss: 31, fine: 18, simmons: 7, other: 5, undecided: 11, margin: 'Biss +13' },
+      { pollster: 'GBAO Strategies (D)', date: 'January 26–29, 2026', sampleSize: 500, abughazaleh: 14, amiwala: 4, andrew: 4, biss: 21, fine: 21, simmons: 7, other: 9, undecided: 23, margin: 'Tie' },
+      { pollster: 'Impact Research (D)', date: 'November 4–9, 2025', sampleSize: 500, abughazaleh: 17, amiwala: 3, andrew: 3, biss: 31, fine: 10, simmons: 6, other: 8, undecided: 21, margin: 'Biss +14' },
+      { pollster: 'Data for Progress (D)', date: 'October 29 – November 3, 2025', sampleSize: 569, abughazaleh: 18, amiwala: 6, andrew: 1, biss: 18, fine: 10, simmons: 6, other: 10, undecided: 31, margin: 'Tie' },
+      { pollster: 'MDW Communications (D)', date: 'October 14–16, 2025', sampleSize: 917, abughazaleh: 13, amiwala: 2, andrew: 2, biss: 18, fine: 9, simmons: 4, other: 4, undecided: 48, margin: 'Biss +5' },
+      { pollster: 'MDW Communications (D)', date: 'June 12–15, 2025', sampleSize: 899, abughazaleh: 10, amiwala: 2, andrew: 0, biss: 17, fine: 8, simmons: 4, other: 6, undecided: 53, margin: 'Biss +7' }
     ]
   },
   'congress-approval': {
