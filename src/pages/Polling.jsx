@@ -8,7 +8,7 @@ const pollingOptions = [
   { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff' },
   { value: 'illinois-dem-primary', label: 'Illinois Democratic Senate Primary' },
   { value: 'illinois-9th-house', label: 'Illinois 9th Democratic House Primary' },
-  { value: 'congress-approval', label: 'Congress Approval Rating' }
+  { value: 'florida-gop-governor', label: 'Florida Republican Governor Primary' }
 ];
 
 const mockPollingData = {
@@ -247,17 +247,38 @@ const mockPollingData = {
       { pollster: 'MDW Communications (D)', date: 'June 12–15, 2025', sampleSize: 899, abughazaleh: 10, amiwala: 2, andrew: 0, biss: 17, fine: 8, simmons: 4, other: 6, undecided: 53, margin: 'Biss +7' }
     ]
   },
-  'congress-approval': {
+  'florida-gop-governor': {
     chartData: [
-      { date: '2026-01-15', approve: 18, disapprove: 75 },
-      { date: '2026-02-01', approve: 19, disapprove: 74 },
-      { date: '2026-02-15', approve: 17, disapprove: 76 },
-      { date: '2026-03-01', approve: 18, disapprove: 75 },
-      { date: '2026-03-15', approve: 19, disapprove: 74 }
+      { date: '2025-09-04', donalds: 40, fishback: 0, collins: 2, renner: 2 },
+      { date: '2025-09-16', donalds: 29, fishback: 0, collins: 0, renner: 9 },
+      { date: '2025-10-13', donalds: 39, fishback: 0, collins: 4, renner: 3 },
+      { date: '2025-11-11', donalds: 45, fishback: 1, collins: 1, renner: 3 },
+      { date: '2025-11-17', donalds: 43, fishback: 0, collins: 1, renner: 2 },
+      { date: '2025-12-07', donalds: 40, fishback: 0, collins: 13, renner: 0 },
+      { date: '2025-12-08', donalds: 38, fishback: 2, collins: 9, renner: 1 },
+      { date: '2026-01-04', donalds: 45, fishback: 4, collins: 6, renner: 3 },
+      { date: '2026-01-08', donalds: 37, fishback: 3, collins: 7, renner: 4 },
+      { date: '2026-01-19', donalds: 37, fishback: 23, collins: 0, renner: 0 },
+      { date: '2026-02-13', donalds: 33, fishback: 3, collins: 15, renner: 9 },
+      { date: '2026-02-16', donalds: 31, fishback: 6, collins: 4, renner: 1 },
+      { date: '2026-02-20', donalds: 30, fishback: 8, collins: 12, renner: 2 },
+      { date: '2026-02-23', donalds: 44, fishback: 5, collins: 4, renner: 2 }
     ],
     polls: [
-      { pollster: 'Gallup', date: '3/15/2026', sampleSize: 1502, approve: 19, disapprove: 74, margin: '-55' },
-      { pollster: 'ABC News/Washington Post', date: '3/12/2026', sampleSize: 1234, approve: 18, disapprove: 75, margin: '-57' }
+      { pollster: 'The American Promise', date: 'February 23–26, 2026', sampleSize: 800, collins: 4, donalds: 44, fishback: 5, renner: 2, other: 0, undecided: 45, margin: 'Donalds +40' },
+      { pollster: 'The Public Sentiment Institute', date: 'February 20, 2026', sampleSize: 0, collins: 12, donalds: 30, fishback: 8, renner: 2, other: 2, undecided: 46, margin: 'Donalds +18' },
+      { pollster: 'University of North Florida', date: 'February 16–20, 2026', sampleSize: 657, collins: 4, donalds: 31, fishback: 6, renner: 1, other: 6, undecided: 51, margin: 'Donalds +27' },
+      { pollster: 'Targoz Market Research', date: 'February 13–16, 2026', sampleSize: 401, collins: 15, donalds: 33, fishback: 3, renner: 9, other: 0, undecided: 40, margin: 'Donalds +18' },
+      { pollster: 'Patriot Polling (R)', date: 'January 19–29, 2026', sampleSize: 827, collins: 0, donalds: 37, fishback: 23, renner: 0, other: 0, undecided: 40, margin: 'Donalds +14' },
+      { pollster: 'Mason-Dixon Polling & Strategy', date: 'January 8–13, 2026', sampleSize: 400, collins: 7, donalds: 37, fishback: 3, renner: 4, other: 0, undecided: 49, margin: 'Donalds +30' },
+      { pollster: 'Fabrizio, Lee & Associates (R)', date: 'January 4–6, 2026', sampleSize: 600, collins: 6, donalds: 45, fishback: 4, renner: 3, other: 0, undecided: 41, margin: 'Donalds +39' },
+      { pollster: 'Public Opinion Strategies (R)', date: 'December 7–11, 2025', sampleSize: 700, collins: 13, donalds: 40, fishback: 0, renner: 0, other: 9, undecided: 38, margin: 'Donalds +27' },
+      { pollster: 'The Tyson Group (R)', date: 'December 8–9, 2025', sampleSize: 800, collins: 9, donalds: 38, fishback: 2, renner: 1, other: 0, undecided: 49, margin: 'Donalds +29' },
+      { pollster: 'The American Promise', date: 'November 17–19, 2025', sampleSize: 800, collins: 1, donalds: 43, fishback: 0, renner: 2, other: 0, undecided: 54, margin: 'Donalds +42' },
+      { pollster: 'Victory Insights (R)', date: 'November 11–13, 2025', sampleSize: 600, collins: 1, donalds: 45, fishback: 1, renner: 3, other: 0, undecided: 49, margin: 'Donalds +44' },
+      { pollster: 'St. Pete Polls', date: 'October 13–15, 2025', sampleSize: 1034, collins: 4, donalds: 39, fishback: 0, renner: 3, other: 0, undecided: 54, margin: 'Donalds +35' },
+      { pollster: 'Targoz Market Research', date: 'September 16–18, 2025', sampleSize: 506, collins: 0, donalds: 29, fishback: 0, renner: 9, other: 0, undecided: 62, margin: 'Donalds +20' },
+      { pollster: 'The American Promise', date: 'September 4–5, 2025', sampleSize: 800, collins: 2, donalds: 40, fishback: 0, renner: 2, other: 0, undecided: 54, margin: 'Donalds +38' }
     ]
   }
 };

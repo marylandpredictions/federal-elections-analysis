@@ -21,13 +21,18 @@ export default function PollingChart({ data, type, polls }) {
     abughazaleh: poll.abughazaleh,
     simmons: poll.simmons,
     amiwala: poll.amiwala,
-    andrew: poll.andrew
+    andrew: poll.andrew,
+    donalds: poll.donalds,
+    fishback: poll.fishback,
+    collins: poll.collins,
+    renner: poll.renner
   })) : [];
 
   const isApproval = type.includes('approval');
   const isIllinois = type === 'illinois-dem-primary';
   const isTexas = type === '2026-senate-generic';
   const isIllinois9th = type === 'illinois-9th-house';
+  const isFlorida = type === 'florida-gop-governor';
 
   // Calculate dynamic Y-axis domain based on poll type
   let yDomain = [0, 100];
@@ -37,6 +42,8 @@ export default function PollingChart({ data, type, polls }) {
     yDomain = [5, 50];
   } else if (isIllinois9th) {
     yDomain = [0, 40];
+  } else if (isFlorida) {
+    yDomain = [0, 55];
   } else if (isApproval) {
     yDomain = [10, 85];
   }
@@ -77,7 +84,70 @@ export default function PollingChart({ data, type, polls }) {
             labelFormatter={(timestamp) => format(new Date(timestamp), 'MMMM d, yyyy')}
           />
           <Legend wrapperStyle={{ color: 'white' }} />
-          {isIllinois9th ? (
+          {isFlorida ? (
+            <>
+              <Line 
+                type="linear" 
+                dataKey="donalds" 
+                stroke="#8B0000" 
+                strokeWidth={3}
+                name="Byron Donalds"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="fishback" 
+                stroke="#FF6600" 
+                strokeWidth={3}
+                name="James Fishback"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="collins" 
+                stroke="#C71585" 
+                strokeWidth={3}
+                name="Jay Collins"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="renner" 
+                stroke="#DAA520" 
+                strokeWidth={3}
+                name="Paul Renner"
+                dot={false}
+              />
+              {pollDots.map((poll, idx) => (
+                <React.Fragment key={idx}>
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.donalds }]}
+                    fill="#8B0000"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.fishback }]}
+                    fill="#FF6600"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.collins }]}
+                    fill="#C71585"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.renner }]}
+                    fill="#DAA520"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                </React.Fragment>
+              ))}
+            </>
+          ) : isIllinois9th ? (
             <>
               <Line 
                 type="linear" 
