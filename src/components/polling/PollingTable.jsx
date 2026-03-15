@@ -61,8 +61,10 @@ export default function PollingTable({ polls, type }) {
                 </>
               ) : (
                 <>
-                  <TableHead className="text-white font-bold">Democrat</TableHead>
-                  <TableHead className="text-white font-bold">Republican</TableHead>
+                  <TableHead className="text-white font-bold">Cornyn</TableHead>
+                  <TableHead className="text-white font-bold">Paxton</TableHead>
+                  <TableHead className="text-white font-bold">Other</TableHead>
+                  <TableHead className="text-white font-bold">Undecided</TableHead>
                 </>
               )}
               <TableHead className="text-white font-bold">Margin</TableHead>
@@ -73,7 +75,7 @@ export default function PollingTable({ polls, type }) {
               <TableRow key={index} className="border-white/10 hover:bg-white/5">
                 <TableCell className="text-white">{poll.pollster}</TableCell>
                 <TableCell className="text-white">{poll.date}</TableCell>
-                <TableCell className="text-white">{poll.sampleSize.toLocaleString()}</TableCell>
+                <TableCell className="text-white">{poll.sampleSize > 0 ? poll.sampleSize.toLocaleString() : '–'}</TableCell>
                 {isApproval ? (
                   <>
                     <TableCell className="text-green-400 font-semibold">{poll.approve}%</TableCell>
@@ -81,8 +83,10 @@ export default function PollingTable({ polls, type }) {
                   </>
                 ) : (
                   <>
-                    <TableCell className="text-blue-400 font-semibold">{poll.democrat}%</TableCell>
-                    <TableCell className="text-red-400 font-semibold">{poll.republican}%</TableCell>
+                    <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.cornyn}%</TableCell>
+                    <TableCell style={{ color: '#CC5500' }} className="font-semibold">{poll.paxton}%</TableCell>
+                    <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
+                    <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
                   </>
                 )}
                 <TableCell className="text-white font-semibold">{poll.margin}</TableCell>

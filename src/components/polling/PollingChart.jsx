@@ -1,11 +1,11 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area } from 'recharts';
 import { format } from 'date-fns';
 
 export default function PollingChart({ data, type }) {
   const formattedData = data.map(item => ({
     ...item,
-    date: format(new Date(item.date), 'MMM d')
+    date: format(new Date(item.date), 'MMM d, yyyy')
   }));
 
   const isApproval = type.includes('approval');
@@ -58,21 +58,49 @@ export default function PollingChart({ data, type }) {
             </>
           ) : (
             <>
-              <Line 
-                type="monotone" 
-                dataKey="democrat" 
-                stroke="#2663eb" 
-                strokeWidth={3}
-                name="Democrat"
-                dot={{ fill: '#2663eb', r: 4 }}
+              <Area
+                type="monotone"
+                dataKey="cornyinMax"
+                stroke="none"
+                fill="#8B0000"
+                fillOpacity={0.7}
+              />
+              <Area
+                type="monotone"
+                dataKey="cornyinMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="monotone"
+                dataKey="paxtonMax"
+                stroke="none"
+                fill="#CC5500"
+                fillOpacity={0.7}
+              />
+              <Area
+                type="monotone"
+                dataKey="paxtonMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
               />
               <Line 
                 type="monotone" 
-                dataKey="republican" 
-                stroke="#dc2626" 
+                dataKey="cornyn" 
+                stroke="#8B0000" 
                 strokeWidth={3}
-                name="Republican"
-                dot={{ fill: '#dc2626', r: 4 }}
+                name="Cornyn"
+                dot={{ fill: '#8B0000', r: 4 }}
+              />
+              <Line 
+                type="monotone" 
+                dataKey="paxton" 
+                stroke="#CC5500" 
+                strokeWidth={3}
+                name="Paxton"
+                dot={{ fill: '#CC5500', r: 4 }}
               />
             </>
           )}
