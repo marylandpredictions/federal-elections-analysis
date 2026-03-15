@@ -13,6 +13,7 @@ export default function PollingTable({ polls, type }) {
   const currentPolls = polls.slice(startIndex, endIndex);
 
   const isApproval = type.includes('approval');
+  const isIllinois = type === 'illinois-dem-primary';
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
@@ -59,6 +60,14 @@ export default function PollingTable({ polls, type }) {
                   <TableHead className="text-white font-bold">Approve</TableHead>
                   <TableHead className="text-white font-bold">Disapprove</TableHead>
                 </>
+              ) : isIllinois ? (
+                <>
+                  <TableHead className="text-white font-bold">Kelly</TableHead>
+                  <TableHead className="text-white font-bold">Raja</TableHead>
+                  <TableHead className="text-white font-bold">Stratton</TableHead>
+                  <TableHead className="text-white font-bold">Other</TableHead>
+                  <TableHead className="text-white font-bold">Undecided</TableHead>
+                </>
               ) : (
                 <>
                   <TableHead className="text-white font-bold">Cornyn</TableHead>
@@ -73,11 +82,19 @@ export default function PollingTable({ polls, type }) {
           <TableBody>
             {currentPolls.map((poll, index) => {
               let marginColor = 'text-white';
-              if (!isApproval) {
+              if (!isApproval && !isIllinois) {
                 if (poll.margin.includes('Cornyn')) {
                   marginColor = '#8B0000';
                 } else if (poll.margin.includes('Paxton')) {
                   marginColor = '#CC5500';
+                }
+              } else if (isIllinois) {
+                if (poll.margin.includes('Raja')) {
+                  marginColor = '#0047AB';
+                } else if (poll.margin.includes('Stratton')) {
+                  marginColor = '#006400';
+                } else if (poll.margin.includes('Kelly')) {
+                  marginColor = '#008080';
                 }
               }
               
@@ -90,6 +107,14 @@ export default function PollingTable({ polls, type }) {
                     <>
                       <TableCell className="text-green-400 font-semibold">{poll.approve}%</TableCell>
                       <TableCell className="text-red-400 font-semibold">{poll.disapprove}%</TableCell>
+                    </>
+                  ) : isIllinois ? (
+                    <>
+                      <TableCell style={{ color: '#008080' }} className="font-semibold">{poll.kelly}%</TableCell>
+                      <TableCell style={{ color: '#0047AB' }} className="font-semibold">{poll.raja}%</TableCell>
+                      <TableCell style={{ color: '#006400' }} className="font-semibold">{poll.stratton}%</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
                     </>
                   ) : (
                     <>
