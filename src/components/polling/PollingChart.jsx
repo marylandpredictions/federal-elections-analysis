@@ -104,20 +104,20 @@ export default function PollingChart({ data, type, polls }) {
           {isGenericBallot ? (
             <>
               <Line 
-                type="monotone" 
+                type="linear" 
                 dataKey="democrat" 
                 stroke="#0047AB" 
                 strokeWidth={3}
                 name="Democrat"
-                dot={{ fill: '#0047AB', r: 4 }}
+                dot={false}
               />
               <Line 
-                type="monotone" 
+                type="linear" 
                 dataKey="republican" 
                 stroke="#8B0000" 
                 strokeWidth={3}
                 name="Republican"
-                dot={{ fill: '#8B0000', r: 4 }}
+                dot={false}
               />
             </>
           ) : isSouthCarolina ? (
