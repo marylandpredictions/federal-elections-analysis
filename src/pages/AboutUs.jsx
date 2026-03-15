@@ -34,11 +34,20 @@ export default function AboutUs() {
       }}
     >
       <div className="max-w-4xl mx-auto">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-white font-inter font-bold text-3xl sm:text-4xl text-center mb-8 text-shadow-teal"
+        >
+          About Us
+        </motion.h1>
+
         {/* Mission Statement */}
         <motion.p
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }} className="bg-transparent text-white text-base font-inter text-center normal-case leading-relaxed opacity-100 sm:text-lg md:text-xl text-shadow-teal">
+        transition={{ duration: 0.6, delay: 0.2 }} className="bg-transparent text-white text-base font-inter text-center normal-case leading-relaxed opacity-100 sm:text-lg md:text-xl text-shadow-teal">
 
 
           At Federal Elections Analysis, we give data-driven takes and predictions to deliver the most
