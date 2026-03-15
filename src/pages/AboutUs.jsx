@@ -8,7 +8,7 @@ const teamMembers = [
   description: 'Description coming soon.'
 },
 {
-  name: 'Darius',
+  name: 'Darrius',
   description: 'Description coming soon.'
 },
 {
