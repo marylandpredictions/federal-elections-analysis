@@ -9,7 +9,7 @@ const teamMembers = [
 },
 {
   name: 'Darrius',
-  description: 'The chief of Democratic political affairs at FEA and the second to join the channel, another leading producer of content for the channel. Is from Southwestern Georgia.'
+  description: 'The chief of Democratic political affairs at FEA and the second to join the channel, another leading producer of content for the channel. He is located in Georgia, United States.'
 },
 {
   name: 'Cyrus',
