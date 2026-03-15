@@ -62,7 +62,8 @@ const ratingColors = {
   'Tilt R': '#FF7F7F',
   'Lean R': '#E85C5C',
   'Likely R': '#D94343',
-  'Safe R': '#CC0000'
+  'Safe R': '#CC0000',
+  'Not Contested': '#D3D3D3'
 };
 
 export default function InteractiveMap({ ratings }) {
