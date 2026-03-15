@@ -4,7 +4,8 @@ import { Menu, X } from 'lucide-react';
 
 const navLinks = [
 { label: 'Home', path: '/Home' },
-{ label: 'About Us', path: '/AboutUs' }];
+{ label: 'About Us', path: '/AboutUs' },
+{ label: 'Contact Us', path: '/ContactUs' }];
 
 
 export default function Header() {
