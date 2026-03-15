@@ -10,7 +10,7 @@ const governorsRatings = {
   'Arizona': 'Tilt D',
   'Arkansas': 'Safe R',
   'California': 'Safe D',
-  'Colorado': 'Not Contested',
+  'Colorado': 'Safe D',
   'Connecticut': 'Safe D',
   'Delaware': 'Not Contested',
   'Florida': 'Likely R',
@@ -142,6 +142,12 @@ export default function Forecasts() {
             <SeatCounter ratings={senateRatings} />
             <InteractiveMap ratings={senateRatings} />
             <SenateControl democratChance={42} republicanChance={58} />
+            <div className="mt-8">
+              <h3 className="text-white font-inter font-bold text-xl sm:text-2xl text-center mb-4 text-shadow-teal">
+                House Control Probability
+              </h3>
+              <SenateControl democratChance={71} republicanChance={29} />
+            </div>
           </motion.div>
 
           <motion.div
