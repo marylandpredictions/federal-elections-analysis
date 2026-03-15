@@ -29,7 +29,11 @@ export default function PollingChart({ data, type, polls }) {
     jones: poll.jones,
     jackson: poll.jackson,
     raffensperger: poll.raffensperger,
-    carr: poll.carr
+    carr: poll.carr,
+    mace: poll.mace,
+    wilson: poll.wilson,
+    evette: poll.evette,
+    norman: poll.norman
   })) : [];
 
   const isApproval = type.includes('approval');
@@ -38,6 +42,7 @@ export default function PollingChart({ data, type, polls }) {
   const isIllinois9th = type === 'illinois-9th-house';
   const isFlorida = type === 'florida-gop-governor';
   const isGeorgia = type === 'georgia-gop-governor';
+  const isSouthCarolina = type === 'south-carolina-gop-governor';
 
   // Calculate dynamic Y-axis domain based on poll type
   let yDomain = [0, 100];
@@ -51,6 +56,8 @@ export default function PollingChart({ data, type, polls }) {
     yDomain = [0, 55];
   } else if (isGeorgia) {
     yDomain = [0, 45];
+  } else if (isSouthCarolina) {
+    yDomain = [0, 35];
   } else if (isApproval) {
     yDomain = [10, 85];
   }
@@ -91,7 +98,70 @@ export default function PollingChart({ data, type, polls }) {
             labelFormatter={(timestamp) => format(new Date(timestamp), 'MMMM d, yyyy')}
           />
           <Legend wrapperStyle={{ color: 'white' }} />
-          {isGeorgia ? (
+          {isSouthCarolina ? (
+            <>
+              <Line 
+                type="linear" 
+                dataKey="mace" 
+                stroke="#8B0000" 
+                strokeWidth={3}
+                name="Nancy Mace"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="wilson" 
+                stroke="#006400" 
+                strokeWidth={3}
+                name="Alan Wilson"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="evette" 
+                stroke="#C71585" 
+                strokeWidth={3}
+                name="Pamela Evette"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="norman" 
+                stroke="#FF6600" 
+                strokeWidth={3}
+                name="Ralph Norman"
+                dot={false}
+              />
+              {pollDots.map((poll, idx) => (
+                <React.Fragment key={idx}>
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.mace }]}
+                    fill="#8B0000"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.wilson }]}
+                    fill="#006400"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.evette }]}
+                    fill="#C71585"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.norman }]}
+                    fill="#FF6600"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                </React.Fragment>
+              ))}
+            </>
+          ) : isGeorgia ? (
             <>
               <Line 
                 type="linear" 

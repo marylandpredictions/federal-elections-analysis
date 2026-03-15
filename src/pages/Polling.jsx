@@ -9,7 +9,8 @@ const pollingOptions = [
   { value: 'illinois-dem-primary', label: 'Illinois Democratic Senate Primary' },
   { value: 'illinois-9th-house', label: 'Illinois 9th Democratic House Primary' },
   { value: 'florida-gop-governor', label: 'Florida Republican Governor Primary' },
-  { value: 'georgia-gop-governor', label: 'Georgia Republican Governor Primary' }
+  { value: 'georgia-gop-governor', label: 'Georgia Republican Governor Primary' },
+  { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary' }
 ];
 
 const mockPollingData = {
@@ -304,6 +305,44 @@ const mockPollingData = {
       { pollster: 'InsiderAdvantage (R)/Rosetta Stone (R)', date: 'December 18–19, 2025', sampleSize: 1000, carr: 9, dean: 4, jackson: 0, jones: 24, raffensperger: 14, other: 0, undecided: 49, margin: 'Jones +10' },
       { pollster: 'University of Georgia School of Public and International Affairs', date: 'October 15–23, 2025', sampleSize: 1000, carr: 7, dean: 1, jackson: 0, jones: 22, raffensperger: 15, other: 0, undecided: 55, margin: 'Jones +7' },
       { pollster: 'Quantus Insights (R)', date: 'October 13–14, 2025', sampleSize: 900, carr: 12, dean: 2, jackson: 0, jones: 32, raffensperger: 15, other: 1, undecided: 38, margin: 'Jones +17' }
+    ]
+  },
+  'south-carolina-gop-governor': {
+    chartData: [
+      { date: '2025-03-08', mace: 29, wilson: 27, evette: 31, norman: 11 },
+      { date: '2025-03-19', mace: 16, wilson: 21, evette: 7, norman: 6 },
+      { date: '2025-07-18', mace: 19, wilson: 20, evette: 9, norman: 8 },
+      { date: '2025-07-21', mace: 16, wilson: 15, evette: 8, norman: 6 },
+      { date: '2025-08-11', mace: 25, wilson: 17, evette: 6, norman: 10 },
+      { date: '2025-09-18', mace: 19, wilson: 16, evette: 18, norman: 10 },
+      { date: '2025-09-30', mace: 16, wilson: 12, evette: 20, norman: 9 },
+      { date: '2025-10-01', mace: 16, wilson: 16, evette: 17, norman: 11 },
+      { date: '2025-10-02', mace: 17, wilson: 8, evette: 16, norman: 8 },
+      { date: '2025-11-24', mace: 11, wilson: 22, evette: 16, norman: 12 },
+      { date: '2025-12-16', mace: 13, wilson: 23, evette: 17, norman: 13 },
+      { date: '2026-01-07', mace: 23, wilson: 19, evette: 14, norman: 11 },
+      { date: '2026-01-15', mace: 17, wilson: 20, evette: 22, norman: 10 },
+      { date: '2026-01-24', mace: 18, wilson: 12, evette: 12, norman: 11 },
+      { date: '2026-02-02', mace: 17, wilson: 23, evette: 16, norman: 12 },
+      { date: '2026-03-10', mace: 22, wilson: 22, evette: 16, norman: 11 }
+    ],
+    polls: [
+      { pollster: 'Quantus Insights (R)', date: 'March 10–11, 2026', sampleSize: 806, evette: 16, kimbrell: 3, mace: 22, norman: 11, wilson: 22, other: 0, undecided: 26, margin: 'Tie' },
+      { pollster: 'National Public Affairs (R)', date: 'February 2–5, 2026', sampleSize: 800, evette: 16, kimbrell: 2, mace: 17, norman: 12, wilson: 23, other: 0, undecided: 30, margin: 'Wilson +6' },
+      { pollster: 'Targoz Market Research/South Carolina Policy Council', date: 'January 24 – February 1, 2026', sampleSize: 540, evette: 12, kimbrell: 4, mace: 18, norman: 11, wilson: 12, other: 0, undecided: 43, margin: 'Mace +6' },
+      { pollster: 'Trafalgar Group (R)', date: 'January 15–16, 2026', sampleSize: 1076, evette: 22, kimbrell: 2, mace: 17, norman: 10, wilson: 20, other: 0, undecided: 29, margin: 'Evette +2' },
+      { pollster: 'Stratus Intelligence (R)', date: 'January 7–9, 2026', sampleSize: 700, evette: 14, kimbrell: 0, mace: 23, norman: 11, wilson: 19, other: 0, undecided: 32, margin: 'Mace +4' },
+      { pollster: 'Wick', date: 'December 16–19, 2025', sampleSize: 800, evette: 17, kimbrell: 2, mace: 13, norman: 13, wilson: 23, other: 0, undecided: 33, margin: 'Wilson +6' },
+      { pollster: 'Wick', date: 'November 24–26, 2025', sampleSize: 600, evette: 16, kimbrell: 2, mace: 11, norman: 12, wilson: 22, other: 0, undecided: 38, margin: 'Wilson +6' },
+      { pollster: 'Winthrop University', date: 'October 2–19, 2025', sampleSize: 1331, evette: 16, kimbrell: 3, mace: 17, norman: 8, wilson: 8, other: 1, undecided: 47, margin: 'Mace +1' },
+      { pollster: 'Quantus Insights (R)', date: 'October 1–4, 2025', sampleSize: 600, evette: 17, kimbrell: 5, mace: 16, norman: 11, wilson: 16, other: 0, undecided: 35, margin: 'Evette +1' },
+      { pollster: 'Trafalgar Group (R)', date: 'September 30 – October 2, 2025', sampleSize: 1094, evette: 20, kimbrell: 1, mace: 16, norman: 9, wilson: 12, other: 0, undecided: 41, margin: 'Evette +4' },
+      { pollster: 'co/efficient (R)', date: 'September 18–19, 2025', sampleSize: 1094, evette: 18, kimbrell: 2, mace: 19, norman: 10, wilson: 16, other: 0, undecided: 35, margin: 'Mace +1' },
+      { pollster: 'Meeting Street Insights (R)', date: 'August 11–12, 2025', sampleSize: 600, evette: 6, kimbrell: 3, mace: 25, norman: 10, wilson: 17, other: 0, undecided: 38, margin: 'Mace +8' },
+      { pollster: 'Targoz Market Research/South Carolina Policy Council', date: 'July 21–25, 2025', sampleSize: 1200, evette: 8, kimbrell: 3, mace: 16, norman: 6, wilson: 15, other: 0, undecided: 52, margin: 'Mace +1' },
+      { pollster: 'yes. every kid. (D)', date: 'July 18–21, 2025', sampleSize: 406, evette: 9, kimbrell: 3, mace: 19, norman: 8, wilson: 20, other: 2, undecided: 37, margin: 'Wilson +1' },
+      { pollster: 'First Tuesday Strategies (R)', date: 'March 19–21, 2025', sampleSize: 500, evette: 7, kimbrell: 2, mace: 16, norman: 6, wilson: 21, other: 1, undecided: 47, margin: 'Wilson +5' },
+      { pollster: 'Trafalgar Group (R)', date: 'March 8–10, 2025', sampleSize: 1127, evette: 31, kimbrell: 0, mace: 29, norman: 11, wilson: 27, other: 0, undecided: 2, margin: 'Evette +2' }
     ]
   }
 };
