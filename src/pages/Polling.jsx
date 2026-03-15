@@ -6,7 +6,7 @@ import PollingTable from '../components/polling/PollingTable';
 
 const pollingOptions = [
   { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff' },
-  { value: '2026-house-generic', label: '2026 House Generic Ballot' },
+  { value: 'illinois-dem-primary', label: 'Illinois Democratic Senate Primary' },
   { value: 'presidential-approval', label: 'Presidential Approval Rating' },
   { value: 'congress-approval', label: 'Congress Approval Rating' }
 ];
@@ -177,17 +177,50 @@ const mockPollingData = {
       { pollster: 'Victory Insights (R)', date: 'January 4–6, 2025', sampleSize: 600, cornyn: 34, paxton: 42, other: 0, undecided: 25, margin: 'Paxton +8' }
     ]
   },
-  '2026-house-generic': {
+  'illinois-dem-primary': {
     chartData: [
-      { date: '2026-01-15', democrat: 44, republican: 49 },
-      { date: '2026-02-01', democrat: 45, republican: 48 },
-      { date: '2026-02-15', democrat: 43, republican: 50 },
-      { date: '2026-03-01', democrat: 44, republican: 49 },
-      { date: '2026-03-15', democrat: 45, republican: 48 }
+      { date: '2025-06-05', kelly: 14, raja: 32, stratton: 19, kellyMin: 11, kellyMax: 17, rajaMin: 29, rajaMax: 35, strattonMin: 16, strattonMax: 22 },
+      { date: '2025-08-08', kelly: 13, raja: 51, stratton: 28, kellyMin: 10, kellyMax: 16, rajaMin: 48, rajaMax: 54, strattonMin: 25, strattonMax: 31 },
+      { date: '2025-08-12', kelly: 12, raja: 38, stratton: 18, kellyMin: 9, kellyMax: 15, rajaMin: 35, rajaMax: 41, strattonMin: 15, strattonMax: 21 },
+      { date: '2025-09-17', kelly: 8, raja: 41, stratton: 17, kellyMin: 5, kellyMax: 11, rajaMin: 38, rajaMax: 44, strattonMin: 14, strattonMax: 20 },
+      { date: '2025-09-25', kelly: 8, raja: 33, stratton: 18, kellyMin: 5, kellyMax: 11, rajaMin: 30, rajaMax: 36, strattonMin: 15, strattonMax: 21 },
+      { date: '2025-11-20', kelly: 22, raja: 29, stratton: 18, kellyMin: 19, kellyMax: 25, rajaMin: 26, rajaMax: 32, strattonMin: 15, strattonMax: 21 },
+      { date: '2025-12-04', kelly: 7, raja: 42, stratton: 14, kellyMin: 4, kellyMax: 10, rajaMin: 39, rajaMax: 45, strattonMin: 11, strattonMax: 17 },
+      { date: '2025-12-08', kelly: 9, raja: 32, stratton: 20, kellyMin: 6, kellyMax: 12, rajaMin: 29, rajaMax: 35, strattonMin: 17, strattonMax: 23 },
+      { date: '2026-01-03', kelly: 8, raja: 31, stratton: 10, kellyMin: 5, kellyMax: 11, rajaMin: 28, rajaMax: 34, strattonMin: 7, strattonMax: 13 },
+      { date: '2026-01-08', kelly: 15, raja: 41, stratton: 16, kellyMin: 12, kellyMax: 18, rajaMin: 38, rajaMax: 44, strattonMin: 13, strattonMax: 19 },
+      { date: '2026-01-21', kelly: 11, raja: 32, stratton: 21, kellyMin: 8, kellyMax: 14, rajaMin: 29, rajaMax: 35, strattonMin: 18, strattonMax: 24 },
+      { date: '2026-01-25', kelly: 13, raja: 43, stratton: 17, kellyMin: 10, kellyMax: 16, rajaMin: 40, rajaMax: 46, strattonMin: 14, strattonMax: 20 },
+      { date: '2026-02-02', kelly: 8, raja: 34, stratton: 23, kellyMin: 5, kellyMax: 11, rajaMin: 31, rajaMax: 37, strattonMin: 20, strattonMax: 26 },
+      { date: '2026-02-14', kelly: 10, raja: 42, stratton: 26, kellyMin: 7, kellyMax: 13, rajaMin: 39, rajaMax: 45, strattonMin: 23, strattonMax: 29 },
+      { date: '2026-02-23', kelly: 13, raja: 29, stratton: 27, kellyMin: 10, kellyMax: 16, rajaMin: 26, rajaMax: 32, strattonMin: 24, strattonMax: 30 },
+      { date: '2026-03-02', kelly: 11, raja: 30, stratton: 33, kellyMin: 8, kellyMax: 14, rajaMin: 27, rajaMax: 33, strattonMin: 30, strattonMax: 36 },
+      { date: '2026-03-03', kelly: 14, raja: 36, stratton: 26, kellyMin: 11, kellyMax: 17, rajaMin: 33, rajaMax: 39, strattonMin: 23, strattonMax: 29 },
+      { date: '2026-03-04', kelly: 12, raja: 39, stratton: 28, kellyMin: 9, kellyMax: 15, rajaMin: 36, rajaMax: 42, strattonMin: 25, strattonMax: 31 },
+      { date: '2026-03-09', kelly: 13, raja: 30, stratton: 32, kellyMin: 10, kellyMax: 16, rajaMin: 27, rajaMax: 33, strattonMin: 29, strattonMax: 35 },
+      { date: '2026-03-10', kelly: 18, raja: 33, stratton: 38, kellyMin: 15, kellyMax: 21, rajaMin: 30, rajaMax: 36, strattonMin: 35, strattonMax: 41 }
     ],
     polls: [
-      { pollster: 'ABC News/Washington Post', date: '3/15/2026', sampleSize: 1502, democrat: 45, republican: 48, margin: 'R+3' },
-      { pollster: 'CNN/SSRS', date: '3/12/2026', sampleSize: 1234, democrat: 44, republican: 49, margin: 'R+5' }
+      { pollster: 'FM3 Research (D)', date: 'March 10–12, 2026', sampleSize: 678, kelly: 18, raja: 33, stratton: 38, other: 11, undecided: 0, margin: 'Stratton +5' },
+      { pollster: 'Public Policy Polling (D)', date: 'March 9–10, 2026', sampleSize: 700, kelly: 13, raja: 30, stratton: 32, other: 0, undecided: 25, margin: 'Stratton +2' },
+      { pollster: 'Tulchin Research (D)', date: 'March 4–8, 2026', sampleSize: 600, kelly: 12, raja: 39, stratton: 28, other: 4, undecided: 15, margin: 'Raja +11' },
+      { pollster: 'Change Research (D)', date: 'March 3–5, 2026', sampleSize: 717, kelly: 14, raja: 36, stratton: 26, other: 8, undecided: 16, margin: 'Raja +10' },
+      { pollster: 'Public Policy Polling (D)', date: 'March 2–3, 2026', sampleSize: 577, kelly: 11, raja: 30, stratton: 33, other: 0, undecided: 26, margin: 'Stratton +3' },
+      { pollster: 'Public Policy Polling (D)', date: 'February 23–24, 2026', sampleSize: 546, kelly: 13, raja: 29, stratton: 27, other: 0, undecided: 31, margin: 'Raja +2' },
+      { pollster: 'Tulchin Research (D)', date: 'February 14–19, 2026', sampleSize: 600, kelly: 10, raja: 42, stratton: 26, other: 6, undecided: 16, margin: 'Raja +16' },
+      { pollster: 'Public Policy Polling (D)', date: 'February 2–3, 2026', sampleSize: 574, kelly: 8, raja: 34, stratton: 23, other: 0, undecided: 37, margin: 'Raja +11' },
+      { pollster: 'GBAO (D)', date: 'January 25–28, 2026', sampleSize: 800, kelly: 13, raja: 43, stratton: 17, other: 0, undecided: 27, margin: 'Raja +26' },
+      { pollster: 'Victory Research', date: 'January 21–25, 2026', sampleSize: 806, kelly: 11, raja: 32, stratton: 21, other: 6, undecided: 30, margin: 'Raja +11' },
+      { pollster: 'GBAO (D)', date: 'January 8–12, 2026', sampleSize: 900, kelly: 15, raja: 41, stratton: 16, other: 0, undecided: 28, margin: 'Raja +25' },
+      { pollster: 'Emerson College/WGN-TV', date: 'January 3–5, 2026', sampleSize: 568, kelly: 8, raja: 31, stratton: 10, other: 6, undecided: 46, margin: 'Raja +21' },
+      { pollster: 'Public Policy Polling (D)', date: 'December 8–9, 2025', sampleSize: 667, kelly: 9, raja: 32, stratton: 20, other: 0, undecided: 39, margin: 'Raja +12' },
+      { pollster: 'Change Research (D)', date: 'December 4–8, 2025', sampleSize: 1007, kelly: 7, raja: 42, stratton: 14, other: 4, undecided: 33, margin: 'Raja +28' },
+      { pollster: 'Victory Research', date: 'November 20–24, 2025', sampleSize: 0, kelly: 22, raja: 29, stratton: 18, other: 3, undecided: 28, margin: 'Raja +7' },
+      { pollster: 'Public Policy Polling (D)', date: 'September 25–26, 2025', sampleSize: 576, kelly: 8, raja: 33, stratton: 18, other: 0, undecided: 41, margin: 'Raja +15' },
+      { pollster: 'Change Research (D)', date: 'September 17–19, 2025', sampleSize: 1143, kelly: 8, raja: 41, stratton: 17, other: 0, undecided: 31, margin: 'Raja +24' },
+      { pollster: 'GBAO (D)', date: 'August 12–17, 2025', sampleSize: 800, kelly: 12, raja: 38, stratton: 18, other: 0, undecided: 29, margin: 'Raja +20' },
+      { pollster: 'Z to A Research (D)', date: 'August 8–10, 2025', sampleSize: 615, kelly: 13, raja: 51, stratton: 28, other: 0, undecided: 8, margin: 'Raja +23' },
+      { pollster: 'GBAO (D)', date: 'June 5–10, 2025', sampleSize: 1200, kelly: 14, raja: 32, stratton: 19, other: 4, undecided: 31, margin: 'Raja +13' }
     ]
   },
   'presidential-approval': {
