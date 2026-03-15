@@ -54,11 +54,11 @@ const stateCoordinates = {
 };
 
 const ratingColors = {
-  'Safe D': '#0015BC',
-  'Likely D': '#3B5DC9',
-  'Lean D': '#6B8DD6',
-  'Tilt D': '#7FAAFF',
-  'Toss Up': '#9370DB',
+  'Safe D': '#1046ba',
+  'Likely D': '#2663eb',
+  'Lean D': '#5689f7',
+  'Tilt D': '#82a6f2',
+  'Toss Up': '#9334EB',
   'Tilt R': '#FF7F7F',
   'Lean R': '#FF6B6B',
   'Likely R': '#CC0000',
