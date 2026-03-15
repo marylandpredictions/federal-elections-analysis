@@ -5,7 +5,8 @@ import { format } from 'date-fns';
 export default function PollingChart({ data, type, polls }) {
   const formattedData = data.map(item => ({
     ...item,
-    date: format(new Date(item.date), 'MMM d, yyyy')
+    date: format(new Date(item.date), 'MMM d, yyyy'),
+    timestamp: new Date(item.date).getTime()
   }));
 
   const pollDots = polls ? polls.map(poll => ({
@@ -25,9 +26,16 @@ export default function PollingChart({ data, type, polls }) {
         <LineChart data={formattedData}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
           <XAxis 
-            dataKey="date" 
+            dataKey="timestamp"
+            type="number"
+            domain={['dataMin', 'dataMax']}
+            scale="time"
+            tickFormatter={(timestamp) => format(new Date(timestamp), 'MMM d, yyyy')}
             stroke="white" 
-            style={{ fontSize: '12px' }}
+            style={{ fontSize: '10px' }}
+            angle={-45}
+            textAnchor="end"
+            height={80}
           />
           <YAxis 
             stroke="white" 

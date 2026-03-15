@@ -115,7 +115,7 @@ const mockPollingData = {
       { date: '2026-01-25', cornyn: 33, paxton: 44, cornyinMin: 30, cornyinMax: 36, paxtonMin: 41, paxtonMax: 47 },
       { date: '2026-01-26', cornyn: 33, paxton: 44, cornyinMin: 30, cornyinMax: 36, paxtonMin: 41, paxtonMax: 47 },
       { date: '2026-01-27', cornyn: 33, paxton: 44, cornyinMin: 30, cornyinMax: 36, paxtonMin: 41, paxtonMax: 47 },
-      { date: '2026-01-28', connyn: 33, paxton: 44, cornyinMin: 30, cornyinMax: 36, paxtonMin: 41, paxtonMax: 47 },
+      { date: '2026-01-28', cornyn: 33, paxton: 44, cornyinMin: 30, cornyinMax: 36, paxtonMin: 41, paxtonMax: 47 },
       { date: '2026-01-29', cornyn: 33, paxton: 44, cornyinMin: 30, cornyinMax: 36, paxtonMin: 41, paxtonMax: 47 },
       { date: '2026-01-30', cornyn: 33, paxton: 44, cornyinMin: 30, cornyinMax: 36, paxtonMin: 41, paxtonMax: 47 },
       { date: '2026-01-31', cornyn: 40, paxton: 51, cornyinMin: 37, cornyinMax: 43, paxtonMin: 48, paxtonMax: 54 },
@@ -251,9 +251,9 @@ export default function Polling() {
             <SelectTrigger className="w-full sm:w-80 bg-black text-white border-white/30">
               <SelectValue placeholder="Select polling average" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-black text-white border-white/30">
               {pollingOptions.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
+                <SelectItem key={option.value} value={option.value} className="text-white hover:bg-white/20 focus:bg-white/20">
                   {option.label}
                 </SelectItem>
               ))}
