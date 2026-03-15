@@ -50,6 +50,7 @@ export default function PollingChart({ data, type, polls }) {
               color: 'white'
             }}
             formatter={(value) => `${value}%`}
+            labelFormatter={(timestamp) => format(new Date(timestamp), 'MMMM d, yyyy')}
           />
           <Legend wrapperStyle={{ color: 'white' }} />
           {isApproval ? (
