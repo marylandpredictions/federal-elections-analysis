@@ -50,11 +50,11 @@ export default function ContactUs() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-white font-inter font-bold text-3xl sm:text-4xl text-center mb-8 text-shadow-teal">
+          <h1 className="text-black font-inter font-bold text-3xl sm:text-4xl text-center mb-8">
             Contact Us
           </h1>
 
-          <form onSubmit={handleSubmit} className="bg-primary/40 rounded-2xl p-6 sm:p-8 space-y-6">
+          <form onSubmit={handleSubmit} className="bg-primary/80 rounded-2xl p-6 sm:p-8 space-y-6">
             <div>
               <Input
                 required
@@ -112,7 +112,7 @@ export default function ContactUs() {
             </Button>
           </form>
 
-          <p className="text-white text-center mt-6 text-sm sm:text-base text-shadow-teal">
+          <p className="text-black text-center mt-6 text-sm sm:text-base">
             Send an email to us at federalelectionsanalysis@gmail.com
           </p>
         </motion.div>

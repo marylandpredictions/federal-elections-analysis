@@ -10,10 +10,10 @@ export default function Home() {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className="text-center"
       >
-        <h1 className="text-white font-inter font-extrabold text-4xl sm:text-5xl md:text-7xl leading-tight text-shadow-teal">
+        <h1 className="text-black font-inter font-extrabold text-4xl sm:text-5xl md:text-7xl leading-tight">
           Welcome to
         </h1>
-        <h1 className="text-white font-inter font-extrabold text-4xl sm:text-5xl md:text-7xl leading-tight mt-2 text-shadow-teal">
+        <h1 className="text-black font-inter font-extrabold text-4xl sm:text-5xl md:text-7xl leading-tight mt-2">
           Federal Elections Analysis
         </h1>
       </motion.div>

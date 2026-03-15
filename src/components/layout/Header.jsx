@@ -17,9 +17,11 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
         <Link to="/Home" className="flex items-center gap-3">
-          
-
-
+          <img
+            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/69ae34c05_SEALOFNEWPORT3.png"
+            alt="FEA Logo"
+            className="py-1 w-10 h-10 sm:w-12 sm:h-12 object-contain"
+          />
 
           <span className="bg-transparent text-white text-lg font-bold hidden sm:block shimmer-hover text-shadow-teal">Federal Elections Analysis</span>
           
