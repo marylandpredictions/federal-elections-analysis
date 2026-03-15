@@ -29,6 +29,18 @@ export default function PollingChart({ data, type, polls }) {
   const isTexas = type === '2026-senate-generic';
   const isIllinois9th = type === 'illinois-9th-house';
 
+  // Calculate dynamic Y-axis domain based on poll type
+  let yDomain = [0, 100];
+  if (isTexas) {
+    yDomain = [15, 65];
+  } else if (isIllinois) {
+    yDomain = [5, 50];
+  } else if (isIllinois9th) {
+    yDomain = [0, 40];
+  } else if (isApproval) {
+    yDomain = [10, 85];
+  }
+
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
       <h3 className="text-white font-inter font-bold text-xl sm:text-2xl mb-6 text-shadow-teal">
@@ -52,7 +64,7 @@ export default function PollingChart({ data, type, polls }) {
           <YAxis 
             stroke="white" 
             style={{ fontSize: '12px' }}
-            domain={[0, 100]}
+            domain={yDomain}
           />
           <Tooltip 
             contentStyle={{ 
