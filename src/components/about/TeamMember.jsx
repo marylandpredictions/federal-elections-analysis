@@ -18,7 +18,7 @@ export default function TeamMember({ name, isSelected, onClick }) {
 
         <User className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
       </div>
-      <span className="text-white text-sm font-bold underline sm:text-base shimmer-hover">
+      <span className="text-white text-sm font-bold underline sm:text-base shimmer-hover text-shadow-teal">
         {name}
       </span>
     </button>);

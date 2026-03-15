@@ -31,7 +31,7 @@ export default function AboutUs() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }} className="bg-transparent text-white text-base font-inter text-center normal-case leading-relaxed opacity-100 sm:text-lg md:text-xl">
+          transition={{ duration: 0.6 }} className="bg-transparent text-white text-base font-inter text-center normal-case leading-relaxed opacity-100 sm:text-lg md:text-xl text-shadow-teal">
 
 
           At Federal Elections Analysis, we give data-driven takes and predictions to deliver the most
@@ -46,7 +46,7 @@ export default function AboutUs() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-16 sm:mt-20">
 
-          <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-10">
+          <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-10 text-shadow-teal">
             Our Team
           </h2>
 
@@ -75,10 +75,10 @@ export default function AboutUs() {
             transition={{ duration: 0.3 }}
             className="mt-12 bg-primary/40 rounded-2xl p-8 sm:p-10">
 
-              <h3 className="text-white font-inter font-bold text-2xl sm:text-3xl mb-4">
+              <h3 className="text-white font-inter font-bold text-2xl sm:text-3xl mb-4 text-shadow-teal">
                 {selected.name}
               </h3>
-              <p className="text-white/90 font-inter text-base sm:text-lg leading-relaxed">
+              <p className="text-white/90 font-inter text-base sm:text-lg leading-relaxed text-shadow-teal">
                 {selected.description}
               </p>
             </motion.div>

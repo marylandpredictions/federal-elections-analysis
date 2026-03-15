@@ -87,6 +87,10 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .text-shadow-teal {
+    text-shadow: 2px 2px 4px hsl(178, 45%, 25%);
+  }
 }
 
 @keyframes shimmer {

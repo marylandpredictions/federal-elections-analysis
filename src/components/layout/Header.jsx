@@ -20,10 +20,16 @@ export default function Header() {
             src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/e589dc99b_SEALOFNEWPORT2.png"
             alt="FEA Logo" className="py-1 w-10 h-10 sm:w-12 sm:h-12 object-contain" />
 
-
-          <span className="bg-transparent text-white text-lg font-bold hidden sm:block shimmer-hover">Federal Elections Analysis
-
-          </span>
+          <span className="bg-transparent text-white text-lg font-bold hidden sm:block shimmer-hover text-shadow-teal">Federal Elections Analysis</span>
+          
+          <div className="hidden sm:flex items-center gap-2 ml-2">
+            <a href="https://www.youtube.com/@FedElections/featured" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/27c9e4340_youtube-app-white-icon.png" alt="YouTube" className="w-6 h-6 object-contain" />
+            </a>
+            <a href="https://discord.gg/jYYGrgEaMX" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/23208f02a_discord-white-icon.png" alt="Discord" className="w-6 h-6 object-contain" />
+            </a>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
@@ -34,7 +40,7 @@ export default function Header() {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 shimmer-hover ${
+                className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 shimmer-hover text-shadow-teal ${
                 isActive ?
                 'bg-accent text-white' :
                 'text-white/80 hover:bg-accent/50 hover:text-white'}`
@@ -65,7 +71,7 @@ export default function Header() {
               key={link.path}
               to={link.path}
               onClick={() => setMobileOpen(false)}
-              className={`block px-4 py-3 rounded-lg font-inter font-semibold text-sm transition-all mt-1 shimmer-hover ${
+              className={`block px-4 py-3 rounded-lg font-inter font-semibold text-sm transition-all mt-1 shimmer-hover text-shadow-teal ${
               isActive ?
               'bg-accent text-white' :
               'text-white/80 hover:bg-accent/50 hover:text-white'}`
