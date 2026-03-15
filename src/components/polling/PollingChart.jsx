@@ -12,10 +12,15 @@ export default function PollingChart({ data, type, polls }) {
   const pollDots = polls ? polls.map(poll => ({
     date: poll.date,
     cornyn: poll.cornyn,
-    paxton: poll.paxton
+    paxton: poll.paxton,
+    kelly: poll.kelly,
+    raja: poll.raja,
+    stratton: poll.stratton
   })) : [];
 
   const isApproval = type.includes('approval');
+  const isIllinois = type === 'illinois-dem-primary';
+  const isTexas = type === '2026-senate-generic';
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
@@ -72,7 +77,98 @@ export default function PollingChart({ data, type, polls }) {
                 dot={{ fill: '#ef4444', r: 4 }}
               />
             </>
-          ) : (
+          ) : isIllinois ? (
+            <>
+              <Area
+                type="linear"
+                dataKey="rajaMax"
+                stroke="none"
+                fill="#0047AB"
+                fillOpacity={0.8}
+              />
+              <Area
+                type="linear"
+                dataKey="rajaMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="strattonMax"
+                stroke="none"
+                fill="#006400"
+                fillOpacity={0.8}
+              />
+              <Area
+                type="linear"
+                dataKey="strattonMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="kellyMax"
+                stroke="none"
+                fill="#008080"
+                fillOpacity={0.8}
+              />
+              <Area
+                type="linear"
+                dataKey="kellyMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Line 
+                type="linear" 
+                dataKey="raja" 
+                stroke="#0047AB" 
+                strokeWidth={3}
+                name="Raja Krishnamoorthi"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="stratton" 
+                stroke="#006400" 
+                strokeWidth={3}
+                name="Juliana Stratton"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="kelly" 
+                stroke="#008080" 
+                strokeWidth={3}
+                name="Robin Kelly"
+                dot={false}
+              />
+              {pollDots.map((poll, idx) => (
+                <React.Fragment key={idx}>
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.raja }]}
+                    fill="#0047AB"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.stratton }]}
+                    fill="#006400"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.kelly }]}
+                    fill="#008080"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                </React.Fragment>
+              ))}
+            </>
+          ) : isTexas ? (
             <>
               <Area
                 type="linear"
@@ -121,13 +217,13 @@ export default function PollingChart({ data, type, polls }) {
               {pollDots.map((poll, idx) => (
                 <React.Fragment key={idx}>
                   <Scatter
-                    data={[{ date: poll.date, value: poll.cornyn }]}
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.cornyn }]}
                     fill="#8B0000"
                     fillOpacity={0.6}
                     dataKey="value"
                   />
                   <Scatter
-                    data={[{ date: poll.date, value: poll.paxton }]}
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.paxton }]}
                     fill="#CC5500"
                     fillOpacity={0.6}
                     dataKey="value"
@@ -135,7 +231,7 @@ export default function PollingChart({ data, type, polls }) {
                 </React.Fragment>
               ))}
             </>
-          )}
+          ) : null}
         </LineChart>
       </ResponsiveContainer>
     </div>
