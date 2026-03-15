@@ -3,9 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { label: 'Home', path: '/Home' },
-  { label: 'About Us', path: '/AboutUs' },
-];
+{ label: 'Home', path: '/Home' },
+{ label: 'About Us', path: '/AboutUs' }];
+
 
 export default function Header() {
   const location = useLocation();
@@ -16,13 +16,13 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
         <Link to="/Home" className="flex items-center gap-3">
-          <img 
-            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/e589dc99b_SEALOFNEWPORT2.png" 
-            alt="FEA Logo" 
-            className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
-          />
-          <span className="text-white font-inter font-bold text-lg hidden sm:block shimmer-hover">
-            Federal Elections Analysis
+          <img
+            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/e589dc99b_SEALOFNEWPORT2.png"
+            alt="FEA Logo" className="py-1 w-10 h-10 sm:w-12 sm:h-12 object-contain" />
+
+
+          <span className="bg-transparent text-white text-lg font-bold hidden sm:block shimmer-hover">Federal Elections Analysis
+
           </span>
         </Link>
 
@@ -35,48 +35,48 @@ export default function Header() {
                 key={link.path}
                 to={link.path}
                 className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 shimmer-hover ${
-                  isActive
-                    ? 'bg-accent text-white'
-                    : 'text-white/80 hover:bg-accent/50 hover:text-white'
-                }`}
-              >
+                isActive ?
+                'bg-accent text-white' :
+                'text-white/80 hover:bg-accent/50 hover:text-white'}`
+                }>
+
                 {link.label}
-              </Link>
-            );
+              </Link>);
+
           })}
         </nav>
 
         {/* Mobile toggle */}
         <button
           className="md:hidden text-white p-2"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
+          onClick={() => setMobileOpen(!mobileOpen)}>
+
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
       {/* Mobile Nav */}
-      {mobileOpen && (
-        <div className="md:hidden bg-primary border-t border-white/10 px-4 pb-4">
+      {mobileOpen &&
+      <div className="md:hidden bg-primary border-t border-white/10 px-4 pb-4">
           {navLinks.map((link) => {
-            const isActive = location.pathname === link.path;
-            return (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setMobileOpen(false)}
-                className={`block px-4 py-3 rounded-lg font-inter font-semibold text-sm transition-all mt-1 shimmer-hover ${
-                  isActive
-                    ? 'bg-accent text-white'
-                    : 'text-white/80 hover:bg-accent/50 hover:text-white'
-                }`}
-              >
+          const isActive = location.pathname === link.path;
+          return (
+            <Link
+              key={link.path}
+              to={link.path}
+              onClick={() => setMobileOpen(false)}
+              className={`block px-4 py-3 rounded-lg font-inter font-semibold text-sm transition-all mt-1 shimmer-hover ${
+              isActive ?
+              'bg-accent text-white' :
+              'text-white/80 hover:bg-accent/50 hover:text-white'}`
+              }>
+
                 {link.label}
-              </Link>
-            );
-          })}
+              </Link>);
+
+        })}
         </div>
-      )}
-    </header>
-  );
+      }
+    </header>);
+
 }
