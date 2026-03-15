@@ -268,24 +268,14 @@ const mockPollingData = {
   'illinois-dem-primary': {
     chartData: [
       { date: '2025-06-08', kelly: 14.3, raja: 32.1, stratton: 19.4, kellyMin: 11.3, kellyMax: 17.3, rajaMin: 29.1, rajaMax: 35.1, strattonMin: 16.4, strattonMax: 22.4 },
-      { date: '2025-08-10', kelly: 13.2, raja: 51.3, stratton: 28.6, kellyMin: 10.2, kellyMax: 16.2, rajaMin: 48.3, rajaMax: 54.3, strattonMin: 25.6, strattonMax: 31.6 },
-      { date: '2025-08-15', kelly: 12.1, raja: 38.4, stratton: 18.2, kellyMin: 9.1, kellyMax: 15.1, rajaMin: 35.4, rajaMax: 41.4, strattonMin: 15.2, strattonMax: 21.2 },
-      { date: '2025-09-19', kelly: 8, raja: 41, stratton: 17, kellyMin: 5, kellyMax: 11, rajaMin: 38, rajaMax: 44, strattonMin: 14, strattonMax: 20 },
-      { date: '2025-09-26', kelly: 8, raja: 33, stratton: 18, kellyMin: 5, kellyMax: 11, rajaMin: 30, rajaMax: 36, strattonMin: 15, strattonMax: 21 },
+      { date: '2025-08-15', kelly: 12.7, raja: 44.9, stratton: 23.4, kellyMin: 9.7, kellyMax: 15.7, rajaMin: 41.9, rajaMax: 47.9, strattonMin: 20.4, strattonMax: 26.4 },
+      { date: '2025-09-26', kelly: 8, raja: 37, stratton: 17.5, kellyMin: 5, kellyMax: 11, rajaMin: 34, rajaMax: 40, strattonMin: 14.5, strattonMax: 20.5 },
       { date: '2025-11-22', kelly: 22, raja: 29, stratton: 18, kellyMin: 19, kellyMax: 25, rajaMin: 26, rajaMax: 32, strattonMin: 15, strattonMax: 21 },
-      { date: '2025-12-06', kelly: 7, raja: 42, stratton: 14, kellyMin: 4, kellyMax: 10, rajaMin: 39, rajaMax: 45, strattonMin: 11, strattonMax: 17 },
-      { date: '2025-12-09', kelly: 9, raja: 32, stratton: 20, kellyMin: 6, kellyMax: 12, rajaMin: 29, rajaMax: 35, strattonMin: 17, strattonMax: 23 },
-      { date: '2026-01-04', kelly: 8, raja: 31, stratton: 10, kellyMin: 5, kellyMax: 11, rajaMin: 28, rajaMax: 34, strattonMin: 7, strattonMax: 13 },
+      { date: '2025-12-08', kelly: 8, raja: 37, stratton: 17, kellyMin: 5, kellyMax: 11, rajaMin: 34, rajaMax: 40, strattonMin: 14, strattonMax: 20 },
       { date: '2026-01-10', kelly: 15, raja: 41, stratton: 16, kellyMin: 12, kellyMax: 18, rajaMin: 38, rajaMax: 44, strattonMin: 13, strattonMax: 19 },
-      { date: '2026-01-23', kelly: 11, raja: 32, stratton: 21, kellyMin: 8, kellyMax: 14, rajaMin: 29, rajaMax: 35, strattonMin: 18, strattonMax: 24 },
       { date: '2026-01-27', kelly: 13, raja: 43, stratton: 17, kellyMin: 10, kellyMax: 16, rajaMin: 40, rajaMax: 46, strattonMin: 14, strattonMax: 20 },
-      { date: '2026-02-03', kelly: 8, raja: 34, stratton: 23, kellyMin: 5, kellyMax: 11, rajaMin: 31, rajaMax: 37, strattonMin: 20, strattonMax: 26 },
-      { date: '2026-02-17', kelly: 10, raja: 42, stratton: 26, kellyMin: 7, kellyMax: 13, rajaMin: 39, rajaMax: 45, strattonMin: 23, strattonMax: 29 },
-      { date: '2026-02-24', kelly: 13, raja: 29, stratton: 27, kellyMin: 10, kellyMax: 16, rajaMin: 26, rajaMax: 32, strattonMin: 24, strattonMax: 30 },
+      { date: '2026-02-10', kelly: 9, raja: 38, stratton: 24.5, kellyMin: 6, kellyMax: 12, rajaMin: 35, rajaMax: 41, strattonMin: 21.5, strattonMax: 27.5 },
       { date: '2026-03-03', kelly: 11.7, raja: 30.5, stratton: 33.2, kellyMin: 8.7, kellyMax: 14.7, rajaMin: 27.5, rajaMax: 33.5, strattonMin: 30.2, strattonMax: 36.2 },
-      { date: '2026-03-05', kelly: 14.1, raja: 36.3, stratton: 26.4, kellyMin: 11.1, kellyMax: 17.1, rajaMin: 33.3, rajaMax: 39.3, strattonMin: 23.4, strattonMax: 29.4 },
-      { date: '2026-03-06', kelly: 12.6, raja: 39.2, stratton: 28.3, kellyMin: 9.6, kellyMax: 15.6, rajaMin: 36.2, rajaMax: 42.2, strattonMin: 25.3, strattonMax: 31.3 },
-      { date: '2026-03-10', kelly: 13.4, raja: 30.7, stratton: 32.1, kellyMin: 10.4, kellyMax: 16.4, rajaMin: 27.7, rajaMax: 33.7, strattonMin: 29.1, strattonMax: 35.1 },
       { date: '2026-03-12', kelly: 18.2, raja: 33.5, stratton: 38.6, kellyMin: 15.2, kellyMax: 21.2, rajaMin: 30.5, rajaMax: 36.5, strattonMin: 35.6, strattonMax: 41.6 }
     ],
     polls: [
@@ -315,12 +305,10 @@ const mockPollingData = {
     chartData: [
       { date: '2025-06-14', biss: 17.3, fine: 8.2, abughazaleh: 10.1, simmons: 4.5, amiwala: 2.3, andrew: 0.6 },
       { date: '2025-10-15', biss: 18.4, fine: 9.1, abughazaleh: 13.2, simmons: 4.7, amiwala: 2.1, andrew: 2.3 },
-      { date: '2025-11-01', biss: 18.6, fine: 10.3, abughazaleh: 18.2, simmons: 6.4, amiwala: 6.1, andrew: 1.2 },
-      { date: '2025-11-07', biss: 31.5, fine: 10.7, abughazaleh: 17.3, simmons: 6.2, amiwala: 3.4, andrew: 3.1 },
+      { date: '2025-11-07', biss: 25.1, fine: 10.5, abughazaleh: 17.75, simmons: 6.3, amiwala: 4.75, andrew: 2.15 },
       { date: '2026-01-28', biss: 21.8, fine: 21.2, abughazaleh: 14.6, simmons: 7.3, amiwala: 4.2, andrew: 4.5 },
       { date: '2026-02-08', biss: 31.3, fine: 18.4, abughazaleh: 18.1, simmons: 7.6, amiwala: 4.3, andrew: 7.2 },
-      { date: '2026-02-18', biss: 31.7, fine: 14.2, abughazaleh: 13.4, simmons: 9.3, amiwala: 7.1, andrew: 4.6 },
-      { date: '2026-02-21', biss: 24.5, fine: 16.3, abughazaleh: 17.2, simmons: 6.8, amiwala: 4.1, andrew: 5.4 },
+      { date: '2026-02-21', biss: 28.1, fine: 15.25, abughazaleh: 15.3, simmons: 8.05, amiwala: 5.6, andrew: 4.95 },
       { date: '2026-03-10', biss: 24.2, fine: 14.7, abughazaleh: 20.3, simmons: 10.1, amiwala: 6.5, andrew: 7.3 }
     ],
     polls: [
@@ -338,18 +326,11 @@ const mockPollingData = {
   'florida-gop-governor': {
     chartData: [
       { date: '2025-09-05', donalds: 40.2, fishback: 0.3, collins: 2.1, renner: 2.4 },
-      { date: '2025-09-17', donalds: 29.6, fishback: 0.2, collins: 0.5, renner: 9.3 },
-      { date: '2025-10-14', donalds: 39.4, fishback: 0.4, collins: 4.2, renner: 3.1 },
-      { date: '2025-11-12', donalds: 45, fishback: 1, collins: 1, renner: 3 },
-      { date: '2025-11-18', donalds: 43, fishback: 0, collins: 1, renner: 2 },
-      { date: '2025-12-09', donalds: 40, fishback: 0, collins: 13, renner: 0 },
-      { date: '2025-12-09', donalds: 38, fishback: 2, collins: 9, renner: 1 },
-      { date: '2026-01-05', donalds: 45, fishback: 4, collins: 6, renner: 3 },
-      { date: '2026-01-11', donalds: 37, fishback: 3, collins: 7, renner: 4 },
-      { date: '2026-01-24', donalds: 37.3, fishback: 23.1, collins: 0.2, renner: 0.4 },
-      { date: '2026-02-15', donalds: 33.5, fishback: 3.7, collins: 15.2, renner: 9.4 },
-      { date: '2026-02-18', donalds: 31.6, fishback: 6.3, collins: 4.8, renner: 1.2 },
-      { date: '2026-02-20', donalds: 30.4, fishback: 8.1, collins: 12.3, renner: 2.5 },
+      { date: '2025-10-14', donalds: 36.1, fishback: 0.3, collins: 2.4, renner: 5.4 },
+      { date: '2025-11-15', donalds: 44, fishback: 0.5, collins: 1, renner: 2.5 },
+      { date: '2025-12-09', donalds: 39, fishback: 1, collins: 11, renner: 0.5 },
+      { date: '2026-01-08', donalds: 41, fishback: 3.5, collins: 6.5, renner: 3.5 },
+      { date: '2026-02-16', donalds: 32.15, fishback: 6.37, collins: 10.6, renner: 4.05 },
       { date: '2026-02-25', donalds: 44.2, fishback: 5.6, collins: 4.3, renner: 2.1 }
     ],
     polls: [
@@ -372,13 +353,9 @@ const mockPollingData = {
   'georgia-gop-governor': {
     chartData: [
       { date: '2025-10-14', jones: 32.4, jackson: 0.3, raffensperger: 15.2, carr: 12.1 },
-      { date: '2025-10-19', jones: 22.6, jackson: 0.2, raffensperger: 15.4, carr: 7.3 },
-      { date: '2025-12-19', jones: 24.3, jackson: 0.4, raffensperger: 14.7, carr: 9.2 },
-      { date: '2026-02-06', jones: 22.5, jackson: 16.3, raffensperger: 10.2, carr: 7.4 },
-      { date: '2026-02-09', jones: 16.7, jackson: 24.1, raffensperger: 9.3, carr: 3.6 },
-      { date: '2026-02-12', jones: 16.4, jackson: 22.3, raffensperger: 18.2, carr: 10.5 },
-      { date: '2026-02-18', jones: 17.2, jackson: 33.6, raffensperger: 8.1, carr: 5.3 },
-      { date: '2026-03-01', jones: 21.3, jackson: 20.4, raffensperger: 11.6, carr: 6.2 },
+      { date: '2025-12-19', jones: 23.45, jackson: 0.3, raffensperger: 15.05, carr: 8.25 },
+      { date: '2026-02-09', jones: 19.6, jackson: 20.2, raffensperger: 9.75, carr: 5.5 },
+      { date: '2026-02-18', jones: 16.8, jackson: 27.95, raffensperger: 13.15, carr: 7.9 },
       { date: '2026-03-08', jones: 22.1, jackson: 37.4, raffensperger: 11.3, carr: 4.7 }
     ],
     polls: [
@@ -396,20 +373,11 @@ const mockPollingData = {
   'south-carolina-gop-governor': {
     chartData: [
       { date: '2025-03-09', mace: 29.3, wilson: 27.2, evette: 31.4, norman: 11.6 },
-      { date: '2025-03-20', mace: 16.5, wilson: 21.3, evette: 7.2, norman: 6.4 },
-      { date: '2025-07-20', mace: 19.4, wilson: 20.1, evette: 9.3, norman: 8.2 },
-      { date: '2025-07-23', mace: 16, wilson: 15, evette: 8, norman: 6 },
-      { date: '2025-08-12', mace: 25, wilson: 17, evette: 6, norman: 10 },
-      { date: '2025-09-19', mace: 19, wilson: 16, evette: 18, norman: 10 },
-      { date: '2025-10-01', mace: 16, wilson: 12, evette: 20, norman: 9 },
-      { date: '2025-10-11', mace: 16, wilson: 16, evette: 17, norman: 11 },
-      { date: '2025-10-12', mace: 17, wilson: 8, evette: 16, norman: 8 },
+      { date: '2025-07-20', mace: 17.95, wilson: 18.2, evette: 8.75, norman: 7.1 },
+      { date: '2025-10-12', mace: 16.33, wilson: 12, evette: 17.67, norman: 8.67 },
       { date: '2025-11-25', mace: 11, wilson: 22, evette: 16, norman: 12 },
-      { date: '2025-12-18', mace: 13, wilson: 23, evette: 17, norman: 13 },
-      { date: '2026-01-08', mace: 23.2, wilson: 19.4, evette: 14.3, norman: 11.5 },
-      { date: '2026-01-16', mace: 17.6, wilson: 20.3, evette: 22.1, norman: 10.2 },
-      { date: '2026-01-28', mace: 18.4, wilson: 12.7, evette: 12.3, norman: 11.1 },
-      { date: '2026-02-04', mace: 17.3, wilson: 23.2, evette: 16.5, norman: 12.4 },
+      { date: '2026-01-16', mace: 20.4, wilson: 19.85, evette: 18.2, norman: 10.85 },
+      { date: '2026-02-04', mace: 17.85, wilson: 18, evette: 14.4, norman: 11.75 },
       { date: '2026-03-11', mace: 22.1, wilson: 22.3, evette: 16.2, norman: 11.6 }
     ],
     polls: [
