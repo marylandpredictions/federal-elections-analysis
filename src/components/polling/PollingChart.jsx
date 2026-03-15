@@ -453,7 +453,7 @@ export default function PollingChart({ data, type, polls }) {
                 dataKey="cornyn" 
                 stroke="#8B0000" 
                 strokeWidth={3}
-                name="Cornyn"
+                name="John Cornyn"
                 dot={false}
               />
               <Line 
@@ -461,7 +461,7 @@ export default function PollingChart({ data, type, polls }) {
                 dataKey="paxton" 
                 stroke="#CC5500" 
                 strokeWidth={3}
-                name="Paxton"
+                name="Ken Paxton"
                 dot={false}
               />
               {pollDots.map((poll, idx) => (
