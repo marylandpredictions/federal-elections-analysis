@@ -68,6 +68,8 @@ const ratingColors = {
 export default function InteractiveMap({ ratings }) {
   const [hoveredState, setHoveredState] = useState(null);
 
+  const stateEntries = Object.entries(stateCoordinates);
+
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
       <div className="relative w-full" style={{ paddingBottom: '60%' }}>
@@ -76,20 +78,22 @@ export default function InteractiveMap({ ratings }) {
           className="absolute inset-0 w-full h-full"
           style={{ filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))' }}
         >
-          {Object.entries(stateCoordinates).map(([state, coords]) => {
+          {stateEntries.map(([state, coords]) => {
             const rating = ratings[state] || 'Toss Up';
             const color = ratingColors[rating];
             const isHovered = hoveredState === state;
+            
+            if (isHovered) return null;
             
             return (
               <g key={state}>
                 <circle
                   cx={coords.x}
                   cy={coords.y}
-                  r={isHovered ? 22 : 18}
+                  r={18}
                   fill={color}
                   stroke="white"
-                  strokeWidth={isHovered ? 3 : 2}
+                  strokeWidth={2}
                   onMouseEnter={() => setHoveredState(state)}
                   onMouseLeave={() => setHoveredState(null)}
                   style={{ 
@@ -97,43 +101,66 @@ export default function InteractiveMap({ ratings }) {
                     transition: 'all 0.2s ease'
                   }}
                 />
-                {isHovered && (
-                  <>
-                    <rect
-                      x={coords.x - 60}
-                      y={coords.y - 55}
-                      width={120}
-                      height={40}
-                      fill="rgba(0, 0, 0, 0.9)"
-                      stroke="white"
-                      strokeWidth={2}
-                      rx={6}
-                    />
-                    <text
-                      x={coords.x}
-                      y={coords.y - 42}
-                      textAnchor="middle"
-                      fill="white"
-                      fontSize="12"
-                      fontWeight="bold"
-                    >
-                      {state}
-                    </text>
-                    <text
-                      x={coords.x}
-                      y={coords.y - 26}
-                      textAnchor="middle"
-                      fill={color}
-                      fontSize="11"
-                      fontWeight="600"
-                    >
-                      {rating}
-                    </text>
-                  </>
-                )}
               </g>
             );
           })}
+          {hoveredState && (() => {
+            const coords = stateCoordinates[hoveredState];
+            const rating = ratings[hoveredState] || 'Toss Up';
+            const color = ratingColors[rating];
+            
+            return (
+              <g key={`${hoveredState}-hovered`}>
+                <circle
+                  cx={coords.x}
+                  cy={coords.y}
+                  r={22}
+                  fill={color}
+                  stroke="white"
+                  strokeWidth={3}
+                  onMouseEnter={() => setHoveredState(hoveredState)}
+                  onMouseLeave={() => setHoveredState(null)}
+                  style={{ 
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                />
+                <rect
+                  x={coords.x - 60}
+                  y={coords.y - 55}
+                  width={120}
+                  height={40}
+                  fill="rgba(0, 0, 0, 0.9)"
+                  stroke="white"
+                  strokeWidth={2}
+                  rx={6}
+                  pointerEvents="none"
+                />
+                <text
+                  x={coords.x}
+                  y={coords.y - 42}
+                  textAnchor="middle"
+                  fill="white"
+                  fontSize="12"
+                  fontWeight="bold"
+                  pointerEvents="none"
+                >
+                  {hoveredState}
+                </text>
+                <text
+                  x={coords.x}
+                  y={coords.y - 26}
+                  textAnchor="middle"
+                  fill={color}
+                  fontSize="11"
+                  fontWeight="600"
+                  pointerEvents="none"
+                >
+                  {rating}
+                </text>
+              </g>
+            );
+          })()}
         </svg>
       </div>
 
