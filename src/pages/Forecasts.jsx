@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import InteractiveMap from '../components/forecasts/InteractiveMap';
+import SenateControl from '../components/forecasts/SenateControl';
 
 const governorsRatings = {
   'Alabama': 'Safe R',
@@ -138,6 +139,7 @@ export default function Forecasts() {
               Senate Forecast
             </h2>
             <InteractiveMap ratings={senateRatings} />
+            <SenateControl democratChance={45} republicanChance={55} />
           </motion.div>
 
           <motion.div

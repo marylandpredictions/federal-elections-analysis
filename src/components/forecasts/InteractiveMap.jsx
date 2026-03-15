@@ -60,9 +60,9 @@ const ratingColors = {
   'Tilt D': '#7FAAFF',
   'Toss Up': '#9370DB',
   'Tilt R': '#FF7F7F',
-  'Lean R': '#E85C5C',
-  'Likely R': '#D94343',
-  'Safe R': '#CC0000',
+  'Lean R': '#FF6B6B',
+  'Likely R': '#CC0000',
+  'Safe R': '#8B0000',
   'Not Contested': '#D3D3D3'
 };
 
