@@ -16,6 +16,7 @@ export default function PollingTable({ polls, type }) {
   const isIllinois = type === 'illinois-dem-primary';
   const isIllinois9th = type === 'illinois-9th-house';
   const isFlorida = type === 'florida-gop-governor';
+  const isGeorgia = type === 'georgia-gop-governor';
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
@@ -62,6 +63,16 @@ export default function PollingTable({ polls, type }) {
                   <TableHead className="text-white font-bold">Approve</TableHead>
                   <TableHead className="text-white font-bold">Disapprove</TableHead>
                 </>
+              ) : isGeorgia ? (
+                <>
+                  <TableHead className="text-white font-bold">Jones</TableHead>
+                  <TableHead className="text-white font-bold">Jackson</TableHead>
+                  <TableHead className="text-white font-bold">Raffensperger</TableHead>
+                  <TableHead className="text-white font-bold">Carr</TableHead>
+                  <TableHead className="text-white font-bold">Dean</TableHead>
+                  <TableHead className="text-white font-bold">Other</TableHead>
+                  <TableHead className="text-white font-bold">Undecided</TableHead>
+                </>
               ) : isFlorida ? (
                 <>
                   <TableHead className="text-white font-bold">Donalds</TableHead>
@@ -104,7 +115,17 @@ export default function PollingTable({ polls, type }) {
           <TableBody>
             {currentPolls.map((poll, index) => {
               let marginColor = 'text-white';
-              if (isFlorida) {
+              if (isGeorgia) {
+                if (poll.margin.includes('Jones')) {
+                  marginColor = '#8B0000';
+                } else if (poll.margin.includes('Jackson')) {
+                  marginColor = '#C71585';
+                } else if (poll.margin.includes('Raffensperger')) {
+                  marginColor = '#DAA520';
+                } else if (poll.margin.includes('Carr')) {
+                  marginColor = '#FF6600';
+                }
+              } else if (isFlorida) {
                 if (poll.margin.includes('Donalds')) {
                   marginColor = '#8B0000';
                 } else if (poll.margin.includes('Fishback')) {
@@ -153,6 +174,16 @@ export default function PollingTable({ polls, type }) {
                     <>
                       <TableCell className="text-green-400 font-semibold">{poll.approve}%</TableCell>
                       <TableCell className="text-red-400 font-semibold">{poll.disapprove}%</TableCell>
+                    </>
+                  ) : isGeorgia ? (
+                    <>
+                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.jones}%</TableCell>
+                      <TableCell style={{ color: '#C71585' }} className="font-semibold">{poll.jackson}%</TableCell>
+                      <TableCell style={{ color: '#DAA520' }} className="font-semibold">{poll.raffensperger}%</TableCell>
+                      <TableCell style={{ color: '#FF6600' }} className="font-semibold">{poll.carr}%</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.dean > 0 ? `${poll.dean}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
                     </>
                   ) : isFlorida ? (
                     <>

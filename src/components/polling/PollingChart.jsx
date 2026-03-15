@@ -25,7 +25,11 @@ export default function PollingChart({ data, type, polls }) {
     donalds: poll.donalds,
     fishback: poll.fishback,
     collins: poll.collins,
-    renner: poll.renner
+    renner: poll.renner,
+    jones: poll.jones,
+    jackson: poll.jackson,
+    raffensperger: poll.raffensperger,
+    carr: poll.carr
   })) : [];
 
   const isApproval = type.includes('approval');
@@ -33,6 +37,7 @@ export default function PollingChart({ data, type, polls }) {
   const isTexas = type === '2026-senate-generic';
   const isIllinois9th = type === 'illinois-9th-house';
   const isFlorida = type === 'florida-gop-governor';
+  const isGeorgia = type === 'georgia-gop-governor';
 
   // Calculate dynamic Y-axis domain based on poll type
   let yDomain = [0, 100];
@@ -44,6 +49,8 @@ export default function PollingChart({ data, type, polls }) {
     yDomain = [0, 40];
   } else if (isFlorida) {
     yDomain = [0, 55];
+  } else if (isGeorgia) {
+    yDomain = [0, 45];
   } else if (isApproval) {
     yDomain = [10, 85];
   }
@@ -84,7 +91,70 @@ export default function PollingChart({ data, type, polls }) {
             labelFormatter={(timestamp) => format(new Date(timestamp), 'MMMM d, yyyy')}
           />
           <Legend wrapperStyle={{ color: 'white' }} />
-          {isFlorida ? (
+          {isGeorgia ? (
+            <>
+              <Line 
+                type="linear" 
+                dataKey="jones" 
+                stroke="#8B0000" 
+                strokeWidth={3}
+                name="Burt Jones"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="jackson" 
+                stroke="#C71585" 
+                strokeWidth={3}
+                name="Rick Jackson"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="raffensperger" 
+                stroke="#DAA520" 
+                strokeWidth={3}
+                name="Brad Raffensperger"
+                dot={false}
+              />
+              <Line 
+                type="linear" 
+                dataKey="carr" 
+                stroke="#FF6600" 
+                strokeWidth={3}
+                name="Chris Carr"
+                dot={false}
+              />
+              {pollDots.map((poll, idx) => (
+                <React.Fragment key={idx}>
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.jones }]}
+                    fill="#8B0000"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.jackson }]}
+                    fill="#C71585"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.raffensperger }]}
+                    fill="#DAA520"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.carr }]}
+                    fill="#FF6600"
+                    fillOpacity={0.6}
+                    dataKey="value"
+                  />
+                </React.Fragment>
+              ))}
+            </>
+          ) : isFlorida ? (
             <>
               <Line 
                 type="linear" 

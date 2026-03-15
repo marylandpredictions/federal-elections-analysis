@@ -8,7 +8,8 @@ const pollingOptions = [
   { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff' },
   { value: 'illinois-dem-primary', label: 'Illinois Democratic Senate Primary' },
   { value: 'illinois-9th-house', label: 'Illinois 9th Democratic House Primary' },
-  { value: 'florida-gop-governor', label: 'Florida Republican Governor Primary' }
+  { value: 'florida-gop-governor', label: 'Florida Republican Governor Primary' },
+  { value: 'georgia-gop-governor', label: 'Georgia Republican Governor Primary' }
 ];
 
 const mockPollingData = {
@@ -279,6 +280,30 @@ const mockPollingData = {
       { pollster: 'St. Pete Polls', date: 'October 13–15, 2025', sampleSize: 1034, collins: 4, donalds: 39, fishback: 0, renner: 3, other: 0, undecided: 54, margin: 'Donalds +35' },
       { pollster: 'Targoz Market Research', date: 'September 16–18, 2025', sampleSize: 506, collins: 0, donalds: 29, fishback: 0, renner: 9, other: 0, undecided: 62, margin: 'Donalds +20' },
       { pollster: 'The American Promise', date: 'September 4–5, 2025', sampleSize: 800, collins: 2, donalds: 40, fishback: 0, renner: 2, other: 0, undecided: 54, margin: 'Donalds +38' }
+    ]
+  },
+  'georgia-gop-governor': {
+    chartData: [
+      { date: '2025-10-13', jones: 32, jackson: 0, raffensperger: 15, carr: 12 },
+      { date: '2025-10-15', jones: 22, jackson: 0, raffensperger: 15, carr: 7 },
+      { date: '2025-12-18', jones: 24, jackson: 0, raffensperger: 14, carr: 9 },
+      { date: '2026-02-05', jones: 22, jackson: 16, raffensperger: 10, carr: 7 },
+      { date: '2026-02-08', jones: 16, jackson: 24, raffensperger: 9, carr: 3 },
+      { date: '2026-02-11', jones: 16, jackson: 22, raffensperger: 18, carr: 10 },
+      { date: '2026-02-17', jones: 17, jackson: 33, raffensperger: 8, carr: 5 },
+      { date: '2026-02-28', jones: 21, jackson: 20, raffensperger: 11, carr: 6 },
+      { date: '2026-03-07', jones: 22, jackson: 37, raffensperger: 11, carr: 4 }
+    ],
+    polls: [
+      { pollster: 'JMC Analytics', date: 'March 7–8, 2026', sampleSize: 560, carr: 4, dean: 0, jackson: 37, jones: 22, raffensperger: 11, other: 0, undecided: 25, margin: 'Jackson +15' },
+      { pollster: 'Emerson College', date: 'February 28 – March 2, 2026', sampleSize: 453, carr: 6, dean: 0, jackson: 20, jones: 21, raffensperger: 11, other: 4, undecided: 38, margin: 'Jones +1' },
+      { pollster: 'Quantus Insights (R)', date: 'February 17–18, 2026', sampleSize: 1337, carr: 5, dean: 0, jackson: 33, jones: 17, raffensperger: 8, other: 0, undecided: 37, margin: 'Jackson +16' },
+      { pollster: 'Rasmussen Reports (R)', date: 'February 11–12, 2026', sampleSize: 1022, carr: 10, dean: 0, jackson: 22, jones: 16, raffensperger: 18, other: 0, undecided: 34, margin: 'Jackson +4' },
+      { pollster: 'co/efficient (R)', date: 'February 8–9, 2026', sampleSize: 1123, carr: 3, dean: 1, jackson: 24, jones: 16, raffensperger: 9, other: 5, undecided: 42, margin: 'Jackson +8' },
+      { pollster: 'Cygnal (R)', date: 'February 5–6, 2026', sampleSize: 600, carr: 7, dean: 0, jackson: 16, jones: 22, raffensperger: 10, other: 0, undecided: 45, margin: 'Jones +6' },
+      { pollster: 'InsiderAdvantage (R)/Rosetta Stone (R)', date: 'December 18–19, 2025', sampleSize: 1000, carr: 9, dean: 4, jackson: 0, jones: 24, raffensperger: 14, other: 0, undecided: 49, margin: 'Jones +10' },
+      { pollster: 'University of Georgia School of Public and International Affairs', date: 'October 15–23, 2025', sampleSize: 1000, carr: 7, dean: 1, jackson: 0, jones: 22, raffensperger: 15, other: 0, undecided: 55, margin: 'Jones +7' },
+      { pollster: 'Quantus Insights (R)', date: 'October 13–14, 2025', sampleSize: 900, carr: 12, dean: 2, jackson: 0, jones: 32, raffensperger: 15, other: 1, undecided: 38, margin: 'Jones +17' }
     ]
   }
 };
