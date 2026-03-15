@@ -59,48 +59,48 @@ export default function PollingChart({ data, type }) {
           ) : (
             <>
               <Area
-                type="monotone"
+                type="linear"
                 dataKey="cornyinMax"
                 stroke="none"
                 fill="#8B0000"
-                fillOpacity={0.7}
+                fillOpacity={0.8}
               />
               <Area
-                type="monotone"
+                type="linear"
                 dataKey="cornyinMin"
                 stroke="none"
                 fill="#ffffff"
                 fillOpacity={1}
               />
               <Area
-                type="monotone"
+                type="linear"
                 dataKey="paxtonMax"
                 stroke="none"
                 fill="#CC5500"
-                fillOpacity={0.7}
+                fillOpacity={0.8}
               />
               <Area
-                type="monotone"
+                type="linear"
                 dataKey="paxtonMin"
                 stroke="none"
                 fill="#ffffff"
                 fillOpacity={1}
               />
               <Line 
-                type="monotone" 
+                type="linear" 
                 dataKey="cornyn" 
                 stroke="#8B0000" 
                 strokeWidth={3}
                 name="Cornyn"
-                dot={{ fill: '#8B0000', r: 4 }}
+                dot={false}
               />
               <Line 
-                type="monotone" 
+                type="linear" 
                 dataKey="paxton" 
                 stroke="#CC5500" 
                 strokeWidth={3}
                 name="Paxton"
-                dot={{ fill: '#CC5500', r: 4 }}
+                dot={false}
               />
             </>
           )}
