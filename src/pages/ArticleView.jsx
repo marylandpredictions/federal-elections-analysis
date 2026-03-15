@@ -9,7 +9,7 @@ const articles = [
     title: "Illinois' Democratic Revolution",
     author: "Nathan",
     date: "March 15, 2026",
-    image: null,
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/3c8d9b846_FEA4.png",
     content: `Something may be brewing within the lines of the Democratic Party in Illinois. This will be put to the test next Tuesday in an open senate and an arousing four house seats. In all of these races, there is some sort of progressive candidate(s), but they are just all so different.
 
 In the biggest race to watch on Tuesday, three top candidates are vying to fill the retiring old guard Dick Durbin's senate seat. Durbin has not endorsed a candidate in this race, however, the other senator from Illinois Tammy Duckworth has by endorsing Julianna Stratton. Lieutenant Governor Stratton was pushed into this race by Governor JB Pritzker, who is running for re-election and will win the nomination unopposed. Her other two opponents, are Reps. Raja Krishnamoorthi and Robin Kelly. Krishnamoorthi has been leading in polling aggregates by double digits until recently where Stratton has received a large ad boost. Stratton is the clearest progressive in this race on all but one key issue, Gaza which goes to Kelly. Robin Kelly entered this race to split not only the progressive vote but also the black vote in opposition to JB Pritzker, who kicked her out of the Democratic state chair position several years ago. This race will be a test to see how Illinois Democrats feel about each level of progressivism.
