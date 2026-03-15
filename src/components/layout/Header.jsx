@@ -5,7 +5,6 @@ import { Menu, X } from 'lucide-react';
 const navLinks = [
   { label: 'Home', path: '/Home' },
   { label: 'About Us', path: '/AboutUs' },
-  { label: 'Videos', path: '/Videos' },
 ];
 
 export default function Header() {
@@ -17,9 +16,11 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
         <Link to="/Home" className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-accent flex items-center justify-center">
-            <span className="text-white font-inter font-extrabold text-sm">FEA</span>
-          </div>
+          <img 
+            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/e589dc99b_SEALOFNEWPORT2.png" 
+            alt="FEA Logo" 
+            className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+          />
           <span className="text-white font-inter font-bold text-lg hidden sm:block shimmer-hover">
             Federal Elections Analysis
           </span>
