@@ -56,9 +56,11 @@ const stateCoordinates = {
 const ratingColors = {
   'Safe D': '#0015BC',
   'Likely D': '#3B5DC9',
+  'Lean D': '#6B8DD6',
   'Tilt D': '#7FAAFF',
-  'Toss Up': '#FFFF00',
+  'Toss Up': '#9370DB',
   'Tilt R': '#FF7F7F',
+  'Lean R': '#E85C5C',
   'Likely R': '#D94343',
   'Safe R': '#CC0000'
 };

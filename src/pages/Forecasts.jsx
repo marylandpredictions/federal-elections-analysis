@@ -2,50 +2,50 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import InteractiveMap from '../components/forecasts/InteractiveMap';
 
-const presidentialRatings = {
+const governorsRatings = {
   'Alabama': 'Safe R',
   'Alaska': 'Likely R',
-  'Arizona': 'Tilt R',
+  'Arizona': 'Lean R',
   'Arkansas': 'Safe R',
   'California': 'Safe D',
   'Colorado': 'Likely D',
   'Connecticut': 'Safe D',
   'Delaware': 'Safe D',
-  'Florida': 'Likely R',
-  'Georgia': 'Toss Up',
+  'Florida': 'Safe R',
+  'Georgia': 'Lean R',
   'Hawaii': 'Safe D',
   'Idaho': 'Safe R',
   'Illinois': 'Safe D',
   'Indiana': 'Safe R',
-  'Iowa': 'Likely R',
-  'Kansas': 'Safe R',
+  'Iowa': 'Safe R',
+  'Kansas': 'Likely R',
   'Kentucky': 'Safe R',
   'Louisiana': 'Safe R',
   'Maine': 'Likely D',
-  'Maryland': 'Safe D',
+  'Maryland': 'Likely D',
   'Massachusetts': 'Safe D',
-  'Michigan': 'Toss Up',
+  'Michigan': 'Tilt D',
   'Minnesota': 'Likely D',
   'Mississippi': 'Safe R',
   'Missouri': 'Safe R',
-  'Montana': 'Likely R',
+  'Montana': 'Safe R',
   'Nebraska': 'Safe R',
   'Nevada': 'Toss Up',
-  'New Hampshire': 'Tilt D',
+  'New Hampshire': 'Tilt R',
   'New Jersey': 'Likely D',
-  'New Mexico': 'Likely D',
+  'New Mexico': 'Safe D',
   'New York': 'Safe D',
-  'North Carolina': 'Toss Up',
+  'North Carolina': 'Lean R',
   'North Dakota': 'Safe R',
-  'Ohio': 'Likely R',
+  'Ohio': 'Safe R',
   'Oklahoma': 'Safe R',
-  'Oregon': 'Likely D',
-  'Pennsylvania': 'Toss Up',
+  'Oregon': 'Safe D',
+  'Pennsylvania': 'Lean D',
   'Rhode Island': 'Safe D',
-  'South Carolina': 'Likely R',
+  'South Carolina': 'Safe R',
   'South Dakota': 'Safe R',
   'Tennessee': 'Safe R',
-  'Texas': 'Likely R',
+  'Texas': 'Safe R',
   'Utah': 'Safe R',
   'Vermont': 'Safe D',
   'Virginia': 'Likely D',
@@ -135,9 +135,9 @@ export default function Forecasts() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
-              Presidential Forecast
+              Senate Forecast
             </h2>
-            <InteractiveMap ratings={presidentialRatings} />
+            <InteractiveMap ratings={senateRatings} />
           </motion.div>
 
           <motion.div
@@ -146,9 +146,9 @@ export default function Forecasts() {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
-              Senate Forecast
+              Governors Forecast
             </h2>
-            <InteractiveMap ratings={senateRatings} />
+            <InteractiveMap ratings={governorsRatings} />
           </motion.div>
         </div>
       </div>
