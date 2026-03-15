@@ -94,7 +94,7 @@ export default function PollingChart({ data, type, polls }) {
               borderRadius: '8px',
               color: 'white'
             }}
-            formatter={(value) => `${value}%`}
+            formatter={(value) => `${Number(value).toFixed(1)}%`}
             labelFormatter={(timestamp) => format(new Date(timestamp), 'MMMM d, yyyy')}
           />
           <Legend wrapperStyle={{ color: 'white' }} />
