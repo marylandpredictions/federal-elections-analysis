@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import Forecasts from './pages/Forecasts';
+import Polling from './pages/Polling';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -40,6 +41,7 @@ const AuthenticatedApp = () => {
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/Forecasts" element={<Forecasts />} />
+        <Route path="/Polling" element={<Polling />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
