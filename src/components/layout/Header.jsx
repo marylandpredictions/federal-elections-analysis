@@ -22,6 +22,7 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-primary shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-16">
         {/* Left side: Logo and social */}
+        <div className="flex items-center gap-3">
           <Link to="/Home" className="flex items-center gap-3">
             <img
               src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/69ae34c05_SEALOFNEWPORT3.png"
