@@ -23,23 +23,26 @@ export default function Header() {
           <img
             src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/69ae34c05_SEALOFNEWPORT3.png"
             alt="FEA Logo"
-            className="py-1 w-10 h-10 sm:w-12 sm:h-12 object-contain"
+            className="py-1 w-10 h-10 sm:w-12 sm:h-12 object-contain transition-transform duration-200 hover:scale-110"
           />
 
-          <span className="bg-transparent text-white text-lg font-bold hidden sm:block shimmer-hover text-shadow-teal">Federal Elections Analysis</span>
+          <span className="bg-transparent text-white text-lg font-bold hidden sm:block shimmer-hover text-shadow-teal relative group">
+            Federal Elections Analysis
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </span>
           
           <div className="hidden sm:flex items-center gap-2 ml-2">
-            <a href="https://www.youtube.com/@FedElections/featured" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+            <a href="https://www.youtube.com/@FedElections/featured" target="_blank" rel="noopener noreferrer" className="transition-transform duration-200 hover:scale-110">
               <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/27c9e4340_youtube-app-white-icon.png" alt="YouTube" className="w-6 h-6 object-contain" />
             </a>
-            <a href="https://discord.gg/jYYGrgEaMX" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+            <a href="https://discord.gg/jYYGrgEaMX" target="_blank" rel="noopener noreferrer" className="transition-transform duration-200 hover:scale-110">
               <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/23208f02a_discord-white-icon.png" alt="Discord" className="w-6 h-6 object-contain" />
             </a>
             <a 
               href="https://www.youtube.com/@FedElections/membership" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="bg-white text-primary font-inter font-semibold text-sm px-4 py-2 rounded-lg hover:bg-white/90 transition-all ml-2"
+              className="bg-white text-primary font-inter font-semibold text-sm px-4 py-2 rounded-lg hover:bg-white/90 transition-transform duration-200 hover:scale-110 ml-2"
             >
               Membership
             </a>
@@ -54,13 +57,14 @@ export default function Header() {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 shimmer-hover text-shadow-teal ${
+                className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 shimmer-hover text-shadow-teal relative group ${
                 isActive ?
                 'bg-accent text-white' :
                 'text-white/80 hover:bg-accent/50 hover:text-white'}`
                 }>
 
                 {link.label}
+                <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-white scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
               </Link>);
 
           })}
