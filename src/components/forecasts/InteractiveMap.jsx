@@ -1,57 +1,56 @@
 import React, { useState } from 'react';
 
-// Actual US state SVG paths with proper geographic shapes
-const statePaths = {
-  'Alabama': 'M765.3,393.5l1.4-0.9l1.9-0.4l1.4,0.6l1.3,1.1l0.9,1.6l0.4,2.4l-0.3,2.8l-0.9,2.3l-1.5,1.8l-1.8,1.1l-1.9,0.5l-1.7-0.3l-1.4-1.1l-0.8-1.8l-0.2-2.4l0.4-2.6l0.9-2.3l1.3-1.9l1-0.9l1.5-0.6z',
-  'Alaska': 'M140,550l-15-15l-10,5l-15,10l-20,5l-15-5l-10-10l-5-15l5-20l15-15l20-5l25,5l20,15l15,20l5,25z',
-  'Arizona': 'M178,324l-58-12l-11,63l23,12l47-2l11-12l-1-30z',
-  'Arkansas': 'M550,350l42,3l1,42l-43,2l-1-47z',
-  'California': 'M67,230l12,58l18,46l22,36l28,26l16,8l-8,24l-18,22l-26,12l-24-4l-18-16l-14-22l-8-28l-2-34l4-38l10-42l16-44z',
-  'Colorado': 'M280,270l80,8l-4,60l-80-8z',
-  'Connecticut': 'M850,210l18,2l-1,12l-18-2z',
-  'Delaware': 'M820,298l8,0l0,18l-8,0z',
-  'Florida': 'M780,460l18,8l20,22l12,28l4,22l-4,18l-12,12l-20,4l-24-8l-16-18l-8-24l0-28l8-24l12-12z',
-  'Georgia': 'M724,380l40,8l-4,58l-42-4l6-62z',
-  'Hawaii': 'M260,530l22-8l16,4l8,12l-4,14l-16,8l-22-4l-12-12z',
-  'Idaho': 'M208,128l-4,88l-42-4l4-88z',
-  'Illinois': 'M598,242l32,4l-4,62l-32-4z',
-  'Indiana': 'M640,262l28,4l-4,54l-28-4z',
-  'Iowa': 'M520,232l48,6l-6,48l-48-6z',
-  'Kansas': 'M430,304l78,8l-8,48l-78-8z',
-  'Kentucky': 'M678,318l48,6l-6,32l-48-6z',
-  'Louisiana': 'M550,438l44,6l-6,42l-44-6z',
-  'Maine': 'M870,100l12,8l8,28l-4,32l-12,18l-16,8l-12-8l-8-24l4-32l12-24z',
-  'Maryland': 'M792,288l24,4l-4,18l-24-4z',
-  'Massachusetts': 'M850,188l24,2l-2,14l-24-2z',
-  'Michigan': 'M648,182l40,8l-8,52l-40-8z',
-  'Minnesota': 'M500,148l52,8l-8,56l-52-8z',
-  'Mississippi': 'M588,418l28,4l-4,56l-28-4z',
-  'Missouri': 'M520,308l58,8l-8,48l-58-8z',
-  'Montana': 'M260,120l88,12l-12,64l-88-12z',
-  'Nebraska': 'M408,250l80,10l-10,48l-80-10z',
-  'Nevada': 'M148,260l-4,68l-42-8l4-68z',
-  'New Hampshire': 'M850,160l14,2l-2,20l-14-2z',
-  'New Jersey': 'M808,264l16,2l-2,28l-16-2z',
-  'New Mexico': 'M288,348l64,8l-8,64l-64-8z',
-  'New York': 'M774,198l48,8l-8,36l-48-8z',
-  'North Carolina': 'M738,348l54,8l-8,36l-54-8z',
-  'North Dakota': 'M408,128l80,12l-12,48l-80-12z',
-  'Ohio': 'M680,272l40,6l-6,42l-40-6z',
-  'Oklahoma': 'M428,358l80,10l-10,40l-80-10z',
-  'Oregon': 'M98,140l-6,76l-42-8l6-76z',
-  'Pennsylvania': 'M760,250l52,8l-8,36l-52-8z',
-  'Rhode Island': 'M862,196l8,1l-1,8l-8-1z',
-  'South Carolina': 'M744,388l32,6l-6,28l-32-6z',
-  'South Dakota': 'M388,188l80,12l-12,48l-80-12z',
-  'Tennessee': 'M638,348l58,8l-8,32l-58-8z',
-  'Texas': 'M358,408l-8,124l-88-12l8-124z',
-  'Utah': 'M228,260l-8,68l-42-8l8-68z',
-  'Vermont': 'M830,158l14,2l-2,18l-14-2z',
-  'Virginia': 'M754,312l52,8l-8,32l-52-8z',
-  'Washington': 'M118,88l-8,68l-42-8l8-68z',
-  'West Virginia': 'M742,294l36,6l-6,28l-36-6z',
-  'Wisconsin': 'M588,170l40,8l-8,52l-40-8z',
-  'Wyoming': 'M288,188l80,12l-12,58l-80-12z'
+const statePositions = {
+  'Alabama': { x: 700, y: 420 },
+  'Alaska': { x: 120, y: 550 },
+  'Arizona': { x: 180, y: 380 },
+  'Arkansas': { x: 580, y: 400 },
+  'California': { x: 100, y: 320 },
+  'Colorado': { x: 300, y: 320 },
+  'Connecticut': { x: 850, y: 240 },
+  'Delaware': { x: 820, y: 290 },
+  'Florida': { x: 760, y: 500 },
+  'Georgia': { x: 720, y: 430 },
+  'Hawaii': { x: 280, y: 550 },
+  'Idaho': { x: 200, y: 180 },
+  'Illinois': { x: 620, y: 300 },
+  'Indiana': { x: 660, y: 300 },
+  'Iowa': { x: 560, y: 260 },
+  'Kansas': { x: 480, y: 350 },
+  'Kentucky': { x: 690, y: 340 },
+  'Louisiana': { x: 600, y: 470 },
+  'Maine': { x: 870, y: 150 },
+  'Maryland': { x: 800, y: 300 },
+  'Massachusetts': { x: 860, y: 220 },
+  'Michigan': { x: 670, y: 230 },
+  'Minnesota': { x: 540, y: 180 },
+  'Mississippi': { x: 620, y: 450 },
+  'Missouri': { x: 570, y: 340 },
+  'Montana': { x: 280, y: 160 },
+  'Nebraska': { x: 440, y: 280 },
+  'Nevada': { x: 140, y: 300 },
+  'New Hampshire': { x: 860, y: 200 },
+  'New Jersey': { x: 820, y: 270 },
+  'New Mexico': { x: 300, y: 400 },
+  'New York': { x: 800, y: 220 },
+  'North Carolina': { x: 760, y: 370 },
+  'North Dakota': { x: 420, y: 160 },
+  'Ohio': { x: 700, y: 300 },
+  'Oklahoma': { x: 480, y: 390 },
+  'Oregon': { x: 100, y: 180 },
+  'Pennsylvania': { x: 780, y: 270 },
+  'Rhode Island': { x: 870, y: 230 },
+  'South Carolina': { x: 750, y: 400 },
+  'South Dakota': { x: 420, y: 210 },
+  'Tennessee': { x: 660, y: 370 },
+  'Texas': { x: 450, y: 480 },
+  'Utah': { x: 220, y: 300 },
+  'Vermont': { x: 840, y: 190 },
+  'Virginia': { x: 770, y: 330 },
+  'Washington': { x: 120, y: 120 },
+  'West Virginia': { x: 750, y: 310 },
+  'Wisconsin': { x: 600, y: 210 },
+  'Wyoming': { x: 300, y: 230 }
 };
 
 const ratingColors = {
@@ -70,7 +69,7 @@ const ratingColors = {
 export default function InteractiveMap({ ratings }) {
   const [hoveredState, setHoveredState] = useState(null);
 
-  const stateEntries = Object.entries(statePaths);
+  const stateEntries = Object.entries(statePositions);
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
@@ -80,80 +79,64 @@ export default function InteractiveMap({ ratings }) {
           className="absolute inset-0 w-full h-full"
           style={{ filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))' }}
         >
-          {stateEntries.map(([state, path]) => {
+          {stateEntries.map(([state, { x, y }]) => {
             const rating = ratings[state] || 'Toss Up';
             const color = ratingColors[rating];
             const isHovered = hoveredState === state;
             
             return (
               <g key={state}>
-                <path
-                  d={path}
+                <circle
+                  cx={x}
+                  cy={y}
+                  r={isHovered ? 20 : 16}
                   fill={color}
                   stroke="white"
-                  strokeWidth={isHovered ? 3 : 1.5}
+                  strokeWidth={isHovered ? 3 : 2}
                   onMouseEnter={() => setHoveredState(state)}
                   onMouseLeave={() => setHoveredState(null)}
                   style={{ 
                     cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    opacity: isHovered ? 1 : 0.9
+                    transition: 'all 0.2s ease'
                   }}
                 />
+                {isHovered && (
+                  <>
+                    <rect
+                      x={x - 60}
+                      y={y - 60}
+                      width={120}
+                      height={40}
+                      fill="rgba(0, 0, 0, 0.9)"
+                      stroke="white"
+                      strokeWidth={2}
+                      rx={6}
+                    />
+                    <text
+                      x={x}
+                      y={y - 47}
+                      textAnchor="middle"
+                      fill="white"
+                      fontSize="12"
+                      fontWeight="bold"
+                    >
+                      {state}
+                    </text>
+                    <text
+                      x={x}
+                      y={y - 31}
+                      textAnchor="middle"
+                      fill={color}
+                      fontSize="11"
+                      fontWeight="600"
+                    >
+                      {rating}
+                    </text>
+                  </>
+                )}
               </g>
             );
           })}
-          {hoveredState && (() => {
-            const rating = ratings[hoveredState] || 'Toss Up';
-            const color = ratingColors[rating];
-            const path = statePaths[hoveredState];
-            
-            // Calculate approximate center based on path
-            const getCenterFromPath = (pathStr) => {
-              const coords = pathStr.match(/[\d.]+/g);
-              if (coords && coords.length >= 2) {
-                return { x: parseFloat(coords[0]), y: parseFloat(coords[1]) - 40 };
-              }
-              return { x: 480, y: 200 };
-            };
-            
-            const center = getCenterFromPath(path);
-            
-            return (
-              <g key={`${hoveredState}-tooltip`} pointerEvents="none">
-                <rect
-                  x={center.x - 60}
-                  y={center.y - 40}
-                  width={120}
-                  height={40}
-                  fill="rgba(0, 0, 0, 0.9)"
-                  stroke="white"
-                  strokeWidth={2}
-                  rx={6}
-                />
-                <text
-                  x={center.x}
-                  y={center.y - 27}
-                  textAnchor="middle"
-                  fill="white"
-                  fontSize="12"
-                  fontWeight="bold"
-                >
-                  {hoveredState}
-                </text>
-                <text
-                  x={center.x}
-                  y={center.y - 11}
-                  textAnchor="middle"
-                  fill={color}
-                  fontSize="11"
-                  fontWeight="600"
-                >
-                  {rating}
-                </text>
-              </g>
-            );
-          })()}
         </svg>
       </div>
 
@@ -162,7 +145,7 @@ export default function InteractiveMap({ ratings }) {
         {Object.entries(ratingColors).map(([rating, color]) => (
           <div key={rating} className="flex items-center gap-2">
             <div 
-              className="w-4 h-4 rounded border-2 border-white" 
+              className="w-4 h-4 rounded-full border-2 border-white" 
               style={{ backgroundColor: color }}
             />
             <span className="text-white text-xs sm:text-sm font-medium">
