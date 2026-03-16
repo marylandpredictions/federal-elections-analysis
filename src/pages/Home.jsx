@@ -37,6 +37,20 @@ const genericBallotData = [
   { democrat: 45.3, republican: 42.7 }
 ];
 
+const baseResults = {
+  'Alaska': 13.1, 'Arizona': null, 'Hawaii': null, 'California': null, 'Oregon': -14.3,
+  'Washington': null, 'Nevada': null, 'Idaho': 36.5, 'Utah': null, 'New Mexico': -6.0,
+  'Colorado': -11.0, 'Wyoming': 45.8, 'Montana': 19.9, 'North Dakota': null, 'South Dakota': 29.2,
+  'Nebraska': 20.5, 'Kansas': 16.1, 'Oklahoma': 34.3, 'Texas': 13.7, 'Louisiana': 22.0,
+  'Arkansas': 30.6, 'Missouri': null, 'Iowa': 13.2, 'Minnesota': -4.2, 'Wisconsin': null,
+  'Illinois': -10.9, 'Michigan': 1.4, 'Indiana': null, 'Ohio': 11.2, 'Kentucky': 30.5,
+  'Tennessee': 29.7, 'Mississippi': 22.9, 'Alabama': 30.5, 'Florida': 13.1, 'Georgia': 2.2,
+  'South Carolina': 17.9, 'North Carolina': 3.2, 'Virginia': -5.8, 'West Virginia': 41.9,
+  'Maryland': null, 'Delaware': -14.7, 'Pennsylvania': null, 'New Jersey': -5.9, 'New York': null,
+  'Connecticut': null, 'Rhode Island': -13.8, 'Massachusetts': -25.2, 'Vermont': null,
+  'New Hampshire': -2.8, 'Maine': -6.9
+};
+
 const bubbleBase = "bg-white/60 backdrop-blur-sm rounded-2xl p-5 shadow-lg hover:bg-white/70 transition-all duration-300 hover:shadow-xl";
 
 export default function Home() {
