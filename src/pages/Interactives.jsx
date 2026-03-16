@@ -2,7 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const interactives = [];
+const interactives = [
+  {
+    title: 'Senate Swingometer',
+    path: '/SenateSwingometer',
+    description: 'Swing the 2026 Senate map based on 2024 presidential results'
+  }
+];
 
 export default function Interactives() {
   return (
@@ -21,7 +27,7 @@ export default function Interactives() {
           transition={{ duration: 0.6 }}
           className="text-white font-inter font-bold text-3xl sm:text-4xl text-center mb-12 text-shadow-teal"
         >
-          Interactive Tools
+          Interactives
         </motion.h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
