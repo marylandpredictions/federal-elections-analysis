@@ -84,6 +84,7 @@ export default function SwingMap({ baseResults, swing }) {
   // Calculate seat counts
   let demSeats = 32;
   let repSeats = 31;
+  let tossUpSeats = 0;
   
   Object.entries(baseResults).forEach(([state, baseMargin]) => {
     if (baseMargin !== null) {
@@ -92,6 +93,8 @@ export default function SwingMap({ baseResults, swing }) {
         demSeats += 1;
       } else if (newMargin > 0) {
         repSeats += 1;
+      } else {
+        tossUpSeats += 1;
       }
     }
   });
@@ -103,65 +106,25 @@ export default function SwingMap({ baseResults, swing }) {
       </h3>
       
       {/* Seat Counter */}
-      <div className="flex justify-center gap-8 mb-6">
-        <div className="text-center">
-          <div className="text-4xl font-inter font-bold" style={{ color: '#0047AB' }}>
+      <div className="flex justify-center gap-4 mb-6 flex-wrap">
+        <div className="bg-[#0047AB] rounded-2xl px-6 py-4 text-center transition-transform duration-200 hover:scale-105 cursor-pointer shadow-lg">
+          <div className="text-white font-inter font-bold text-3xl sm:text-4xl">
             {demSeats}
           </div>
           <div className="text-white font-inter text-sm mt-1">Democrat</div>
         </div>
-        <div className="text-center">
-          <div className="text-4xl font-inter font-bold" style={{ color: '#8B0000' }}>
+        <div className="bg-[#9334EB] rounded-2xl px-6 py-4 text-center transition-transform duration-200 hover:scale-105 cursor-pointer shadow-lg">
+          <div className="text-white font-inter font-bold text-3xl sm:text-4xl">
+            {tossUpSeats}
+          </div>
+          <div className="text-white font-inter text-sm mt-1">Toss Up</div>
+        </div>
+        <div className="bg-[#8B0000] rounded-2xl px-6 py-4 text-center transition-transform duration-200 hover:scale-105 cursor-pointer shadow-lg">
+          <div className="text-white font-inter font-bold text-3xl sm:text-4xl">
             {repSeats}
           </div>
           <div className="text-white font-inter text-sm mt-1">Republican</div>
         </div>
-      </div>
-      
-      {/* Control Buttons */}
-      <div className="flex justify-center gap-4 mb-6">
-        <button
-          className="text-white font-inter text-sm hover:text-white/80 transition-all"
-          onClick={() => window.location.reload()}
-        >
-          Reset
-        </button>
-        <button
-          className="text-white font-inter text-sm hover:text-white/80 transition-all"
-          onClick={() => {
-            const url = new URL(window.location.href);
-            url.searchParams.set('swing', swing.toString());
-            navigator.clipboard.writeText(url.toString());
-            alert('Link copied to clipboard!');
-          }}
-        >
-          Share
-        </button>
-        <button
-          className="text-white font-inter text-sm hover:text-white/80 transition-all"
-          onClick={() => {
-            const canvas = document.createElement('canvas');
-            const svg = document.querySelector('svg');
-            const data = new XMLSerializer().serializeToString(svg);
-            const img = new Image();
-            img.onload = () => {
-              canvas.width = img.width;
-              canvas.height = img.height;
-              const ctx = canvas.getContext('2d');
-              ctx.drawImage(img, 0, 0);
-              canvas.toBlob((blob) => {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'senate-swingometer.png';
-                a.click();
-              });
-            };
-            img.src = 'data:image/svg+xml;base64,' + btoa(data);
-          }}
-        >
-          Download
-        </button>
       </div>
 
       <div className="relative w-full" style={{ paddingBottom: '60%' }}>
