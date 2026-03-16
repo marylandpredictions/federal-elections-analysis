@@ -20,19 +20,20 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-primary shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        {/* Logo */}
-        <Link to="/Home" className="flex items-center gap-3">
-          <img
-            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/69ae34c05_SEALOFNEWPORT3.png"
-            alt="FEA Logo"
-            className="py-1 w-10 h-10 sm:w-12 sm:h-12 object-contain transition-transform duration-200 hover:scale-110"
-          />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-16">
+        {/* Left side: Logo and social */}
+          <Link to="/Home" className="flex items-center gap-3">
+            <img
+              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/69ae34c05_SEALOFNEWPORT3.png"
+              alt="FEA Logo"
+              className="py-1 w-10 h-10 sm:w-12 sm:h-12 object-contain transition-transform duration-200 hover:scale-110"
+            />
 
-          <span className="bg-transparent text-white text-lg font-bold hidden sm:block text-shadow-teal relative group">
-            Federal Elections Analysis
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-          </span>
+            <span className="bg-transparent text-white text-lg font-bold hidden sm:block text-shadow-teal relative group">
+              Federal Elections Analysis
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+            </span>
+          </Link>
           
           <div className="hidden sm:flex items-center gap-2 ml-2">
             <a href="https://www.youtube.com/@FedElections/featured" target="_blank" rel="noopener noreferrer" className="transition-transform duration-200 hover:scale-110">
@@ -50,10 +51,10 @@ export default function Header() {
               Membership
             </a>
           </div>
-        </Link>
+        </div>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-1">
+        {/* Center: Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-1 mx-auto">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.path;
             return (
@@ -127,7 +128,7 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Mobile toggle */}
+        {/* Right side: Mobile toggle */}
         <button
           className="md:hidden text-white p-2"
           onClick={() => setMobileOpen(!mobileOpen)}>
