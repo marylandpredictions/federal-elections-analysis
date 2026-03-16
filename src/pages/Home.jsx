@@ -24,7 +24,7 @@ export default function Home() {
         <h1 className="text-white font-inter font-extrabold text-4xl sm:text-5xl md:text-7xl leading-tight mt-2 text-shadow-teal">
           Federal Elections Analysis
         </h1>
-        <p className="text-white font-inter text-lg sm:text-xl md:text-2xl mt-6 text-shadow-teal bg-primary/90 rounded-3xl px-8 py-4 inline-block">
+        <p className="text-white font-inter text-lg sm:text-xl md:text-2xl mt-6 text-shadow-teal bg-primary/90 rounded-3xl px-8 py-4 inline-block transition-all duration-300 hover:scale-110 hover:text-xl sm:hover:text-2xl md:hover:text-3xl cursor-pointer">
           A Haven for Political Fatigue
         </p>
       </motion.div>
