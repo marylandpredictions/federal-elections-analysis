@@ -81,9 +81,9 @@ export default function SwingMap({ baseResults, swing }) {
 
   const stateEntries = Object.entries(statePositions);
   
-  // Calculate seat counts - start with uncontested seats
-  let demSeats = 32;
-  let repSeats = 31;
+  // Calculate seat counts - start with base seats
+  let demSeats = 44;
+  let repSeats = 56;
   let tossUpSeats = 0;
   
   // Add contested seats based on swing
