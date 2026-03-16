@@ -89,7 +89,7 @@ export default function Header() {
               key={link.path}
               to={link.path}
               onClick={() => setMobileOpen(false)}
-              className={`block px-4 py-3 rounded-lg font-inter font-semibold text-sm transition-all mt-1 shimmer-hover text-shadow-teal ${
+              className={`block px-4 py-3 rounded-lg font-inter font-semibold text-sm transition-all mt-1 text-shadow-teal ${
               isActive ?
               'bg-accent text-white' :
               'text-white/80 hover:bg-accent/50 hover:text-white'}`
