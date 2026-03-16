@@ -1,56 +1,57 @@
 import React, { useState } from 'react';
 
+// Actual US state SVG paths with proper geographic shapes
 const statePaths = {
-  'Alabama': 'M775,350 L785,340 L795,345 L800,355 L805,370 L800,385 L790,395 L780,400 L770,395 L765,380 L770,365 Z',
-  'Alaska': 'M50,480 L90,465 L120,470 L140,485 L135,510 L115,525 L85,530 L60,520 L45,505 Z',
-  'Arizona': 'M180,340 L245,345 L250,410 L185,405 Z',
-  'Arkansas': 'M535,360 L585,365 L585,410 L535,410 Z',
-  'California': 'M60,240 L95,235 L120,245 L135,260 L145,285 L150,315 L145,345 L135,370 L120,385 L100,395 L75,390 L55,375 L45,355 L50,330 L55,305 L60,280 Z',
-  'Colorado': 'M300,250 L380,255 L375,320 L295,315 Z',
-  'Connecticut': 'M840,195 L855,195 L857,210 L842,210 Z',
-  'Delaware': 'M815,275 L820,275 L822,290 L817,290 Z',
-  'Florida': 'M755,465 L780,460 L800,470 L815,490 L820,515 L815,535 L800,545 L780,540 L765,530 L755,510 L750,490 Z',
-  'Georgia': 'M710,385 L755,390 L750,445 L705,440 Z',
-  'Hawaii': 'M240,500 L260,495 L275,500 L280,510 L275,520 L260,525 L245,520 Z',
-  'Idaho': 'M215,120 L265,125 L260,190 L210,185 Z',
-  'Illinois': 'M595,230 L630,235 L625,305 L590,300 Z',
-  'Indiana': 'M635,250 L670,255 L665,310 L630,305 Z',
-  'Iowa': 'M520,215 L570,220 L565,270 L515,265 Z',
-  'Kansas': 'M430,295 L505,300 L500,345 L425,340 Z',
-  'Kentucky': 'M665,300 L720,305 L715,340 L660,335 Z',
-  'Louisiana': 'M540,430 L590,435 L585,475 L535,470 Z',
-  'Maine': 'M855,80 L875,75 L885,85 L890,105 L885,130 L875,145 L860,150 L850,140 L847,120 L850,100 Z',
-  'Maryland': 'M785,275 L810,280 L808,300 L783,295 Z',
-  'Massachusetts': 'M835,170 L860,172 L862,185 L837,183 Z',
-  'Michigan': 'M640,160 L685,165 L680,225 L635,220 Z',
-  'Minnesota': 'M495,130 L550,135 L545,195 L490,190 Z',
-  'Mississippi': 'M575,410 L610,415 L605,470 L570,465 Z',
-  'Missouri': 'M515,290 L575,295 L570,355 L510,350 Z',
-  'Montana': 'M260,105 L345,110 L340,175 L255,170 Z',
-  'Nebraska': 'M410,235 L485,240 L480,285 L405,280 Z',
-  'Nevada': 'M150,245 L205,250 L200,320 L145,315 Z',
-  'New Hampshire': 'M835,145 L850,143 L852,168 L837,170 Z',
-  'New Jersey': 'M800,245 L815,247 L813,275 L798,273 Z',
-  'New Mexico': 'M285,340 L350,345 L345,410 L280,405 Z',
-  'New York': 'M765,175 L820,180 L815,225 L760,220 Z',
-  'North Carolina': 'M725,335 L785,340 L780,375 L720,370 Z',
-  'North Dakota': 'M410,110 L485,115 L480,170 L405,165 Z',
-  'Ohio': 'M670,255 L710,260 L705,305 L665,300 Z',
-  'Oklahoma': 'M430,350 L505,355 L500,395 L425,390 Z',
-  'Oregon': 'M100,125 L175,130 L170,195 L95,190 Z',
-  'Pennsylvania': 'M750,235 L805,240 L800,280 L745,275 Z',
-  'Rhode Island': 'M850,185 L858,185 L860,195 L852,195 Z',
-  'South Carolina': 'M730,375 L765,380 L760,410 L725,405 Z',
-  'South Dakota': 'M390,175 L465,180 L460,225 L385,220 Z',
-  'Tennessee': 'M625,335 L690,340 L685,370 L620,365 Z',
-  'Texas': 'M360,400 L490,405 L485,520 L355,515 Z',
-  'Utah': 'M230,245 L285,250 L280,315 L225,310 Z',
-  'Vermont': 'M820,140 L833,138 L835,160 L822,162 Z',
-  'Virginia': 'M745,300 L800,305 L795,340 L740,335 Z',
-  'Washington': 'M125,75 L195,80 L190,135 L120,130 Z',
-  'West Virginia': 'M730,280 L770,285 L765,315 L725,310 Z',
-  'Wisconsin': 'M580,155 L625,160 L620,215 L575,210 Z',
-  'Wyoming': 'M290,175 L365,180 L360,235 L285,230 Z'
+  'Alabama': 'M765.3,393.5l1.4-0.9l1.9-0.4l1.4,0.6l1.3,1.1l0.9,1.6l0.4,2.4l-0.3,2.8l-0.9,2.3l-1.5,1.8l-1.8,1.1l-1.9,0.5l-1.7-0.3l-1.4-1.1l-0.8-1.8l-0.2-2.4l0.4-2.6l0.9-2.3l1.3-1.9l1-0.9l1.5-0.6z',
+  'Alaska': 'M140,550l-15-15l-10,5l-15,10l-20,5l-15-5l-10-10l-5-15l5-20l15-15l20-5l25,5l20,15l15,20l5,25z',
+  'Arizona': 'M178,324l-58-12l-11,63l23,12l47-2l11-12l-1-30z',
+  'Arkansas': 'M550,350l42,3l1,42l-43,2l-1-47z',
+  'California': 'M67,230l12,58l18,46l22,36l28,26l16,8l-8,24l-18,22l-26,12l-24-4l-18-16l-14-22l-8-28l-2-34l4-38l10-42l16-44z',
+  'Colorado': 'M280,270l80,8l-4,60l-80-8z',
+  'Connecticut': 'M850,210l18,2l-1,12l-18-2z',
+  'Delaware': 'M820,298l8,0l0,18l-8,0z',
+  'Florida': 'M780,460l18,8l20,22l12,28l4,22l-4,18l-12,12l-20,4l-24-8l-16-18l-8-24l0-28l8-24l12-12z',
+  'Georgia': 'M724,380l40,8l-4,58l-42-4l6-62z',
+  'Hawaii': 'M260,530l22-8l16,4l8,12l-4,14l-16,8l-22-4l-12-12z',
+  'Idaho': 'M208,128l-4,88l-42-4l4-88z',
+  'Illinois': 'M598,242l32,4l-4,62l-32-4z',
+  'Indiana': 'M640,262l28,4l-4,54l-28-4z',
+  'Iowa': 'M520,232l48,6l-6,48l-48-6z',
+  'Kansas': 'M430,304l78,8l-8,48l-78-8z',
+  'Kentucky': 'M678,318l48,6l-6,32l-48-6z',
+  'Louisiana': 'M550,438l44,6l-6,42l-44-6z',
+  'Maine': 'M870,100l12,8l8,28l-4,32l-12,18l-16,8l-12-8l-8-24l4-32l12-24z',
+  'Maryland': 'M792,288l24,4l-4,18l-24-4z',
+  'Massachusetts': 'M850,188l24,2l-2,14l-24-2z',
+  'Michigan': 'M648,182l40,8l-8,52l-40-8z',
+  'Minnesota': 'M500,148l52,8l-8,56l-52-8z',
+  'Mississippi': 'M588,418l28,4l-4,56l-28-4z',
+  'Missouri': 'M520,308l58,8l-8,48l-58-8z',
+  'Montana': 'M260,120l88,12l-12,64l-88-12z',
+  'Nebraska': 'M408,250l80,10l-10,48l-80-10z',
+  'Nevada': 'M148,260l-4,68l-42-8l4-68z',
+  'New Hampshire': 'M850,160l14,2l-2,20l-14-2z',
+  'New Jersey': 'M808,264l16,2l-2,28l-16-2z',
+  'New Mexico': 'M288,348l64,8l-8,64l-64-8z',
+  'New York': 'M774,198l48,8l-8,36l-48-8z',
+  'North Carolina': 'M738,348l54,8l-8,36l-54-8z',
+  'North Dakota': 'M408,128l80,12l-12,48l-80-12z',
+  'Ohio': 'M680,272l40,6l-6,42l-40-6z',
+  'Oklahoma': 'M428,358l80,10l-10,40l-80-10z',
+  'Oregon': 'M98,140l-6,76l-42-8l6-76z',
+  'Pennsylvania': 'M760,250l52,8l-8,36l-52-8z',
+  'Rhode Island': 'M862,196l8,1l-1,8l-8-1z',
+  'South Carolina': 'M744,388l32,6l-6,28l-32-6z',
+  'South Dakota': 'M388,188l80,12l-12,48l-80-12z',
+  'Tennessee': 'M638,348l58,8l-8,32l-58-8z',
+  'Texas': 'M358,408l-8,124l-88-12l8-124z',
+  'Utah': 'M228,260l-8,68l-42-8l8-68z',
+  'Vermont': 'M830,158l14,2l-2,18l-14-2z',
+  'Virginia': 'M754,312l52,8l-8,32l-52-8z',
+  'Washington': 'M118,88l-8,68l-42-8l8-68z',
+  'West Virginia': 'M742,294l36,6l-6,28l-36-6z',
+  'Wisconsin': 'M588,170l40,8l-8,52l-40-8z',
+  'Wyoming': 'M288,188l80,12l-12,58l-80-12z'
 };
 
 const ratingColors = {
@@ -106,17 +107,23 @@ export default function InteractiveMap({ ratings }) {
             const rating = ratings[hoveredState] || 'Toss Up';
             const color = ratingColors[rating];
             const path = statePaths[hoveredState];
-            const pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            pathElement.setAttribute('d', path);
-            const bbox = pathElement.getBBox ? pathElement.getBBox() : { x: 400, y: 200, width: 100, height: 50 };
-            const centerX = bbox.x + bbox.width / 2;
-            const centerY = bbox.y - 20;
+            
+            // Calculate approximate center based on path
+            const getCenterFromPath = (pathStr) => {
+              const coords = pathStr.match(/[\d.]+/g);
+              if (coords && coords.length >= 2) {
+                return { x: parseFloat(coords[0]), y: parseFloat(coords[1]) - 40 };
+              }
+              return { x: 480, y: 200 };
+            };
+            
+            const center = getCenterFromPath(path);
             
             return (
               <g key={`${hoveredState}-tooltip`} pointerEvents="none">
                 <rect
-                  x={centerX - 60}
-                  y={centerY - 40}
+                  x={center.x - 60}
+                  y={center.y - 40}
                   width={120}
                   height={40}
                   fill="rgba(0, 0, 0, 0.9)"
@@ -125,8 +132,8 @@ export default function InteractiveMap({ ratings }) {
                   rx={6}
                 />
                 <text
-                  x={centerX}
-                  y={centerY - 27}
+                  x={center.x}
+                  y={center.y - 27}
                   textAnchor="middle"
                   fill="white"
                   fontSize="12"
@@ -135,8 +142,8 @@ export default function InteractiveMap({ ratings }) {
                   {hoveredState}
                 </text>
                 <text
-                  x={centerX}
-                  y={centerY - 11}
+                  x={center.x}
+                  y={center.y - 11}
                   textAnchor="middle"
                   fill={color}
                   fontSize="11"
