@@ -177,7 +177,7 @@ export default function SwingMap({ baseResults, swing }) {
                 left: `${(x / 960) * 100}%`,
                 top: `${(y / 600) * 100}%`,
                 transform: 'translate(-50%, -100%)',
-                zIndex: 1000
+                zIndex: 9999
               }}
             >
               <div className="bg-black/90 border-2 border-white rounded-lg px-4 py-2 shadow-lg mb-2">
