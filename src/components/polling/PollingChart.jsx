@@ -3,11 +3,97 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { format } from 'date-fns';
 
 export default function PollingChart({ data, type, polls }) {
-  const formattedData = data.map(item => ({
-    ...item,
-    date: format(new Date(item.date), 'MMMM d, yyyy'),
-    timestamp: new Date(item.date).getTime()
-  }));
+  const formattedData = data.map(item => {
+    const baseData = {
+      ...item,
+      date: format(new Date(item.date), 'MMMM d, yyyy'),
+      timestamp: new Date(item.date).getTime()
+    };
+    
+    // Add 3% zones for each candidate if not already present
+    if (item.democrat !== undefined && !item.democratMin) {
+      baseData.democratMin = Math.max(0, item.democrat - 3);
+      baseData.democratMax = Math.min(100, item.democrat + 3);
+    }
+    if (item.republican !== undefined && !item.republicanMin) {
+      baseData.republicanMin = Math.max(0, item.republican - 3);
+      baseData.republicanMax = Math.min(100, item.republican + 3);
+    }
+    if (item.biss !== undefined && !item.bissMin) {
+      baseData.bissMin = Math.max(0, item.biss - 3);
+      baseData.bissMax = Math.min(100, item.biss + 3);
+    }
+    if (item.fine !== undefined && !item.fineMin) {
+      baseData.fineMin = Math.max(0, item.fine - 3);
+      baseData.fineMax = Math.min(100, item.fine + 3);
+    }
+    if (item.abughazaleh !== undefined && !item.abughazalehMin) {
+      baseData.abughazalehMin = Math.max(0, item.abughazaleh - 3);
+      baseData.abughazalehMax = Math.min(100, item.abughazaleh + 3);
+    }
+    if (item.simmons !== undefined && !item.simmonsMin) {
+      baseData.simmonsMin = Math.max(0, item.simmons - 3);
+      baseData.simmonsMax = Math.min(100, item.simmons + 3);
+    }
+    if (item.amiwala !== undefined && !item.amiwalaMin) {
+      baseData.amiwalaMin = Math.max(0, item.amiwala - 3);
+      baseData.amiwalaMax = Math.min(100, item.amiwala + 3);
+    }
+    if (item.andrew !== undefined && !item.andrewMin) {
+      baseData.andrewMin = Math.max(0, item.andrew - 3);
+      baseData.andrewMax = Math.min(100, item.andrew + 3);
+    }
+    if (item.donalds !== undefined && !item.donaldsMin) {
+      baseData.donaldsMin = Math.max(0, item.donalds - 3);
+      baseData.donaldsMax = Math.min(100, item.donalds + 3);
+    }
+    if (item.fishback !== undefined && !item.fishbackMin) {
+      baseData.fishbackMin = Math.max(0, item.fishback - 3);
+      baseData.fishbackMax = Math.min(100, item.fishback + 3);
+    }
+    if (item.collins !== undefined && !item.collinsMin) {
+      baseData.collinsMin = Math.max(0, item.collins - 3);
+      baseData.collinsMax = Math.min(100, item.collins + 3);
+    }
+    if (item.renner !== undefined && !item.rennerMin) {
+      baseData.rennerMin = Math.max(0, item.renner - 3);
+      baseData.rennerMax = Math.min(100, item.renner + 3);
+    }
+    if (item.jones !== undefined && !item.jonesMin) {
+      baseData.jonesMin = Math.max(0, item.jones - 3);
+      baseData.jonesMax = Math.min(100, item.jones + 3);
+    }
+    if (item.jackson !== undefined && !item.jacksonMin) {
+      baseData.jacksonMin = Math.max(0, item.jackson - 3);
+      baseData.jacksonMax = Math.min(100, item.jackson + 3);
+    }
+    if (item.raffensperger !== undefined && !item.raffenspergerMin) {
+      baseData.raffenspergerMin = Math.max(0, item.raffensperger - 3);
+      baseData.raffenspergerMax = Math.min(100, item.raffensperger + 3);
+    }
+    if (item.carr !== undefined && !item.carrMin) {
+      baseData.carrMin = Math.max(0, item.carr - 3);
+      baseData.carrMax = Math.min(100, item.carr + 3);
+    }
+    if (item.mace !== undefined && !item.maceMin) {
+      baseData.maceMin = Math.max(0, item.mace - 3);
+      baseData.maceMax = Math.min(100, item.mace + 3);
+    }
+    if (item.wilson !== undefined && !item.wilsonMin) {
+      baseData.wilsonMin = Math.max(0, item.wilson - 3);
+      baseData.wilsonMax = Math.min(100, item.wilson + 3);
+    }
+    if (item.evette !== undefined && !item.evetteMin) {
+      baseData.evetteMin = Math.max(0, item.evette - 3);
+      baseData.evetteMax = Math.min(100, item.evette + 3);
+    }
+    if (item.norman !== undefined && !item.normanMin) {
+      baseData.normanMin = Math.max(0, item.norman - 3);
+      baseData.normanMax = Math.min(100, item.norman + 3);
+    }
+    
+    return baseData;
+  });
 
   const pollDots = polls ? polls.map(poll => ({
     date: poll.date,
@@ -103,6 +189,34 @@ export default function PollingChart({ data, type, polls }) {
           <Legend wrapperStyle={{ color: 'white', fontWeight: 'bold' }} />
           {isGenericBallot ? (
             <>
+              <Area
+                type="linear"
+                dataKey="democratMax"
+                stroke="none"
+                fill="#0047AB"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="democratMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="republicanMax"
+                stroke="none"
+                fill="#8B0000"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="republicanMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
               <Line 
                 type="linear" 
                 dataKey="democrat" 
@@ -122,6 +236,62 @@ export default function PollingChart({ data, type, polls }) {
             </>
           ) : isSouthCarolina ? (
             <>
+              <Area
+                type="linear"
+                dataKey="maceMax"
+                stroke="none"
+                fill="#8B0000"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="maceMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="wilsonMax"
+                stroke="none"
+                fill="#006400"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="wilsonMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="evetteMax"
+                stroke="none"
+                fill="#C71585"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="evetteMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="normanMax"
+                stroke="none"
+                fill="#FF6600"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="normanMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
               <Line 
                 type="linear" 
                 dataKey="mace" 
@@ -185,6 +355,62 @@ export default function PollingChart({ data, type, polls }) {
             </>
           ) : isGeorgia ? (
             <>
+              <Area
+                type="linear"
+                dataKey="jonesMax"
+                stroke="none"
+                fill="#8B0000"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="jonesMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="jacksonMax"
+                stroke="none"
+                fill="#C71585"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="jacksonMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="raffenspergerMax"
+                stroke="none"
+                fill="#DAA520"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="raffenspergerMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="carrMax"
+                stroke="none"
+                fill="#FF6600"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="carrMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
               <Line 
                 type="linear" 
                 dataKey="jones" 
@@ -248,6 +474,62 @@ export default function PollingChart({ data, type, polls }) {
             </>
           ) : isFlorida ? (
             <>
+              <Area
+                type="linear"
+                dataKey="donaldsMax"
+                stroke="none"
+                fill="#8B0000"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="donaldsMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="fishbackMax"
+                stroke="none"
+                fill="#FF6600"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="fishbackMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="collinsMax"
+                stroke="none"
+                fill="#C71585"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="collinsMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="rennerMax"
+                stroke="none"
+                fill="#DAA520"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="rennerMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
               <Line 
                 type="linear" 
                 dataKey="donalds" 
@@ -311,6 +593,90 @@ export default function PollingChart({ data, type, polls }) {
             </>
           ) : isIllinois9th ? (
             <>
+              <Area
+                type="linear"
+                dataKey="bissMax"
+                stroke="none"
+                fill="#008080"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="bissMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="fineMax"
+                stroke="none"
+                fill="#8B0000"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="fineMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="abughazalehMax"
+                stroke="none"
+                fill="#C71585"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="abughazalehMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="simmonsMax"
+                stroke="none"
+                fill="#006400"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="simmonsMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="amiwalaMax"
+                stroke="none"
+                fill="#4B0082"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="amiwalaMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
+              <Area
+                type="linear"
+                dataKey="andrewMax"
+                stroke="none"
+                fill="#FFD700"
+                fillOpacity={0.75}
+              />
+              <Area
+                type="linear"
+                dataKey="andrewMin"
+                stroke="none"
+                fill="#ffffff"
+                fillOpacity={1}
+              />
               <Line 
                 type="linear" 
                 dataKey="biss" 
