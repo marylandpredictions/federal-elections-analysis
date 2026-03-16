@@ -8,9 +8,7 @@ const navLinks = [
 { label: 'Forecasts', path: '/Forecasts' },
 { label: 'Polling', path: '/Polling' }];
 
-const interactiveLinks = [
-{ label: 'Senate Swingometer', path: '/SenateSwingometer' }
-];
+const interactiveLinks = [];
 
 
 export default function Header() {

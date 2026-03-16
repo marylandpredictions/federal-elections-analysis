@@ -2,13 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const interactives = [
-  {
-    title: 'Senate Swingometer',
-    path: '/SenateSwingometer',
-    description: 'Swing the 2026 Senate map based on 2024 presidential results'
-  }
-];
+const interactives = [];
 
 export default function Interactives() {
   return (
