@@ -104,29 +104,35 @@ export default function Header() {
             )}
           </div>
           
-          <Link
-            to="/Articles"
-            className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 text-shadow-teal relative group ${
-              location.pathname === '/Articles' ?
-              'bg-accent text-white' :
-              'text-white/80 hover:bg-accent/50 hover:text-white'
-            }`}
-          >
-            Articles
-            <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-white scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-          </Link>
-          
-          <Link
-            to="/ContactUs"
-            className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 text-shadow-teal relative group ${
-              location.pathname === '/ContactUs' ?
-              'bg-accent text-white' :
-              'text-white/80 hover:bg-accent/50 hover:text-white'
-            }`}
-          >
-            Contact Us
-            <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-white scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-          </Link>
+          {/* More Dropdown */}
+          <div className="relative" onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>
+            <button
+              className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
+                location.pathname === '/Articles' || location.pathname === '/ContactUs'
+                  ? 'bg-accent text-white'
+                  : 'text-white/80 hover:bg-accent/50 hover:text-white'
+              }`}
+            >
+              More
+              <ChevronDown className="w-4 h-4" />
+            </button>
+            {moreOpen && (
+              <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 min-w-[160px] py-2 z-50">
+                <Link
+                  to="/Articles"
+                  className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold text-sm transition-all"
+                >
+                  Articles
+                </Link>
+                <Link
+                  to="/ContactUs"
+                  className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold text-sm transition-all"
+                >
+                  Contact Us
+                </Link>
+              </div>
+            )}
+          </div>
         </nav>
 
         {/* Right side: Mobile toggle */}
