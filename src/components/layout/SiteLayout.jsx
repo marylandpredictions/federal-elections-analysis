@@ -12,6 +12,7 @@ export default function SiteLayout() {
         <Outlet />
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }
