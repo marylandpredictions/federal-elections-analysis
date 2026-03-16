@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function PollingTable({ polls, type }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [pollsterSearch, setPollsterSearch] = useState('');
   const pollsPerPage = 20;
-  const totalPages = Math.ceil(polls.length / pollsPerPage);
+  
+  // Filter polls by pollster search
+  const normalizeString = (str) => str.replace(/\s/g, '').toLowerCase();
+  const filteredPolls = polls.filter(poll => {
+    if (!pollsterSearch) return true;
+    return normalizeString(poll.pollster).includes(normalizeString(pollsterSearch));
+  });
+  
+  const totalPages = Math.ceil(filteredPolls.length / pollsPerPage);
   
   const startIndex = (currentPage - 1) * pollsPerPage;
   const endIndex = startIndex + pollsPerPage;
-  const currentPolls = polls.slice(startIndex, endIndex);
+  const currentPolls = filteredPolls.slice(startIndex, endIndex);
 
   const isApproval = type.includes('approval');
   const isGenericBallot = type === 'generic-congressional-ballot';
@@ -22,11 +32,22 @@ export default function PollingTable({ polls, type }) {
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <h3 className="text-white font-inter font-bold text-xl sm:text-2xl text-shadow-teal">
           Individual Polls
         </h3>
-        {totalPages > 1 && (
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <Input
+            type="text"
+            placeholder="Search pollster..."
+            value={pollsterSearch}
+            onChange={(e) => {
+              setPollsterSearch(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="w-full sm:w-64 bg-white/10 text-white border-white/30 placeholder:text-white/50 focus:border-white/50"
+          />
+          {totalPages > 1 && (
           <div className="flex items-center gap-2">
             <Button
               variant="outline"
@@ -50,7 +71,8 @@ export default function PollingTable({ polls, type }) {
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
-        )}
+          )}
+        </div>
       </div>
 
       <div className="overflow-x-auto">
