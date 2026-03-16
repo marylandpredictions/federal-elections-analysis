@@ -89,7 +89,7 @@
   }
 
   .text-shadow-teal {
-    text-shadow: 2px 2px 4px hsl(178, 45%, 25%);
+    text-shadow: 2px 2px 4px black;
   }
 }
 
