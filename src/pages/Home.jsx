@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { LineChart, Line, ResponsiveContainer, YAxis } from 'recharts';
+import SwingMap from '../components/swingometer/SwingMap';
 
 const BG = 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png)';
 
@@ -70,7 +71,7 @@ export default function Home() {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <Link to="/ArticleView/1" className={`block ${bubbleBase}`}>
-            <p className="text-xs font-inter font-semibold text-primary/70 uppercase tracking-wider mb-2">Latest Article</p>
+            <p className="text-xs font-inter font-semibold text-black/60 uppercase tracking-wider mb-2">Latest Article</p>
             <img
               src={latestArticle.image}
               alt={latestArticle.title}
@@ -81,7 +82,7 @@ export default function Home() {
             </h3>
             <p className="text-xs text-gray-500 font-inter mb-2">By {latestArticle.author} · {latestArticle.date}</p>
             <p className="text-gray-700 font-inter text-sm line-clamp-3">{latestArticle.excerpt}</p>
-            <p className="text-primary font-inter font-semibold text-sm mt-3">Read more →</p>
+            <p className="text-black font-inter font-semibold text-sm mt-3">Read more →</p>
           </Link>
         </motion.div>
 
@@ -92,7 +93,7 @@ export default function Home() {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <Link to="/Polling" className={`block ${bubbleBase}`}>
-            <p className="text-xs font-inter font-semibold text-primary/70 uppercase tracking-wider mb-2">Polling Average</p>
+            <p className="text-xs font-inter font-semibold text-black/60 uppercase tracking-wider mb-2">Polling Average</p>
             <h3 className="font-inter font-bold text-gray-900 text-base sm:text-lg leading-tight mb-3">
               Generic Congressional Ballot
             </h3>
@@ -106,10 +107,10 @@ export default function Home() {
               </ResponsiveContainer>
             </div>
             <div className="flex gap-4">
-              <span className="text-sm font-inter font-semibold" style={{ color: '#0047AB' }}>Dem: ~47%</span>
-              <span className="text-sm font-inter font-semibold" style={{ color: '#8B0000' }}>Rep: ~43%</span>
+              <span className="text-sm font-inter font-semibold" style={{ color: '#0047AB' }}>Dem: 47%</span>
+              <span className="text-sm font-inter font-semibold" style={{ color: '#8B0000' }}>Rep: 43%</span>
             </div>
-            <p className="text-primary font-inter font-semibold text-sm mt-2">View all polls →</p>
+            <p className="text-black font-inter font-semibold text-sm mt-2">View all polls →</p>
           </Link>
         </motion.div>
 
@@ -120,9 +121,11 @@ export default function Home() {
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           <Link to="/SenateSwingometer" className={`block ${bubbleBase}`}>
-            <p className="text-xs font-inter font-semibold text-primary/70 uppercase tracking-wider mb-2">Interactive</p>
-            <div className="w-full h-36 bg-gradient-to-r from-blue-700 via-purple-700 to-red-800 rounded-xl mb-3 flex items-center justify-center">
-              <span className="text-white font-inter font-bold text-4xl">⚖️</span>
+            <p className="text-xs font-inter font-semibold text-black/60 uppercase tracking-wider mb-2">Interactive</p>
+            <div className="w-full rounded-xl mb-3 overflow-hidden pointer-events-none" style={{ height: '144px' }}>
+              <div style={{ transform: 'scale(0.45)', transformOrigin: 'top left', width: '222%', height: '222%' }}>
+                <SwingMap baseResults={baseResults} swing={0} />
+              </div>
             </div>
             <h3 className="font-inter font-bold text-gray-900 text-base sm:text-lg leading-tight mb-1">
               Senate Swingometer
@@ -130,7 +133,7 @@ export default function Home() {
             <p className="text-gray-700 font-inter text-sm">
               Swing the 2026 Senate map based on 2024 presidential results.
             </p>
-            <p className="text-primary font-inter font-semibold text-sm mt-3">Try it →</p>
+            <p className="text-black font-inter font-semibold text-sm mt-3">Try it →</p>
           </Link>
         </motion.div>
       </div>
@@ -144,7 +147,7 @@ export default function Home() {
           className="w-full md:w-1/2"
         >
           <Link to="/Forecasts" className={`block ${bubbleBase}`}>
-            <p className="text-xs font-inter font-semibold text-primary/70 uppercase tracking-wider mb-2">Forecasts</p>
+            <p className="text-xs font-inter font-semibold text-black/60 uppercase tracking-wider mb-2">Forecasts</p>
             <h3 className="font-inter font-bold text-gray-900 text-xl sm:text-2xl leading-tight mb-2">
               2026 Election Forecasts
             </h3>
@@ -156,7 +159,7 @@ export default function Home() {
               <span className="bg-red-100 text-red-800 font-semibold text-xs px-3 py-1 rounded-full">Governors</span>
               <span className="bg-purple-100 text-purple-800 font-semibold text-xs px-3 py-1 rounded-full">Interactive Maps</span>
             </div>
-            <p className="text-primary font-inter font-semibold text-sm mt-3">View forecasts →</p>
+            <p className="text-black font-inter font-semibold text-sm mt-3">View forecasts →</p>
           </Link>
         </motion.div>
       </div>
