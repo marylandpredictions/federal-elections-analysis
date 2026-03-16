@@ -49,7 +49,7 @@ export default function AboutUs() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
         className="mb-12 max-w-3xl mx-auto">
-          <p className="text-white font-inter text-center bg-accent/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:text-lg sm:hover:text-xl cursor-pointer">
+          <p className="text-white font-inter text-center bg-accent/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 text-base sm:text-lg transition-all duration-300 hover:scale-102 cursor-pointer">
             Here at Federal Elections Analysis, our priority is to deliver data-driven analysis, information, and results as fast as we can and as accurate as we can. We have been on this mission since June of 2024. Since then, not only our community has grown, but so has the team that makes this possible. Check them out below!
           </p>
         </motion.div>
@@ -106,7 +106,7 @@ export default function AboutUs() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 max-w-3xl mx-auto">
-          <p className="text-white font-inter text-center bg-accent/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:text-lg sm:hover:text-xl cursor-pointer">
+          <p className="text-white font-inter text-center bg-accent/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 text-base sm:text-lg transition-all duration-300 hover:scale-102 cursor-pointer">
             All four of us share something in common with elections. Its not just the numbers and data, its the people involved. The community and service. We want to make that easier for you and you can check that out on our Youtube and this site. If you want to help us out further, you can subscribe to our channel and like our videos, to go a step further, buy our Youtube membership starting at just $1.99 a piece!
           </p>
         </motion.div>

@@ -410,21 +410,14 @@ export default function Polling() {
   // Normalize string for search (remove spaces, lowercase)
   const normalizeString = (str) => str.replace(/\s/g, '').toLowerCase();
 
-  // Filter options based on search
+  // Filter options based on search (only poll name, not pollsters)
   const filteredOptions = pollingOptions.filter(option => {
     if (!searchQuery) return true;
     
     const normalizedQuery = normalizeString(searchQuery);
     const normalizedLabel = normalizeString(option.label);
     
-    // Check if poll name matches
-    if (normalizedLabel.includes(normalizedQuery)) return true;
-    
-    // Check if any pollster in this poll's data matches
-    const polls = mockPollingData[option.value]?.polls || [];
-    return polls.some(poll => 
-      normalizeString(poll.pollster).includes(normalizedQuery)
-    );
+    return normalizedLabel.includes(normalizedQuery);
   });
 
   return (
@@ -460,11 +453,12 @@ export default function Polling() {
               <div className="px-2 py-2 sticky top-0 bg-black z-10">
                 <input
                   type="text"
-                  placeholder="Search by poll or pollster..."
+                  placeholder="Search polls..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-white/10 text-white border border-white/30 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-white/50"
                   onClick={(e) => e.stopPropagation()}
+                  onKeyDown={(e) => e.stopPropagation()}
                 />
               </div>
               {filteredOptions.length > 0 ? (
