@@ -17,6 +17,7 @@ export default function Header() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [interactivesOpen, setInteractivesOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-primary shadow-lg">
@@ -191,25 +192,25 @@ export default function Header() {
         <Link
           to="/Articles"
           onClick={() => setMobileOpen(false)}
-          className={`block px-4 py-3 rounded-lg font-inter font-semibold text-sm transition-all mt-1 text-shadow-teal ${
+          className={`block px-4 py-3 rounded-lg font-inter font-semibold text-sm transition-all mt-1 text-shadow-teal ml-4 ${
             location.pathname === '/Articles' ?
             'bg-accent text-white' :
             'text-white/80 hover:bg-accent/50 hover:text-white'
           }`}
         >
-          Articles
+          • Articles
         </Link>
         
         <Link
           to="/ContactUs"
           onClick={() => setMobileOpen(false)}
-          className={`block px-4 py-3 rounded-lg font-inter font-semibold text-sm transition-all mt-1 text-shadow-teal ${
+          className={`block px-4 py-3 rounded-lg font-inter font-semibold text-sm transition-all mt-1 text-shadow-teal ml-4 ${
             location.pathname === '/ContactUs' ?
             'bg-accent text-white' :
             'text-white/80 hover:bg-accent/50 hover:text-white'
           }`}
         >
-          Contact Us
+          • Contact Us
         </Link>
         </div>
       }
