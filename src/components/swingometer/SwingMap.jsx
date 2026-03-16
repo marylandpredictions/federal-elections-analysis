@@ -110,23 +110,19 @@ export default function SwingMap({ baseResults, swing }) {
       
       {/* Seat Counter */}
       <div className="flex justify-center gap-4 mb-6 flex-wrap">
-        <div className="rounded-2xl px-6 py-4 text-center transition-transform duration-200 hover:scale-105 cursor-pointer shadow-lg" style={{ backgroundColor: '#2663EB' }}>
-          <div className="text-white font-inter font-bold text-3xl sm:text-4xl">
-            {demSeats}
-          </div>
-          <div className="text-white font-inter text-sm mt-1">Democrat</div>
+        <div className="bg-blue-600 rounded-xl px-6 py-3 shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+          <div className="text-white font-bold text-2xl text-center">{demSeats}</div>
+          <div className="text-white/90 text-sm text-center">Democrat</div>
         </div>
-        <div className="rounded-2xl px-6 py-4 text-center transition-transform duration-200 hover:scale-105 cursor-pointer shadow-lg" style={{ backgroundColor: '#9334EB' }}>
-          <div className="text-white font-inter font-bold text-3xl sm:text-4xl">
-            {tossUpSeats}
-          </div>
-          <div className="text-white font-inter text-sm mt-1">Toss Up</div>
+        
+        <div className="bg-purple-600 rounded-xl px-6 py-3 shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+          <div className="text-white font-bold text-2xl text-center">{tossUpSeats}</div>
+          <div className="text-white/90 text-sm text-center">Toss Up</div>
         </div>
-        <div className="rounded-2xl px-6 py-4 text-center transition-transform duration-200 hover:scale-105 cursor-pointer shadow-lg" style={{ backgroundColor: '#DC2627' }}>
-          <div className="text-white font-inter font-bold text-3xl sm:text-4xl">
-            {repSeats}
-          </div>
-          <div className="text-white font-inter text-sm mt-1">Republican</div>
+        
+        <div className="bg-red-600 rounded-xl px-6 py-3 shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+          <div className="text-white font-bold text-2xl text-center">{repSeats}</div>
+          <div className="text-white/90 text-sm text-center">Republican</div>
         </div>
       </div>
 
