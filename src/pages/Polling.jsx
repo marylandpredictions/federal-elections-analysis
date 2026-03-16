@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import PollingChart from '../components/polling/PollingChart';
 import PollingTable from '../components/polling/PollingTable';
+import { Input } from '@/components/ui/input';
 
 const pollingOptions = [
   { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot' },
@@ -403,7 +404,28 @@ const mockPollingData = {
 
 export default function Polling() {
   const [selectedPoll, setSelectedPoll] = useState('generic-congressional-ballot');
+  const [searchQuery, setSearchQuery] = useState('');
   const currentData = mockPollingData[selectedPoll];
+
+  // Normalize string for search (remove spaces, lowercase)
+  const normalizeString = (str) => str.replace(/\s/g, '').toLowerCase();
+
+  // Filter options based on search
+  const filteredOptions = pollingOptions.filter(option => {
+    if (!searchQuery) return true;
+    
+    const normalizedQuery = normalizeString(searchQuery);
+    const normalizedLabel = normalizeString(option.label);
+    
+    // Check if poll name matches
+    if (normalizedLabel.includes(normalizedQuery)) return true;
+    
+    // Check if any pollster in this poll's data matches
+    const polls = mockPollingData[option.value]?.polls || [];
+    return polls.some(poll => 
+      normalizeString(poll.pollster).includes(normalizedQuery)
+    );
+  });
 
   return (
     <div 
@@ -435,11 +457,25 @@ export default function Polling() {
               <SelectValue placeholder="Select polling average" />
             </SelectTrigger>
             <SelectContent className="bg-black text-white border-white/30">
-              {pollingOptions.map((option) => (
-                <SelectItem key={option.value} value={option.value} className="text-white hover:bg-white/20 focus:bg-white/20">
-                  {option.label}
-                </SelectItem>
-              ))}
+              <div className="px-2 py-2 sticky top-0 bg-black z-10">
+                <input
+                  type="text"
+                  placeholder="Search by poll or pollster..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-white/10 text-white border border-white/30 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-white/50"
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+              {filteredOptions.length > 0 ? (
+                filteredOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value} className="text-white hover:bg-white/20 focus:bg-white/20">
+                    {option.label}
+                  </SelectItem>
+                ))
+              ) : (
+                <div className="px-3 py-2 text-white/60 text-sm">No results found</div>
+              )}
             </SelectContent>
           </Select>
         </motion.div>
