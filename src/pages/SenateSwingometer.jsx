@@ -51,7 +51,7 @@ const baseResults = {
   'Connecticut': -14.5,
   'Rhode Island': -13.8,
   'Massachusetts': -25.2,
-  'Vermont': null,
+  'Vermont': -32.5,
   'New Hampshire': -2.8,
   'Maine': -6.9
 };
