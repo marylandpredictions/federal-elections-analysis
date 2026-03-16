@@ -126,6 +126,52 @@ export default function SwingMap({ baseResults, swing }) {
           <div className="text-white font-inter text-sm mt-1">Republican</div>
         </div>
       </div>
+      
+      {/* Control Buttons */}
+      <div className="flex justify-center gap-4 mb-6">
+        <button
+          className="text-white font-inter text-sm hover:text-white/80 transition-all"
+          onClick={() => window.location.reload()}
+        >
+          Reset
+        </button>
+        <button
+          className="text-white font-inter text-sm hover:text-white/80 transition-all"
+          onClick={() => {
+            const url = new URL(window.location.href);
+            url.searchParams.set('swing', swing.toString());
+            navigator.clipboard.writeText(url.toString());
+            alert('Link copied to clipboard!');
+          }}
+        >
+          Share
+        </button>
+        <button
+          className="text-white font-inter text-sm hover:text-white/80 transition-all"
+          onClick={() => {
+            const canvas = document.createElement('canvas');
+            const svg = document.querySelector('svg');
+            const data = new XMLSerializer().serializeToString(svg);
+            const img = new Image();
+            img.onload = () => {
+              canvas.width = img.width;
+              canvas.height = img.height;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(img, 0, 0);
+              canvas.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'senate-swingometer.png';
+                a.click();
+              });
+            };
+            img.src = 'data:image/svg+xml;base64,' + btoa(data);
+          }}
+        >
+          Download
+        </button>
+      </div>
 
       <div className="relative w-full" style={{ paddingBottom: '60%' }}>
         <svg 
@@ -161,60 +207,42 @@ export default function SwingMap({ baseResults, swing }) {
             );
           })}
           </g>
-          {hoveredState && (() => {
-            const { x, y } = statePositions[hoveredState];
-            const baseMargin = baseResults[hoveredState];
-            const newMargin = baseMargin !== null ? baseMargin + swing : null;
-            const rating = getRating(newMargin);
-            const color = ratingColors[rating];
-            
-            return (
-              <g style={{ pointerEvents: 'none' }}>
-                <rect
-                  x={x - 70}
-                  y={y - 70}
-                  width={140}
-                  height={50}
-                  fill="rgba(0, 0, 0, 0.9)"
-                  stroke="white"
-                  strokeWidth={2}
-                  rx={6}
-                />
-                <text
-                  x={x}
-                  y={y - 52}
-                  textAnchor="middle"
-                  fill="white"
-                  fontSize="12"
-                  fontWeight="bold"
-                >
-                  {hoveredState}
-                </text>
-                <text
-                  x={x}
-                  y={y - 38}
-                  textAnchor="middle"
-                  fill={color}
-                  fontSize="11"
-                  fontWeight="600"
-                >
-                  {rating}
-                </text>
-                {newMargin !== null && (
-                  <text
-                    x={x}
-                    y={y - 24}
-                    textAnchor="middle"
-                    fill="white"
-                    fontSize="10"
-                  >
-                    {newMargin > 0 ? `R +${newMargin.toFixed(1)}%` : `D +${Math.abs(newMargin).toFixed(1)}%`}
-                  </text>
-                )}
-              </g>
-            );
-          })()}
         </svg>
+        
+        {/* Tooltip - rendered separately to stay on top */}
+        {hoveredState && (() => {
+          const { x, y } = statePositions[hoveredState];
+          const baseMargin = baseResults[hoveredState];
+          const newMargin = baseMargin !== null ? baseMargin + swing : null;
+          const rating = getRating(newMargin);
+          const color = ratingColors[rating];
+          
+          return (
+            <div 
+              className="absolute pointer-events-none"
+              style={{
+                left: `${(x / 960) * 100}%`,
+                top: `${(y / 600) * 100}%`,
+                transform: 'translate(-50%, -100%)',
+                zIndex: 1000
+              }}
+            >
+              <div className="bg-black/90 border-2 border-white rounded-lg px-4 py-2 shadow-lg mb-2">
+                <div className="text-white font-inter font-bold text-xs text-center">
+                  {hoveredState}
+                </div>
+                <div className="text-xs font-inter font-semibold text-center mt-1" style={{ color }}>
+                  {rating}
+                </div>
+                {newMargin !== null && (
+                  <div className="text-white text-xs text-center mt-1">
+                    {newMargin > 0 ? `R +${newMargin.toFixed(1)}%` : `D +${Math.abs(newMargin).toFixed(1)}%`}
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       {/* Legend */}
