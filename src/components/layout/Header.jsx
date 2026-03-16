@@ -6,9 +6,7 @@ const navLinks = [
 { label: 'Home', path: '/Home' },
 { label: 'About Us', path: '/AboutUs' },
 { label: 'Forecasts', path: '/Forecasts' },
-{ label: 'Polling', path: '/Polling' },
-{ label: 'Articles', path: '/Articles' },
-{ label: 'Contact Us', path: '/ContactUs' }];
+{ label: 'Polling', path: '/Polling' }];
 
 const interactiveLinks = [
 { label: 'Senate Swingometer', path: '/SenateSwingometer' }
@@ -103,6 +101,30 @@ export default function Header() {
               </div>
             )}
           </div>
+          
+          <Link
+            to="/Articles"
+            className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 text-shadow-teal relative group ${
+              location.pathname === '/Articles' ?
+              'bg-accent text-white' :
+              'text-white/80 hover:bg-accent/50 hover:text-white'
+            }`}
+          >
+            Articles
+            <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-white scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+          </Link>
+          
+          <Link
+            to="/ContactUs"
+            className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 text-shadow-teal relative group ${
+              location.pathname === '/ContactUs' ?
+              'bg-accent text-white' :
+              'text-white/80 hover:bg-accent/50 hover:text-white'
+            }`}
+          >
+            Contact Us
+            <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-white scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+          </Link>
         </nav>
 
         {/* Mobile toggle */}
@@ -157,6 +179,30 @@ export default function Header() {
             • {link.label}
           </Link>
         ))}
+        
+        <Link
+          to="/Articles"
+          onClick={() => setMobileOpen(false)}
+          className={`block px-4 py-3 rounded-lg font-inter font-semibold text-sm transition-all mt-1 text-shadow-teal ${
+            location.pathname === '/Articles' ?
+            'bg-accent text-white' :
+            'text-white/80 hover:bg-accent/50 hover:text-white'
+          }`}
+        >
+          Articles
+        </Link>
+        
+        <Link
+          to="/ContactUs"
+          onClick={() => setMobileOpen(false)}
+          className={`block px-4 py-3 rounded-lg font-inter font-semibold text-sm transition-all mt-1 text-shadow-teal ${
+            location.pathname === '/ContactUs' ?
+            'bg-accent text-white' :
+            'text-white/80 hover:bg-accent/50 hover:text-white'
+          }`}
+        >
+          Contact Us
+        </Link>
         </div>
       }
     </header>);

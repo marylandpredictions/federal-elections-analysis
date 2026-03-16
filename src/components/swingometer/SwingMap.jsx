@@ -95,9 +95,8 @@ export default function SwingMap({ baseResults, swing }) {
         >
           {stateEntries.map(([state, { x, y }]) => {
             const baseMargin = baseResults[state];
-            if (baseMargin === null) return null;
             
-            const newMargin = baseMargin + swing;
+            const newMargin = baseMargin !== null ? baseMargin + swing : null;
             const rating = getRating(newMargin);
             const color = ratingColors[rating];
             const isHovered = hoveredState === state;
@@ -150,15 +149,17 @@ export default function SwingMap({ baseResults, swing }) {
                     >
                       {rating}
                     </text>
-                    <text
-                      x={x}
-                      y={y - 24}
-                      textAnchor="middle"
-                      fill="white"
-                      fontSize="10"
-                    >
-                      {newMargin > 0 ? `R +${newMargin.toFixed(1)}%` : `D +${Math.abs(newMargin).toFixed(1)}%`}
-                    </text>
+                    {newMargin !== null && (
+                      <text
+                        x={x}
+                        y={y - 24}
+                        textAnchor="middle"
+                        fill="white"
+                        fontSize="10"
+                      >
+                        {newMargin > 0 ? `R +${newMargin.toFixed(1)}%` : `D +${Math.abs(newMargin).toFixed(1)}%`}
+                      </text>
+                    )}
                   </>
                 )}
               </g>
@@ -169,7 +170,7 @@ export default function SwingMap({ baseResults, swing }) {
 
       {/* Legend */}
       <div className="mt-6 flex flex-wrap justify-center gap-3 sm:gap-4">
-        {Object.entries(ratingColors).filter(([rating]) => rating !== 'Not Contested').map(([rating, color]) => (
+        {Object.entries(ratingColors).map(([rating, color]) => (
           <div key={rating} className="flex items-center gap-2">
             <div 
               className="w-4 h-4 rounded-full border-2 border-white" 
