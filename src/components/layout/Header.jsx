@@ -26,7 +26,7 @@ export default function Header() {
             className="py-1 w-10 h-10 sm:w-12 sm:h-12 object-contain transition-transform duration-200 hover:scale-110"
           />
 
-          <span className="bg-transparent text-white text-lg font-bold hidden sm:block shimmer-hover text-shadow-teal relative group">
+          <span className="bg-transparent text-white text-lg font-bold hidden sm:block text-shadow-teal relative group">
             Federal Elections Analysis
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
           </span>
@@ -57,7 +57,7 @@ export default function Header() {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 shimmer-hover text-shadow-teal relative group ${
+                className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 text-shadow-teal relative group ${
                 isActive ?
                 'bg-accent text-white' :
                 'text-white/80 hover:bg-accent/50 hover:text-white'}`
