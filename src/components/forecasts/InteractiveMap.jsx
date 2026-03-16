@@ -85,59 +85,52 @@ export default function InteractiveMap({ ratings }) {
             const isHovered = hoveredState === state;
             
             return (
-              <g key={state}>
-                <circle
-                  cx={x}
-                  cy={y}
-                  r={isHovered ? 20 : 16}
-                  fill={color}
-                  stroke="white"
-                  strokeWidth={isHovered ? 3 : 2}
-                  onMouseEnter={() => setHoveredState(state)}
-                  onMouseLeave={() => setHoveredState(null)}
-                  style={{ 
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease'
-                  }}
-                />
-                {isHovered && (
-                  <>
-                    <rect
-                      x={x - 60}
-                      y={y - 60}
-                      width={120}
-                      height={40}
-                      fill="rgba(0, 0, 0, 0.9)"
-                      stroke="white"
-                      strokeWidth={2}
-                      rx={6}
-                    />
-                    <text
-                      x={x}
-                      y={y - 47}
-                      textAnchor="middle"
-                      fill="white"
-                      fontSize="12"
-                      fontWeight="bold"
-                    >
-                      {state}
-                    </text>
-                    <text
-                      x={x}
-                      y={y - 31}
-                      textAnchor="middle"
-                      fill={color}
-                      fontSize="11"
-                      fontWeight="600"
-                    >
-                      {rating}
-                    </text>
-                  </>
-                )}
-              </g>
+              <circle
+                key={state}
+                cx={x}
+                cy={y}
+                r={isHovered ? 20 : 16}
+                fill={color}
+                stroke="white"
+                strokeWidth={isHovered ? 3 : 2}
+                onMouseEnter={() => setHoveredState(state)}
+                onMouseLeave={() => setHoveredState(null)}
+                style={{ 
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
+                }}
+              />
             );
           })}
         </svg>
+        
+        {/* Tooltip - rendered outside SVG to stay on top */}
+        {hoveredState && (() => {
+          const { x, y } = statePositions[hoveredState];
+          const rating = ratings[hoveredState] || 'Toss Up';
+          const color = ratingColors[rating];
+          
+          return (
+            <div 
+              className="absolute pointer-events-none"
+              style={{
+                left: `${(x / 960) * 100}%`,
+                top: `${(y / 600) * 100}%`,
+                transform: 'translate(-50%, -100%)',
+                zIndex: 9999
+              }}
+            >
+              <div className="bg-black/90 border-2 border-white rounded-lg px-4 py-2 shadow-lg mb-2">
+                <div className="text-white font-inter font-bold text-xs text-center">
+                  {hoveredState}
+                </div>
+                <div className="text-xs font-inter font-semibold text-center mt-1" style={{ color }}>
+                  {rating}
+                </div>
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       {/* Legend */}
