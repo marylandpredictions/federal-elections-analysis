@@ -133,6 +133,7 @@ export default function SwingMap({ baseResults, swing }) {
           className="absolute inset-0 w-full h-full"
           style={{ filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))' }}
         >
+          <g>
           {stateEntries.map(([state, { x, y }]) => {
             const baseMargin = baseResults[state];
             
@@ -142,69 +143,77 @@ export default function SwingMap({ baseResults, swing }) {
             const isHovered = hoveredState === state;
             
             return (
-              <g key={state}>
-                <circle
-                  cx={x}
-                  cy={y}
-                  r={isHovered ? 22 : 16}
-                  fill={color}
+              <circle
+                key={state}
+                cx={x}
+                cy={y}
+                r={isHovered ? 22 : 16}
+                fill={color}
+                stroke="white"
+                strokeWidth={isHovered ? 3 : 2}
+                onMouseEnter={() => setHoveredState(state)}
+                onMouseLeave={() => setHoveredState(null)}
+                style={{ 
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
+                }}
+              />
+            );
+          })}
+          </g>
+          {hoveredState && (() => {
+            const { x, y } = statePositions[hoveredState];
+            const baseMargin = baseResults[hoveredState];
+            const newMargin = baseMargin !== null ? baseMargin + swing : null;
+            const rating = getRating(newMargin);
+            const color = ratingColors[rating];
+            
+            return (
+              <g style={{ pointerEvents: 'none' }}>
+                <rect
+                  x={x - 70}
+                  y={y - 70}
+                  width={140}
+                  height={50}
+                  fill="rgba(0, 0, 0, 0.9)"
                   stroke="white"
-                  strokeWidth={isHovered ? 3 : 2}
-                  onMouseEnter={() => setHoveredState(state)}
-                  onMouseLeave={() => setHoveredState(null)}
-                  style={{ 
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease'
-                  }}
+                  strokeWidth={2}
+                  rx={6}
                 />
-                {isHovered && (
-                  <>
-                    <rect
-                      x={x - 70}
-                      y={y - 70}
-                      width={140}
-                      height={50}
-                      fill="rgba(0, 0, 0, 0.9)"
-                      stroke="white"
-                      strokeWidth={2}
-                      rx={6}
-                    />
-                    <text
-                      x={x}
-                      y={y - 52}
-                      textAnchor="middle"
-                      fill="white"
-                      fontSize="12"
-                      fontWeight="bold"
-                    >
-                      {state}
-                    </text>
-                    <text
-                      x={x}
-                      y={y - 38}
-                      textAnchor="middle"
-                      fill={color}
-                      fontSize="11"
-                      fontWeight="600"
-                    >
-                      {rating}
-                    </text>
-                    {newMargin !== null && (
-                      <text
-                        x={x}
-                        y={y - 24}
-                        textAnchor="middle"
-                        fill="white"
-                        fontSize="10"
-                      >
-                        {newMargin > 0 ? `R +${newMargin.toFixed(1)}%` : `D +${Math.abs(newMargin).toFixed(1)}%`}
-                      </text>
-                    )}
-                  </>
+                <text
+                  x={x}
+                  y={y - 52}
+                  textAnchor="middle"
+                  fill="white"
+                  fontSize="12"
+                  fontWeight="bold"
+                >
+                  {hoveredState}
+                </text>
+                <text
+                  x={x}
+                  y={y - 38}
+                  textAnchor="middle"
+                  fill={color}
+                  fontSize="11"
+                  fontWeight="600"
+                >
+                  {rating}
+                </text>
+                {newMargin !== null && (
+                  <text
+                    x={x}
+                    y={y - 24}
+                    textAnchor="middle"
+                    fill="white"
+                    fontSize="10"
+                  >
+                    {newMargin > 0 ? `R +${newMargin.toFixed(1)}%` : `D +${Math.abs(newMargin).toFixed(1)}%`}
+                  </text>
                 )}
               </g>
             );
-          })}
+          })()}
         </svg>
       </div>
 
