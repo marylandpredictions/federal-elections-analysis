@@ -61,7 +61,7 @@ export default function SwingBar({ swing, setSwing }) {
         ref={barRef}
         className="relative h-12 rounded-full cursor-pointer overflow-hidden"
         style={{
-          background: 'linear-gradient(to right, #00008B 0%, #9334EB 50%, #8B0000 100%)'
+          background: 'linear-gradient(to right, #2663EB 0%, #9334EB 50%, #DC2627 100%)'
         }}
         onMouseDown={handleMouseDown}
         onTouchStart={handleMouseDown}
