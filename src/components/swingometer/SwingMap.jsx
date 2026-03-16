@@ -107,19 +107,19 @@ export default function SwingMap({ baseResults, swing }) {
       
       {/* Seat Counter */}
       <div className="flex justify-center gap-4 mb-6 flex-wrap">
-        <div className="bg-primary/40 rounded-2xl px-6 py-4 text-center transition-transform duration-200 hover:scale-105 cursor-pointer shadow-lg">
+        <div className="rounded-2xl px-6 py-4 text-center transition-transform duration-200 hover:scale-105 cursor-pointer shadow-lg" style={{ backgroundColor: '#2663EB' }}>
           <div className="text-white font-inter font-bold text-3xl sm:text-4xl">
             {demSeats}
           </div>
           <div className="text-white font-inter text-sm mt-1">Democrat</div>
         </div>
-        <div className="bg-primary/40 rounded-2xl px-6 py-4 text-center transition-transform duration-200 hover:scale-105 cursor-pointer shadow-lg">
+        <div className="rounded-2xl px-6 py-4 text-center transition-transform duration-200 hover:scale-105 cursor-pointer shadow-lg" style={{ backgroundColor: '#9334EB' }}>
           <div className="text-white font-inter font-bold text-3xl sm:text-4xl">
             {tossUpSeats}
           </div>
           <div className="text-white font-inter text-sm mt-1">Toss Up</div>
         </div>
-        <div className="bg-primary/40 rounded-2xl px-6 py-4 text-center transition-transform duration-200 hover:scale-105 cursor-pointer shadow-lg">
+        <div className="rounded-2xl px-6 py-4 text-center transition-transform duration-200 hover:scale-105 cursor-pointer shadow-lg" style={{ backgroundColor: '#DC2627' }}>
           <div className="text-white font-inter font-bold text-3xl sm:text-4xl">
             {repSeats}
           </div>
