@@ -106,6 +106,7 @@ export default function ArticleView() {
           </div>
         </motion.article>
       </div>
+      </div>
     </>
   );
 }
