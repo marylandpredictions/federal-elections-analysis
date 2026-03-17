@@ -20,18 +20,9 @@ export function parsePollDate(dateStr) {
 
 function getPollWeight(pollDate, referenceDate, pollsterName) {
   const diffDays = (referenceDate - pollDate) / (1000 * 60 * 60 * 24);
-
-  let weight;
-  if (diffDays <= 60) weight = 1.0;
-  else if (diffDays <= 90) weight = 0.5;
-  else if (diffDays <= 180) weight = 1 / 6;
-  else weight = 0;
-
-  // Internal polls (has (D) or (R) in pollster name) get half weight
-  if (pollsterName && /\([DR]\)/.test(pollsterName)) {
-    weight *= 0.5;
-  }
-
+  if (diffDays > 60) return 0;
+  let weight = 1.0;
+  if (pollsterName && /\([DR]\)/.test(pollsterName)) weight *= 0.5;
   return weight;
 }
 

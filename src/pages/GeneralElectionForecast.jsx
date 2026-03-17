@@ -16,7 +16,7 @@ const governorsRatings = {
   'North Carolina': 'Not Contested', 'North Dakota': 'Not Contested', 'Ohio': 'Toss Up', 'Oklahoma': 'Safe R',
   'Oregon': 'Safe D', 'Pennsylvania': 'Safe D', 'Rhode Island': 'Safe D', 'South Carolina': 'Likely R',
   'South Dakota': 'Safe R', 'Tennessee': 'Safe R', 'Texas': 'Lean R', 'Utah': 'Not Contested',
-  'Vermont': 'Toss Up', 'Virginia': 'Not Contested', 'Washington': 'Not Contested', 'West Virginia': 'Not Contested',
+  'Vermont': 'Safe R', 'Virginia': 'Not Contested', 'Washington': 'Not Contested', 'West Virginia': 'Not Contested',
   'Wisconsin': 'Lean D', 'Wyoming': 'Safe R'
 };
 
@@ -66,8 +66,8 @@ export default function GeneralElectionForecast() {
           </h2>
           <SeatCounter ratings={senateRatings} />
           <InteractiveMap ratings={senateRatings} />
-          <SenateControl democratChance={42} republicanChance={58} />
-          <SenateControl democratChance={71} republicanChance={29} title="House Control Probability" />
+          <SenateControl democratChance={43} republicanChance={57} />
+          <SenateControl democratChance={73} republicanChance={27} title="House Control Probability" />
         </motion.div>
 
         <motion.div
