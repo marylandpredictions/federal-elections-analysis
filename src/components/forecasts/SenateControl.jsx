@@ -9,7 +9,7 @@ export default function SenateControl({ democratChance, republicanChance, title 
       </h3>
       
       <div className="flex items-center gap-4 mb-6">
-        <div className="flex-1 bg-white/10 rounded-full h-12 overflow-hidden flex">
+        <div className="flex-1 bg-white/10 rounded-full h-12 overflow-hidden flex transition-transform duration-200 hover:scale-[1.02] cursor-default">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${democratChance}%` }}
