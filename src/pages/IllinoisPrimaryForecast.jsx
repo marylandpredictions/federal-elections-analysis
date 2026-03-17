@@ -7,9 +7,9 @@ const races = [
   {
     title: 'Illinois Senate',
     candidates: [
-      { first: 'Raja', last: 'Krishnamoorthi (D)', pct: 39.7, color: '#1a35d4' },
-      { first: 'Julianna', last: 'Stratton (D)', pct: 35.2, color: '#15803d' },
-      { first: 'Robin', last: 'Kelly (D)', pct: 18.4, color: '#0e7490' },
+      { first: 'Raja', last: 'Krishnamoorthi (D)', pct: 38.4, color: '#1a35d4' },
+      { first: 'Julianna', last: 'Stratton (D)', pct: 37.0, color: '#15803d' },
+      { first: 'Robin', last: 'Kelly (D)', pct: 16.9, color: '#0e7490' },
     ],
   },
   {
@@ -33,20 +33,21 @@ const races = [
   {
     title: 'Illinois 8th House District',
     candidates: [
-      { first: 'Melissa', last: 'Bean (D)', pct: 38.4, color: '#0e7490' },
-      { first: 'Junaid', last: 'Ahmed (D)', pct: 36.7, color: '#a16207' },
-      { first: 'Kevin', last: 'Morrison (D)', pct: 10.9, color: '#15803d' },
-      { first: 'Dan', last: 'Tully (D)', pct: 5.5, color: '#c2410c' },
+      { first: 'Melissa', last: 'Bean (D)', pct: 38.8, color: '#0e7490' },
+      { first: 'Junaid', last: 'Ahmed (D)', pct: 34.1, color: '#a16207' },
+      { first: 'Kevin', last: 'Morrison (D)', pct: 11.2, color: '#15803d' },
+      { first: 'Dan', last: 'Tully (D)', pct: 4.9, color: '#c2410c' },
+      { first: 'Yasmeen', last: 'Bankole (D)', pct: 3.5, color: '#5B0080' },
     ],
   },
   {
     title: 'Illinois 9th House District',
     candidates: [
-      { first: 'Daniel', last: 'Biss (D)', pct: 33.8, color: '#0e7490' },
-      { first: 'Kat', last: 'Abughazaleh (D)', pct: 28.4, color: '#be185d' },
-      { first: 'Laura', last: 'Fine (D)', pct: 14.3, color: '#b91c1c' },
-      { first: 'Mike', last: 'Simmons (D)', pct: 8.2, color: '#15803d' },
-      { first: 'Bushra', last: 'Amiwala (D)', pct: 6.4, color: '#7e22ce' },
+      { first: 'Daniel', last: 'Biss (D)', pct: 31.4, color: '#0e7490' },
+      { first: 'Kat', last: 'Abughazaleh (D)', pct: 29.2, color: '#be185d' },
+      { first: 'Laura', last: 'Fine (D)', pct: 14.0, color: '#b91c1c' },
+      { first: 'Mike', last: 'Simmons (D)', pct: 8.8, color: '#15803d' },
+      { first: 'Bushra', last: 'Amiwala (D)', pct: 5.9, color: '#7e22ce' },
       { first: 'Phil', last: 'Andrew (D)', pct: 4.0, color: '#a16207' },
     ],
   },
