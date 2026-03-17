@@ -17,6 +17,7 @@ import ArticleView from './pages/ArticleView';
 import Interactives from './pages/Interactives';
 import SenateSwingometer from './pages/SenateSwingometer';
 import IllinoisPrimaryForecast from './pages/IllinoisPrimaryForecast';
+import GeneralElectionForecast from './pages/GeneralElectionForecast';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
