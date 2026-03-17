@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import InteractiveMap from '../components/forecasts/InteractiveMap';
 import SenateControl from '../components/forecasts/SenateControl';
