@@ -95,6 +95,12 @@ export default function Header() {
             </Link>
             {forecastsOpen && (
               <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 min-w-[220px] py-2 z-50">
+                <Link
+                  to="/Forecasts"
+                  className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold text-sm transition-all"
+                >
+                  All Forecasts
+                </Link>
                 {forecastLinks.map((link) => (
                   <Link
                     key={link.path}
