@@ -8,12 +8,15 @@ import { Input } from '@/components/ui/input';
 
 const pollingOptions = [
   { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot' },
+  { value: '2028-dem-primary', label: '2028 Democratic Presidential Primary' },
+  { value: '2028-rep-primary', label: '2028 Republican Presidential Primary' },
   { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff' },
   { value: 'illinois-dem-primary', label: 'Illinois Democratic Senate Primary' },
   { value: 'illinois-9th-house', label: 'Illinois 9th Democratic House Primary' },
   { value: 'florida-gop-governor', label: 'Florida Republican Governor Primary' },
   { value: 'georgia-gop-governor', label: 'Georgia Republican Governor Primary' },
-  { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary' }
+  { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary' },
+  { value: 'arizona-gop-governor', label: 'Arizona Republican Governor Primary' },
 ];
 
 const mockPollingData = {
