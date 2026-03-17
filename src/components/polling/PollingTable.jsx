@@ -291,6 +291,38 @@ export default function PollingTable({ polls, type }) {
                       <TableCell className="text-green-400 font-semibold">{poll.approve}%</TableCell>
                       <TableCell className="text-red-400 font-semibold">{poll.disapprove}%</TableCell>
                     </>
+                  ) : isArizona ? (
+                    <>
+                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.biggs}%</TableCell>
+                      <TableCell style={{ color: '#CC5500' }} className="font-semibold">{poll.robson > 0 ? `${poll.robson}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#B8860B' }} className="font-semibold">{poll.schweikert > 0 ? `${poll.schweikert}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+                    </>
+                  ) : isDemPrimary ? (
+                    <>
+                      <TableCell style={{ color: '#0047AB' }} className="font-semibold">{poll.harris > 0 ? `${poll.harris}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#008080' }} className="font-semibold">{poll.newsom > 0 ? `${poll.newsom}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#006400' }} className="font-semibold">{poll.buttigieg > 0 ? `${poll.buttigieg}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#CC5500' }} className="font-semibold">{poll.aoc > 0 ? `${poll.aoc}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.pritzker > 0 ? `${poll.pritzker}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#4A4A4A' }} className="font-semibold">{poll.shapiro > 0 ? `${poll.shapiro}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#B8860B' }} className="font-semibold">{poll.booker > 0 ? `${poll.booker}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
+                    </>
+                  ) : isRepPrimary ? (
+                    <>
+                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.vance > 0 ? `${poll.vance}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#CC5500' }} className="font-semibold">{poll.trumpjr > 0 ? `${poll.trumpjr}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#B8860B' }} className="font-semibold">{poll.rubio > 0 ? `${poll.rubio}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#008080' }} className="font-semibold">{poll.cruz > 0 ? `${poll.cruz}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#C71585' }} className="font-semibold">{poll.haley > 0 ? `${poll.haley}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#006400' }} className="font-semibold">{poll.desantis > 0 ? `${poll.desantis}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#4A4A4A' }} className="font-semibold">{poll.rfk > 0 ? `${poll.rfk}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#6B3A2A' }} className="font-semibold">{poll.ramaswamy > 0 ? `${poll.ramaswamy}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+                    </>
                   ) : isSouthCarolina ? (
                     <>
                       <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.mace}%</TableCell>
