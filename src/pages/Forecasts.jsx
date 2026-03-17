@@ -110,7 +110,24 @@ const senateRatings = {
   'Wyoming': 'Safe R'
 };
 
+const forecastGallery = [
+  {
+    title: '2026 General Election Forecast',
+    description: 'Senate, House & Governors race projections',
+    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png',
+    anchor: 'general'
+  },
+  {
+    title: 'Illinois Primary Forecast',
+    description: 'Illinois Democratic Senate & House Primaries',
+    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png',
+    link: '/IllinoisPrimaryForecast'
+  },
+];
+
 export default function Forecasts() {
+  const [view, setView] = useState('gallery');
+
   return (
     <div 
       className="min-h-[calc(100vh-4rem)] px-4 py-16 sm:py-24 bg-black"
@@ -130,33 +147,69 @@ export default function Forecasts() {
           2026 Election Forecasts
         </motion.h1>
 
-        <div className="space-y-16">
+        {view === 'gallery' ? (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
-              Senate Forecast
-            </h2>
-            <SeatCounter ratings={senateRatings} />
-            <InteractiveMap ratings={senateRatings} />
-            <SenateControl democratChance={42} republicanChance={58} />
-            <SenateControl democratChance={71} republicanChance={29} title="House Control Probability" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {forecastGallery.map((f, i) => (
+                <motion.div
+                  key={f.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  onClick={() => f.link ? (window.location.href = f.link) : setView('detail')}
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden cursor-pointer hover:bg-white/20 transition-all duration-300 hover:scale-105 shadow-lg"
+                >
+                  <img src={f.image} alt={f.title} className="w-full h-44 object-cover" />
+                  <div className="p-5">
+                    <h3 className="text-white font-inter font-bold text-lg mb-1 text-shadow-teal">{f.title}</h3>
+                    <p className="text-white/70 font-inter text-sm">{f.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
+        ) : (
+          <>
+            <button
+              onClick={() => setView('gallery')}
+              className="mb-8 text-white/70 hover:text-white font-inter text-sm underline"
+            >
+              ← Back to Forecasts
+            </button>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
-              Governors Forecast
-            </h2>
-            <SeatCounter ratings={governorsRatings} />
-            <InteractiveMap ratings={governorsRatings} />
-          </motion.div>
-        </div>
+            <div className="space-y-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
+                  Senate Forecast
+                </h2>
+                <SeatCounter ratings={senateRatings} />
+                <InteractiveMap ratings={senateRatings} />
+                <SenateControl democratChance={42} republicanChance={58} />
+                <SenateControl democratChance={71} republicanChance={29} title="House Control Probability" />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
+                  Governors Forecast
+                </h2>
+                <SeatCounter ratings={governorsRatings} />
+                <InteractiveMap ratings={governorsRatings} />
+              </motion.div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
