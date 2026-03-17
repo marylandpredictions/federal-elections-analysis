@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import WinProbabilityDonut from '../components/forecasts/WinProbabilityDonut';
 
 const BG = 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png)';
 
@@ -11,6 +12,12 @@ const races = [
       { first: 'Julianna', last: 'Stratton (D)', pct: 37.0, color: '#15803d' },
       { first: 'Robin', last: 'Kelly (D)', pct: 16.9, color: '#0e7490' },
     ],
+    winProb: [
+      { name: 'Krishnamoorthi', value: 57.4, color: '#1a35d4' },
+      { name: 'Stratton', value: 41.8, color: '#15803d' },
+      { name: 'Kelly', value: 0.7, color: '#0e7490' },
+      { name: 'Other', value: 0.1, color: '#6b7280' },
+    ],
   },
   {
     title: 'Illinois 2nd House District',
@@ -18,6 +25,12 @@ const races = [
       { first: 'Jesse', last: 'Jackson Jr. (D)', pct: 36.3, color: '#1a35d4' },
       { first: 'Donna', last: 'Miller (D)', pct: 26.8, color: '#be185d' },
       { first: 'Robert', last: 'Peters (D)', pct: 25.5, color: '#c2410c' },
+    ],
+    winProb: [
+      { name: 'Jackson', value: 56.3, color: '#1a35d4' },
+      { name: 'Miller', value: 21.8, color: '#be185d' },
+      { name: 'Peters', value: 20.5, color: '#c2410c' },
+      { name: 'Other', value: 1.4, color: '#6b7280' },
     ],
   },
   {
@@ -29,6 +42,14 @@ const races = [
       { first: 'Anabel', last: 'Mendoza (D)', pct: 9.1, color: '#c2410c' },
       { first: 'Anthony', last: 'Driver Jr. (D)', pct: 7.8, color: '#a16207' },
     ],
+    winProb: [
+      { name: 'Ford', value: 59.6, color: '#15803d' },
+      { name: 'Conyears-Ervin', value: 34.0, color: '#b91c1c' },
+      { name: 'Collins', value: 2.7, color: '#be185d' },
+      { name: 'Mendoza', value: 1.5, color: '#c2410c' },
+      { name: 'Driver Jr.', value: 1.0, color: '#a16207' },
+      { name: 'Other', value: 0.2, color: '#6b7280' },
+    ],
   },
   {
     title: 'Illinois 8th House District',
@@ -38,6 +59,14 @@ const races = [
       { first: 'Kevin', last: 'Morrison (D)', pct: 11.2, color: '#15803d' },
       { first: 'Dan', last: 'Tully (D)', pct: 4.9, color: '#c2410c' },
       { first: 'Yasmeen', last: 'Bankole (D)', pct: 3.5, color: '#5B0080' },
+    ],
+    winProb: [
+      { name: 'Bean', value: 59.4, color: '#0e7490' },
+      { name: 'Ahmed', value: 38.6, color: '#a16207' },
+      { name: 'Morrison', value: 1.6, color: '#15803d' },
+      { name: 'Tully', value: 0.2, color: '#c2410c' },
+      { name: 'Bankole', value: 0.1, color: '#5B0080' },
+      { name: 'Other', value: 0.1, color: '#6b7280' },
     ],
   },
   {
@@ -49,6 +78,15 @@ const races = [
       { first: 'Mike', last: 'Simmons (D)', pct: 8.8, color: '#15803d' },
       { first: 'Bushra', last: 'Amiwala (D)', pct: 5.9, color: '#7e22ce' },
       { first: 'Phil', last: 'Andrew (D)', pct: 4.0, color: '#a16207' },
+    ],
+    winProb: [
+      { name: 'Biss', value: 48.8, color: '#0e7490' },
+      { name: 'Abughazaleh', value: 45.9, color: '#be185d' },
+      { name: 'Fine', value: 3.4, color: '#b91c1c' },
+      { name: 'Simmons', value: 1.1, color: '#15803d' },
+      { name: 'Amiwala', value: 0.3, color: '#7e22ce' },
+      { name: 'Andrew', value: 0.2, color: '#a16207' },
+      { name: 'Other', value: 0.3, color: '#6b7280' },
     ],
   },
 ];
@@ -116,6 +154,7 @@ function RaceCard({ race, raceIndex }) {
       {race.candidates.map((c, i) => (
         <CandidateBar key={c.last} candidate={c} index={i} maxPct={maxPct} />
       ))}
+      {race.winProb && <WinProbabilityDonut data={race.winProb} />}
     </motion.div>
   );
 }
