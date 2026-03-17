@@ -490,7 +490,10 @@ export default function Polling() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-8"
         >
-          <PollingTable polls={currentData.polls} type={selectedPoll} />
+          <PollingAverageTable polls={currentPolls} type={selectedPoll} />
+          <div className="mt-8">
+            <PollingTable polls={currentData.polls} type={selectedPoll} />
+          </div>
         </motion.div>
       </div>
     </div>
