@@ -128,6 +128,7 @@ const forecastGallery = [
 
 export default function Forecasts() {
   const [view, setView] = useState('gallery');
+  const navigate = useNavigate();
 
   return (
     <div 
