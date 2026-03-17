@@ -11,6 +11,9 @@ const yDomains = {
   'florida-gop-governor': [0, 55],
   'georgia-gop-governor': [0, 45],
   'south-carolina-gop-governor': [0, 35],
+  'arizona-gop-governor': [0, 80],
+  '2028-dem-primary': [0, 50],
+  '2028-rep-primary': [0, 70],
 };
 
 const candidateColors = {
