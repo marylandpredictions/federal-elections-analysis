@@ -161,6 +161,22 @@ export default function PollingChart({ data, type, polls }) {
                 name="Republican"
                 dot={false}
               />
+              {pollDots.map((poll, idx) => (
+                <React.Fragment key={idx}>
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.democrat }]}
+                    fill="#0047AB"
+                    fillOpacity={0.8}
+                    dataKey="value"
+                  />
+                  <Scatter
+                    data={[{ timestamp: new Date(poll.date).getTime(), value: poll.republican }]}
+                    fill="#8B0000"
+                    fillOpacity={0.8}
+                    dataKey="value"
+                  />
+                </React.Fragment>
+              ))}
             </>
           ) : isSouthCarolina ? (
             <>
