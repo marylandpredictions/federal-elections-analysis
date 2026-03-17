@@ -1,34 +1,42 @@
 import React from 'react';
 import { parsePollDate, pollConfigs } from './pollConfig';
 
+function getPollWeight(pollDate, referenceDate, pollsterName) {
+  const diffDays = (referenceDate - pollDate) / (1000 * 60 * 60 * 24);
+  let weight;
+  if (diffDays <= 60) weight = 1.0;
+  else if (diffDays <= 90) weight = 0.5;
+  else if (diffDays <= 180) weight = 1 / 6;
+  else weight = 0;
+  if (pollsterName && /\([DR]\)/.test(pollsterName)) weight *= 0.5;
+  return weight;
+}
+
+function weightedAvg(polls, key, referenceDate) {
+  let sum = 0, total = 0;
+  polls.forEach(p => {
+    const val = p[key];
+    if (val == null || val <= 0) return;
+    const w = getPollWeight(parsePollDate(p.date), referenceDate, p.pollster);
+    if (w <= 0) return;
+    sum += val * w;
+    total += w;
+  });
+  return total > 0 ? sum / total : null;
+}
+
 export default function PollingAverageTable({ polls, type }) {
   const config = pollConfigs[type];
   if (!config || !polls || polls.length === 0) return null;
 
   const candidates = config.candidates;
-
-  // Sort polls ascending by date
-  const sorted = [...polls].sort((a, b) => parsePollDate(a.date) - parsePollDate(b.date));
-
-  // Overall average (all polls)
-  const overallAvg = {};
-  candidates.forEach(c => {
-    const vals = sorted.map(p => p[c.key]).filter(v => v != null && v > 0);
-    overallAvg[c.key] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
-  });
-
-  // One-month-ago average (polls from >30 days ago)
   const now = new Date();
   const oneMonthAgo = new Date(now);
   oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
 
-  const monthAgoPolls = sorted.filter(p => parsePollDate(p.date) <= oneMonthAgo);
-
-  const monthAgoAvg = {};
-  candidates.forEach(c => {
-    const vals = monthAgoPolls.map(p => p[c.key]).filter(v => v != null && v > 0);
-    monthAgoAvg[c.key] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
-  });
+  // Current weighted average (reference = today)
+  // One-month-ago weighted average (reference = 30 days ago, only polls before that)
+  const pastPolls = polls.filter(p => parsePollDate(p.date) <= oneMonthAgo);
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 mt-8">
@@ -46,13 +54,11 @@ export default function PollingAverageTable({ polls, type }) {
           </thead>
           <tbody>
             {candidates.map(c => {
-              const avg = overallAvg[c.key];
-              const prev = monthAgoAvg[c.key];
+              const avg = weightedAvg(polls, c.key, now);
+              const prev = pastPolls.length > 0 ? weightedAvg(pastPolls, c.key, oneMonthAgo) : null;
 
               let trendEl;
-              if (avg == null) {
-                trendEl = <span className="text-white font-bold">—</span>;
-              } else if (prev == null) {
+              if (avg == null || prev == null) {
                 trendEl = <span className="text-white font-bold">—</span>;
               } else {
                 const diff = avg - prev;
