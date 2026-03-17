@@ -82,16 +82,17 @@ export default function Header() {
           
           {/* Forecasts Dropdown */}
           <div className="relative" onMouseEnter={() => setForecastsOpen(true)} onMouseLeave={() => setForecastsOpen(false)}>
-            <button
+            <Link
+              to="/Forecasts"
               className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
-                forecastLinks.some(l => location.pathname === l.path)
+                forecastLinks.some(l => location.pathname === l.path) || location.pathname === '/Forecasts'
                   ? 'bg-accent text-white'
                   : 'text-white/80 hover:bg-accent/50 hover:text-white'
               }`}
             >
               Forecasts
               <ChevronDown className="w-4 h-4" />
-            </button>
+            </Link>
             {forecastsOpen && (
               <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 min-w-[220px] py-2 z-50">
                 {forecastLinks.map((link) => (
