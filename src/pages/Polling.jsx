@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import PollingChart from '../components/polling/PollingChart';
+import PollingAverageTable from '../components/polling/PollingAverageTable';
 import PollingTable from '../components/polling/PollingTable';
 import { Input } from '@/components/ui/input';
 
