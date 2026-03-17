@@ -195,6 +195,27 @@ export default function PollingTable({ polls, type }) {
                 } else if (poll.margin.includes('Generic R')) {
                   marginColor = '#8B0000';
                 }
+              } else if (isArizona) {
+                if (poll.margin.includes('Biggs')) marginColor = '#8B0000';
+                else if (poll.margin.includes('Robson')) marginColor = '#CC5500';
+                else if (poll.margin.includes('Schweikert')) marginColor = '#B8860B';
+              } else if (isDemPrimary) {
+                if (poll.margin.includes('Harris')) marginColor = '#0047AB';
+                else if (poll.margin.includes('Newsom')) marginColor = '#008080';
+                else if (poll.margin.includes('Buttigieg')) marginColor = '#006400';
+                else if (poll.margin.includes('AOC') || poll.margin.includes('Ocasio')) marginColor = '#CC5500';
+                else if (poll.margin.includes('Pritzker')) marginColor = '#8B0000';
+                else if (poll.margin.includes('Shapiro')) marginColor = '#4A4A4A';
+                else if (poll.margin.includes('Booker')) marginColor = '#B8860B';
+              } else if (isRepPrimary) {
+                if (poll.margin.includes('Vance')) marginColor = '#8B0000';
+                else if (poll.margin.includes('Trump Jr')) marginColor = '#CC5500';
+                else if (poll.margin.includes('Rubio')) marginColor = '#B8860B';
+                else if (poll.margin.includes('Cruz')) marginColor = '#008080';
+                else if (poll.margin.includes('Haley')) marginColor = '#C71585';
+                else if (poll.margin.includes('DeSantis')) marginColor = '#006400';
+                else if (poll.margin.includes('RFK') || poll.margin.includes('Kennedy')) marginColor = '#4A4A4A';
+                else if (poll.margin.includes('Ramaswamy')) marginColor = '#6B3A2A';
               } else if (isSouthCarolina) {
                 if (poll.margin.includes('Mace')) {
                   marginColor = '#8B0000';
