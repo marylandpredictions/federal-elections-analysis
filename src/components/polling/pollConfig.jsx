@@ -3,22 +3,36 @@ export function parsePollDate(dateStr) {
   let s = dateStr.replace(/[–—]/g, '-').trim();
   s = s.replace(/Mid-/i, '');
 
-  // Last "Month Day, Year" at end of string (handles "Jan 4, 26" too)
   const m = s.match(/([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{2,4})\s*$/);
   if (m) {
     const year = m[3].length === 2 ? '20' + m[3] : m[3];
     return new Date(`${m[1]} ${m[2]}, ${year}`);
   }
 
-  // "March 7-8, 2026" - same month range, take last day
   const m2 = s.match(/([A-Za-z]+)\s+\d+\s*-\s*(\d+),?\s*(\d{4})/);
   if (m2) return new Date(`${m2[1]} ${m2[2]}, ${m2[3]}`);
 
-  // "April 2025"
   const m3 = s.match(/([A-Za-z]+)\s+(\d{4})/);
   if (m3) return new Date(`${m3[1]} 15, ${m3[2]}`);
 
   return new Date(0);
+}
+
+function getPollWeight(pollDate, referenceDate, pollsterName) {
+  const diffDays = (referenceDate - pollDate) / (1000 * 60 * 60 * 24);
+
+  let weight;
+  if (diffDays <= 60) weight = 1.0;
+  else if (diffDays <= 90) weight = 0.5;
+  else if (diffDays <= 180) weight = 1 / 6;
+  else weight = 0;
+
+  // Internal polls (has (D) or (R) in pollster name) get half weight
+  if (pollsterName && /\([DR]\)/.test(pollsterName)) {
+    weight *= 0.5;
+  }
+
+  return weight;
 }
 
 export const pollConfigs = {
@@ -91,7 +105,6 @@ export function computeChartData(polls, type) {
   const candidates = config.candidates;
   const r = 2.5;
 
-  // Sort polls by parsed date ascending
   const sorted = [...polls].sort((a, b) => parsePollDate(a.date) - parsePollDate(b.date));
 
   const result = [];
@@ -99,16 +112,26 @@ export function computeChartData(polls, type) {
     const ts = parsePollDate(poll.date).getTime();
     if (!ts || ts <= 0) return;
 
+    const refDate = new Date(ts);
     const pollsUpTo = sorted.slice(0, idx + 1);
     const point = { timestamp: ts };
 
     candidates.forEach(c => {
-      const values = pollsUpTo
-        .map(p => p[c.key])
-        .filter(v => v !== undefined && v !== null && v > 0);
+      let weightedSum = 0;
+      let totalWeight = 0;
 
-      if (values.length > 0) {
-        const mean = values.reduce((a, b) => a + b, 0) / values.length;
+      pollsUpTo.forEach(p => {
+        const val = p[c.key];
+        if (val == null || val <= 0) return;
+        const pDate = parsePollDate(p.date);
+        const w = getPollWeight(pDate, refDate, p.pollster);
+        if (w <= 0) return;
+        weightedSum += val * w;
+        totalWeight += w;
+      });
+
+      if (totalWeight > 0) {
+        const mean = weightedSum / totalWeight;
         point[c.key] = mean;
         point[`${c.key}Min`] = Math.max(0, mean - r);
         point[`${c.key}Max`] = Math.min(100, mean + r);
