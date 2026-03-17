@@ -80,6 +80,33 @@ export default function Header() {
 
           })}
           
+          {/* Forecasts Dropdown */}
+          <div className="relative" onMouseEnter={() => setForecastsOpen(true)} onMouseLeave={() => setForecastsOpen(false)}>
+            <button
+              className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
+                forecastLinks.some(l => location.pathname === l.path)
+                  ? 'bg-accent text-white'
+                  : 'text-white/80 hover:bg-accent/50 hover:text-white'
+              }`}
+            >
+              Forecasts
+              <ChevronDown className="w-4 h-4" />
+            </button>
+            {forecastsOpen && (
+              <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 min-w-[220px] py-2 z-50">
+                {forecastLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold text-sm transition-all"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
           {/* Interactives Dropdown */}
           <div className="relative" onMouseEnter={() => setInteractivesOpen(true)} onMouseLeave={() => setInteractivesOpen(false)}>
             <Link
@@ -171,6 +198,19 @@ export default function Header() {
 
         })}
         
+        {forecastLinks.map((link) => (
+          <Link
+            key={link.path}
+            to={link.path}
+            onClick={() => setMobileOpen(false)}
+            className={`block px-4 py-3 rounded-lg font-inter font-semibold text-sm transition-all mt-1 text-shadow-teal ml-4 ${
+              location.pathname === link.path ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'
+            }`}
+          >
+            • {link.label}
+          </Link>
+        ))}
+
         <Link
           to="/Interactives"
           onClick={() => setMobileOpen(false)}
