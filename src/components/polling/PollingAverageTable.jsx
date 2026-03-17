@@ -29,14 +29,17 @@ export default function PollingAverageTable({ polls, type }) {
   const config = pollConfigs[type];
   if (!config || !polls || polls.length === 0) return null;
 
-  const candidates = config.candidates;
   const now = new Date();
   const oneMonthAgo = new Date(now);
   oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
-
-  // Current weighted average (reference = today)
-  // One-month-ago weighted average (reference = 30 days ago, only polls before that)
   const pastPolls = polls.filter(p => parsePollDate(p.date) <= oneMonthAgo);
+
+  // Sort candidates by current average descending
+  const candidates = [...config.candidates].sort((a, b) => {
+    const avgA = weightedAvg(polls, a.key, now) ?? -1;
+    const avgB = weightedAvg(polls, b.key, now) ?? -1;
+    return avgB - avgA;
+  });
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 mt-8">
