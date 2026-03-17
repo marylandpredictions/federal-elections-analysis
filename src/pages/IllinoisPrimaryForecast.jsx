@@ -82,13 +82,12 @@ function CandidateBar({ candidate, index, maxPct }) {
           </span>
         </div>
 
-        {/* Percentage at end of bar */}
+        {/* Percentage at far right */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: index * 0.12 + 0.9 }}
-          className="absolute inset-y-0 flex items-center z-10 pr-2"
-          style={{ left: `max(${barWidth}% - 60px, 4px)` }}
+          className="absolute inset-y-0 right-4 flex items-center z-10"
         >
           <span className="text-white font-inter font-bold text-lg leading-none drop-shadow">
             {candidate.pct}
