@@ -42,11 +42,11 @@ const forecastGallery = [
     title: '2026 General Election Forecast',
     description: 'Senate, House & Governors race projections with interactive maps and control probabilities.',
     image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png',
-    action: 'detail'
+    link: '/GeneralElectionForecast'
   },
   {
     title: 'Illinois Primary Forecast',
-    description: 'Illinois Democratic Senate & House Primaries — win probabilities and polling averages.',
+    description: 'Illinois Democratic Senate & House Primary Predictions, check out polling for more!',
     image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png',
     link: '/IllinoisPrimaryForecast'
   },
