@@ -62,7 +62,7 @@ function CandidateBar({ candidate, index, maxPct }) {
       transition={{ duration: 0.5, delay: index * 0.12 }}
       className="mb-4"
     >
-      <div className="relative h-20 rounded-xl overflow-hidden bg-white/10">
+      <div className="relative h-20 rounded-xl overflow-hidden bg-white/10 transition-transform duration-200 hover:scale-[1.02] cursor-default">
         {/* Bar fill */}
         <motion.div
           initial={{ width: 0 }}
