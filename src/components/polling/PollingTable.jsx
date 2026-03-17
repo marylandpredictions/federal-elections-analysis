@@ -29,6 +29,9 @@ export default function PollingTable({ polls, type }) {
   const isFlorida = type === 'florida-gop-governor';
   const isGeorgia = type === 'georgia-gop-governor';
   const isSouthCarolina = type === 'south-carolina-gop-governor';
+  const isArizona = type === 'arizona-gop-governor';
+  const isDemPrimary = type === '2028-dem-primary';
+  const isRepPrimary = type === '2028-rep-primary';
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
