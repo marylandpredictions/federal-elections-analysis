@@ -96,6 +96,39 @@ export const pollConfigs = {
       { key: 'norman', name: 'Ralph Norman', color: '#FF6600' },
     ]
   },
+  'arizona-gop-governor': {
+    title: 'Arizona Republican Governor Primary',
+    candidates: [
+      { key: 'biggs', name: 'Andy Biggs', color: '#8B0000' },
+      { key: 'robson', name: 'Karrin Taylor Robson', color: '#CC5500' },
+      { key: 'schweikert', name: 'David Schweikert', color: '#B8860B' },
+    ]
+  },
+  '2028-dem-primary': {
+    title: '2028 Democratic Presidential Primary',
+    candidates: [
+      { key: 'harris', name: 'Kamala Harris', color: '#0047AB' },
+      { key: 'newsom', name: 'Gavin Newsom', color: '#008080' },
+      { key: 'buttigieg', name: 'Pete Buttigieg', color: '#006400' },
+      { key: 'aoc', name: 'Alexandria Ocasio-Cortez', color: '#CC5500' },
+      { key: 'pritzker', name: 'JB Pritzker', color: '#8B0000' },
+      { key: 'shapiro', name: 'Josh Shapiro', color: '#4A4A4A' },
+      { key: 'booker', name: 'Cory Booker', color: '#B8860B' },
+    ]
+  },
+  '2028-rep-primary': {
+    title: '2028 Republican Presidential Primary',
+    candidates: [
+      { key: 'vance', name: 'JD Vance', color: '#8B0000' },
+      { key: 'trumpjr', name: 'Donald Trump Jr.', color: '#CC5500' },
+      { key: 'rubio', name: 'Marco Rubio', color: '#B8860B' },
+      { key: 'cruz', name: 'Ted Cruz', color: '#008080' },
+      { key: 'haley', name: 'Nikki Haley', color: '#C71585' },
+      { key: 'desantis', name: 'Ron DeSantis', color: '#006400' },
+      { key: 'rfk', name: 'RFK Jr.', color: '#4A4A4A' },
+      { key: 'ramaswamy', name: 'Vivek Ramaswamy', color: '#6B3A2A' },
+    ]
+  },
 };
 
 export function computeChartData(polls, type) {
