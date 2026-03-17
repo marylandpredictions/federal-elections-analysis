@@ -83,7 +83,7 @@ export default function Forecasts() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                onClick={() => f.link ? navigate(f.link) : setView('detail')}
+                onClick={() => navigate(f.link)}
                 className="cursor-pointer rounded-2xl overflow-hidden border border-primary/40 bg-primary/20 backdrop-blur-sm hover:bg-primary/30 hover:border-primary/70 transition-all duration-300 hover:scale-105 shadow-lg"
               >
                 <img src={f.image} alt={f.title} className="w-full h-44 object-cover" />
