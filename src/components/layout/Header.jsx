@@ -5,8 +5,12 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 const navLinks = [
 { label: 'Home', path: '/Home' },
 { label: 'About Us', path: '/AboutUs' },
-{ label: 'Forecasts', path: '/Forecasts' },
 { label: 'Polling', path: '/Polling' }];
+
+const forecastLinks = [
+{ label: '2026 General Forecast', path: '/Forecasts' },
+{ label: 'Illinois Primary Forecast', path: '/IllinoisPrimaryForecast' }
+];
 
 const interactiveLinks = [
 { label: 'Senate Swingometer', path: '/SenateSwingometer' }
@@ -16,6 +20,7 @@ const interactiveLinks = [
 export default function Header() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [forecastsOpen, setForecastsOpen] = useState(false);
   const [interactivesOpen, setInteractivesOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
 

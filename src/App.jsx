@@ -16,6 +16,7 @@ import Articles from './pages/Articles';
 import ArticleView from './pages/ArticleView';
 import Interactives from './pages/Interactives';
 import SenateSwingometer from './pages/SenateSwingometer';
+import IllinoisPrimaryForecast from './pages/IllinoisPrimaryForecast';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -50,6 +51,7 @@ const AuthenticatedApp = () => {
         <Route path="/ArticleView/:id" element={<ArticleView />} />
         <Route path="/Interactives" element={<Interactives />} />
         <Route path="/SenateSwingometer" element={<SenateSwingometer />} />
+        <Route path="/IllinoisPrimaryForecast" element={<IllinoisPrimaryForecast />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
