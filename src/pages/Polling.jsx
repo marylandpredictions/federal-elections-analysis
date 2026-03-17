@@ -407,6 +407,7 @@ export default function Polling() {
   const [selectedPoll, setSelectedPoll] = useState('generic-congressional-ballot');
   const [searchQuery, setSearchQuery] = useState('');
   const currentData = mockPollingData[selectedPoll];
+  const currentPolls = currentData?.polls || [];
 
   // Normalize string for search (remove spaces, lowercase)
   const normalizeString = (str) => str.replace(/\s/g, '').toLowerCase();
