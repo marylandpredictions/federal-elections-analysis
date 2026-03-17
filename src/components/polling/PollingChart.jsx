@@ -77,14 +77,22 @@ export default function PollingChart({ polls, type }) {
             domain={yDomain}
           />
           <Tooltip
-            contentStyle={{
-              backgroundColor: 'rgba(0,0,0,0.7)',
-              border: '1px solid rgba(255,255,255,0.2)',
-              borderRadius: '8px',
-              color: 'white'
+            content={({ active, payload, label }) => {
+              if (!active || !payload || !payload.length) return null;
+              const entries = payload
+                .filter(e => !e.dataKey.endsWith('Min') && !e.dataKey.endsWith('Max') && e.value != null)
+                .sort((a, b) => b.value - a.value);
+              return (
+                <div style={{ backgroundColor: 'rgba(0,0,0,0.85)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', padding: '10px 14px' }}>
+                  <p style={{ color: 'white', marginBottom: 6, fontSize: 12 }}>{format(new Date(label), 'MMMM d, yyyy')}</p>
+                  {entries.map(e => (
+                    <div key={e.dataKey} style={{ color: e.color, fontSize: 13, fontWeight: 600 }}>
+                      {e.name}: {Number(e.value).toFixed(1)}%
+                    </div>
+                  ))}
+                </div>
+              );
             }}
-            formatter={(value) => `${Number(value).toFixed(1)}%`}
-            labelFormatter={(ts) => format(new Date(ts), 'MMMM d, yyyy')}
           />
           <Legend wrapperStyle={{ color: 'white', fontWeight: 'bold' }} />
           {candidates.map(c => {
