@@ -53,6 +53,7 @@ const AuthenticatedApp = () => {
         <Route path="/Interactives" element={<Interactives />} />
         <Route path="/SenateSwingometer" element={<SenateSwingometer />} />
         <Route path="/IllinoisPrimaryForecast" element={<IllinoisPrimaryForecast />} />
+        <Route path="/GeneralElectionForecast" element={<GeneralElectionForecast />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
