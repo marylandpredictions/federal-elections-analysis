@@ -95,6 +95,38 @@ export default function PollingTable({ polls, type }) {
                   <TableHead className="text-white font-bold">Approve</TableHead>
                   <TableHead className="text-white font-bold">Disapprove</TableHead>
                 </>
+              ) : isArizona ? (
+                <>
+                  <TableHead className="text-white font-bold">Biggs</TableHead>
+                  <TableHead className="text-white font-bold">Robson</TableHead>
+                  <TableHead className="text-white font-bold">Schweikert</TableHead>
+                  <TableHead className="text-white font-bold">Other</TableHead>
+                  <TableHead className="text-white font-bold">Undecided</TableHead>
+                </>
+              ) : isDemPrimary ? (
+                <>
+                  <TableHead className="text-white font-bold">Harris</TableHead>
+                  <TableHead className="text-white font-bold">Newsom</TableHead>
+                  <TableHead className="text-white font-bold">Buttigieg</TableHead>
+                  <TableHead className="text-white font-bold">AOC</TableHead>
+                  <TableHead className="text-white font-bold">Pritzker</TableHead>
+                  <TableHead className="text-white font-bold">Shapiro</TableHead>
+                  <TableHead className="text-white font-bold">Booker</TableHead>
+                  <TableHead className="text-white font-bold">Other</TableHead>
+                </>
+              ) : isRepPrimary ? (
+                <>
+                  <TableHead className="text-white font-bold">Vance</TableHead>
+                  <TableHead className="text-white font-bold">Trump Jr.</TableHead>
+                  <TableHead className="text-white font-bold">Rubio</TableHead>
+                  <TableHead className="text-white font-bold">Cruz</TableHead>
+                  <TableHead className="text-white font-bold">Haley</TableHead>
+                  <TableHead className="text-white font-bold">DeSantis</TableHead>
+                  <TableHead className="text-white font-bold">RFK Jr.</TableHead>
+                  <TableHead className="text-white font-bold">Ramaswamy</TableHead>
+                  <TableHead className="text-white font-bold">Other</TableHead>
+                  <TableHead className="text-white font-bold">Undecided</TableHead>
+                </>
               ) : isSouthCarolina ? (
                 <>
                   <TableHead className="text-white font-bold">Mace</TableHead>
