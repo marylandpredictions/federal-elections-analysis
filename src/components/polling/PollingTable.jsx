@@ -28,8 +28,7 @@ export default function PollingTable({ polls, type }) {
   const isArizona = type === 'arizona-gop-governor';
   const isDemPrimary = type === '2028-dem-primary';
   const isRepPrimary = type === '2028-rep-primary';
-  const isIllinois = type === 'illinois-dem-primary';
-  const isIllinois9th = type === 'illinois-9th-house';
+  const isLouisiana = type === 'louisiana-gop-senate';
   const isApproval = type ? type.includes('approval') : false;
 
   function getMarginColor(poll) {
@@ -95,6 +94,11 @@ export default function PollingTable({ polls, type }) {
       if (m.includes('Simmons')) return '#22C55E';
       if (m.includes('Amiwala')) return '#A78BFA';
       if (m.includes('Andrew')) return '#FBBF24';
+    } else {
+      if (isLouisiana) {
+      if (m.includes('Cassidy')) return '#EF4444';
+      if (m.includes('Fleming')) return '#FBBF24';
+      if (m.includes('Letlow')) return '#F472B6';
     } else {
       if (m.includes('Cornyn')) return '#EF4444';
       if (m.includes('Paxton')) return '#F97316';
@@ -225,15 +229,17 @@ export default function PollingTable({ polls, type }) {
         <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
       </>
     );
-    // Default: Texas Senate
-    return (
+    if (isLouisiana) return (
       <>
-        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.cornyn > 0 ? `${poll.cornyn}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.paxton > 0 ? `${poll.paxton}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.cassidy > 0 ? `${poll.cassidy}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.fleming > 0 ? `${poll.fleming}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.letlow > 0 ? `${poll.letlow}%` : '–'}</TableCell>
         <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
         <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
       </>
     );
+    // Default: Texas Senate
+    return (
   }
 
   function renderHeaders() {
@@ -249,6 +255,7 @@ export default function PollingTable({ polls, type }) {
     if (isFlorida) return (<><TableHead className="text-white font-bold">Donalds</TableHead><TableHead className="text-white font-bold">Fishback</TableHead><TableHead className="text-white font-bold">Collins</TableHead><TableHead className="text-white font-bold">Renner</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     if (isIllinois9th) return (<><TableHead className="text-white font-bold">Biss</TableHead><TableHead className="text-white font-bold">Fine</TableHead><TableHead className="text-white font-bold">Abughazaleh</TableHead><TableHead className="text-white font-bold">Simmons</TableHead><TableHead className="text-white font-bold">Amiwala</TableHead><TableHead className="text-white font-bold">Andrew</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     if (isIllinois) return (<><TableHead className="text-white font-bold">Kelly</TableHead><TableHead className="text-white font-bold">Raja</TableHead><TableHead className="text-white font-bold">Stratton</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
+    if (isLouisiana) return (<><TableHead className="text-white font-bold">Cassidy</TableHead><TableHead className="text-white font-bold">Fleming</TableHead><TableHead className="text-white font-bold">Letlow</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     return (<><TableHead className="text-white font-bold">Cornyn</TableHead><TableHead className="text-white font-bold">Paxton</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
   }
 
