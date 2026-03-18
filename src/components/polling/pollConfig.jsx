@@ -96,6 +96,14 @@ export const pollConfigs = {
       { key: 'schweikert', name: 'David Schweikert', color: '#FBBF24' },
     ]
   },
+  'louisiana-gop-senate': {
+    title: 'Louisiana Republican Senate Primary',
+    candidates: [
+      { key: 'cassidy', name: 'Bill Cassidy', color: '#EF4444' },
+      { key: 'fleming', name: 'John Fleming', color: '#FBBF24' },
+      { key: 'letlow', name: 'Julia Letlow', color: '#F472B6' },
+    ]
+  },
   '2028-dem-primary': {
     title: '2028 Democratic Presidential Primary',
     candidates: [

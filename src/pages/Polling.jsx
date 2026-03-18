@@ -17,6 +17,7 @@ const pollingOptions = [
   { value: 'georgia-gop-governor', label: 'Georgia Republican Governor Primary' },
   { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary' },
   { value: 'arizona-gop-governor', label: 'Arizona Republican Governor Primary' },
+  { value: 'louisiana-gop-senate', label: 'Louisiana Republican Senate Primary' },
 ];
 
 const mainePollingData = {
@@ -449,6 +450,23 @@ const mockPollingData = {
       { pollster: 'Pulse Decision Science (R)', date: 'April 6–9, 2025', sampleSize: 511, biggs: 45, robson: 16, schweikert: 0, other: 0, undecided: 39, margin: 'Biggs +29' },
       { pollster: 'NicoPAC (R)', date: 'April 2–6, 2025', sampleSize: 477, biggs: 66, robson: 15, schweikert: 0, other: 4, undecided: 15, margin: 'Biggs +51' },
       { pollster: 'NicoPAC (R)', date: 'January 24–26, 2025', sampleSize: 512, biggs: 71, robson: 14, schweikert: 0, other: 0, undecided: 15, margin: 'Biggs +57' },
+    ]
+  },
+  'louisiana-gop-senate': {
+    chartData: [],
+    polls: [
+      { pollster: 'Fabrizio, Lee & Associates (R)', date: 'March 11–12, 2026', sampleSize: 600, cassidy: 26, fleming: 19, letlow: 27, other: 1, undecided: 27, margin: 'Letlow +1' },
+      { pollster: 'Public Opinion Strategies (R)', date: 'March 7–10, 2026', sampleSize: 500, cassidy: 35, fleming: 21, letlow: 24, other: 2, undecided: 18, margin: 'Cassidy +11' },
+      { pollster: 'BDPC', date: 'February 21–23, 2026', sampleSize: 600, cassidy: 28, fleming: 21, letlow: 21, other: 0, undecided: 30, margin: 'Cassidy +7' },
+      { pollster: 'Quantus Insights (R)', date: 'February 23–24, 2026', sampleSize: 1428, cassidy: 20, fleming: 34, letlow: 25, other: 0, undecided: 21, margin: 'Fleming +9' },
+      { pollster: 'Cor Strategies (R)', date: 'February 20–24, 2026', sampleSize: 0, cassidy: 30, fleming: 17, letlow: 15, other: 14, undecided: 24, margin: 'Cassidy +13' },
+      { pollster: 'JMC Analytics & Polling', date: 'February 14–16, 2026', sampleSize: 645, cassidy: 22, fleming: 26, letlow: 25, other: 1, undecided: 26, margin: 'Fleming +4' },
+      { pollster: 'BDPC', date: 'January 20–22, 2026', sampleSize: 600, cassidy: 21, fleming: 14, letlow: 27, other: 6, undecided: 27, margin: 'Letlow +6' },
+      { pollster: 'Public Opinion Strategies (R)', date: 'January 20–22, 2026', sampleSize: 600, cassidy: 32, fleming: 16, letlow: 21, other: 0, undecided: 19, margin: 'Cassidy +11' },
+      { pollster: 'JMC Analytics & Polling', date: 'January 12–14, 2026', sampleSize: 650, cassidy: 22, fleming: 23, letlow: 0, other: 16, undecided: 39, margin: 'Fleming +1' },
+      { pollster: 'JMC Analytics & Polling', date: 'October 15–17, 2025', sampleSize: 610, cassidy: 23, fleming: 25, letlow: 0, other: 17, undecided: 35, margin: 'Fleming +2' },
+      { pollster: 'Ragnar Research Partners (R)', date: 'April 14–16, 2025', sampleSize: 600, cassidy: 45, fleming: 28, letlow: 0, other: 3, undecided: 24, margin: 'Cassidy +17' },
+      { pollster: 'JMC Analytics & Polling', date: 'February 24–26, 2025', sampleSize: 600, cassidy: 27, fleming: 40, letlow: 0, other: 0, undecided: 33, margin: 'Fleming +13' },
     ]
   },
   '2028-dem-primary': {
