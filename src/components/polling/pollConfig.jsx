@@ -127,6 +127,14 @@ export const pollConfigs = {
       { key: 'flanagan', name: 'Peggy Flanagan', color: '#3B82F6' },
     ]
   },
+  'kentucky-gop-senate': {
+    title: 'Kentucky Republican Senate Primary',
+    candidates: [
+      { key: 'barr', name: 'Andy Barr', color: '#EF4444' },
+      { key: 'cameron', name: 'Daniel Cameron', color: '#FBBF24' },
+      { key: 'morris', name: 'Nate Morris', color: '#F97316' },
+    ]
+  },
   '2028-dem-primary': {
     title: '2028 Democratic Presidential Primary',
     candidates: [

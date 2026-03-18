@@ -34,6 +34,7 @@ export default function PollingTable({ polls, type }) {
   const isGeorgiaGOPSenate = type === 'georgia-gop-senate';
   const isMichiganDem = type === 'michigan-dem-senate';
   const isMinnesotaDem = type === 'minnesota-dem-senate';
+  const isKentuckyGOP = type === 'kentucky-gop-senate';
   const isApproval = type ? type.includes('approval') : false;
 
   function getMarginColor(poll) {
