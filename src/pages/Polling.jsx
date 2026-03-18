@@ -676,6 +676,8 @@ const mockPollingData = {
 
 export default function Polling() {
   const [selectedPoll, setSelectedPoll] = useState('generic-congressional-ballot');
+  const currentData = mockPollingData[selectedPoll] || { chartData: [], polls: [] };
+  const currentPolls = currentData?.polls || [];
 
   return (
     <div 
