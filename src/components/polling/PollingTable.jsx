@@ -115,6 +115,10 @@ export default function PollingTable({ polls, type }) {
     } else if (isMinnesotaDem) {
       if (m.includes('Flanagan')) return '#3B82F6';
       if (m.includes('Craig')) return '#14B8A6';
+    } else if (isKentuckyGOP) {
+      if (m.includes('Barr')) return '#EF4444';
+      if (m.includes('Cameron')) return '#FBBF24';
+      if (m.includes('Morris')) return '#F97316';
     } else {
       if (m.includes('Cornyn')) return '#EF4444';
       if (m.includes('Paxton')) return '#F97316';
