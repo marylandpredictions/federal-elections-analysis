@@ -6,20 +6,21 @@ import PollingTable from '../components/polling/PollingTable';
 import PollSelector from '../components/polling/PollSelector';
 
 const pollingOptions = [
-  { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot' },
-  { value: '2028-dem-primary', label: '2028 Democratic Presidential Primary' },
-  { value: '2028-rep-primary', label: '2028 Republican Presidential Primary' },
-  { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff' },
-  { value: 'maine-dem-senate', label: 'Maine Democratic Senate Primary' },
-  { value: 'california-governor', label: 'California Open Governor Primary' },
-  { value: 'florida-gop-governor', label: 'Florida Republican Governor Primary' },
-  { value: 'georgia-gop-governor', label: 'Georgia Republican Governor Primary' },
-  { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary' },
-  { value: 'arizona-gop-governor', label: 'Arizona Republican Governor Primary' },
-  { value: 'louisiana-gop-senate', label: 'Louisiana Republican Senate Primary' },
-  { value: 'georgia-gop-senate', label: 'Georgia Republican Senate Primary' },
-  { value: 'michigan-dem-senate', label: 'Michigan Democratic Senate Primary' },
-  { value: 'minnesota-dem-senate', label: 'Minnesota Democratic Senate Primary' },
+  { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot', party: 'generic' },
+  { value: '2028-dem-primary', label: '2028 Democratic Presidential Primary', party: 'dem' },
+  { value: '2028-rep-primary', label: '2028 Republican Presidential Primary', party: 'rep' },
+  { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff', party: 'rep' },
+  { value: 'maine-dem-senate', label: 'Maine Democratic Senate Primary', party: 'dem' },
+  { value: 'california-governor', label: 'California Open Governor Primary', party: 'open' },
+  { value: 'florida-gop-governor', label: 'Florida Republican Governor Primary', party: 'rep' },
+  { value: 'georgia-gop-governor', label: 'Georgia Republican Governor Primary', party: 'rep' },
+  { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary', party: 'rep' },
+  { value: 'arizona-gop-governor', label: 'Arizona Republican Governor Primary', party: 'rep' },
+  { value: 'louisiana-gop-senate', label: 'Louisiana Republican Senate Primary', party: 'rep' },
+  { value: 'georgia-gop-senate', label: 'Georgia Republican Senate Primary', party: 'rep' },
+  { value: 'kentucky-gop-senate', label: 'Kentucky Republican Senate Primary', party: 'rep' },
+  { value: 'michigan-dem-senate', label: 'Michigan Democratic Senate Primary', party: 'dem' },
+  { value: 'minnesota-dem-senate', label: 'Minnesota Democratic Senate Primary', party: 'dem' },
 ];
 
 const mainePollingData = {
@@ -506,6 +507,24 @@ const mockPollingData = {
       { pollster: 'Impact Research (D)', date: 'January 13–15, 2026', sampleSize: 600, craig: 42, flanagan: 45, other: 3, undecided: 9, margin: 'Flanagan +3' },
       { pollster: 'NRSC (R)', date: 'July 4–7, 2025', sampleSize: 559, craig: 24, flanagan: 30, other: 0, undecided: 45, margin: 'Flanagan +6' },
       { pollster: 'Public Policy Polling (D)', date: 'February 14–15, 2025', sampleSize: 668, craig: 22, flanagan: 52, other: 0, undecided: 27, margin: 'Flanagan +30' },
+    ]
+  },
+  'kentucky-gop-senate': {
+    chartData: [],
+    polls: [
+      { pollster: 'Quantus Insights (R)', date: 'February 4, 2026', sampleSize: 870, barr: 28, cameron: 27, morris: 17, other: 9, undecided: 19, margin: 'Barr +1' },
+      { pollster: 'Emerson College', date: 'January 31 – February 2, 2026', sampleSize: 523, barr: 24, cameron: 21, morris: 14, other: 4, undecided: 37, margin: 'Barr +3' },
+      { pollster: 'Fabrizio, Lee & Associates (R)', date: 'January 27–29, 2026', sampleSize: 800, barr: 21, cameron: 29, morris: 18, other: 0, undecided: 42, margin: 'Cameron +8' },
+      { pollster: 'OnMessage Inc. (R)', date: 'January 5–8, 2026', sampleSize: 600, barr: 25, cameron: 40, morris: 13, other: 0, undecided: 22, margin: 'Cameron +15' },
+      { pollster: 'UpOne Insights (R)', date: 'October 13–14, 2025', sampleSize: 600, barr: 25, cameron: 42, morris: 10, other: 0, undecided: 23, margin: 'Cameron +17' },
+      { pollster: 'co/efficient (R)', date: 'October 8–10, 2025', sampleSize: 911, barr: 22, cameron: 39, morris: 8, other: 4, undecided: 27, margin: 'Cameron +17' },
+      { pollster: 'Public Opinion Strategies (R)', date: 'September 2–4, 2025', sampleSize: 600, barr: 29, cameron: 37, morris: 8, other: 0, undecided: 26, margin: 'Cameron +8' },
+      { pollster: 'Fabrizio, Lee & Associates (R)', date: 'August 2025', sampleSize: 0, barr: 17, cameron: 40, morris: 5, other: 0, undecided: 38, margin: 'Cameron +23' },
+      { pollster: 'UpOne Insights (R)', date: 'August 2025', sampleSize: 0, barr: 19, cameron: 39, morris: 10, other: 0, undecided: 32, margin: 'Cameron +20' },
+      { pollster: 'McLaughlin & Associates (R)', date: 'April 13–15, 2025', sampleSize: 500, barr: 18, cameron: 44, morris: 2, other: 0, undecided: 36, margin: 'Cameron +26' },
+      { pollster: 'co/efficient (R)', date: 'February 25–26, 2025', sampleSize: 1134, barr: 18, cameron: 39, morris: 3, other: 11, undecided: 31, margin: 'Cameron +21' },
+      { pollster: 'UpOne Insights (R)', date: 'Mid-February 2025', sampleSize: 0, barr: 19, cameron: 47, morris: 3, other: 0, undecided: 31, margin: 'Cameron +28' },
+      { pollster: 'co/efficient (R)', date: 'December 2–3, 2024', sampleSize: 1298, barr: 12, cameron: 37, morris: 1, other: 14, undecided: 36, margin: 'Cameron +25' },
     ]
   },
   '2028-dem-primary': {
