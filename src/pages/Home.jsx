@@ -3,17 +3,11 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { LineChart, Line, ResponsiveContainer, YAxis } from 'recharts';
 import SwingMap from '../components/swingometer/SwingMap';
+import articles from '../lib/articlesData';
 
 const BG = 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png)';
 
-const latestArticle = {
-  id: 1,
-  title: "Illinois' Democratic Revolution",
-  author: "Nathan",
-  date: "March 15, 2026",
-  image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/3c8d9b846_FEA4.png",
-  excerpt: "Something may be brewing within the lines of the Democratic Party in Illinois, put to the test in an open senate and four house seats."
-};
+const latestArticle = articles[0];
 
 const genericBallotData = [
   { democrat: 50.3, republican: 43.7 },
@@ -84,7 +78,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <Link to="/ArticleView/1" className={`block ${bubbleBase}`}>
+          <Link to={`/ArticleView/${latestArticle.id}`} className={`block ${bubbleBase}`}>
             <p className="text-xs font-inter font-semibold text-black/60 uppercase tracking-wider mb-2">Latest Article</p>
             <img
               src={latestArticle.image}
@@ -95,7 +89,7 @@ export default function Home() {
               {latestArticle.title}
             </h3>
             <p className="text-xs text-gray-500 font-inter mb-2">By {latestArticle.author} · {latestArticle.date}</p>
-            <p className="text-gray-700 font-inter text-sm line-clamp-3">{latestArticle.excerpt}</p>
+            <p className="text-gray-700 font-inter text-sm line-clamp-3">{latestArticle.excerpt || latestArticle.content?.slice(0, 150) + '...'}</p>
             <p className="text-black font-inter font-semibold text-sm mt-3">Read more →</p>
           </Link>
         </motion.div>
