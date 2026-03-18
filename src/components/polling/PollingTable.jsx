@@ -284,6 +284,15 @@ export default function PollingTable({ polls, type }) {
         <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
+    if (isKentuckyGOP) return (
+      <>
+        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.barr > 0 ? `${poll.barr}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.cameron > 0 ? `${poll.cameron}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.morris > 0 ? `${poll.morris}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
+      </>
+    );
     // Default: Texas Senate
     return (
       <>
