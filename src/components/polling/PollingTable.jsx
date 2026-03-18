@@ -24,6 +24,7 @@ export default function PollingTable({ polls, type }) {
 
   const isApproval = type.includes('approval');
   const isGenericBallot = type === 'generic-congressional-ballot';
+  const isMaine = type === 'maine-dem-senate';
   const isIllinois = type === 'illinois-dem-primary';
   const isIllinois9th = type === 'illinois-9th-house';
   const isFlorida = type === 'florida-gop-governor';
@@ -85,7 +86,15 @@ export default function PollingTable({ polls, type }) {
               <TableHead className="text-white font-bold">Pollster</TableHead>
               <TableHead className="text-white font-bold">Date</TableHead>
               <TableHead className="text-white font-bold">Sample Size</TableHead>
-              {isGenericBallot ? (
+              {isMaine ? (
+                <>
+                  <TableHead className="text-white font-bold">Mills</TableHead>
+                  <TableHead className="text-white font-bold">Platner</TableHead>
+                  <TableHead className="text-white font-bold">Costello</TableHead>
+                  <TableHead className="text-white font-bold">Other</TableHead>
+                  <TableHead className="text-white font-bold">Undecided</TableHead>
+                </>
+              ) : isGenericBallot ? (
                 <>
                   <TableHead className="text-white font-bold">Democrat</TableHead>
                   <TableHead className="text-white font-bold">Republican</TableHead>
