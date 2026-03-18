@@ -104,6 +104,29 @@ export const pollConfigs = {
       { key: 'letlow', name: 'Julia Letlow', color: '#F472B6' },
     ]
   },
+  'georgia-gop-senate': {
+    title: 'Georgia Republican Senate Primary',
+    candidates: [
+      { key: 'carter', name: 'Buddy Carter', color: '#FBBF24' },
+      { key: 'collins', name: 'Mike Collins', color: '#F97316' },
+      { key: 'dooley', name: 'Derek Dooley', color: '#F472B6' },
+    ]
+  },
+  'michigan-dem-senate': {
+    title: 'Michigan Democratic Senate Primary',
+    candidates: [
+      { key: 'elsayed', name: 'Abdul El-Sayed', color: '#84CC16' },
+      { key: 'mcmorrow', name: 'Mallory McMorrow', color: '#14B8A6' },
+      { key: 'stevens', name: 'Haley Stevens', color: '#A78BFA' },
+    ]
+  },
+  'minnesota-dem-senate': {
+    title: 'Minnesota Democratic Senate Primary',
+    candidates: [
+      { key: 'craig', name: 'Angie Craig', color: '#14B8A6' },
+      { key: 'flanagan', name: 'Peggy Flanagan', color: '#3B82F6' },
+    ]
+  },
   '2028-dem-primary': {
     title: '2028 Democratic Presidential Primary',
     candidates: [

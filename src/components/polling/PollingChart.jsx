@@ -13,6 +13,9 @@ const yDomains = {
   'south-carolina-gop-governor': [0, 35],
   'arizona-gop-governor': [0, 80],
   'louisiana-gop-senate': [0, 65],
+  'georgia-gop-senate': [0, 55],
+  'michigan-dem-senate': [0, 50],
+  'minnesota-dem-senate': [0, 65],
   '2028-dem-primary': [0, 50],
   '2028-rep-primary': [0, 70],
 };
