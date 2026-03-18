@@ -180,14 +180,7 @@ export default function Header() {
 
         {/* Right side: Theme toggle + Mobile toggle */}
         <div className="flex items-center gap-1 ml-auto flex-shrink-0">
-          <button
-            onClick={() => setDark(d => !d)}
-            className="text-white rounded-lg hover:bg-accent/50 transition-colors"
-            style={{ padding: '8px' }}
-            title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {dark ? <Sun style={{ width: '20px', height: '20px' }} /> : <Moon style={{ width: '20px', height: '20px' }} />}
-          </button>
+  
           <button
             className="md:hidden text-white"
             style={{ padding: '8px' }}
