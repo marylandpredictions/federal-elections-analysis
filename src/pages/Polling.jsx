@@ -42,6 +42,7 @@ const mainePollingData = {
 };
 
 const mockPollingData = {
+  'maine-dem-senate': mainePollingData,
   'generic-congressional-ballot': {
     chartData: [
       { date: '2025-11-05', democrat: 50.3, republican: 43.7 },
@@ -581,7 +582,7 @@ const mockPollingData = {
 export default function Polling() {
   const [selectedPoll, setSelectedPoll] = useState('generic-congressional-ballot');
   const [searchQuery, setSearchQuery] = useState('');
-  const currentData = mockPollingData[selectedPoll];
+  const currentData = mockPollingData[selectedPoll] || { chartData: [], polls: [] };
   const currentPolls = currentData?.polls || [];
 
   // Normalize string for search (remove spaces, lowercase)
