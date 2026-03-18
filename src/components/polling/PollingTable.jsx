@@ -319,6 +319,7 @@ export default function PollingTable({ polls, type }) {
                       <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.schweikert > 0 ? `${poll.schweikert}%` : '–'}</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+                    </>
                   ) : isDemPrimary ? (
                     <>
                       <TableCell style={{ color: '#3B82F6' }} className="font-semibold">{poll.harris > 0 ? `${poll.harris}%` : '–'}</TableCell>
