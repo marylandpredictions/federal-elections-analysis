@@ -6,8 +6,8 @@ import { computeChartData, pollConfigs } from './pollConfig';
 const yDomains = {
   'generic-congressional-ballot': [25, 60],
   '2026-senate-generic': [15, 65],
-  'illinois-dem-primary': [5, 50],
-  'illinois-9th-house': [0, 40],
+  'maine-dem-senate': [0, 75],
+  'california-governor': [0, 40],
   'florida-gop-governor': [0, 55],
   'georgia-gop-governor': [0, 45],
   'south-carolina-gop-governor': [0, 35],

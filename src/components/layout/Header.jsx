@@ -5,7 +5,11 @@ import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
 function useTheme() {
   const [dark, setDark] = useState(() => {
     const stored = localStorage.getItem('theme');
-    return stored ? stored === 'dark' : true;
+    const isDark = stored ? stored === 'dark' : true;
+    // Apply class synchronously before first paint
+    if (isDark) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+    return isDark;
   });
 
   useEffect(() => {

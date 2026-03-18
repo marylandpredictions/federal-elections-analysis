@@ -6,7 +6,7 @@ import ScrollToTop from '../ui/ScrollToTop';
 
 export default function SiteLayout() {
   return (
-    <div className="min-h-screen flex flex-col font-inter bg-white">
+    <div className="min-h-screen flex flex-col font-inter bg-background">
       <Header />
       <main className="flex-1 pt-16">
         <Outlet />

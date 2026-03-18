@@ -12,6 +12,7 @@ const pollingOptions = [
   { value: '2028-rep-primary', label: '2028 Republican Presidential Primary' },
   { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff' },
   { value: 'maine-dem-senate', label: 'Maine Democratic Senate Primary' },
+  { value: 'california-governor', label: 'California Open Governor Primary' },
   { value: 'florida-gop-governor', label: 'Florida Republican Governor Primary' },
   { value: 'georgia-gop-governor', label: 'Georgia Republican Governor Primary' },
   { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary' },
@@ -41,8 +42,38 @@ const mainePollingData = {
   ]
 };
 
+const californiaGovData = {
+  chartData: [],
+  polls: [
+    { pollster: 'Emerson College', date: 'March 7-9, 2026', sampleSize: 1000, becerra: 3, bianco: 11, hilton: 13, mahan: 3, porter: 8, steyer: 11, swalwell: 17, other: 7, undecided: 25, margin: 'Swalwell +4' },
+    { pollster: 'Politico/UC Berkeley/TrueDot', date: 'February 25-March 3, 2026', sampleSize: 1004, becerra: 5, bianco: 11, hilton: 19, mahan: 3, porter: 11, steyer: 13, swalwell: 11, other: 10, undecided: 17, margin: 'Hilton +6' },
+    { pollster: 'Global Strategy Group (D)', date: 'February 27-March 2, 2026', sampleSize: 1340, becerra: 5, bianco: 15, hilton: 20, mahan: 3, porter: 13, steyer: 16, swalwell: 11, other: 2, undecided: 15, margin: 'Hilton +4' },
+    { pollster: 'Independent Voter Project', date: 'February 13-20, 2026', sampleSize: 868, becerra: 3, bianco: 23, hilton: 15, mahan: 2, porter: 12, steyer: 8, swalwell: 18, other: 6, undecided: 13, margin: 'Bianco +5' },
+    { pollster: 'Emerson College', date: 'February 13-14, 2026', sampleSize: 1000, becerra: 4, bianco: 14, hilton: 17, mahan: 3, porter: 10, steyer: 9, swalwell: 14, other: 9, undecided: 21, margin: 'Hilton +3' },
+    { pollster: 'PPIC', date: 'February 3-11, 2026', sampleSize: 1049, becerra: 5, bianco: 12, hilton: 14, mahan: 3, porter: 13, steyer: 10, swalwell: 11, other: 23, undecided: 10, margin: 'Hilton +1' },
+    { pollster: 'Tavern Research (D)', date: 'February 2-5, 2026', sampleSize: 1097, becerra: 6, bianco: 20, hilton: 12, mahan: 2, porter: 9, steyer: 9, swalwell: 10, other: 7, undecided: 25, margin: 'Bianco +8' },
+    { pollster: 'EMC Research (D)', date: 'January 29-February 4, 2026', sampleSize: 1400, becerra: 6, bianco: 21, hilton: 17, mahan: 5, porter: 12, steyer: 9, swalwell: 18, other: 8, undecided: 4, margin: 'Bianco +3' },
+    { pollster: 'Global Strategy Group (D)', date: 'January 29-February 3, 2026', sampleSize: 0, becerra: 4, bianco: 18, hilton: 18, mahan: 3, porter: 12, steyer: 10, swalwell: 11, other: 3, undecided: 21, margin: 'Tie' },
+    { pollster: 'RBI Strategies (D)', date: 'January 25-29, 2026', sampleSize: 0, becerra: 4, bianco: 15, hilton: 16, mahan: 3, porter: 13, steyer: 8, swalwell: 14, other: 5, undecided: 23, margin: 'Hilton +1' },
+    { pollster: 'Tulchin Research (D)', date: 'January 22-28, 2026', sampleSize: 1000, becerra: 5, bianco: 15, hilton: 15, mahan: 0, porter: 13, steyer: 10, swalwell: 14, other: 12, undecided: 16, margin: 'Tie' },
+    { pollster: 'Public Policy Polling (D)', date: 'January 20-21, 2026', sampleSize: 1001, becerra: 6, bianco: 18, hilton: 17, mahan: 5, porter: 14, steyer: 8, swalwell: 12, other: 3, undecided: 17, margin: 'Bianco +1' },
+    { pollster: 'David Binder Research (D)', date: 'January 17-20, 2026', sampleSize: 800, becerra: 5, bianco: 17, hilton: 14, mahan: 0, porter: 11, steyer: 8, swalwell: 11, other: 9, undecided: 25, margin: 'Bianco +3' },
+    { pollster: 'CivicLens Research', date: 'December 14-16, 2025', sampleSize: 400, becerra: 1, bianco: 14, hilton: 18, mahan: 0, porter: 9, steyer: 7, swalwell: 12, other: 10, undecided: 31, margin: 'Hilton +4' },
+    { pollster: 'FM3 Research (D)', date: 'November 30-December 7, 2025', sampleSize: 632, becerra: 3, bianco: 17, hilton: 18, mahan: 0, porter: 13, steyer: 6, swalwell: 17, other: 5, undecided: 20, margin: 'Hilton +1' },
+    { pollster: 'Emerson College', date: 'December 1-2, 2025', sampleSize: 1000, becerra: 4, bianco: 13, hilton: 12, mahan: 0, porter: 11, steyer: 4, swalwell: 12, other: 14, undecided: 31, margin: 'Bianco +1' },
+    { pollster: 'Lake Research Partners (D)', date: 'November 17-20, 2025', sampleSize: 600, becerra: 6, bianco: 10, hilton: 17, mahan: 0, porter: 15, steyer: 4, swalwell: 10, other: 14, undecided: 22, margin: 'Hilton +2' },
+    { pollster: 'PPIC', date: 'November 13-19, 2025', sampleSize: 1086, becerra: 14, bianco: 10, hilton: 14, mahan: 0, porter: 21, steyer: 0, swalwell: 0, other: 36, undecided: 5, margin: 'Porter +7' },
+    { pollster: 'Tavern Research (D)', date: 'October 27-30, 2025', sampleSize: 1001, becerra: 9, bianco: 16, hilton: 12, mahan: 0, porter: 15, steyer: 0, swalwell: 0, other: 19, undecided: 29, margin: 'Bianco +1' },
+    { pollster: 'EMC Research (D)', date: 'October 22-26, 2025', sampleSize: 1000, becerra: 9, bianco: 14, hilton: 20, mahan: 0, porter: 16, steyer: 3, swalwell: 11, other: 27, undecided: 0, margin: 'Hilton +4' },
+    { pollster: 'Emerson College', date: 'October 20-21, 2025', sampleSize: 900, becerra: 5, bianco: 11, hilton: 16, mahan: 0, porter: 15, steyer: 0, swalwell: 0, other: 14, undecided: 39, margin: 'Hilton +1' },
+    { pollster: 'Bold Decision', date: 'October 16-21, 2025', sampleSize: 509, becerra: 8, bianco: 14, hilton: 13, mahan: 0, porter: 12, steyer: 7, swalwell: 0, other: 16, undecided: 29, margin: 'Bianco +1' },
+    { pollster: 'Emerson College', date: 'April 12-14, 2025', sampleSize: 899, becerra: 3, bianco: 4, hilton: 0, mahan: 0, porter: 12, steyer: 0, swalwell: 0, other: 27, undecided: 54, margin: 'Porter +8' },
+  ]
+};
+
 const mockPollingData = {
   'maine-dem-senate': mainePollingData,
+  'california-governor': californiaGovData,
   'generic-congressional-ballot': {
     chartData: [
       { date: '2025-11-05', democrat: 50.3, republican: 43.7 },
@@ -87,6 +118,11 @@ const mockPollingData = {
       { date: '2026-03-14', democrat: 45.3, republican: 42.7 }
     ],
     polls: [
+      { pollster: 'YouGov (Economist) (B+)', date: 'Mar 13 - 16, 2026', sampleSize: 1529, democrat: 39, republican: 35, margin: 'Generic D +4' },
+      { pollster: 'Morning Consult (C-)', date: 'Mar 13 - 16, 2026', sampleSize: 2201, democrat: 48, republican: 40, margin: 'Generic D +8' },
+      { pollster: 'Morning Consult (C-)', date: 'Mar 9 - 15, 2026', sampleSize: 26634, democrat: 45, republican: 42, margin: 'Generic D +3' },
+      { pollster: 'Echelon Insights (A)', date: 'Mar 12 - 16, 2026', sampleSize: 1033, democrat: 49, republican: 44, margin: 'Generic D +5' },
+      { pollster: 'Clarity Campaign (B)', date: 'Feb 26 - Mar 7, 2026', sampleSize: 1004, democrat: 47, republican: 43, margin: 'Generic D +4' },
       { pollster: 'Noble Predictive (A-)', date: 'Mar 2 - 5, 2026', sampleSize: 2659, democrat: 44, republican: 43, margin: 'Generic D +1' },
       { pollster: 'Focaldata (B-)', date: 'Mar 6 - 10, 2026', sampleSize: 1534, democrat: 48, republican: 42, margin: 'Generic D +6' },
       { pollster: 'TIPP (A+)', date: 'Feb 24 - 27, 2026', sampleSize: 1246, democrat: 46, republican: 44, margin: 'Generic D +2' },
@@ -559,6 +595,8 @@ const mockPollingData = {
       { date: '2026-03-11', mace: 22.1, wilson: 22.3, evette: 16.2, norman: 11.6 }
     ],
     polls: [
+      { pollster: 'co/efficient (R)', date: 'March 12-13, 2026', sampleSize: 810, evette: 21, kimbrell: 1, mace: 22, norman: 8, wilson: 19, other: 0, undecided: 29, margin: 'Mace +1' },
+      { pollster: 'Stratus Intelligence (R)', date: 'March 9-11, 2026', sampleSize: 600, evette: 15, kimbrell: 0, mace: 24, norman: 14, wilson: 18, other: 0, undecided: 29, margin: 'Mace +6' },
       { pollster: 'Quantus Insights (R)', date: 'March 10–11, 2026', sampleSize: 806, evette: 16, kimbrell: 3, mace: 22, norman: 11, wilson: 22, other: 0, undecided: 26, margin: 'Tie' },
       { pollster: 'National Public Affairs (R)', date: 'February 2–5, 2026', sampleSize: 800, evette: 16, kimbrell: 2, mace: 17, norman: 12, wilson: 23, other: 0, undecided: 30, margin: 'Wilson +6' },
       { pollster: 'Targoz Market Research/South Carolina Policy Council', date: 'January 24 – February 1, 2026', sampleSize: 540, evette: 12, kimbrell: 4, mace: 18, norman: 11, wilson: 12, other: 0, undecided: 43, margin: 'Mace +6' },

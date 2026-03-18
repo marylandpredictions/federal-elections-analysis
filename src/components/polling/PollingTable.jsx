@@ -25,6 +25,7 @@ export default function PollingTable({ polls, type }) {
   const isApproval = type.includes('approval');
   const isGenericBallot = type === 'generic-congressional-ballot';
   const isMaine = type === 'maine-dem-senate';
+  const isCaliforniaGov = type === 'california-governor';
   const isIllinois = type === 'illinois-dem-primary';
   const isIllinois9th = type === 'illinois-9th-house';
   const isFlorida = type === 'florida-gop-governor';
@@ -86,7 +87,19 @@ export default function PollingTable({ polls, type }) {
               <TableHead className="text-white font-bold">Pollster</TableHead>
               <TableHead className="text-white font-bold">Date</TableHead>
               <TableHead className="text-white font-bold">Sample Size</TableHead>
-              {isMaine ? (
+              {isCaliforniaGov ? (
+                <>
+                  <TableHead className="text-white font-bold">Swalwell</TableHead>
+                  <TableHead className="text-white font-bold">Hilton</TableHead>
+                  <TableHead className="text-white font-bold">Bianco</TableHead>
+                  <TableHead className="text-white font-bold">Porter</TableHead>
+                  <TableHead className="text-white font-bold">Steyer</TableHead>
+                  <TableHead className="text-white font-bold">Mahan</TableHead>
+                  <TableHead className="text-white font-bold">Becerra</TableHead>
+                  <TableHead className="text-white font-bold">Other</TableHead>
+                  <TableHead className="text-white font-bold">Undecided</TableHead>
+                </>
+              ) : isMaine ? (
                 <>
                   <TableHead className="text-white font-bold">Mills</TableHead>
                   <TableHead className="text-white font-bold">Platner</TableHead>
@@ -198,94 +211,70 @@ export default function PollingTable({ polls, type }) {
           <TableBody>
             {currentPolls.map((poll, index) => {
               let marginColor = 'text-white';
-              if (isMaine) {
+              if (isCaliforniaGov) {
+                if (poll.margin.includes('Swalwell')) marginColor = '#3B82F6';
+                else if (poll.margin.includes('Hilton')) marginColor = '#F472B6';
+                else if (poll.margin.includes('Bianco')) marginColor = '#F97316';
+                else if (poll.margin.includes('Porter')) marginColor = '#A78BFA';
+                else if (poll.margin.includes('Steyer')) marginColor = '#84CC16';
+                else if (poll.margin.includes('Mahan')) marginColor = '#22D3EE';
+                else if (poll.margin.includes('Becerra')) marginColor = '#FBBF24';
+              } else if (isMaine) {
                 if (poll.margin.includes('Mills')) marginColor = '#1976D2';
                 else if (poll.margin.includes('Platner')) marginColor = '#FFD600';
               } else if (isGenericBallot) {
-                if (poll.margin.includes('Generic D')) {
-                  marginColor = '#0047AB';
-                } else if (poll.margin.includes('Generic R')) {
-                  marginColor = '#8B0000';
-                }
+                if (poll.margin.includes('Generic D')) marginColor = '#1E90FF';
+                else if (poll.margin.includes('Generic R')) marginColor = '#FF2020';
               } else if (isArizona) {
-                if (poll.margin.includes('Biggs')) marginColor = '#8B0000';
-                else if (poll.margin.includes('Robson')) marginColor = '#CC5500';
-                else if (poll.margin.includes('Schweikert')) marginColor = '#B8860B';
+                if (poll.margin.includes('Biggs')) marginColor = '#EF4444';
+                else if (poll.margin.includes('Robson')) marginColor = '#F97316';
+                else if (poll.margin.includes('Schweikert')) marginColor = '#FBBF24';
               } else if (isDemPrimary) {
-                if (poll.margin.includes('Harris')) marginColor = '#0047AB';
-                else if (poll.margin.includes('Newsom')) marginColor = '#008080';
-                else if (poll.margin.includes('Buttigieg')) marginColor = '#006400';
-                else if (poll.margin.includes('AOC') || poll.margin.includes('Ocasio')) marginColor = '#CC5500';
-                else if (poll.margin.includes('Pritzker')) marginColor = '#8B0000';
-                else if (poll.margin.includes('Shapiro')) marginColor = '#4A4A4A';
-                else if (poll.margin.includes('Booker')) marginColor = '#B8860B';
+                if (poll.margin.includes('Harris')) marginColor = '#3B82F6';
+                else if (poll.margin.includes('Newsom')) marginColor = '#06B6D4';
+                else if (poll.margin.includes('Buttigieg')) marginColor = '#22C55E';
+                else if (poll.margin.includes('AOC') || poll.margin.includes('Ocasio')) marginColor = '#F97316';
+                else if (poll.margin.includes('Pritzker')) marginColor = '#EF4444';
+                else if (poll.margin.includes('Shapiro')) marginColor = '#94A3B8';
+                else if (poll.margin.includes('Booker')) marginColor = '#FBBF24';
               } else if (isRepPrimary) {
-                if (poll.margin.includes('Vance')) marginColor = '#8B0000';
-                else if (poll.margin.includes('Trump Jr')) marginColor = '#CC5500';
-                else if (poll.margin.includes('Rubio')) marginColor = '#B8860B';
-                else if (poll.margin.includes('Cruz')) marginColor = '#008080';
-                else if (poll.margin.includes('Haley')) marginColor = '#C71585';
-                else if (poll.margin.includes('DeSantis')) marginColor = '#006400';
-                else if (poll.margin.includes('RFK') || poll.margin.includes('Kennedy')) marginColor = '#4A4A4A';
-                else if (poll.margin.includes('Ramaswamy')) marginColor = '#6B3A2A';
+                if (poll.margin.includes('Vance')) marginColor = '#EF4444';
+                else if (poll.margin.includes('Trump Jr')) marginColor = '#F97316';
+                else if (poll.margin.includes('Rubio')) marginColor = '#FBBF24';
+                else if (poll.margin.includes('Cruz')) marginColor = '#22D3EE';
+                else if (poll.margin.includes('Haley')) marginColor = '#F472B6';
+                else if (poll.margin.includes('DeSantis')) marginColor = '#4ADE80';
+                else if (poll.margin.includes('RFK') || poll.margin.includes('Kennedy')) marginColor = '#94A3B8';
+                else if (poll.margin.includes('Ramaswamy')) marginColor = '#D4956A';
               } else if (isSouthCarolina) {
-                if (poll.margin.includes('Mace')) {
-                  marginColor = '#8B0000';
-                } else if (poll.margin.includes('Wilson')) {
-                  marginColor = '#006400';
-                } else if (poll.margin.includes('Evette')) {
-                  marginColor = '#C71585';
-                } else if (poll.margin.includes('Norman')) {
-                  marginColor = '#FF6600';
-                }
+                if (poll.margin.includes('Mace')) marginColor = '#EF4444';
+                else if (poll.margin.includes('Wilson')) marginColor = '#4ADE80';
+                else if (poll.margin.includes('Evette')) marginColor = '#F472B6';
+                else if (poll.margin.includes('Norman')) marginColor = '#F97316';
               } else if (isGeorgia) {
-                if (poll.margin.includes('Jones')) {
-                  marginColor = '#8B0000';
-                } else if (poll.margin.includes('Jackson')) {
-                  marginColor = '#C71585';
-                } else if (poll.margin.includes('Raffensperger')) {
-                  marginColor = '#DAA520';
-                } else if (poll.margin.includes('Carr')) {
-                  marginColor = '#FF6600';
-                }
+                if (poll.margin.includes('Jones')) marginColor = '#EF4444';
+                else if (poll.margin.includes('Jackson')) marginColor = '#F472B6';
+                else if (poll.margin.includes('Raffensperger')) marginColor = '#FBBF24';
+                else if (poll.margin.includes('Carr')) marginColor = '#F97316';
               } else if (isFlorida) {
-                if (poll.margin.includes('Donalds')) {
-                  marginColor = '#8B0000';
-                } else if (poll.margin.includes('Fishback')) {
-                  marginColor = '#FF6600';
-                } else if (poll.margin.includes('Collins')) {
-                  marginColor = '#C71585';
-                } else if (poll.margin.includes('Renner')) {
-                  marginColor = '#DAA520';
-                }
+                if (poll.margin.includes('Donalds')) marginColor = '#EF4444';
+                else if (poll.margin.includes('Fishback')) marginColor = '#F97316';
+                else if (poll.margin.includes('Collins')) marginColor = '#F472B6';
+                else if (poll.margin.includes('Renner')) marginColor = '#FBBF24';
               } else if (!isApproval && !isIllinois && !isIllinois9th) {
-                if (poll.margin.includes('Cornyn')) {
-                  marginColor = '#8B0000';
-                } else if (poll.margin.includes('Paxton')) {
-                  marginColor = '#CC5500';
-                }
+                if (poll.margin.includes('Cornyn')) marginColor = '#EF4444';
+                else if (poll.margin.includes('Paxton')) marginColor = '#F97316';
               } else if (isIllinois) {
-                if (poll.margin.includes('Raja')) {
-                  marginColor = '#0047AB';
-                } else if (poll.margin.includes('Stratton')) {
-                  marginColor = '#006400';
-                } else if (poll.margin.includes('Kelly')) {
-                  marginColor = '#008080';
-                }
+                if (poll.margin.includes('Raja')) marginColor = '#3B82F6';
+                else if (poll.margin.includes('Stratton')) marginColor = '#22C55E';
+                else if (poll.margin.includes('Kelly')) marginColor = '#22D3EE';
               } else if (isIllinois9th) {
-                if (poll.margin.includes('Biss')) {
-                  marginColor = '#008080';
-                } else if (poll.margin.includes('Fine')) {
-                  marginColor = '#8B0000';
-                } else if (poll.margin.includes('Abughazaleh')) {
-                  marginColor = '#C71585';
-                } else if (poll.margin.includes('Simmons')) {
-                  marginColor = '#006400';
-                } else if (poll.margin.includes('Amiwala')) {
-                  marginColor = '#4B0082';
-                } else if (poll.margin.includes('Andrew')) {
-                  marginColor = '#FFD700';
-                }
+                if (poll.margin.includes('Biss')) marginColor = '#22D3EE';
+                else if (poll.margin.includes('Fine')) marginColor = '#EF4444';
+                else if (poll.margin.includes('Abughazaleh')) marginColor = '#F472B6';
+                else if (poll.margin.includes('Simmons')) marginColor = '#22C55E';
+                else if (poll.margin.includes('Amiwala')) marginColor = '#A78BFA';
+                else if (poll.margin.includes('Andrew')) marginColor = '#FBBF24';
               }
               
               return (
@@ -293,7 +282,19 @@ export default function PollingTable({ polls, type }) {
                   <TableCell className="text-white">{poll.pollster}</TableCell>
                   <TableCell className="text-white">{poll.date}</TableCell>
                   <TableCell className="text-white">{poll.sampleSize > 0 ? poll.sampleSize.toLocaleString() : '–'}</TableCell>
-                  {isMaine ? (
+                  {isCaliforniaGov ? (
+                    <>
+                      <TableCell style={{ color: '#3B82F6' }} className="font-semibold">{poll.swalwell > 0 ? `${poll.swalwell}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.hilton > 0 ? `${poll.hilton}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.bianco > 0 ? `${poll.bianco}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#A78BFA' }} className="font-semibold">{poll.porter > 0 ? `${poll.porter}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#84CC16' }} className="font-semibold">{poll.steyer > 0 ? `${poll.steyer}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#22D3EE' }} className="font-semibold">{poll.mahan > 0 ? `${poll.mahan}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.becerra > 0 ? `${poll.becerra}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+                    </>
+                  ) : isMaine ? (
                     <>
                       <TableCell style={{ color: '#1976D2' }} className="font-semibold">{poll.mills}%</TableCell>
                       <TableCell style={{ color: '#FFD600' }} className="font-semibold">{poll.platner}%</TableCell>
@@ -313,62 +314,61 @@ export default function PollingTable({ polls, type }) {
                     </>
                   ) : isArizona ? (
                     <>
-                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.biggs}%</TableCell>
-                      <TableCell style={{ color: '#CC5500' }} className="font-semibold">{poll.robson > 0 ? `${poll.robson}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#B8860B' }} className="font-semibold">{poll.schweikert > 0 ? `${poll.schweikert}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.biggs}%</TableCell>
+                      <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.robson > 0 ? `${poll.robson}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.schweikert > 0 ? `${poll.schweikert}%` : '–'}</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
-                    </>
                   ) : isDemPrimary ? (
                     <>
-                      <TableCell style={{ color: '#0047AB' }} className="font-semibold">{poll.harris > 0 ? `${poll.harris}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#008080' }} className="font-semibold">{poll.newsom > 0 ? `${poll.newsom}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#006400' }} className="font-semibold">{poll.buttigieg > 0 ? `${poll.buttigieg}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#CC5500' }} className="font-semibold">{poll.aoc > 0 ? `${poll.aoc}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.pritzker > 0 ? `${poll.pritzker}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#4A4A4A' }} className="font-semibold">{poll.shapiro > 0 ? `${poll.shapiro}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#B8860B' }} className="font-semibold">{poll.booker > 0 ? `${poll.booker}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#3B82F6' }} className="font-semibold">{poll.harris > 0 ? `${poll.harris}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#06B6D4' }} className="font-semibold">{poll.newsom > 0 ? `${poll.newsom}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#22C55E' }} className="font-semibold">{poll.buttigieg > 0 ? `${poll.buttigieg}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.aoc > 0 ? `${poll.aoc}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.pritzker > 0 ? `${poll.pritzker}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#94A3B8' }} className="font-semibold">{poll.shapiro > 0 ? `${poll.shapiro}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.booker > 0 ? `${poll.booker}%` : '–'}</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
                     </>
                   ) : isRepPrimary ? (
                     <>
-                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.vance > 0 ? `${poll.vance}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#CC5500' }} className="font-semibold">{poll.trumpjr > 0 ? `${poll.trumpjr}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#B8860B' }} className="font-semibold">{poll.rubio > 0 ? `${poll.rubio}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#008080' }} className="font-semibold">{poll.cruz > 0 ? `${poll.cruz}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#C71585' }} className="font-semibold">{poll.haley > 0 ? `${poll.haley}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#006400' }} className="font-semibold">{poll.desantis > 0 ? `${poll.desantis}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#4A4A4A' }} className="font-semibold">{poll.rfk > 0 ? `${poll.rfk}%` : '–'}</TableCell>
-                      <TableCell style={{ color: '#6B3A2A' }} className="font-semibold">{poll.ramaswamy > 0 ? `${poll.ramaswamy}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.vance > 0 ? `${poll.vance}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.trumpjr > 0 ? `${poll.trumpjr}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.rubio > 0 ? `${poll.rubio}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#22D3EE' }} className="font-semibold">{poll.cruz > 0 ? `${poll.cruz}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.haley > 0 ? `${poll.haley}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#4ADE80' }} className="font-semibold">{poll.desantis > 0 ? `${poll.desantis}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#94A3B8' }} className="font-semibold">{poll.rfk > 0 ? `${poll.rfk}%` : '–'}</TableCell>
+                      <TableCell style={{ color: '#D4956A' }} className="font-semibold">{poll.ramaswamy > 0 ? `${poll.ramaswamy}%` : '–'}</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
                     </>
                   ) : isSouthCarolina ? (
                     <>
-                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.mace}%</TableCell>
-                      <TableCell style={{ color: '#006400' }} className="font-semibold">{poll.wilson}%</TableCell>
-                      <TableCell style={{ color: '#C71585' }} className="font-semibold">{poll.evette}%</TableCell>
-                      <TableCell style={{ color: '#FF6600' }} className="font-semibold">{poll.norman}%</TableCell>
+                      <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.mace}%</TableCell>
+                      <TableCell style={{ color: '#4ADE80' }} className="font-semibold">{poll.wilson}%</TableCell>
+                      <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.evette}%</TableCell>
+                      <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.norman}%</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.kimbrell > 0 ? `${poll.kimbrell}%` : '–'}</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
                     </>
                   ) : isGeorgia ? (
                     <>
-                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.jones}%</TableCell>
-                      <TableCell style={{ color: '#C71585' }} className="font-semibold">{poll.jackson}%</TableCell>
-                      <TableCell style={{ color: '#DAA520' }} className="font-semibold">{poll.raffensperger}%</TableCell>
-                      <TableCell style={{ color: '#FF6600' }} className="font-semibold">{poll.carr}%</TableCell>
+                      <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.jones}%</TableCell>
+                      <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.jackson}%</TableCell>
+                      <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.raffensperger}%</TableCell>
+                      <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.carr}%</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.dean > 0 ? `${poll.dean}%` : '–'}</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
                     </>
                   ) : isFlorida ? (
                     <>
-                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.donalds}%</TableCell>
-                      <TableCell style={{ color: '#FF6600' }} className="font-semibold">{poll.fishback}%</TableCell>
-                      <TableCell style={{ color: '#C71585' }} className="font-semibold">{poll.collins}%</TableCell>
-                      <TableCell style={{ color: '#DAA520' }} className="font-semibold">{poll.renner}%</TableCell>
+                      <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.donalds}%</TableCell>
+                      <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.fishback}%</TableCell>
+                      <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.collins}%</TableCell>
+                      <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.renner}%</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
                     </>
@@ -393,8 +393,8 @@ export default function PollingTable({ polls, type }) {
                     </>
                   ) : (
                     <>
-                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.cornyn}%</TableCell>
-                      <TableCell style={{ color: '#CC5500' }} className="font-semibold">{poll.paxton}%</TableCell>
+                      <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.cornyn}%</TableCell>
+                      <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.paxton}%</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
                       <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
                     </>
