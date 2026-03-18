@@ -28,6 +28,8 @@ export default function PollingTable({ polls, type }) {
   const isArizona = type === 'arizona-gop-governor';
   const isDemPrimary = type === '2028-dem-primary';
   const isRepPrimary = type === '2028-rep-primary';
+  const isIllinois = type === 'illinois-dem-primary';
+  const isIllinois9th = type === 'illinois-9th-house';
   const isLouisiana = type === 'louisiana-gop-senate';
   const isApproval = type ? type.includes('approval') : false;
 
@@ -94,8 +96,7 @@ export default function PollingTable({ polls, type }) {
       if (m.includes('Simmons')) return '#22C55E';
       if (m.includes('Amiwala')) return '#A78BFA';
       if (m.includes('Andrew')) return '#FBBF24';
-    } else {
-      if (isLouisiana) {
+    } else if (isLouisiana) {
       if (m.includes('Cassidy')) return '#EF4444';
       if (m.includes('Fleming')) return '#FBBF24';
       if (m.includes('Letlow')) return '#F472B6';
@@ -109,24 +110,24 @@ export default function PollingTable({ polls, type }) {
   function renderCells(poll) {
     if (isCaliforniaGov) return (
       <>
-        <TableCell style={{ color: '#3B82F6' }} className="font-semibold">{poll.swalwell > 0 ? `${poll.swalwell}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.hilton > 0 ? `${poll.hilton}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.bianco > 0 ? `${poll.bianco}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#A78BFA' }} className="font-semibold">{poll.porter > 0 ? `${poll.porter}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#84CC16' }} className="font-semibold">{poll.steyer > 0 ? `${poll.steyer}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#22D3EE' }} className="font-semibold">{poll.mahan > 0 ? `${poll.mahan}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.becerra > 0 ? `${poll.becerra}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#3B82F6' }} className="font-semibold">{poll.swalwell > 0 ? `${poll.swalwell}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.hilton > 0 ? `${poll.hilton}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.bianco > 0 ? `${poll.bianco}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#A78BFA' }} className="font-semibold">{poll.porter > 0 ? `${poll.porter}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#84CC16' }} className="font-semibold">{poll.steyer > 0 ? `${poll.steyer}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#22D3EE' }} className="font-semibold">{poll.mahan > 0 ? `${poll.mahan}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.becerra > 0 ? `${poll.becerra}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
     if (isMaine) return (
       <>
-        <TableCell style={{ color: '#1976D2' }} className="font-semibold">{poll.mills > 0 ? `${poll.mills}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#FFD600' }} className="font-semibold">{poll.platner > 0 ? `${poll.platner}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#00ACC1' }} className="font-semibold">{poll.costello > 0 ? `${poll.costello}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#1976D2' }} className="font-semibold">{poll.mills > 0 ? `${poll.mills}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#FFD600' }} className="font-semibold">{poll.platner > 0 ? `${poll.platner}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#00ACC1' }} className="font-semibold">{poll.costello > 0 ? `${poll.costello}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
     if (isGenericBallot) return (
@@ -143,103 +144,110 @@ export default function PollingTable({ polls, type }) {
     );
     if (isArizona) return (
       <>
-        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.biggs > 0 ? `${poll.biggs}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.robson > 0 ? `${poll.robson}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.schweikert > 0 ? `${poll.schweikert}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.biggs > 0 ? `${poll.biggs}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.robson > 0 ? `${poll.robson}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.schweikert > 0 ? `${poll.schweikert}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
     if (isDemPrimary) return (
       <>
-        <TableCell style={{ color: '#3B82F6' }} className="font-semibold">{poll.harris > 0 ? `${poll.harris}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#06B6D4' }} className="font-semibold">{poll.newsom > 0 ? `${poll.newsom}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#22C55E' }} className="font-semibold">{poll.buttigieg > 0 ? `${poll.buttigieg}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.aoc > 0 ? `${poll.aoc}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.pritzker > 0 ? `${poll.pritzker}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#94A3B8' }} className="font-semibold">{poll.shapiro > 0 ? `${poll.shapiro}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.booker > 0 ? `${poll.booker}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#3B82F6' }} className="font-semibold">{poll.harris > 0 ? `${poll.harris}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#06B6D4' }} className="font-semibold">{poll.newsom > 0 ? `${poll.newsom}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#22C55E' }} className="font-semibold">{poll.buttigieg > 0 ? `${poll.buttigieg}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.aoc > 0 ? `${poll.aoc}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.pritzker > 0 ? `${poll.pritzker}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#94A3B8' }} className="font-semibold">{poll.shapiro > 0 ? `${poll.shapiro}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.booker > 0 ? `${poll.booker}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
       </>
     );
     if (isRepPrimary) return (
       <>
-        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.vance > 0 ? `${poll.vance}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.trumpjr > 0 ? `${poll.trumpjr}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.rubio > 0 ? `${poll.rubio}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#22D3EE' }} className="font-semibold">{poll.cruz > 0 ? `${poll.cruz}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.haley > 0 ? `${poll.haley}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#4ADE80' }} className="font-semibold">{poll.desantis > 0 ? `${poll.desantis}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#94A3B8' }} className="font-semibold">{poll.rfk > 0 ? `${poll.rfk}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#D4956A' }} className="font-semibold">{poll.ramaswamy > 0 ? `${poll.ramaswamy}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.vance > 0 ? `${poll.vance}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.trumpjr > 0 ? `${poll.trumpjr}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.rubio > 0 ? `${poll.rubio}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#22D3EE' }} className="font-semibold">{poll.cruz > 0 ? `${poll.cruz}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.haley > 0 ? `${poll.haley}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#4ADE80' }} className="font-semibold">{poll.desantis > 0 ? `${poll.desantis}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#94A3B8' }} className="font-semibold">{poll.rfk > 0 ? `${poll.rfk}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#D4956A' }} className="font-semibold">{poll.ramaswamy > 0 ? `${poll.ramaswamy}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
     if (isSouthCarolina) return (
       <>
-        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.mace > 0 ? `${poll.mace}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#4ADE80' }} className="font-semibold">{poll.wilson > 0 ? `${poll.wilson}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.evette > 0 ? `${poll.evette}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.norman > 0 ? `${poll.norman}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.kimbrell > 0 ? `${poll.kimbrell}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.mace > 0 ? `${poll.mace}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#4ADE80' }} className="font-semibold">{poll.wilson > 0 ? `${poll.wilson}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.evette > 0 ? `${poll.evette}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.norman > 0 ? `${poll.norman}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.kimbrell > 0 ? `${poll.kimbrell}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
     if (isGeorgia) return (
       <>
-        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.jones > 0 ? `${poll.jones}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.jackson > 0 ? `${poll.jackson}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.raffensperger > 0 ? `${poll.raffensperger}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.carr > 0 ? `${poll.carr}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.dean > 0 ? `${poll.dean}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.jones > 0 ? `${poll.jones}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.jackson > 0 ? `${poll.jackson}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.raffensperger > 0 ? `${poll.raffensperger}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.carr > 0 ? `${poll.carr}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.dean > 0 ? `${poll.dean}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
     if (isFlorida) return (
       <>
-        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.donalds > 0 ? `${poll.donalds}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.fishback > 0 ? `${poll.fishback}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.collins > 0 ? `${poll.collins}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.renner > 0 ? `${poll.renner}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.donalds > 0 ? `${poll.donalds}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.fishback > 0 ? `${poll.fishback}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.collins > 0 ? `${poll.collins}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.renner > 0 ? `${poll.renner}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
     if (isIllinois9th) return (
       <>
-        <TableCell style={{ color: '#008080' }} className="font-semibold">{poll.biss > 0 ? `${poll.biss}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.fine > 0 ? `${poll.fine}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#C71585' }} className="font-semibold">{poll.abughazaleh > 0 ? `${poll.abughazaleh}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#006400' }} className="font-semibold">{poll.simmons > 0 ? `${poll.simmons}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#4B0082' }} className="font-semibold">{poll.amiwala > 0 ? `${poll.amiwala}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#FFD700' }} className="font-semibold">{poll.andrew > 0 ? `${poll.andrew}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#008080' }} className="font-semibold">{poll.biss > 0 ? `${poll.biss}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.fine > 0 ? `${poll.fine}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#C71585' }} className="font-semibold">{poll.abughazaleh > 0 ? `${poll.abughazaleh}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#006400' }} className="font-semibold">{poll.simmons > 0 ? `${poll.simmons}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#4B0082' }} className="font-semibold">{poll.amiwala > 0 ? `${poll.amiwala}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#FFD700' }} className="font-semibold">{poll.andrew > 0 ? `${poll.andrew}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
     if (isIllinois) return (
       <>
-        <TableCell style={{ color: '#008080' }} className="font-semibold">{poll.kelly > 0 ? `${poll.kelly}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#0047AB' }} className="font-semibold">{poll.raja > 0 ? `${poll.raja}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#006400' }} className="font-semibold">{poll.stratton > 0 ? `${poll.stratton}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#008080' }} className="font-semibold">{poll.kelly > 0 ? `${poll.kelly}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#0047AB' }} className="font-semibold">{poll.raja > 0 ? `${poll.raja}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#006400' }} className="font-semibold">{poll.stratton > 0 ? `${poll.stratton}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
     if (isLouisiana) return (
       <>
-        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.cassidy > 0 ? `${poll.cassidy}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.fleming > 0 ? `${poll.fleming}%` : '–'}</TableCell>
-        <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.letlow > 0 ? `${poll.letlow}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
-        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.cassidy > 0 ? `${poll.cassidy}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#FBBF24' }} className="font-semibold">{poll.fleming > 0 ? `${poll.fleming}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F472B6' }} className="font-semibold">{poll.letlow > 0 ? `${poll.letlow}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
     // Default: Texas Senate
     return (
+      <>
+        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.cornyn > 0 ? `${poll.cornyn}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.paxton > 0 ? `${poll.paxton}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
+      </>
+    );
   }
 
   function renderHeaders() {
@@ -303,7 +311,7 @@ export default function PollingTable({ polls, type }) {
               <TableRow key={index} className="border-white/10 hover:bg-white/5">
                 <TableCell className="text-white">{poll.pollster}</TableCell>
                 <TableCell className="text-white">{poll.date}</TableCell>
-                <TableCell className="text-white">{poll.sampleSize > 0 ? poll.sampleSize.toLocaleString() : '–'}</TableCell>
+                <TableCell className="text-white">{poll.sampleSize > 0 ? poll.sampleSize.toLocaleString() : '-'}</TableCell>
                 {renderCells(poll)}
                 <TableCell style={{ color: getMarginColor(poll) }} className="font-semibold">{poll.margin}</TableCell>
               </TableRow>
