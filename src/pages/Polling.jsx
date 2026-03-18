@@ -11,13 +11,35 @@ const pollingOptions = [
   { value: '2028-dem-primary', label: '2028 Democratic Presidential Primary' },
   { value: '2028-rep-primary', label: '2028 Republican Presidential Primary' },
   { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff' },
-  { value: 'illinois-dem-primary', label: 'Illinois Democratic Senate Primary' },
-  { value: 'illinois-9th-house', label: 'Illinois 9th Democratic House Primary' },
+  { value: 'maine-dem-senate', label: 'Maine Democratic Senate Primary' },
   { value: 'florida-gop-governor', label: 'Florida Republican Governor Primary' },
   { value: 'georgia-gop-governor', label: 'Georgia Republican Governor Primary' },
   { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary' },
   { value: 'arizona-gop-governor', label: 'Arizona Republican Governor Primary' },
 ];
+
+const mainePollingData = {
+  chartData: [
+    { date: '2025-10-22', mills: 33, platner: 47, costello: 1 },
+    { date: '2025-10-25', mills: 37, platner: 38, costello: 1 },
+    { date: '2025-11-16', mills: 38, platner: 58, costello: 0 },
+    { date: '2025-12-09', mills: 43, platner: 46, costello: 0 },
+    { date: '2026-02-15', mills: 33, platner: 54, costello: 3 },
+    { date: '2026-03-05', mills: 34, platner: 51, costello: 2 },
+  ],
+  polls: [
+    { pollster: 'Quantus Insights (R)', date: 'March 5, 2026', sampleSize: 450, mills: 38, platner: 43, costello: 0, other: 0, undecided: 19, margin: 'Platner +5' },
+    { pollster: 'Pan Atlantic Research', date: 'February 13 - March 2, 2026', sampleSize: 367, mills: 39, platner: 46, costello: 4, other: 0, undecided: 11, margin: 'Platner +7' },
+    { pollster: 'University of New Hampshire', date: 'February 12-16, 2026', sampleSize: 462, mills: 26, platner: 64, costello: 1, other: 0, undecided: 6, margin: 'Platner +38' },
+    { pollster: 'Workbench Strategy (D)', date: 'December 11-16, 2025', sampleSize: 500, mills: 40, platner: 55, costello: 0, other: 0, undecided: 5, margin: 'Platner +15' },
+    { pollster: 'Pan Atlantic Research', date: 'November 29 - December 7, 2025', sampleSize: 318, mills: 47, platner: 37, costello: 1, other: 0, undecided: 14, margin: 'Mills +10' },
+    { pollster: 'Z to A Research (D)', date: 'November 14-18, 2025', sampleSize: 845, mills: 38, platner: 58, costello: 0, other: 0, undecided: 2, margin: 'Platner +20' },
+    { pollster: "Maine People's Resource Center", date: 'October 26-29, 2025', sampleSize: 783, mills: 39, platner: 41, costello: 0, other: 0, undecided: 14, margin: 'Platner +2' },
+    { pollster: 'SoCal Strategies', date: 'October 21-25, 2025', sampleSize: 500, mills: 41, platner: 36, costello: 1, other: 0, undecided: 20, margin: 'Mills +5' },
+    { pollster: 'NRSC (R)', date: 'October 22-23, 2025', sampleSize: 647, mills: 25, platner: 46, costello: 0, other: 0, undecided: 26, margin: 'Platner +21' },
+    { pollster: 'University of New Hampshire', date: 'October 16-21, 2025', sampleSize: 510, mills: 24, platner: 58, costello: 1, other: 0, undecided: 14, margin: 'Platner +34' },
+  ]
+};
 
 const mockPollingData = {
   'generic-congressional-ballot': {
