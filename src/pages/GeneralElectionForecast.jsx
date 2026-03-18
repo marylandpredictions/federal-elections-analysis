@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import SVGMap from '../components/forecasts/SVGMap';
 import InteractiveMap from '../components/forecasts/InteractiveMap';
 import SenateControl from '../components/forecasts/SenateControl';
 import SeatCounter from '../components/forecasts/SeatCounter';
@@ -66,7 +65,7 @@ export default function GeneralElectionForecast() {
             Senate Forecast
           </h2>
           <SeatCounter ratings={senateRatings} />
-          <SVGMap ratings={senateRatings} />
+          <InteractiveMap ratings={senateRatings} />
           <SenateControl democratChance={43} republicanChance={57} />
           <SenateControl democratChance={73} republicanChance={27} title="House Control Probability" />
         </motion.div>

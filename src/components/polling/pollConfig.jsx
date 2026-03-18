@@ -30,94 +30,83 @@ export const pollConfigs = {
   'generic-congressional-ballot': {
     title: 'Generic Congressional Ballot',
     candidates: [
-      { key: 'democrat', name: 'Democrat', color: '#0047AB' },
-      { key: 'republican', name: 'Republican', color: '#8B0000' },
+      { key: 'democrat', name: 'Democrat', color: '#1E90FF' },
+      { key: 'republican', name: 'Republican', color: '#FF2020' },
     ]
   },
   '2026-senate-generic': {
     title: 'Texas Republican Senate Runoff',
     candidates: [
-      { key: 'cornyn', name: 'John Cornyn', color: '#8B0000' },
-      { key: 'paxton', name: 'Ken Paxton', color: '#CC5500' },
+      { key: 'cornyn', name: 'John Cornyn', color: '#D32F2F' },
+      { key: 'paxton', name: 'Ken Paxton', color: '#FF6D00' },
     ]
   },
-  'illinois-dem-primary': {
-    title: 'Illinois Democratic Senate Primary',
+  'maine-dem-senate': {
+    title: 'Maine Democratic Senate Primary',
     candidates: [
-      { key: 'raja', name: 'Raja Krishnamoorthi', color: '#0047AB' },
-      { key: 'stratton', name: 'Juliana Stratton', color: '#006400' },
-      { key: 'kelly', name: 'Robin Kelly', color: '#008080' },
-    ]
-  },
-  'illinois-9th-house': {
-    title: 'Illinois 9th Democratic House Primary',
-    candidates: [
-      { key: 'biss', name: 'Daniel Biss', color: '#008080' },
-      { key: 'fine', name: 'Laura Fine', color: '#8B0000' },
-      { key: 'abughazaleh', name: 'Kat Abughazaleh', color: '#C71585' },
-      { key: 'simmons', name: 'Mike Simmons', color: '#006400' },
-      { key: 'amiwala', name: 'Bushra Amiwala', color: '#4B0082' },
-      { key: 'andrew', name: 'Phil Andrew', color: '#FFD700' },
+      { key: 'mills', name: 'Janet Mills', color: '#1976D2' },
+      { key: 'platner', name: 'Graham Platner', color: '#FFD600' },
+      { key: 'costello', name: 'David Costello', color: '#00ACC1' },
     ]
   },
   'florida-gop-governor': {
     title: 'Florida Republican Governor Primary',
     candidates: [
-      { key: 'donalds', name: 'Byron Donalds', color: '#8B0000' },
-      { key: 'fishback', name: 'James Fishback', color: '#FF6600' },
-      { key: 'collins', name: 'Jay Collins', color: '#C71585' },
-      { key: 'renner', name: 'Paul Renner', color: '#DAA520' },
+      { key: 'donalds', name: 'Byron Donalds', color: '#D32F2F' },
+      { key: 'fishback', name: 'James Fishback', color: '#FF6D00' },
+      { key: 'collins', name: 'Jay Collins', color: '#E91E8C' },
+      { key: 'renner', name: 'Paul Renner', color: '#F9A825' },
     ]
   },
   'georgia-gop-governor': {
     title: 'Georgia Republican Governor Primary',
     candidates: [
-      { key: 'jones', name: 'Burt Jones', color: '#8B0000' },
-      { key: 'jackson', name: 'Rick Jackson', color: '#C71585' },
-      { key: 'raffensperger', name: 'Brad Raffensperger', color: '#DAA520' },
-      { key: 'carr', name: 'Chris Carr', color: '#FF6600' },
+      { key: 'jones', name: 'Burt Jones', color: '#D32F2F' },
+      { key: 'jackson', name: 'Rick Jackson', color: '#E91E8C' },
+      { key: 'raffensperger', name: 'Brad Raffensperger', color: '#F9A825' },
+      { key: 'carr', name: 'Chris Carr', color: '#FF6D00' },
     ]
   },
   'south-carolina-gop-governor': {
     title: 'South Carolina Republican Governor Primary',
     candidates: [
-      { key: 'mace', name: 'Nancy Mace', color: '#8B0000' },
-      { key: 'wilson', name: 'Alan Wilson', color: '#006400' },
-      { key: 'evette', name: 'Pamela Evette', color: '#C71585' },
-      { key: 'norman', name: 'Ralph Norman', color: '#FF6600' },
+      { key: 'mace', name: 'Nancy Mace', color: '#D32F2F' },
+      { key: 'wilson', name: 'Alan Wilson', color: '#2E7D32' },
+      { key: 'evette', name: 'Pamela Evette', color: '#E91E8C' },
+      { key: 'norman', name: 'Ralph Norman', color: '#FF6D00' },
     ]
   },
   'arizona-gop-governor': {
     title: 'Arizona Republican Governor Primary',
     candidates: [
-      { key: 'biggs', name: 'Andy Biggs', color: '#8B0000' },
-      { key: 'robson', name: 'Karrin Taylor Robson', color: '#CC5500' },
-      { key: 'schweikert', name: 'David Schweikert', color: '#B8860B' },
+      { key: 'biggs', name: 'Andy Biggs', color: '#D32F2F' },
+      { key: 'robson', name: 'Karrin Taylor Robson', color: '#FF6D00' },
+      { key: 'schweikert', name: 'David Schweikert', color: '#F9A825' },
     ]
   },
   '2028-dem-primary': {
     title: '2028 Democratic Presidential Primary',
     candidates: [
-      { key: 'harris', name: 'Kamala Harris', color: '#0047AB' },
-      { key: 'newsom', name: 'Gavin Newsom', color: '#008080' },
-      { key: 'buttigieg', name: 'Pete Buttigieg', color: '#006400' },
-      { key: 'aoc', name: 'Alexandria Ocasio-Cortez', color: '#CC5500' },
-      { key: 'pritzker', name: 'JB Pritzker', color: '#8B0000' },
-      { key: 'shapiro', name: 'Josh Shapiro', color: '#4A4A4A' },
-      { key: 'booker', name: 'Cory Booker', color: '#B8860B' },
+      { key: 'harris', name: 'Kamala Harris', color: '#1976D2' },
+      { key: 'newsom', name: 'Gavin Newsom', color: '#00897B' },
+      { key: 'buttigieg', name: 'Pete Buttigieg', color: '#2E7D32' },
+      { key: 'aoc', name: 'Alexandria Ocasio-Cortez', color: '#FF6D00' },
+      { key: 'pritzker', name: 'JB Pritzker', color: '#D32F2F' },
+      { key: 'shapiro', name: 'Josh Shapiro', color: '#757575' },
+      { key: 'booker', name: 'Cory Booker', color: '#F9A825' },
     ]
   },
   '2028-rep-primary': {
     title: '2028 Republican Presidential Primary',
     candidates: [
-      { key: 'vance', name: 'JD Vance', color: '#8B0000' },
-      { key: 'trumpjr', name: 'Donald Trump Jr.', color: '#CC5500' },
-      { key: 'rubio', name: 'Marco Rubio', color: '#B8860B' },
-      { key: 'cruz', name: 'Ted Cruz', color: '#008080' },
-      { key: 'haley', name: 'Nikki Haley', color: '#C71585' },
-      { key: 'desantis', name: 'Ron DeSantis', color: '#006400' },
-      { key: 'rfk', name: 'RFK Jr.', color: '#4A4A4A' },
-      { key: 'ramaswamy', name: 'Vivek Ramaswamy', color: '#6B3A2A' },
+      { key: 'vance', name: 'JD Vance', color: '#D32F2F' },
+      { key: 'trumpjr', name: 'Donald Trump Jr.', color: '#FF6D00' },
+      { key: 'rubio', name: 'Marco Rubio', color: '#F9A825' },
+      { key: 'cruz', name: 'Ted Cruz', color: '#00ACC1' },
+      { key: 'haley', name: 'Nikki Haley', color: '#E91E8C' },
+      { key: 'desantis', name: 'Ron DeSantis', color: '#2E7D32' },
+      { key: 'rfk', name: 'RFK Jr.', color: '#9E9E9E' },
+      { key: 'ramaswamy', name: 'Vivek Ramaswamy', color: '#8D4B2D' },
     ]
   },
 };

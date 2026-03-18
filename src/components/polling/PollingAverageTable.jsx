@@ -78,19 +78,19 @@ export default function PollingAverageTable({ polls, type }) {
                 <tr key={c.key} className="border-t border-white/10">
                   <td className="py-3 pr-4">
                     <span
-                      className="inline-block px-3 py-1 rounded font-inter font-bold text-sm text-white"
+                      className="inline-block px-3 py-1 rounded font-inter font-bold text-sm text-white transition-transform duration-200 hover:scale-110 cursor-default"
                       style={{ backgroundColor: c.color }}
                     >
                       {c.name}
                     </span>
                   </td>
                   <td className="py-3 px-4 text-center">
-                    <span className="bg-black/80 text-white font-inter font-semibold text-sm px-4 py-2 rounded inline-block min-w-[60px]">
+                    <span className="bg-black/80 text-white font-inter font-semibold text-sm px-4 py-2 rounded inline-block min-w-[60px] transition-transform duration-200 hover:scale-110 cursor-default">
                       {avg != null ? `${avg.toFixed(1)}%` : '—'}
                     </span>
                   </td>
                   <td className="py-3 pl-4 text-center">
-                    <span className="bg-black/80 px-4 py-2 rounded inline-block min-w-[80px] font-inter font-semibold text-sm">
+                    <span className="bg-black/80 px-4 py-2 rounded inline-block min-w-[80px] font-inter font-semibold text-sm transition-transform duration-200 hover:scale-110 cursor-default">
                       {trendEl}
                     </span>
                   </td>
