@@ -44,12 +44,6 @@ const forecastGallery = [
     image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png',
     link: '/GeneralElectionForecast'
   },
-  {
-    title: 'Illinois Primary Forecast',
-    description: 'Illinois Democratic Senate & House Primary Predictions, check out polling for more!',
-    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png',
-    link: '/IllinoisPrimaryForecast'
-  },
 ];
 
 export default function Forecasts() {

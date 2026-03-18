@@ -16,7 +16,7 @@ import Articles from './pages/Articles';
 import ArticleView from './pages/ArticleView';
 import Interactives from './pages/Interactives';
 import SenateSwingometer from './pages/SenateSwingometer';
-import IllinoisPrimaryForecast from './pages/IllinoisPrimaryForecast';
+
 import GeneralElectionForecast from './pages/GeneralElectionForecast';
 
 const AuthenticatedApp = () => {
@@ -52,7 +52,7 @@ const AuthenticatedApp = () => {
         <Route path="/ArticleView/:id" element={<ArticleView />} />
         <Route path="/Interactives" element={<Interactives />} />
         <Route path="/SenateSwingometer" element={<SenateSwingometer />} />
-        <Route path="/IllinoisPrimaryForecast" element={<IllinoisPrimaryForecast />} />
+
         <Route path="/GeneralElectionForecast" element={<GeneralElectionForecast />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />

@@ -8,8 +8,7 @@ const navLinks = [
 { label: 'Polling', path: '/Polling' }];
 
 const forecastLinks = [
-{ label: '2026 General Forecast', path: '/GeneralElectionForecast' },
-{ label: 'Illinois Primary Forecast', path: '/IllinoisPrimaryForecast' }
+{ label: '2026 General Forecast', path: '/GeneralElectionForecast' }
 ];
 
 const interactiveLinks = [
