@@ -198,7 +198,10 @@ export default function PollingTable({ polls, type }) {
           <TableBody>
             {currentPolls.map((poll, index) => {
               let marginColor = 'text-white';
-              if (isGenericBallot) {
+              if (isMaine) {
+                if (poll.margin.includes('Mills')) marginColor = '#1976D2';
+                else if (poll.margin.includes('Platner')) marginColor = '#FFD600';
+              } else if (isGenericBallot) {
                 if (poll.margin.includes('Generic D')) {
                   marginColor = '#0047AB';
                 } else if (poll.margin.includes('Generic R')) {
@@ -290,10 +293,18 @@ export default function PollingTable({ polls, type }) {
                   <TableCell className="text-white">{poll.pollster}</TableCell>
                   <TableCell className="text-white">{poll.date}</TableCell>
                   <TableCell className="text-white">{poll.sampleSize > 0 ? poll.sampleSize.toLocaleString() : '–'}</TableCell>
-                  {isGenericBallot ? (
+                  {isMaine ? (
                     <>
-                      <TableCell style={{ color: '#0047AB' }} className="font-semibold">{poll.democrat}%</TableCell>
-                      <TableCell style={{ color: '#8B0000' }} className="font-semibold">{poll.republican}%</TableCell>
+                      <TableCell style={{ color: '#1976D2' }} className="font-semibold">{poll.mills}%</TableCell>
+                      <TableCell style={{ color: '#FFD600' }} className="font-semibold">{poll.platner}%</TableCell>
+                      <TableCell style={{ color: '#00ACC1' }} className="font-semibold">{poll.costello > 0 ? `${poll.costello}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '–'}</TableCell>
+                      <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '–'}</TableCell>
+                    </>
+                  ) : isGenericBallot ? (
+                    <>
+                      <TableCell style={{ color: '#1E90FF' }} className="font-semibold">{poll.democrat}%</TableCell>
+                      <TableCell style={{ color: '#FF2020' }} className="font-semibold">{poll.republican}%</TableCell>
                     </>
                   ) : isApproval ? (
                     <>
