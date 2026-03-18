@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import PollingChart from '../components/polling/PollingChart';
 import PollingAverageTable from '../components/polling/PollingAverageTable';
 import PollingTable from '../components/polling/PollingTable';
-import { Input } from '@/components/ui/input';
+import PollSelector from '../components/polling/PollSelector';
 
 const pollingOptions = [
   { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot' },
@@ -18,6 +17,9 @@ const pollingOptions = [
   { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary' },
   { value: 'arizona-gop-governor', label: 'Arizona Republican Governor Primary' },
   { value: 'louisiana-gop-senate', label: 'Louisiana Republican Senate Primary' },
+  { value: 'georgia-gop-senate', label: 'Georgia Republican Senate Primary' },
+  { value: 'michigan-dem-senate', label: 'Michigan Democratic Senate Primary' },
+  { value: 'minnesota-dem-senate', label: 'Minnesota Democratic Senate Primary' },
 ];
 
 const mainePollingData = {
@@ -469,6 +471,43 @@ const mockPollingData = {
       { pollster: 'JMC Analytics & Polling', date: 'February 24–26, 2025', sampleSize: 600, cassidy: 27, fleming: 40, letlow: 0, other: 0, undecided: 33, margin: 'Fleming +13' },
     ]
   },
+  'georgia-gop-senate': {
+    chartData: [],
+    polls: [
+      { pollster: 'JMC Analytics', date: 'March 7–8, 2026', sampleSize: 560, carter: 11, collins: 31, dooley: 13, other: 1, undecided: 43, margin: 'Collins +18' },
+      { pollster: 'Emerson College', date: 'February 28 – March 2, 2026', sampleSize: 453, carter: 16, collins: 30, dooley: 10, other: 4, undecided: 40, margin: 'Collins +14' },
+      { pollster: 'Quantus Insights (R)', date: 'February 17–18, 2026', sampleSize: 1337, carter: 11, collins: 36, dooley: 9, other: 0, undecided: 44, margin: 'Collins +25' },
+      { pollster: 'Rasmussen Reports (R)', date: 'February 11–12, 2026', sampleSize: 1022, carter: 19, collins: 34, dooley: 11, other: 0, undecided: 36, margin: 'Collins +15' },
+      { pollster: 'Plymouth Union Public Research (R)', date: 'January 13–15, 2026', sampleSize: 600, carter: 16, collins: 32, dooley: 12, other: 0, undecided: 38, margin: 'Collins +16' },
+      { pollster: 'InsiderAdvantage (R)', date: 'December 18–19, 2025', sampleSize: 1000, carter: 20, collins: 25, dooley: 12, other: 5, undecided: 38, margin: 'Collins +5' },
+      { pollster: 'Quantus Insights (R)', date: 'October 22–23, 2025', sampleSize: 1320, carter: 16, collins: 28, dooley: 16, other: 0, undecided: 40, margin: 'Collins +12' },
+      { pollster: 'Atlanta Journal-Constitution', date: 'October 15–23, 2025', sampleSize: 0, carter: 20, collins: 30, dooley: 12, other: 0, undecided: 38, margin: 'Collins +10' },
+      { pollster: 'Quantus Insights (R)', date: 'September 9–12, 2025', sampleSize: 253, carter: 20, collins: 25, dooley: 7, other: 0, undecided: 48, margin: 'Collins +5' },
+      { pollster: 'TIPP Insights', date: 'July 28 – August 1, 2025', sampleSize: 1123, carter: 19, collins: 25, dooley: 7, other: 6, undecided: 43, margin: 'Collins +6' },
+    ]
+  },
+  'michigan-dem-senate': {
+    chartData: [],
+    polls: [
+      { pollster: 'Upswing Research (D)', date: 'February 26 – March 2, 2026', sampleSize: 600, elsayed: 23, mcmorrow: 25, stevens: 27, other: 0, undecided: 25, margin: 'Stevens +2' },
+      { pollster: 'Emerson College', date: 'January 24–25, 2026', sampleSize: 491, elsayed: 16, mcmorrow: 22, stevens: 16, other: 7, undecided: 38, margin: 'McMorrow +6' },
+      { pollster: 'Mitchell Research & Communications', date: 'November 18–21, 2025', sampleSize: 261, elsayed: 16, mcmorrow: 24, stevens: 27, other: 0, undecided: 33, margin: 'Stevens +3' },
+      { pollster: 'Rosetta Stone Communications (R)', date: 'October 23–25, 2025', sampleSize: 287, elsayed: 20, mcmorrow: 25, stevens: 26, other: 0, undecided: 29, margin: 'Stevens +1' },
+      { pollster: 'NRSC (R)', date: 'July 4–7, 2025', sampleSize: 582, elsayed: 22, mcmorrow: 11, stevens: 24, other: 1, undecided: 42, margin: 'Stevens +2' },
+      { pollster: 'Global Strategy Group (D)', date: 'May 28 – June 2, 2025', sampleSize: 800, elsayed: 15, mcmorrow: 20, stevens: 24, other: 4, undecided: 37, margin: 'Stevens +4' },
+      { pollster: 'Glengariff Group', date: 'May 5–8, 2025', sampleSize: 600, elsayed: 22, mcmorrow: 14, stevens: 34, other: 0, undecided: 30, margin: 'Stevens +12' },
+    ]
+  },
+  'minnesota-dem-senate': {
+    chartData: [],
+    polls: [
+      { pollster: 'GQR (D)', date: 'January 14–20, 2026', sampleSize: 600, craig: 36, flanagan: 49, other: 0, undecided: 15, margin: 'Flanagan +13' },
+      { pollster: 'Public Policy Polling (D)', date: 'January 16–17, 2026', sampleSize: 976, craig: 28, flanagan: 40, other: 0, undecided: 31, margin: 'Flanagan +12' },
+      { pollster: 'Impact Research (D)', date: 'January 13–15, 2026', sampleSize: 600, craig: 42, flanagan: 45, other: 3, undecided: 9, margin: 'Flanagan +3' },
+      { pollster: 'NRSC (R)', date: 'July 4–7, 2025', sampleSize: 559, craig: 24, flanagan: 30, other: 0, undecided: 45, margin: 'Flanagan +6' },
+      { pollster: 'Public Policy Polling (D)', date: 'February 14–15, 2025', sampleSize: 668, craig: 22, flanagan: 52, other: 0, undecided: 27, margin: 'Flanagan +30' },
+    ]
+  },
   '2028-dem-primary': {
     chartData: [],
     polls: [
@@ -637,22 +676,6 @@ const mockPollingData = {
 
 export default function Polling() {
   const [selectedPoll, setSelectedPoll] = useState('generic-congressional-ballot');
-  const [searchQuery, setSearchQuery] = useState('');
-  const currentData = mockPollingData[selectedPoll] || { chartData: [], polls: [] };
-  const currentPolls = currentData?.polls || [];
-
-  // Normalize string for search (remove spaces, lowercase)
-  const normalizeString = (str) => str.replace(/\s/g, '').toLowerCase();
-
-  // Filter options based on search (only poll name, not pollsters)
-  const filteredOptions = pollingOptions.filter(option => {
-    if (!searchQuery) return true;
-    
-    const normalizedQuery = normalizeString(searchQuery);
-    const normalizedLabel = normalizeString(option.label);
-    
-    return normalizedLabel.includes(normalizedQuery);
-  });
 
   return (
     <div 
@@ -679,33 +702,7 @@ export default function Polling() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-8"
         >
-          <Select value={selectedPoll} onValueChange={setSelectedPoll}>
-            <SelectTrigger className="w-full sm:w-80 bg-black text-white border-white/30">
-              <SelectValue placeholder="Select polling average" />
-            </SelectTrigger>
-            <SelectContent className="bg-black text-white border-white/30">
-              <div className="px-2 py-2 sticky top-0 bg-black z-10">
-                <input
-                  type="text"
-                  placeholder="Search polls..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-white/10 text-white border border-white/30 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-white/50"
-                  onClick={(e) => e.stopPropagation()}
-                  onKeyDown={(e) => e.stopPropagation()}
-                />
-              </div>
-              {filteredOptions.length > 0 ? (
-                filteredOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value} className="text-white hover:bg-white/20 focus:bg-white/20">
-                    {option.label}
-                  </SelectItem>
-                ))
-              ) : (
-                <div className="px-3 py-2 text-white/60 text-sm">No results found</div>
-              )}
-            </SelectContent>
-          </Select>
+          <PollSelector options={pollingOptions} value={selectedPoll} onChange={setSelectedPoll} />
         </motion.div>
 
         <motion.div
