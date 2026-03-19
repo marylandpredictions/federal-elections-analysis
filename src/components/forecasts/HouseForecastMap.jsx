@@ -10,74 +10,126 @@ const ratingColors = {
   'Safe R':   '#7F1D1D',
 };
 
-// Positions scaled to fill ~50-980 x, 50-470 y space
-const stateData = {
-  ME:  { seats: ['Safe D','Safe D'], pos: [918, 50] },
-  NH:  { seats: ['Lean D','Lean D'], pos: [887, 87] },
-  VT:  { seats: ['Safe D'], pos: [949, 73] },
-  MA:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D'], pos: [939, 112] },
-  RI:  { seats: ['Safe D','Safe D'], pos: [976, 137] },
-  CT:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D'], pos: [918, 142] },
-  NY:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [811, 123] },
-  NJ:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Likely D','Lean D','Toss Up','Lean R','Safe R'], pos: [866, 159] },
-  DE:  { seats: ['Safe D'], pos: [873, 182] },
-  MD:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely R'], pos: [815, 191] },
-  PA:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R'], pos: [763, 148] },
-  VA:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean R','Likely R','Safe R','Safe R'], pos: [763, 213] },
-  WV:  { seats: ['Safe R','Safe R'], pos: [716, 200] },
-  NC:  { seats: ['Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [732, 245] },
-  SC:  { seats: ['Safe D','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [743, 279] },
-  GA:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [716, 298] },
-  FL:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Toss Up','Lean R','Likely R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [691, 339] },
-  AL:  { seats: ['Safe D','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [666, 298] },
-  MS:  { seats: ['Safe D','Safe R','Safe R','Safe R'], pos: [645, 312] },
-  TN:  { seats: ['Safe D','Safe D','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [639, 253] },
-  KY:  { seats: ['Safe D','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [639, 222] },
-  OH:  { seats: ['Safe D','Safe D','Safe D','Safe D','Likely D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [687, 171] },
-  IN:  { seats: ['Safe D','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [645, 185] },
-  IL:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean R','Likely R','Safe R'], pos: [604, 182] },
-  MI:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R'], pos: [666, 140] },
-  WI:  { seats: ['Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R'], pos: [597, 140] },
-  MN:  { seats: ['Safe D','Safe D','Safe D','Safe D','Lean D','Toss Up','Lean R','Safe R'], pos: [546, 110] },
-  IA:  { seats: ['Lean D','Toss Up','Likely R','Safe R'], pos: [546, 166] },
-  MO:  { seats: ['Safe D','Safe D','Lean R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [571, 219] },
-  AR:  { seats: ['Safe R','Safe R','Safe R','Safe R'], pos: [571, 275] },
-  LA:  { seats: ['Safe D','Safe D','Safe R','Safe R','Safe R','Safe R'], pos: [583, 320] },
-  TX:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean D','Toss Up','Toss Up','Lean R','Lean R','Likely R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [468, 335] },
-  OK:  { seats: ['Safe D','Safe R','Safe R','Safe R','Safe R'], pos: [474, 279] },
-  KS:  { seats: ['Toss Up','Safe R','Safe R','Safe R'], pos: [468, 222] },
-  NE:  { seats: ['Lean D','Safe R','Safe R'], pos: [453, 182] },
-  SD:  { seats: ['Safe R'], pos: [418, 140] },
-  ND:  { seats: ['Safe R'], pos: [377, 103] },
-  MT:  { seats: ['Safe R','Safe R'], pos: [267, 87] },
-  WY:  { seats: ['Safe R'], pos: [329, 163] },
-  CO:  { seats: ['Safe D','Safe D','Safe D','Safe D','Likely D','Lean R','Safe R','Safe R'], pos: [323, 227] },
-  NM:  { seats: ['Safe D','Safe D','Lean R'], pos: [302, 298] },
-  AZ:  { seats: ['Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R'], pos: [226, 301] },
-  UT:  { seats: ['Lean D','Lean R','Safe R','Safe R'], pos: [246, 236] },
-  ID:  { seats: ['Safe R','Safe R'], pos: [226, 159] },
-  NV:  { seats: ['Safe D','Likely D','Lean D','Toss Up'], pos: [170, 234] },
-  CA:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Likely D','Lean D','Lean D','Toss Up','Lean R','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [95, 264] },
-  OR:  { seats: ['Safe D','Safe D','Safe D','Safe D','Likely D','Safe R'], pos: [129, 171] },
-  WA:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean R','Safe R'], pos: [137, 114] },
-  AK:  { seats: ['Lean R'], pos: [55, 440] },
-  HI:  { seats: ['Safe D','Safe D'], pos: [178, 458] },
-};
-
 const ratingOrder = ['Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R'];
+
+// All 435 seats: state abbreviation → array of ratings
+const stateSeats = {
+  AK: ['Lean R'],
+  AL: ['Safe D','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'],
+  AR: ['Safe R','Safe R','Safe R','Safe R'],
+  AZ: ['Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R'],
+  CA: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Likely D','Lean D','Lean D','Toss Up','Lean R','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'],
+  CO: ['Safe D','Safe D','Safe D','Safe D','Likely D','Lean R','Safe R','Safe R'],
+  CT: ['Safe D','Safe D','Safe D','Safe D','Safe D'],
+  DE: ['Safe D'],
+  FL: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Toss Up','Lean R','Likely R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'],
+  GA: ['Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'],
+  HI: ['Safe D','Safe D'],
+  IA: ['Lean D','Toss Up','Likely R','Safe R'],
+  ID: ['Safe R','Safe R'],
+  IL: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean R','Likely R','Safe R'],
+  IN: ['Safe D','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'],
+  KS: ['Toss Up','Safe R','Safe R','Safe R'],
+  KY: ['Safe D','Safe R','Safe R','Safe R','Safe R','Safe R'],
+  LA: ['Safe D','Safe D','Safe R','Safe R','Safe R','Safe R'],
+  MA: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D'],
+  MD: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely R'],
+  ME: ['Safe D','Safe D'],
+  MI: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R'],
+  MN: ['Safe D','Safe D','Safe D','Safe D','Lean D','Toss Up','Lean R','Safe R'],
+  MO: ['Safe D','Safe D','Lean R','Safe R','Safe R','Safe R','Safe R','Safe R'],
+  MS: ['Safe D','Safe R','Safe R','Safe R'],
+  MT: ['Safe R','Safe R'],
+  NC: ['Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'],
+  ND: ['Safe R'],
+  NE: ['Lean D','Safe R','Safe R'],
+  NH: ['Lean D','Lean D'],
+  NJ: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Likely D','Lean D','Toss Up','Lean R','Safe R'],
+  NM: ['Safe D','Safe D','Lean R'],
+  NV: ['Safe D','Likely D','Lean D','Toss Up'],
+  NY: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'],
+  OH: ['Safe D','Safe D','Safe D','Safe D','Likely D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'],
+  OK: ['Safe D','Safe R','Safe R','Safe R','Safe R'],
+  OR: ['Safe D','Safe D','Safe D','Safe D','Likely D','Safe R'],
+  PA: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R'],
+  RI: ['Safe D','Safe D'],
+  SC: ['Safe D','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'],
+  SD: ['Safe R'],
+  TN: ['Safe D','Safe D','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'],
+  TX: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean D','Toss Up','Toss Up','Lean R','Lean R','Likely R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'],
+  UT: ['Lean D','Lean R','Safe R','Safe R'],
+  VA: ['Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean R','Likely R','Safe R','Safe R'],
+  VT: ['Safe D'],
+  WA: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean R','Safe R'],
+  WI: ['Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R'],
+  WV: ['Safe R','Safe R'],
+  WY: ['Safe R'],
+};
 
 export default function HouseForecastMap() {
   const [hovered, setHovered] = useState(null);
   const [tooltip, setTooltip] = useState(null);
 
+  // Build sorted seat list: by rating order, then state alpha, then district #
+  const allSeats = [];
+  const ratingGroups = {};
+  ratingOrder.forEach(r => ratingGroups[r] = []);
+
+  Object.entries(stateSeats).sort(([a], [b]) => a.localeCompare(b)).forEach(([state, seats]) => {
+    seats.forEach((rating, i) => {
+      ratingGroups[rating].push({ state, district: i + 1, rating, key: `${state}-${i + 1}` });
+    });
+  });
+
+  ratingOrder.forEach(r => allSeats.push(...ratingGroups[r]));
+
+  // Count totals
   const totals = {};
   ratingOrder.forEach(r => totals[r] = 0);
-  Object.values(stateData).forEach(s => s.seats.forEach(r => { totals[r] = (totals[r] || 0) + 1; }));
-
+  allSeats.forEach(s => totals[s.rating]++);
   const demSeats = (totals['Safe D'] || 0) + (totals['Likely D'] || 0) + (totals['Lean D'] || 0);
   const repSeats = (totals['Safe R'] || 0) + (totals['Likely R'] || 0) + (totals['Lean R'] || 0);
   const tossUp = totals['Toss Up'] || 0;
-  const total = demSeats + repSeats + tossUp;
+  const total = allSeats.length;
+
+  // Parliament semicircle layout
+  // Center at (500, 420), arcs from angle π (left=Safe D) to 0 (right=Safe R)
+  const cx = 500, cy = 430;
+  const dotR = 6;
+  const spacing = dotR * 2.8;
+  const startRadius = 90;
+  const radiusStep = spacing + 1;
+
+  // Distribute seats into rows
+  const rows = [];
+  let remaining = total;
+  let r = startRadius;
+  while (remaining > 0) {
+    const capacity = Math.floor(Math.PI * r / spacing);
+    const count = Math.min(capacity, remaining);
+    rows.push({ radius: r, count });
+    remaining -= count;
+    r += radiusStep;
+  }
+
+  // Assign seats to positions
+  const dotPositions = [];
+  let seatIdx = 0;
+  rows.forEach(({ radius, count }) => {
+    for (let i = 0; i < count; i++) {
+      // angle goes from π (left) to 0 (right), evenly spaced
+      const angle = Math.PI - (i / (count - 1 || 1)) * Math.PI;
+      const x = cx + radius * Math.cos(angle);
+      const y = cy - radius * Math.sin(angle);
+      dotPositions.push({ x, y, seat: allSeats[seatIdx] });
+      seatIdx++;
+    }
+  });
+
+  // Compute SVG height needed
+  const maxRadius = rows[rows.length - 1]?.radius || 200;
+  const svgHeight = cy - maxRadius + 40;
+  const svgViewHeight = cy + 30;
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
@@ -101,43 +153,35 @@ export default function HouseForecastMap() {
 
       <div className="text-white/50 text-xs text-center mb-4">218 seats needed for majority</div>
 
-      {/* Map */}
+      {/* Semicircle map */}
       <div className="relative w-full overflow-x-auto">
-        <svg viewBox="0 0 1030 500" className="w-full" style={{ minWidth: '320px' }}>
-          {Object.entries(stateData).map(([abbr, { seats, pos }]) => {
-            const [cx, cy] = pos;
-            const cols = Math.ceil(Math.sqrt(seats.length));
-            const dotR = seats.length > 20 ? 4.5 : seats.length > 8 ? 5.5 : 6.5;
-            const gap = dotR * 3.8;
-            return seats.map((rating, i) => {
-              const col = i % cols;
-              const row = Math.floor(i / cols);
-              const totalCols = Math.min(cols, seats.length);
-              const dx = (col - (totalCols - 1) / 2) * gap;
-              const dy = (row - (Math.ceil(seats.length / cols) - 1) / 2) * gap;
-              const key = `${abbr}-${i}`;
-              const isHovered = hovered === key;
-              const districtLabel = `${abbr}-${i + 1}`;
-              return (
-                <circle
-                  key={key}
-                  cx={cx + dx}
-                  cy={cy + dy}
-                  r={isHovered ? dotR * 1.8 : dotR}
-                  fill={ratingColors[rating]}
-                  stroke="white"
-                  strokeWidth={isHovered ? 1.8 : 0.8}
-                  opacity={0.95}
-                  onMouseEnter={(e) => {
-                    setHovered(key);
-                    setTooltip({ label: districtLabel, rating, x: e.clientX, y: e.clientY });
-                  }}
-                  onMouseLeave={() => { setHovered(null); setTooltip(null); }}
-                  style={{ cursor: 'pointer', transition: 'r 0.1s' }}
-                />
-              );
-            });
+        <svg viewBox={`0 0 1000 ${svgViewHeight}`} className="w-full" style={{ minWidth: '320px' }}>
+          {dotPositions.map(({ x, y, seat }) => {
+            if (!seat) return null;
+            const isHovered = hovered === seat.key;
+            return (
+              <circle
+                key={seat.key}
+                cx={x}
+                cy={y}
+                r={isHovered ? dotR * 1.8 : dotR}
+                fill={ratingColors[seat.rating]}
+                stroke="white"
+                strokeWidth={isHovered ? 1.8 : 0.7}
+                opacity={0.95}
+                onMouseEnter={(e) => {
+                  setHovered(seat.key);
+                  setTooltip({ label: `${seat.state}-${seat.district}`, rating: seat.rating, x: e.clientX, y: e.clientY });
+                }}
+                onMouseLeave={() => { setHovered(null); setTooltip(null); }}
+                style={{ cursor: 'pointer', transition: 'r 0.1s' }}
+              />
+            );
           })}
+          {/* Center line */}
+          <line x1={cx} y1={cy - maxRadius - 10} x2={cx} y2={cy + 5} stroke="rgba(255,255,255,0.15)" strokeWidth="1" strokeDasharray="4,4" />
+          <text x={cx - 70} y={cy + 22} fill="rgba(255,255,255,0.4)" fontSize="11" fontFamily="Inter,sans-serif">← Democrat</text>
+          <text x={cx + 12} y={cy + 22} fill="rgba(255,255,255,0.4)" fontSize="11" fontFamily="Inter,sans-serif">Republican →</text>
         </svg>
       </div>
 
@@ -145,7 +189,7 @@ export default function HouseForecastMap() {
       {tooltip && (
         <div
           className="fixed z-50 text-white text-xs px-3 py-2 rounded-lg pointer-events-none border border-white/60"
-          style={{ left: tooltip.x + 14, top: tooltip.y - 48, backgroundColor: 'rgba(0,0,0,0.8)' }}
+          style={{ left: tooltip.x + 14, top: tooltip.y - 55, backgroundColor: 'rgba(0,0,0,0.8)' }}
         >
           <div className="font-bold text-sm">{tooltip.label}</div>
           <div className="mt-0.5 font-semibold" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
