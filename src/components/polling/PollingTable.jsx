@@ -19,6 +19,8 @@ export default function PollingTable({ polls, type }) {
   const startIndex = (currentPage - 1) * pollsPerPage;
   const currentPolls = filteredPolls.slice(startIndex, startIndex + pollsPerPage);
 
+  const isAlaska = type === 'alaska-senate';
+  const isMassDem = type === 'massachusetts-dem-senate';
   const isGenericBallot = type === 'generic-congressional-ballot';
   const isMaine = type === 'maine-dem-senate';
   const isCaliforniaGov = type === 'california-governor';
@@ -39,6 +41,14 @@ export default function PollingTable({ polls, type }) {
 
   function getMarginColor(poll) {
     const m = poll.margin || '';
+    if (isAlaska) {
+      if (m.includes('Sullivan')) return '#DC2626';
+      if (m.includes('Peltola')) return '#3B82F6';
+    } else if (isMassDem) {
+      if (m.includes('Markey')) return '#3B82F6';
+      if (m.includes('Moulton')) return '#22C55E';
+      if (m.includes('Rikleen')) return '#F97316';
+    }
     if (isCaliforniaGov) {
       if (m.includes('Swalwell')) return '#3B82F6';
       if (m.includes('Hilton')) return '#F472B6';
@@ -127,6 +137,23 @@ export default function PollingTable({ polls, type }) {
   }
 
   function renderCells(poll) {
+    if (isAlaska) return (
+      <>
+        <TableCell style={{ color: '#DC2626' }} className="font-semibold">{poll.sullivan > 0 ? `${poll.sullivan}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#3B82F6' }} className="font-semibold">{poll.peltola > 0 ? `${poll.peltola}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
+      </>
+    );
+    if (isMassDem) return (
+      <>
+        <TableCell style={{ color: '#3B82F6' }} className="font-semibold">{poll.markey > 0 ? `${poll.markey}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#22C55E' }} className="font-semibold">{poll.moulton > 0 ? `${poll.moulton}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.rikleen > 0 ? `${poll.rikleen}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
+      </>
+    );
     if (isCaliforniaGov) return (
       <>
         <TableCell style={{ color: '#3B82F6' }} className="font-semibold">{poll.swalwell > 0 ? `${poll.swalwell}%` : '-'}</TableCell>
@@ -305,6 +332,8 @@ export default function PollingTable({ polls, type }) {
   }
 
   function renderHeaders() {
+    if (isAlaska) return (<><TableHead className="text-white font-bold">Sullivan</TableHead><TableHead className="text-white font-bold">Peltola</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
+    if (isMassDem) return (<><TableHead className="text-white font-bold">Markey</TableHead><TableHead className="text-white font-bold">Moulton</TableHead><TableHead className="text-white font-bold">Rikleen</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     if (isCaliforniaGov) return (<><TableHead className="text-white font-bold">Swalwell</TableHead><TableHead className="text-white font-bold">Hilton</TableHead><TableHead className="text-white font-bold">Bianco</TableHead><TableHead className="text-white font-bold">Porter</TableHead><TableHead className="text-white font-bold">Steyer</TableHead><TableHead className="text-white font-bold">Mahan</TableHead><TableHead className="text-white font-bold">Becerra</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     if (isMaine) return (<><TableHead className="text-white font-bold">Mills</TableHead><TableHead className="text-white font-bold">Platner</TableHead><TableHead className="text-white font-bold">Costello</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     if (isGenericBallot) return (<><TableHead className="text-white font-bold">Democrat</TableHead><TableHead className="text-white font-bold">Republican</TableHead></>);

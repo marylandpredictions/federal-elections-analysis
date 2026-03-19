@@ -6,7 +6,9 @@ import PollingTable from '../components/polling/PollingTable';
 import PollSelector from '../components/polling/PollSelector';
 
 const pollingOptions = [
-  { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot', party: 'generic' },
+  { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot', party: 'general' },
+  { value: 'alaska-senate', label: 'Alaska Senate', party: 'general' },
+  { value: 'massachusetts-dem-senate', label: 'Massachusetts Democratic Senate Primary', party: 'dem' },
   { value: '2028-dem-primary', label: '2028 Democratic Presidential Primary', party: 'dem' },
   { value: '2028-rep-primary', label: '2028 Republican Presidential Primary', party: 'rep' },
   { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff', party: 'rep' },
@@ -22,6 +24,31 @@ const pollingOptions = [
   { value: 'michigan-dem-senate', label: 'Michigan Democratic Senate Primary', party: 'dem' },
   { value: 'minnesota-dem-senate', label: 'Minnesota Democratic Senate Primary', party: 'dem' },
 ];
+
+const alaskaSenateData = {
+  chartData: [],
+  polls: [
+    { pollster: 'Public Policy Polling (D)', date: 'January 16–17, 2026', sampleSize: 611, sullivan: 47, peltola: 49, other: 0, undecided: 4, margin: 'Peltola +2' },
+    { pollster: 'Alaska Survey Research', date: 'January 8–11, 2026', sampleSize: 1988, sullivan: 46, peltola: 48, other: 0, undecided: 6, margin: 'Peltola +2' },
+    { pollster: 'Data for Progress (D)', date: 'October 17–23, 2025', sampleSize: 823, sullivan: 45, peltola: 46, other: 5, undecided: 4, margin: 'Peltola +1' },
+    { pollster: 'Alaska Survey Research', date: 'October 10–15, 2025', sampleSize: 1708, sullivan: 46, peltola: 48, other: 0, undecided: 6, margin: 'Peltola +2' },
+    { pollster: 'Alaska Survey Research', date: 'July 29 – August 1, 2025', sampleSize: 1623, sullivan: 47, peltola: 42, other: 0, undecided: 11, margin: 'Sullivan +5' },
+    { pollster: 'Data for Progress (D)', date: 'July 21–27, 2025', sampleSize: 678, sullivan: 46, peltola: 45, other: 5, undecided: 4, margin: 'Sullivan +1' },
+    { pollster: 'Alaska Survey Research', date: 'April 21–25, 2025', sampleSize: 1261, sullivan: 41, peltola: 44, other: 0, undecided: 15, margin: 'Peltola +3' },
+  ]
+};
+
+const massDemSenateData = {
+  chartData: [],
+  polls: [
+    { pollster: 'University of New Hampshire', date: 'February 12–16, 2026', sampleSize: 352, markey: 35, moulton: 23, rikleen: 7, other: 5, undecided: 30, margin: 'Markey +12' },
+    { pollster: 'Suffolk University', date: 'November 19–23, 2025', sampleSize: 226, markey: 45, moulton: 22, rikleen: 0, other: 0, undecided: 33, margin: 'Markey +23' },
+    { pollster: 'University of New Hampshire', date: 'November 13–17, 2025', sampleSize: 343, markey: 34, moulton: 25, rikleen: 2, other: 3, undecided: 35, margin: 'Markey +9' },
+    { pollster: 'Data for Progress (D)', date: 'October 23–26, 2025', sampleSize: 652, markey: 53, moulton: 34, rikleen: 0, other: 0, undecided: 13, margin: 'Markey +19' },
+    { pollster: 'UMass Amherst/YouGov', date: 'October 21–29, 2025', sampleSize: 416, markey: 51, moulton: 28, rikleen: 6, other: 1, undecided: 14, margin: 'Markey +23' },
+    { pollster: 'Advantage, Inc. (R)', date: 'September 23–24, 2025', sampleSize: 278, markey: 30, moulton: 38, rikleen: 0, other: 0, undecided: 32, margin: 'Moulton +8' },
+  ]
+};
 
 const mainePollingData = {
   chartData: [
@@ -76,6 +103,8 @@ const californiaGovData = {
 };
 
 const mockPollingData = {
+  'alaska-senate': alaskaSenateData,
+  'massachusetts-dem-senate': massDemSenateData,
   'maine-dem-senate': mainePollingData,
   'california-governor': californiaGovData,
   'generic-congressional-ballot': {
