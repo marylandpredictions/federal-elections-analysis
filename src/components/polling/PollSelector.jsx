@@ -37,7 +37,8 @@ export default function PollSelector({ options, value, onChange }) {
   function partyColor(party) {
     if (party === 'rep') return '#EF4444';
     if (party === 'dem') return '#3B82F6';
-    return '#9CA3AF'; // gray for open/generic
+    if (party === 'general') return '#A855F7'; // purple for generic/general elections
+    return '#9CA3AF'; // gray for open primaries
   }
 
   return (

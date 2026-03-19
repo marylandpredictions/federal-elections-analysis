@@ -27,7 +27,23 @@ function getPollWeight(pollDate, referenceDate, pollsterName) {
 }
 
 export const pollConfigs = {
+  'alaska-senate': {
+    title: 'Alaska Senate',
+    candidates: [
+      { key: 'sullivan', name: 'Dan Sullivan', color: '#DC2626' },
+      { key: 'peltola', name: 'Mary Peltola', color: '#3B82F6' },
+    ]
+  },
+  'massachusetts-dem-senate': {
+    title: 'Massachusetts Democratic Senate Primary',
+    candidates: [
+      { key: 'markey', name: 'Ed Markey', color: '#3B82F6' },
+      { key: 'moulton', name: 'Seth Moulton', color: '#22C55E' },
+      { key: 'rikleen', name: 'Alex Rikleen', color: '#F97316' },
+    ]
+  },
   'generic-congressional-ballot': {
+    title: 'Generic Congressional Ballot',
     title: 'Generic Congressional Ballot',
     candidates: [
       { key: 'democrat', name: 'Democrat', color: '#1E90FF' },

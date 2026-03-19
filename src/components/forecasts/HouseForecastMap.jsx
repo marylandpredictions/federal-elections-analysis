@@ -91,10 +91,10 @@ export default function HouseForecastMap() {
 
   // Parliament semicircle layout
   // Generate all dot positions, sort by x (left→right), assign seats in order
-  const CX = 500, CY = 460;
-  const dotR = 5.5;
+  const CX = 500, CY = 560;
+  const dotR = 6.5;
   const spacing = dotR * 2.9;
-  const startRadius = 95;
+  const startRadius = 110;
   const radiusStep = spacing + 1.5;
 
   // Build rows
