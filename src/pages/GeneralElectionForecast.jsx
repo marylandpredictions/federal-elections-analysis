@@ -65,7 +65,6 @@ export default function GeneralElectionForecast() {
           <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
             Senate Forecast
           </h2>
-          <SeatCounter ratings={senateRatings} />
           <InteractiveMap ratings={senateRatings} />
           <SenateControl democratChance={43} republicanChance={57} />
           <div className="mt-8">
@@ -85,7 +84,6 @@ export default function GeneralElectionForecast() {
           <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
             Governors Forecast
           </h2>
-          <SeatCounter ratings={governorsRatings} />
           <InteractiveMap ratings={governorsRatings} />
         </motion.div>
       </div>
