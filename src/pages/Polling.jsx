@@ -7,22 +7,24 @@ import PollSelector from '../components/polling/PollSelector';
 
 const pollingOptions = [
   { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot', party: 'general' },
-  { value: 'alaska-senate', label: 'Alaska Senate', party: 'general' },
-  { value: 'massachusetts-dem-senate', label: 'Massachusetts Democratic Senate Primary', party: 'dem' },
   { value: '2028-dem-primary', label: '2028 Democratic Presidential Primary', party: 'dem' },
   { value: '2028-rep-primary', label: '2028 Republican Presidential Primary', party: 'rep' },
-  { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff', party: 'rep' },
-  { value: 'maine-dem-senate', label: 'Maine Democratic Senate Primary', party: 'dem' },
+  { value: 'alaska-senate', label: 'Alaska Senate General', party: 'general' },
+  { value: 'arizona-gop-governor', label: 'Arizona Republican Governor Primary', party: 'rep' },
   { value: 'california-governor', label: 'California Open Governor Primary', party: 'open' },
   { value: 'florida-gop-governor', label: 'Florida Republican Governor Primary', party: 'rep' },
   { value: 'georgia-gop-governor', label: 'Georgia Republican Governor Primary', party: 'rep' },
-  { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary', party: 'rep' },
-  { value: 'arizona-gop-governor', label: 'Arizona Republican Governor Primary', party: 'rep' },
-  { value: 'louisiana-gop-senate', label: 'Louisiana Republican Senate Primary', party: 'rep' },
   { value: 'georgia-gop-senate', label: 'Georgia Republican Senate Primary', party: 'rep' },
+  { value: 'illinois-dem-primary', label: 'Illinois Democratic Senate Primary', party: 'dem' },
+  { value: 'illinois-9th-house', label: 'Illinois 9th House Democratic Primary', party: 'dem' },
   { value: 'kentucky-gop-senate', label: 'Kentucky Republican Senate Primary', party: 'rep' },
+  { value: 'louisiana-gop-senate', label: 'Louisiana Republican Senate Primary', party: 'rep' },
+  { value: 'maine-dem-senate', label: 'Maine Democratic Senate Primary', party: 'dem' },
+  { value: 'massachusetts-dem-senate', label: 'Massachusetts Democratic Senate Primary', party: 'dem' },
   { value: 'michigan-dem-senate', label: 'Michigan Democratic Senate Primary', party: 'dem' },
   { value: 'minnesota-dem-senate', label: 'Minnesota Democratic Senate Primary', party: 'dem' },
+  { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary', party: 'rep' },
+  { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff', party: 'rep' },
 ];
 
 const alaskaSenateData = {
