@@ -10,57 +10,58 @@ const ratingColors = {
   'Safe R':   '#7F1D1D',
 };
 
+// Positions scaled to fill ~50-980 x, 50-470 y space
 const stateData = {
-  ME: { seats: ['Safe D','Safe D'], pos: [930, 75] },
-  NH: { seats: ['Lean D','Lean D'], pos: [915, 108] },
-  VT: { seats: ['Safe D'], pos: [945, 95] },
-  MA: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D'], pos: [940, 130] },
-  RI: { seats: ['Safe D','Safe D'], pos: [958, 152] },
-  CT: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D'], pos: [930, 157] },
-  NY: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [878, 140] },
-  NJ: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Likely D','Lean D','Toss Up','Lean R','Safe R'], pos: [905, 172] },
-  DE: { seats: ['Safe D'], pos: [908, 192] },
-  MD: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely R'], pos: [880, 200] },
-  PA: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R'], pos: [855, 162] },
-  VA: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean R','Likely R','Safe R','Safe R'], pos: [855, 220] },
-  WV: { seats: ['Safe R','Safe R'], pos: [832, 208] },
-  NC: { seats: ['Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [840, 248] },
-  SC: { seats: ['Safe D','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [845, 278] },
-  GA: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [832, 295] },
-  FL: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Toss Up','Lean R','Likely R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [820, 332] },
-  AL: { seats: ['Safe D','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [808, 295] },
-  MS: { seats: ['Safe D','Safe R','Safe R','Safe R'], pos: [798, 308] },
-  TN: { seats: ['Safe D','Safe D','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [795, 255] },
-  KY: { seats: ['Safe D','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [795, 228] },
-  OH: { seats: ['Safe D','Safe D','Safe D','Safe D','Likely D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [818, 182] },
-  IN: { seats: ['Safe D','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [798, 195] },
-  IL: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean R','Likely R','Safe R'], pos: [778, 192] },
-  MI: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R'], pos: [808, 155] },
-  WI: { seats: ['Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R'], pos: [775, 155] },
-  MN: { seats: ['Safe D','Safe D','Safe D','Safe D','Lean D','Toss Up','Lean R','Safe R'], pos: [750, 128] },
-  IA: { seats: ['Lean D','Toss Up','Likely R','Safe R'], pos: [750, 178] },
-  MO: { seats: ['Safe D','Safe D','Lean R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [762, 225] },
-  AR: { seats: ['Safe R','Safe R','Safe R','Safe R'], pos: [762, 275] },
-  LA: { seats: ['Safe D','Safe D','Safe R','Safe R','Safe R','Safe R'], pos: [768, 315] },
-  TX: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean D','Toss Up','Toss Up','Lean R','Lean R','Likely R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [712, 328] },
-  OK: { seats: ['Safe D','Safe R','Safe R','Safe R','Safe R'], pos: [715, 278] },
-  KS: { seats: ['Toss Up','Safe R','Safe R','Safe R'], pos: [712, 228] },
-  NE: { seats: ['Lean D','Safe R','Safe R'], pos: [705, 192] },
-  SD: { seats: ['Safe R'], pos: [688, 155] },
-  ND: { seats: ['Safe R'], pos: [668, 122] },
-  MT: { seats: ['Safe R','Safe R'], pos: [615, 108] },
-  WY: { seats: ['Safe R'], pos: [645, 175] },
-  CO: { seats: ['Safe D','Safe D','Safe D','Safe D','Likely D','Lean R','Safe R','Safe R'], pos: [642, 232] },
-  NM: { seats: ['Safe D','Safe D','Lean R'], pos: [632, 295] },
-  AZ: { seats: ['Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R'], pos: [595, 298] },
-  UT: { seats: ['Lean D','Lean R','Safe R','Safe R'], pos: [605, 240] },
-  ID: { seats: ['Safe R','Safe R'], pos: [595, 172] },
-  NV: { seats: ['Safe D','Likely D','Lean D','Toss Up'], pos: [568, 238] },
-  CA: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Likely D','Lean D','Lean D','Toss Up','Lean R','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [532, 265] },
-  OR: { seats: ['Safe D','Safe D','Safe D','Safe D','Likely D','Safe R'], pos: [548, 182] },
-  WA: { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean R','Safe R'], pos: [552, 132] },
-  AK: { seats: ['Lean R'], pos: [510, 435] },
-  HI: { seats: ['Safe D','Safe D'], pos: [572, 448] },
+  ME:  { seats: ['Safe D','Safe D'], pos: [918, 50] },
+  NH:  { seats: ['Lean D','Lean D'], pos: [887, 87] },
+  VT:  { seats: ['Safe D'], pos: [949, 73] },
+  MA:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D'], pos: [939, 112] },
+  RI:  { seats: ['Safe D','Safe D'], pos: [976, 137] },
+  CT:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D'], pos: [918, 142] },
+  NY:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [811, 123] },
+  NJ:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Likely D','Lean D','Toss Up','Lean R','Safe R'], pos: [866, 159] },
+  DE:  { seats: ['Safe D'], pos: [873, 182] },
+  MD:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely R'], pos: [815, 191] },
+  PA:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R'], pos: [763, 148] },
+  VA:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean R','Likely R','Safe R','Safe R'], pos: [763, 213] },
+  WV:  { seats: ['Safe R','Safe R'], pos: [716, 200] },
+  NC:  { seats: ['Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [732, 245] },
+  SC:  { seats: ['Safe D','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [743, 279] },
+  GA:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [716, 298] },
+  FL:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Toss Up','Lean R','Likely R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [691, 339] },
+  AL:  { seats: ['Safe D','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [666, 298] },
+  MS:  { seats: ['Safe D','Safe R','Safe R','Safe R'], pos: [645, 312] },
+  TN:  { seats: ['Safe D','Safe D','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [639, 253] },
+  KY:  { seats: ['Safe D','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [639, 222] },
+  OH:  { seats: ['Safe D','Safe D','Safe D','Safe D','Likely D','Toss Up','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [687, 171] },
+  IN:  { seats: ['Safe D','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [645, 185] },
+  IL:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean R','Likely R','Safe R'], pos: [604, 182] },
+  MI:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R'], pos: [666, 140] },
+  WI:  { seats: ['Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R'], pos: [597, 140] },
+  MN:  { seats: ['Safe D','Safe D','Safe D','Safe D','Lean D','Toss Up','Lean R','Safe R'], pos: [546, 110] },
+  IA:  { seats: ['Lean D','Toss Up','Likely R','Safe R'], pos: [546, 166] },
+  MO:  { seats: ['Safe D','Safe D','Lean R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [571, 219] },
+  AR:  { seats: ['Safe R','Safe R','Safe R','Safe R'], pos: [571, 275] },
+  LA:  { seats: ['Safe D','Safe D','Safe R','Safe R','Safe R','Safe R'], pos: [583, 320] },
+  TX:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean D','Toss Up','Toss Up','Lean R','Lean R','Likely R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [468, 335] },
+  OK:  { seats: ['Safe D','Safe R','Safe R','Safe R','Safe R'], pos: [474, 279] },
+  KS:  { seats: ['Toss Up','Safe R','Safe R','Safe R'], pos: [468, 222] },
+  NE:  { seats: ['Lean D','Safe R','Safe R'], pos: [453, 182] },
+  SD:  { seats: ['Safe R'], pos: [418, 140] },
+  ND:  { seats: ['Safe R'], pos: [377, 103] },
+  MT:  { seats: ['Safe R','Safe R'], pos: [267, 87] },
+  WY:  { seats: ['Safe R'], pos: [329, 163] },
+  CO:  { seats: ['Safe D','Safe D','Safe D','Safe D','Likely D','Lean R','Safe R','Safe R'], pos: [323, 227] },
+  NM:  { seats: ['Safe D','Safe D','Lean R'], pos: [302, 298] },
+  AZ:  { seats: ['Safe D','Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R','Safe R'], pos: [226, 301] },
+  UT:  { seats: ['Lean D','Lean R','Safe R','Safe R'], pos: [246, 236] },
+  ID:  { seats: ['Safe R','Safe R'], pos: [226, 159] },
+  NV:  { seats: ['Safe D','Likely D','Lean D','Toss Up'], pos: [170, 234] },
+  CA:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Likely D','Lean D','Lean D','Toss Up','Lean R','Lean R','Likely R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R','Safe R'], pos: [95, 264] },
+  OR:  { seats: ['Safe D','Safe D','Safe D','Safe D','Likely D','Safe R'], pos: [129, 171] },
+  WA:  { seats: ['Safe D','Safe D','Safe D','Safe D','Safe D','Safe D','Likely D','Lean D','Lean R','Safe R'], pos: [137, 114] },
+  AK:  { seats: ['Lean R'], pos: [55, 440] },
+  HI:  { seats: ['Safe D','Safe D'], pos: [178, 458] },
 };
 
 const ratingOrder = ['Safe D','Likely D','Lean D','Toss Up','Lean R','Likely R','Safe R'];
@@ -82,19 +83,19 @@ export default function HouseForecastMap() {
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
       <p className="text-white/60 text-center text-sm mb-6">{total} seats · Each dot represents one congressional district</p>
 
-      {/* Seat count bubbles matching SeatCounter style */}
-      <div className="flex justify-center gap-4 mb-6">
-        <div className="bg-blue-900/60 rounded-xl px-5 py-3 text-center min-w-[90px]">
+      {/* Seat count bubbles */}
+      <div className="flex justify-center gap-4 mb-6 flex-wrap">
+        <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
           <div className="text-3xl font-bold text-blue-300">{demSeats}</div>
-          <div className="text-blue-200/70 text-xs mt-1">Dem-leaning</div>
+          <div className="text-blue-200/70 text-sm mt-1">Democrat</div>
         </div>
-        <div className="bg-purple-900/60 rounded-xl px-5 py-3 text-center min-w-[90px]">
+        <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
           <div className="text-3xl font-bold text-purple-300">{tossUp}</div>
-          <div className="text-purple-200/70 text-xs mt-1">Toss Up</div>
+          <div className="text-purple-200/70 text-sm mt-1">Toss Up</div>
         </div>
-        <div className="bg-red-900/60 rounded-xl px-5 py-3 text-center min-w-[90px]">
+        <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
           <div className="text-3xl font-bold text-red-300">{repSeats}</div>
-          <div className="text-red-200/70 text-xs mt-1">Rep-leaning</div>
+          <div className="text-red-200/70 text-sm mt-1">Republican</div>
         </div>
       </div>
 
@@ -102,12 +103,12 @@ export default function HouseForecastMap() {
 
       {/* Map */}
       <div className="relative w-full overflow-x-auto">
-        <svg viewBox="0 0 1000 510" className="w-full" style={{ minWidth: '320px' }}>
+        <svg viewBox="0 0 1030 500" className="w-full" style={{ minWidth: '320px' }}>
           {Object.entries(stateData).map(([abbr, { seats, pos }]) => {
             const [cx, cy] = pos;
             const cols = Math.ceil(Math.sqrt(seats.length));
             const dotR = seats.length > 20 ? 4.5 : seats.length > 8 ? 5.5 : 6.5;
-            const gap = dotR * 3.0;
+            const gap = dotR * 3.8;
             return seats.map((rating, i) => {
               const col = i % cols;
               const row = Math.floor(i / cols);
@@ -122,10 +123,10 @@ export default function HouseForecastMap() {
                   key={key}
                   cx={cx + dx}
                   cy={cy + dy}
-                  r={isHovered ? dotR * 1.7 : dotR}
+                  r={isHovered ? dotR * 1.8 : dotR}
                   fill={ratingColors[rating]}
                   stroke="white"
-                  strokeWidth={isHovered ? 1.5 : 0.8}
+                  strokeWidth={isHovered ? 1.8 : 0.8}
                   opacity={0.95}
                   onMouseEnter={(e) => {
                     setHovered(key);
@@ -143,10 +144,11 @@ export default function HouseForecastMap() {
       {/* Tooltip */}
       {tooltip && (
         <div
-          className="fixed z-50 text-white text-xs px-3 py-2 rounded-lg pointer-events-none border border-white/20"
-          style={{ left: tooltip.x + 12, top: tooltip.y - 30, backgroundColor: 'rgba(0,0,0,0.8)' }}
+          className="fixed z-50 text-white text-xs px-3 py-2 rounded-lg pointer-events-none border border-white/60"
+          style={{ left: tooltip.x + 14, top: tooltip.y - 48, backgroundColor: 'rgba(0,0,0,0.8)' }}
         >
-          <span className="font-bold">{tooltip.label}</span> — {tooltip.rating}
+          <div className="font-bold text-sm">{tooltip.label}</div>
+          <div className="mt-0.5 font-semibold" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
         </div>
       )}
 

@@ -14,19 +14,17 @@ export default function SeatCounter({ ratings }) {
 
   return (
     <div className="flex justify-center gap-4 mb-6 flex-wrap">
-      <div className="bg-blue-600 rounded-xl px-6 py-3 shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
-        <div className="text-white font-bold text-2xl text-center">{counts.democrat}</div>
-        <div className="text-white/90 text-sm text-center">Democrat</div>
+      <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+        <div className="text-3xl font-bold text-blue-300">{counts.democrat}</div>
+        <div className="text-blue-200/70 text-sm mt-1">Democrat</div>
       </div>
-      
-      <div className="bg-purple-600 rounded-xl px-6 py-3 shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
-        <div className="text-white font-bold text-2xl text-center">{counts.tossUp}</div>
-        <div className="text-white/90 text-sm text-center">Toss Up</div>
+      <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+        <div className="text-3xl font-bold text-purple-300">{counts.tossUp}</div>
+        <div className="text-purple-200/70 text-sm mt-1">Toss Up</div>
       </div>
-      
-      <div className="bg-red-600 rounded-xl px-6 py-3 shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
-        <div className="text-white font-bold text-2xl text-center">{counts.republican}</div>
-        <div className="text-white/90 text-sm text-center">Republican</div>
+      <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+        <div className="text-3xl font-bold text-red-300">{counts.republican}</div>
+        <div className="text-red-200/70 text-sm mt-1">Republican</div>
       </div>
     </div>
   );
