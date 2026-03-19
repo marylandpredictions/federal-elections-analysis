@@ -69,6 +69,9 @@ export default function GeneralElectionForecast() {
           <InteractiveMap ratings={senateRatings} />
           <SenateControl democratChance={43} republicanChance={57} />
           <div className="mt-8">
+            <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
+              House Forecast
+            </h2>
             <HouseForecastMap />
           </div>
           <SenateControl democratChance={73} republicanChance={27} title="House Control Probability" />
