@@ -71,7 +71,7 @@ const californiaGovData = {
     { pollster: 'EMC Research (D)', date: 'October 22-26, 2025', sampleSize: 1000, becerra: 9, bianco: 14, hilton: 20, mahan: 0, porter: 16, steyer: 3, swalwell: 11, other: 27, undecided: 0, margin: 'Hilton +4' },
     { pollster: 'Emerson College', date: 'October 20-21, 2025', sampleSize: 900, becerra: 5, bianco: 11, hilton: 16, mahan: 0, porter: 15, steyer: 0, swalwell: 0, other: 14, undecided: 39, margin: 'Hilton +1' },
     { pollster: 'Bold Decision', date: 'October 16-21, 2025', sampleSize: 509, becerra: 8, bianco: 14, hilton: 13, mahan: 0, porter: 12, steyer: 7, swalwell: 0, other: 16, undecided: 29, margin: 'Bianco +1' },
-    { pollster: 'Emerson College', date: 'April 12-14, 2025', sampleSize: 899, becerra: 3, bianco: 4, hilton: 0, mahan: 0, porter: 12, steyer: 0, swalwell: 0, other: 27, undecided: 54, margin: 'Porter +8' },
+
   ]
 };
 

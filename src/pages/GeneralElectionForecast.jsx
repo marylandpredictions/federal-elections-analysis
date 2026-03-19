@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import InteractiveMap from '../components/forecasts/InteractiveMap';
 import SenateControl from '../components/forecasts/SenateControl';
 import SeatCounter from '../components/forecasts/SeatCounter';
+import HouseForecastMap from '../components/forecasts/HouseForecastMap';
 
 const governorsRatings = {
   'Alabama': 'Safe R', 'Alaska': 'Lean R', 'Arizona': 'Tilt D', 'Arkansas': 'Safe R',
@@ -67,6 +68,9 @@ export default function GeneralElectionForecast() {
           <SeatCounter ratings={senateRatings} />
           <InteractiveMap ratings={senateRatings} />
           <SenateControl democratChance={43} republicanChance={57} />
+          <div className="mt-8">
+            <HouseForecastMap />
+          </div>
           <SenateControl democratChance={73} republicanChance={27} title="House Control Probability" />
         </motion.div>
 
