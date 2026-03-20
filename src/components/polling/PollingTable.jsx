@@ -37,6 +37,7 @@ export default function PollingTable({ polls, type }) {
   const isMichiganDem = type === 'michigan-dem-senate';
   const isMinnesotaDem = type === 'minnesota-dem-senate';
   const isKentuckyGOP = type === 'kentucky-gop-senate';
+  const isWisconsinDem = type === 'wisconsin-dem-governor';
   const isApproval = type ? type.includes('approval') : false;
 
   function getMarginColor(poll) {
@@ -311,6 +312,18 @@ export default function PollingTable({ polls, type }) {
         <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
+    if (isWisconsinDem) return (
+      <>
+        <TableCell style={{ color: '#008080' }} className="font-semibold">{poll.barnes > 0 ? `${poll.barnes}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#DAA520' }} className="font-semibold">{poll.rodriguez > 0 ? `${poll.rodriguez}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#C71585' }} className="font-semibold">{poll.hong > 0 ? `${poll.hong}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#0047AB' }} className="font-semibold">{poll.crowley > 0 ? `${poll.crowley}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#22C55E' }} className="font-semibold">{poll.roys > 0 ? `${poll.roys}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.hughes > 0 ? `${poll.hughes}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
+      </>
+    );
     if (isKentuckyGOP) return (
       <>
         <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.barr > 0 ? `${poll.barr}%` : '-'}</TableCell>
@@ -350,6 +363,7 @@ export default function PollingTable({ polls, type }) {
     if (isGeorgiaGOPSenate) return (<><TableHead className="text-white font-bold">Carter</TableHead><TableHead className="text-white font-bold">Collins</TableHead><TableHead className="text-white font-bold">Dooley</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     if (isMichiganDem) return (<><TableHead className="text-white font-bold">El-Sayed</TableHead><TableHead className="text-white font-bold">McMorrow</TableHead><TableHead className="text-white font-bold">Stevens</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     if (isMinnesotaDem) return (<><TableHead className="text-white font-bold">Craig</TableHead><TableHead className="text-white font-bold">Flanagan</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
+    if (isWisconsinDem) return (<><TableHead className="text-white font-bold">Barnes</TableHead><TableHead className="text-white font-bold">Rodriguez</TableHead><TableHead className="text-white font-bold">Hong</TableHead><TableHead className="text-white font-bold">Crowley</TableHead><TableHead className="text-white font-bold">Roys</TableHead><TableHead className="text-white font-bold">Hughes</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     if (isKentuckyGOP) return (<><TableHead className="text-white font-bold">Barr</TableHead><TableHead className="text-white font-bold">Cameron</TableHead><TableHead className="text-white font-bold">Morris</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     return (<><TableHead className="text-white font-bold">Cornyn</TableHead><TableHead className="text-white font-bold">Paxton</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
   }

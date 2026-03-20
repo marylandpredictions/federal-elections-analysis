@@ -150,6 +150,17 @@ export const pollConfigs = {
       { key: 'morris', name: 'Nate Morris', color: '#F97316' },
     ]
   },
+  'wisconsin-dem-governor': {
+    title: 'Wisconsin Democratic Governor Primary',
+    candidates: [
+      { key: 'barnes', name: 'Mandela Barnes', color: '#008080' },
+      { key: 'rodriguez', name: 'Sara Rodriguez', color: '#DAA520' },
+      { key: 'hong', name: 'Francesca Hong', color: '#C71585' },
+      { key: 'crowley', name: 'David Crowley', color: '#0047AB' },
+      { key: 'roys', name: 'Kelda Roys', color: '#22C55E' },
+      { key: 'hughes', name: 'Missy Hughes', color: '#F97316' },
+    ]
+  },
   '2028-dem-primary': {
     title: '2028 Democratic Presidential Primary',
     candidates: [

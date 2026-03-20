@@ -15,11 +15,15 @@ const pollingOptions = [
   { value: 'florida-gop-governor', label: 'Florida Republican Governor Primary', party: 'rep' },
   { value: 'georgia-gop-governor', label: 'Georgia Republican Governor Primary', party: 'rep' },
   { value: 'georgia-gop-senate', label: 'Georgia Republican Senate Primary', party: 'rep' },
-
   { value: 'kentucky-gop-senate', label: 'Kentucky Republican Senate Primary', party: 'rep' },
   { value: 'louisiana-gop-senate', label: 'Louisiana Republican Senate Primary', party: 'rep' },
+  { value: 'maine-dem-senate', label: 'Maine Democratic Senate Primary', party: 'dem' },
+  { value: 'massachusetts-dem-senate', label: 'Massachusetts Democratic Senate Primary', party: 'dem' },
+  { value: 'michigan-dem-senate', label: 'Michigan Democratic Senate Primary', party: 'dem' },
+  { value: 'minnesota-dem-senate', label: 'Minnesota Democratic Senate Primary', party: 'dem' },
   { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary', party: 'rep' },
   { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff', party: 'rep' },
+  { value: 'wisconsin-dem-governor', label: 'Wisconsin Democratic Governor Primary', party: 'dem' },
 ];
 
 const alaskaSenateData = {
@@ -493,6 +497,16 @@ const mockPollingData = {
       { pollster: 'co/efficient (R)', date: 'February 25–26, 2025', sampleSize: 1134, barr: 18, cameron: 39, morris: 3, other: 11, undecided: 31, margin: 'Cameron +21' },
       { pollster: 'UpOne Insights (R)', date: 'Mid-February 2025', sampleSize: 0, barr: 19, cameron: 47, morris: 3, other: 0, undecided: 31, margin: 'Cameron +28' },
       { pollster: 'co/efficient (R)', date: 'December 2–3, 2024', sampleSize: 1298, barr: 12, cameron: 37, morris: 1, other: 14, undecided: 36, margin: 'Cameron +25' },
+    ]
+  },
+  'wisconsin-dem-governor': {
+    chartData: [],
+    polls: [
+      { pollster: 'Marquette University', date: 'February 11–19, 2026', sampleSize: 394, crowley: 3, hong: 11, roys: 1, barnes: 10, hughes: 2, rodriguez: 6, other: 3, undecided: 65, margin: 'Hong +1' },
+      { pollster: 'TIPP Insights (R)', date: 'February 6–12, 2026', sampleSize: 1524, crowley: 7, hong: 5, roys: 2, barnes: 28, hughes: 1, rodriguez: 20, other: 1, undecided: 35, margin: 'Barnes +8' },
+      { pollster: 'TIPP Insights (R)', date: 'November 17–21, 2025', sampleSize: 589, crowley: 6, hong: 0, roys: 1, barnes: 21, hughes: 2, rodriguez: 6, other: 11, undecided: 52, margin: 'Barnes +15' },
+      { pollster: 'Marquette University', date: 'October 15–22, 2025', sampleSize: 378, crowley: 3, hong: 6, roys: 3, barnes: 0, hughes: 2, rodriguez: 4, other: 0, undecided: 81, margin: 'Hong +2' },
+      { pollster: 'Platform Communications', date: 'September 28–30, 2025', sampleSize: 0, crowley: 7, hong: 4, roys: 4, barnes: 16, hughes: 2, rodriguez: 8, other: 20, undecided: 39, margin: 'Barnes +8' },
     ]
   },
   '2028-dem-primary': {
