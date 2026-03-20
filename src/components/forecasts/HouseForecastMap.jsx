@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 const ratingColors = {
   'Safe D':    '#1E3A8A',

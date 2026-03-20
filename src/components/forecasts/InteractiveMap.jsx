@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 const statePositions = {
   'Alabama': { x: 700, y: 420 },
