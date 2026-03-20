@@ -4,6 +4,7 @@ import SwingBar from '../components/swingometer/SwingBar';
 import SwingMap from '../components/swingometer/SwingMap';
 
 const baseResults = {
+  'District of Columbia': null,
   'Alaska': 13.1,
   'Arizona': null,
   'Hawaii': null,

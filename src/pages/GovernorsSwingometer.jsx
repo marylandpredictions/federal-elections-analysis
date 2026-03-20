@@ -6,6 +6,7 @@ import SwingMap from '../components/swingometer/SwingMap';
 // 2024 presidential margins for governor-contested states (positive = R, negative = D)
 // null = Not Contested governor race
 const govBaseResults = {
+  'District of Columbia': null,
   'Alabama': 30.5,
   'Alaska': 13.1,
   'Arizona': 5.5,
