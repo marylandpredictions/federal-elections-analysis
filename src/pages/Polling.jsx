@@ -18,10 +18,6 @@ const pollingOptions = [
 
   { value: 'kentucky-gop-senate', label: 'Kentucky Republican Senate Primary', party: 'rep' },
   { value: 'louisiana-gop-senate', label: 'Louisiana Republican Senate Primary', party: 'rep' },
-  { value: 'maine-dem-senate', label: 'Maine Democratic Senate Primary', party: 'dem' },
-  { value: 'massachusetts-dem-senate', label: 'Massachusetts Democratic Senate Primary', party: 'dem' },
-  { value: 'michigan-dem-senate', label: 'Michigan Democratic Senate Primary', party: 'dem' },
-  { value: 'minnesota-dem-senate', label: 'Minnesota Democratic Senate Primary', party: 'dem' },
   { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary', party: 'rep' },
   { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff', party: 'rep' },
 ];
@@ -361,64 +357,6 @@ const mockPollingData = {
       { pollster: 'Lake Research Partners (D)/Slingshot Strategies (D)', date: 'March 7–10, 2025', sampleSize: 0, cornyn: 27, paxton: 38, other: 19, undecided: 16, margin: 'Paxton +11' },
       { pollster: 'Fabrizio, Lee & Associates (R)', date: 'January 28 – February 2, 2025', sampleSize: 0, cornyn: 28, paxton: 53, other: 0, undecided: 19, margin: 'Paxton +25' },
       { pollster: 'Victory Insights (R)', date: 'January 4–6, 2025', sampleSize: 600, cornyn: 34, paxton: 42, other: 0, undecided: 25, margin: 'Paxton +8' }
-    ]
-  },
-  'illinois-dem-primary': {
-    chartData: [
-      { date: '2025-06-08', kelly: 14.3, raja: 32.1, stratton: 19.4, kellyMin: 11.3, kellyMax: 17.3, rajaMin: 29.1, rajaMax: 35.1, strattonMin: 16.4, strattonMax: 22.4 },
-      { date: '2025-08-15', kelly: 12.7, raja: 44.9, stratton: 23.4, kellyMin: 9.7, kellyMax: 15.7, rajaMin: 41.9, rajaMax: 47.9, strattonMin: 20.4, strattonMax: 26.4 },
-      { date: '2025-09-26', kelly: 8, raja: 37, stratton: 17.5, kellyMin: 5, kellyMax: 11, rajaMin: 34, rajaMax: 40, strattonMin: 14.5, strattonMax: 20.5 },
-      { date: '2025-11-22', kelly: 22, raja: 29, stratton: 18, kellyMin: 19, kellyMax: 25, rajaMin: 26, rajaMax: 32, strattonMin: 15, strattonMax: 21 },
-      { date: '2025-12-08', kelly: 8, raja: 37, stratton: 17, kellyMin: 5, kellyMax: 11, rajaMin: 34, rajaMax: 40, strattonMin: 14, strattonMax: 20 },
-      { date: '2026-01-10', kelly: 15, raja: 41, stratton: 16, kellyMin: 12, kellyMax: 18, rajaMin: 38, rajaMax: 44, strattonMin: 13, strattonMax: 19 },
-      { date: '2026-01-27', kelly: 13, raja: 43, stratton: 17, kellyMin: 10, kellyMax: 16, rajaMin: 40, rajaMax: 46, strattonMin: 14, strattonMax: 20 },
-      { date: '2026-02-10', kelly: 9, raja: 38, stratton: 24.5, kellyMin: 6, kellyMax: 12, rajaMin: 35, rajaMax: 41, strattonMin: 21.5, strattonMax: 27.5 },
-      { date: '2026-03-03', kelly: 11.7, raja: 30.5, stratton: 33.2, kellyMin: 8.7, kellyMax: 14.7, rajaMin: 27.5, rajaMax: 33.5, strattonMin: 30.2, strattonMax: 36.2 },
-      { date: '2026-03-12', kelly: 18.2, raja: 33.5, stratton: 38.6, kellyMin: 15.2, kellyMax: 21.2, rajaMin: 30.5, rajaMax: 36.5, strattonMin: 35.6, strattonMax: 41.6 }
-    ],
-    polls: [
-      { pollster: 'FM3 Research (D)', date: 'March 10–12, 2026', sampleSize: 678, kelly: 18, raja: 33, stratton: 38, other: 11, undecided: 0, margin: 'Stratton +5' },
-      { pollster: 'Public Policy Polling (D)', date: 'March 9–10, 2026', sampleSize: 700, kelly: 13, raja: 30, stratton: 32, other: 0, undecided: 25, margin: 'Stratton +2' },
-      { pollster: 'Tulchin Research (D)', date: 'March 4–8, 2026', sampleSize: 600, kelly: 12, raja: 39, stratton: 28, other: 4, undecided: 15, margin: 'Raja +11' },
-      { pollster: 'Change Research (D)', date: 'March 3–5, 2026', sampleSize: 717, kelly: 14, raja: 36, stratton: 26, other: 8, undecided: 16, margin: 'Raja +10' },
-      { pollster: 'Public Policy Polling (D)', date: 'March 2–3, 2026', sampleSize: 577, kelly: 11, raja: 30, stratton: 33, other: 0, undecided: 26, margin: 'Stratton +3' },
-      { pollster: 'Public Policy Polling (D)', date: 'February 23–24, 2026', sampleSize: 546, kelly: 13, raja: 29, stratton: 27, other: 0, undecided: 31, margin: 'Raja +2' },
-      { pollster: 'Tulchin Research (D)', date: 'February 14–19, 2026', sampleSize: 600, kelly: 10, raja: 42, stratton: 26, other: 6, undecided: 16, margin: 'Raja +16' },
-      { pollster: 'Public Policy Polling (D)', date: 'February 2–3, 2026', sampleSize: 574, kelly: 8, raja: 34, stratton: 23, other: 0, undecided: 37, margin: 'Raja +11' },
-      { pollster: 'GBAO (D)', date: 'January 25–28, 2026', sampleSize: 800, kelly: 13, raja: 43, stratton: 17, other: 0, undecided: 27, margin: 'Raja +26' },
-      { pollster: 'Victory Research', date: 'January 21–25, 2026', sampleSize: 806, kelly: 11, raja: 32, stratton: 21, other: 6, undecided: 30, margin: 'Raja +11' },
-      { pollster: 'GBAO (D)', date: 'January 8–12, 2026', sampleSize: 900, kelly: 15, raja: 41, stratton: 16, other: 0, undecided: 28, margin: 'Raja +25' },
-      { pollster: 'Emerson College/WGN-TV', date: 'January 3–5, 2026', sampleSize: 568, kelly: 8, raja: 31, stratton: 10, other: 6, undecided: 46, margin: 'Raja +21' },
-      { pollster: 'Public Policy Polling (D)', date: 'December 8–9, 2025', sampleSize: 667, kelly: 9, raja: 32, stratton: 20, other: 0, undecided: 39, margin: 'Raja +12' },
-      { pollster: 'Change Research (D)', date: 'December 4–8, 2025', sampleSize: 1007, kelly: 7, raja: 42, stratton: 14, other: 4, undecided: 33, margin: 'Raja +28' },
-      { pollster: 'Victory Research', date: 'November 20–24, 2025', sampleSize: 0, kelly: 22, raja: 29, stratton: 18, other: 3, undecided: 28, margin: 'Raja +7' },
-      { pollster: 'Public Policy Polling (D)', date: 'September 25–26, 2025', sampleSize: 576, kelly: 8, raja: 33, stratton: 18, other: 0, undecided: 41, margin: 'Raja +15' },
-      { pollster: 'Change Research (D)', date: 'September 17–19, 2025', sampleSize: 1143, kelly: 8, raja: 41, stratton: 17, other: 0, undecided: 31, margin: 'Raja +24' },
-      { pollster: 'GBAO (D)', date: 'August 12–17, 2025', sampleSize: 800, kelly: 12, raja: 38, stratton: 18, other: 0, undecided: 29, margin: 'Raja +20' },
-      { pollster: 'Z to A Research (D)', date: 'August 8–10, 2025', sampleSize: 615, kelly: 13, raja: 51, stratton: 28, other: 0, undecided: 8, margin: 'Raja +23' },
-      { pollster: 'GBAO (D)', date: 'June 5–10, 2025', sampleSize: 1200, kelly: 14, raja: 32, stratton: 19, other: 4, undecided: 31, margin: 'Raja +13' }
-    ]
-  },
-  'illinois-9th-house': {
-    chartData: [
-      { date: '2025-06-14', biss: 17.3, fine: 8.2, abughazaleh: 10.1, simmons: 4.5, amiwala: 2.3, andrew: 0.6 },
-      { date: '2025-10-15', biss: 18.4, fine: 9.1, abughazaleh: 13.2, simmons: 4.7, amiwala: 2.1, andrew: 2.3 },
-      { date: '2025-11-07', biss: 25.1, fine: 10.5, abughazaleh: 17.75, simmons: 6.3, amiwala: 4.75, andrew: 2.15 },
-      { date: '2026-01-28', biss: 21.8, fine: 21.2, abughazaleh: 14.6, simmons: 7.3, amiwala: 4.2, andrew: 4.5 },
-      { date: '2026-02-08', biss: 31.3, fine: 18.4, abughazaleh: 18.1, simmons: 7.6, amiwala: 4.3, andrew: 7.2 },
-      { date: '2026-02-21', biss: 28.1, fine: 15.25, abughazaleh: 15.3, simmons: 8.05, amiwala: 5.6, andrew: 4.95 },
-      { date: '2026-03-10', biss: 24.2, fine: 14.7, abughazaleh: 20.3, simmons: 10.1, amiwala: 6.5, andrew: 7.3 }
-    ],
-    polls: [
-      { pollster: 'Public Policy Polling (D)', date: 'March 9–10, 2026', sampleSize: 741, abughazaleh: 20, amiwala: 6, andrew: 7, biss: 24, fine: 14, simmons: 10, other: 2, undecided: 17, margin: 'Biss +4' },
-      { pollster: 'Public Policy Polling (D)', date: 'February 20–21, 2026', sampleSize: 501, abughazaleh: 17, amiwala: 4, andrew: 5, biss: 24, fine: 16, simmons: 6, other: 6, undecided: 22, margin: 'Biss +7' },
-      { pollster: 'Community Pulse/Molitico (D)', date: 'February 15–20, 2026', sampleSize: 638, abughazaleh: 13, amiwala: 7, andrew: 4, biss: 31, fine: 14, simmons: 9, other: 3, undecided: 21, margin: 'Biss +17' },
-      { pollster: 'Impact Research (D)', date: 'February 5–10, 2026', sampleSize: 500, abughazaleh: 18, amiwala: 4, andrew: 7, biss: 31, fine: 18, simmons: 7, other: 5, undecided: 11, margin: 'Biss +13' },
-      { pollster: 'GBAO Strategies (D)', date: 'January 26–29, 2026', sampleSize: 500, abughazaleh: 14, amiwala: 4, andrew: 4, biss: 21, fine: 21, simmons: 7, other: 9, undecided: 23, margin: 'Tie' },
-      { pollster: 'Impact Research (D)', date: 'November 4–9, 2025', sampleSize: 500, abughazaleh: 17, amiwala: 3, andrew: 3, biss: 31, fine: 10, simmons: 6, other: 8, undecided: 21, margin: 'Biss +14' },
-      { pollster: 'Data for Progress (D)', date: 'October 29 – November 3, 2025', sampleSize: 569, abughazaleh: 18, amiwala: 6, andrew: 1, biss: 18, fine: 10, simmons: 6, other: 10, undecided: 31, margin: 'Tie' },
-      { pollster: 'MDW Communications (D)', date: 'October 14–16, 2025', sampleSize: 917, abughazaleh: 13, amiwala: 2, andrew: 2, biss: 18, fine: 9, simmons: 4, other: 4, undecided: 48, margin: 'Biss +5' },
-      { pollster: 'MDW Communications (D)', date: 'June 12–15, 2025', sampleSize: 899, abughazaleh: 10, amiwala: 2, andrew: 0, biss: 17, fine: 8, simmons: 4, other: 6, undecided: 53, margin: 'Biss +7' }
     ]
   },
   'florida-gop-governor': {
