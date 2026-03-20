@@ -180,18 +180,26 @@ export default function SwingMap({ baseResults, swing }) {
                 zIndex: 9999
               }}
             >
-              <div className="bg-black/90 border-2 border-white rounded-lg px-4 py-2 shadow-lg mb-2">
-                <div className="text-white font-inter font-bold text-xs text-center">
-                  {hoveredState}
-                </div>
-                <div className="text-xs font-inter font-semibold text-center mt-1" style={{ color }}>
-                  {rating}
-                </div>
-                {newMargin !== null && (
-                  <div className="text-white text-xs text-center mt-1">
-                    {newMargin > 0 ? `R +${newMargin.toFixed(1)}%` : newMargin < 0 ? `D +${Math.abs(newMargin).toFixed(1)}%` : 'Even'}
-                  </div>
-                )}
+              <div className="border border-white/40 rounded-xl shadow-xl mb-2" style={{ backgroundColor: 'rgba(0,0,0,0.92)', padding: '10px 14px', minWidth: 210 }}>
+                <div className="text-white font-bold text-base mb-1">{hoveredState}</div>
+                <div className="font-semibold text-sm mb-2" style={{ color }}>{rating}</div>
+                {newMargin !== null && (() => {
+                  const dPct = Math.max(5, Math.min(95, 50 - newMargin / 2));
+                  const rPct = Math.max(5, Math.min(95, 50 + newMargin / 2));
+                  const isDLeading = dPct >= rPct;
+                  const bars = isDLeading
+                    ? [{ label: 'D', pct: dPct, color: '#2563EB' }, { label: 'R', pct: rPct, color: '#DC2626' }]
+                    : [{ label: 'R', pct: rPct, color: '#DC2626' }, { label: 'D', pct: dPct, color: '#2563EB' }];
+                  return bars.map(bar => (
+                    <div key={bar.label} className="flex items-center gap-2 mb-1">
+                      <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 12 }}>{bar.label}</span>
+                      <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 7 }}>
+                        <div style={{ background: bar.color, height: '100%', width: `${bar.pct}%`, borderRadius: 3 }} />
+                      </div>
+                      <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 36, textAlign: 'right' }}>{bar.pct.toFixed(1)}%</span>
+                    </div>
+                  ));
+                })()}
               </div>
             </div>
           );

@@ -221,5 +221,16 @@ export function computeChartData(polls, type) {
     result.push(point);
   });
 
-  return result;
+  if (result.length < 2) return result;
+  result.sort((a, b) => a.timestamp - b.timestamp);
+  const oneDay = 86400000;
+  const minTs = result[0].timestamp;
+  const maxTs = result[result.length - 1].timestamp;
+  const daily = [];
+  let ri = 0;
+  for (let ts = minTs; ts <= maxTs; ts += oneDay) {
+    while (ri + 1 < result.length && result[ri + 1].timestamp <= ts) ri++;
+    daily.push({ ...result[ri], timestamp: ts });
+  }
+  return daily;
 }

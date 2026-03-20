@@ -67,9 +67,18 @@ const rawSeats = [
   ['WY-AL','Safe R'],
 ];
 
+const ratingApprox = {
+  'Safe D':   { d: 65, r: 35 }, 'Likely D': { d: 58, r: 42 },
+  'Lean D':   { d: 54, r: 46 }, 'Tilt D':   { d: 52, r: 48 },
+  'Toss Up':  { d: 50, r: 50 }, 'Tilt R':   { d: 48, r: 52 },
+  'Lean R':   { d: 46, r: 54 }, 'Likely R': { d: 42, r: 58 },
+  'Safe R':   { d: 35, r: 65 },
+};
+
 export default function HouseForecastMap() {
   const [hovered, setHovered] = useState(null);
   const [tooltip, setTooltip] = useState(null);
+  const [hoveredBubble, setHoveredBubble] = useState(null);
 
   // Group by rating in order, stable within each group
   const groups = {};
@@ -131,24 +140,48 @@ export default function HouseForecastMap() {
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
       {/* Seat count bubbles */}
       <div className="flex justify-center gap-4 mb-6 flex-wrap">
-        <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
-          <div className="text-3xl font-bold text-blue-300">{demSeats}</div>
-          <div className="text-blue-200/70 text-sm mt-1">Democrat</div>
+        <div className="relative" onMouseEnter={() => setHoveredBubble('dem')} onMouseLeave={() => setHoveredBubble(null)}>
+          <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+            <div className="text-3xl font-bold text-blue-300">{demSeats}</div>
+            <div className="text-blue-200/70 text-sm mt-1">Democrat</div>
+          </div>
+          {hoveredBubble === 'dem' && (
+            <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 z-50 bg-black/90 border border-white/20 rounded-xl p-2 flex gap-2 shadow-xl">
+              {[['Safe D','#1E3A8A','white'],['Likely D','#2563EB','white'],['Lean D','#93C5FD','#1E3A8A'],['Tilt D','#BFDBFE','#1E3A8A']].map(([r,bg,tc]) => totals[r] > 0 && (
+                <div key={r} className="rounded-lg px-2 py-1 text-center" style={{backgroundColor:bg,color:tc,minWidth:56}}>
+                  <div className="text-lg font-bold">{totals[r]}</div>
+                  <div className="text-xs whitespace-nowrap">{r}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
           <div className="text-3xl font-bold text-purple-300">{tossUp}</div>
           <div className="text-purple-200/70 text-sm mt-1">Toss Up</div>
         </div>
-        <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
-          <div className="text-3xl font-bold text-red-300">{repSeats}</div>
-          <div className="text-red-200/70 text-sm mt-1">Republican</div>
+        <div className="relative" onMouseEnter={() => setHoveredBubble('rep')} onMouseLeave={() => setHoveredBubble(null)}>
+          <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+            <div className="text-3xl font-bold text-red-300">{repSeats}</div>
+            <div className="text-red-200/70 text-sm mt-1">Republican</div>
+          </div>
+          {hoveredBubble === 'rep' && (
+            <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 z-50 bg-black/90 border border-white/20 rounded-xl p-2 flex gap-2 shadow-xl">
+              {[['Safe R','#7F1D1D','white'],['Likely R','#DC2626','white'],['Lean R','#FCA5A5','#7F1D1D'],['Tilt R','#FECACA','#7F1D1D']].map(([r,bg,tc]) => totals[r] > 0 && (
+                <div key={r} className="rounded-lg px-2 py-1 text-center" style={{backgroundColor:bg,color:tc,minWidth:56}}>
+                  <div className="text-lg font-bold">{totals[r]}</div>
+                  <div className="text-xs whitespace-nowrap">{r}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
       <div className="text-white/50 text-xs text-center mb-4">218 seats needed for majority</div>
 
       {/* Semicircle map */}
-      <div className="relative w-full">
+      <div className="relative w-full" style={{ transform: 'scaleY(0.8)', transformOrigin: 'top center', marginBottom: '-12%' }}>
         <svg viewBox={`0 0 1000 ${CY + 20}`} className="w-full" style={{ minWidth: '320px' }}>
           {dots.map(({ x, y, seat }) => {
             const isHovered = hovered === seat.key;
@@ -180,11 +213,27 @@ export default function HouseForecastMap() {
       {/* Tooltip */}
       {tooltip && (
         <div
-          className="fixed z-50 text-white text-xs px-3 py-2 rounded-lg pointer-events-none border border-white/60"
-          style={{ left: tooltip.x + 14, top: tooltip.y - 55, backgroundColor: 'rgba(0,0,0,0.8)' }}
+          className="fixed z-50 pointer-events-none border border-white/40 rounded-xl shadow-xl"
+          style={{ left: tooltip.x + 14, top: tooltip.y - 130, backgroundColor: 'rgba(0,0,0,0.92)', minWidth: 210, padding: '10px 14px' }}
         >
-          <div className="font-bold text-sm">{tooltip.label}</div>
-          <div className="mt-0.5 font-semibold" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
+          <div className="text-white font-bold text-base mb-1">{tooltip.label}</div>
+          <div className="font-semibold text-sm mb-2" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
+          {(() => {
+            const approx = ratingApprox[tooltip.rating] || { d: 50, r: 50 };
+            const isDLeading = approx.d >= approx.r;
+            const bars = isDLeading
+              ? [{ label: 'D', pct: approx.d, color: '#2563EB' }, { label: 'R', pct: approx.r, color: '#DC2626' }]
+              : [{ label: 'R', pct: approx.r, color: '#DC2626' }, { label: 'D', pct: approx.d, color: '#2563EB' }];
+            return bars.map(bar => (
+              <div key={bar.label} className="flex items-center gap-2 mb-1">
+                <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 12 }}>{bar.label}</span>
+                <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 7 }}>
+                  <div style={{ background: bar.color, height: '100%', width: `${bar.pct}%`, borderRadius: 3 }} />
+                </div>
+                <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 32, textAlign: 'right' }}>{bar.pct}%</span>
+              </div>
+            ));
+          })()}
         </div>
       )}
 

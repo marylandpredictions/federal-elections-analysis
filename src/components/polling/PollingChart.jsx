@@ -86,12 +86,20 @@ export default function PollingChart({ polls, type }) {
               const entries = payload
                 .filter(e => !e.dataKey.endsWith('Min') && !e.dataKey.endsWith('Max') && e.value != null)
                 .sort((a, b) => b.value - a.value);
+              if (!entries.length) return null;
+              const maxVal = entries[0].value || 1;
               return (
-                <div style={{ backgroundColor: 'rgba(0,0,0,0.85)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', padding: '10px 14px' }}>
-                  <p style={{ color: 'white', marginBottom: 6, fontSize: 12 }}>{format(new Date(label), 'MMMM d, yyyy')}</p>
+                <div style={{ backgroundColor: 'rgba(0,0,0,0.92)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 8, padding: '10px 14px', minWidth: 230 }}>
+                  <p style={{ color: 'white', marginBottom: 8, fontSize: 12 }}>{format(new Date(label), 'MMMM d, yyyy')}</p>
                   {entries.map(e => (
-                    <div key={e.dataKey} style={{ color: e.color, fontSize: 13, fontWeight: 600 }}>
-                      {e.name}: {Number(e.value).toFixed(1)}%
+                    <div key={e.dataKey} style={{ marginBottom: 6 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <span style={{ color: e.color, fontSize: 11, fontWeight: 600, width: 90, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flexShrink: 0 }}>{e.name}</span>
+                        <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 8, overflow: 'hidden' }}>
+                          <div style={{ background: e.color, height: '100%', width: `${(e.value / maxVal) * 100}%`, borderRadius: 3 }} />
+                        </div>
+                        <span style={{ color: e.color, fontSize: 11, fontWeight: 700, minWidth: 38, textAlign: 'right' }}>{Number(e.value).toFixed(1)}%</span>
+                      </div>
                     </div>
                   ))}
                 </div>

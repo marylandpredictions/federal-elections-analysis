@@ -66,12 +66,26 @@ const ratingColors = {
   'Not Contested': '#D3D3D3'
 };
 
+const ratingApprox = {
+  'Safe D':   { d: 65, r: 35 }, 'Likely D': { d: 58, r: 42 },
+  'Lean D':   { d: 54, r: 46 }, 'Tilt D':   { d: 52, r: 48 },
+  'Toss Up':  { d: 50, r: 50 }, 'Tilt R':   { d: 48, r: 52 },
+  'Lean R':   { d: 46, r: 54 }, 'Likely R': { d: 42, r: 58 },
+  'Safe R':   { d: 35, r: 65 },
+};
+
 export default function InteractiveMap({ ratings }) {
   const [hoveredState, setHoveredState] = useState(null);
+  const [hoveredBubble, setHoveredBubble] = useState(null);
 
   const stateEntries = Object.entries(statePositions);
 
   // Compute seat counts
+  const ratingBreakdown = {};
+  const allRatings = ['Safe D','Likely D','Lean D','Tilt D','Toss Up','Tilt R','Lean R','Likely R','Safe R'];
+  allRatings.forEach(r => ratingBreakdown[r] = 0);
+  Object.values(ratings).forEach(r => { if (ratingBreakdown[r] !== undefined) ratingBreakdown[r]++; });
+
   const counts = Object.values(ratings).reduce((acc, r) => {
     if (r === 'Safe D' || r === 'Likely D' || r === 'Lean D' || r === 'Tilt D') acc.democrat++;
     else if (r === 'Safe R' || r === 'Likely R' || r === 'Lean R' || r === 'Tilt R') acc.republican++;
@@ -83,17 +97,41 @@ export default function InteractiveMap({ ratings }) {
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
       {/* Seat count bubbles */}
       <div className="flex justify-center gap-4 mb-6 flex-wrap">
-        <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
-          <div className="text-3xl font-bold text-blue-300">{counts.democrat}</div>
-          <div className="text-blue-200/70 text-sm mt-1">Democrat</div>
+        <div className="relative" onMouseEnter={() => setHoveredBubble('dem')} onMouseLeave={() => setHoveredBubble(null)}>
+          <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+            <div className="text-3xl font-bold text-blue-300">{counts.democrat}</div>
+            <div className="text-blue-200/70 text-sm mt-1">Democrat</div>
+          </div>
+          {hoveredBubble === 'dem' && (
+            <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 z-50 bg-black/90 border border-white/20 rounded-xl p-2 flex gap-2 shadow-xl">
+              {[['Safe D','#1046ba','white'],['Likely D','#2663eb','white'],['Lean D','#5689f7','white'],['Tilt D','#82a6f2','#1046ba']].map(([r,bg,tc]) => ratingBreakdown[r] > 0 && (
+                <div key={r} className="rounded-lg px-2 py-1 text-center" style={{backgroundColor:bg,color:tc,minWidth:56}}>
+                  <div className="text-lg font-bold">{ratingBreakdown[r]}</div>
+                  <div className="text-xs whitespace-nowrap">{r}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
           <div className="text-3xl font-bold text-purple-300">{counts.tossUp}</div>
           <div className="text-purple-200/70 text-sm mt-1">Toss Up</div>
         </div>
-        <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
-          <div className="text-3xl font-bold text-red-300">{counts.republican}</div>
-          <div className="text-red-200/70 text-sm mt-1">Republican</div>
+        <div className="relative" onMouseEnter={() => setHoveredBubble('rep')} onMouseLeave={() => setHoveredBubble(null)}>
+          <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+            <div className="text-3xl font-bold text-red-300">{counts.republican}</div>
+            <div className="text-red-200/70 text-sm mt-1">Republican</div>
+          </div>
+          {hoveredBubble === 'rep' && (
+            <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 z-50 bg-black/90 border border-white/20 rounded-xl p-2 flex gap-2 shadow-xl">
+              {[['Safe R','#8B0000','white'],['Likely R','#CC0000','white'],['Lean R','#FF6B6B','white'],['Tilt R','#FF7F7F','#8B0000']].map(([r,bg,tc]) => ratingBreakdown[r] > 0 && (
+                <div key={r} className="rounded-lg px-2 py-1 text-center" style={{backgroundColor:bg,color:tc,minWidth:56}}>
+                  <div className="text-lg font-bold">{ratingBreakdown[r]}</div>
+                  <div className="text-xs whitespace-nowrap">{r}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <div className="relative w-full" style={{ paddingBottom: '60%' }}>
@@ -132,24 +170,28 @@ export default function InteractiveMap({ ratings }) {
           const { x, y } = statePositions[hoveredState];
           const rating = ratings[hoveredState] || 'Toss Up';
           const color = ratingColors[rating];
-          
+          const approx = ratingApprox[rating] || { d: 50, r: 50 };
+          const isDLeading = approx.d >= approx.r;
+          const bars = isDLeading
+            ? [{ label: 'D', pct: approx.d, color: '#2563EB' }, { label: 'R', pct: approx.r, color: '#DC2626' }]
+            : [{ label: 'R', pct: approx.r, color: '#DC2626' }, { label: 'D', pct: approx.d, color: '#2563EB' }];
           return (
             <div 
               className="absolute pointer-events-none"
-              style={{
-                left: `${(x / 960) * 100}%`,
-                top: `${(y / 600) * 100}%`,
-                transform: 'translate(-50%, -100%)',
-                zIndex: 9999
-              }}
+              style={{ left: `${(x / 960) * 100}%`, top: `${(y / 600) * 100}%`, transform: 'translate(-50%, -115%)', zIndex: 9999, minWidth: 210 }}
             >
-              <div className="bg-black/90 border-2 border-white rounded-lg px-4 py-2 shadow-lg mb-2">
-                <div className="text-white font-inter font-bold text-xs text-center">
-                  {hoveredState}
-                </div>
-                <div className="text-xs font-inter font-semibold text-center mt-1" style={{ color }}>
-                  {rating}
-                </div>
+              <div className="border border-white/40 rounded-xl shadow-xl mb-2" style={{ backgroundColor: 'rgba(0,0,0,0.92)', padding: '10px 14px' }}>
+                <div className="text-white font-bold text-base mb-1">{hoveredState}</div>
+                <div className="font-semibold text-sm mb-2" style={{ color }}>{rating}</div>
+                {bars.map(bar => (
+                  <div key={bar.label} className="flex items-center gap-2 mb-1">
+                    <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 12 }}>{bar.label}</span>
+                    <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 7 }}>
+                      <div style={{ background: bar.color, height: '100%', width: `${bar.pct}%`, borderRadius: 3 }} />
+                    </div>
+                    <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 32, textAlign: 'right' }}>{bar.pct}%</span>
+                  </div>
+                ))}
               </div>
             </div>
           );
