@@ -26,8 +26,8 @@ const HEX_GRID = {
 
 // AK and HI placed separately at bottom-left
 const SEPARATE = {
-  'AK': { x: 70, y: 505 },
-  'HI': { x: 165, y: 505 },
+  'AK': { x: 70, y: 445 },
+  'HI': { x: 145, y: 445 },
 };
 
 export const NAME_TO_ABBR = {

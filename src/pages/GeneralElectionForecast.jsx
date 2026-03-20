@@ -5,6 +5,7 @@ import SenateControl from '../components/forecasts/SenateControl';
 import HouseForecastMap from '../components/forecasts/HouseForecastMap';
 
 const governorsRatings = {
+  'District of Columbia': 'Not Contested',
   'Alabama': 'Safe R', 'Alaska': 'Tilt R', 'Arizona': 'Tilt D', 'Arkansas': 'Safe R',
   'California': 'Safe D', 'Colorado': 'Safe D', 'Connecticut': 'Safe D', 'Delaware': 'Not Contested',
   'Florida': 'Likely R', 'Georgia': 'Toss Up', 'Hawaii': 'Safe D', 'Idaho': 'Safe R',
@@ -21,6 +22,7 @@ const governorsRatings = {
 };
 
 const senateRatings = {
+  'District of Columbia': 'Not Contested',
   'Alabama': 'Safe R', 'Alaska': 'Tilt D', 'Arizona': 'Not Contested', 'Arkansas': 'Safe R',
   'California': 'Not Contested', 'Colorado': 'Safe D', 'Connecticut': 'Not Contested', 'Delaware': 'Safe D',
   'Florida': 'Likely R', 'Georgia': 'Lean D', 'Hawaii': 'Not Contested', 'Idaho': 'Safe R',
