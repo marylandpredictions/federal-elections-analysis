@@ -55,7 +55,7 @@ export default function Interactives() {
             >
               <Link
                 to={interactive.path}
-                className="block bg-accent/80 backdrop-blur-sm rounded-3xl p-8 hover:bg-accent transition-all duration-300 hover:scale-105 shadow-lg"
+                className="block bg-white/10 backdrop-blur-sm rounded-3xl p-8 hover:bg-white/20 transition-all duration-300 hover:scale-105 shadow-lg border border-white/10"
               >
                 <h2 className="text-white font-inter font-bold text-xl sm:text-2xl mb-3 text-shadow-teal">
                   {interactive.title}

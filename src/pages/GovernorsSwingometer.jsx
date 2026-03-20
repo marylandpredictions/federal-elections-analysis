@@ -82,7 +82,7 @@ export default function GovernorsSwingometer() {
         <SwingBar swing={swing} setSwing={setSwing} />
 
         <div className="mt-8">
-          <SwingMap baseResults={govBaseResults} swing={swing} title="2026 Governors Map" baseSeats={{ dem: 0, rep: 0 }} />
+          <SwingMap baseResults={govBaseResults} swing={swing} title="2026 Governors Map" baseDemSeats={0} baseRepSeats={0} />
         </div>
       </div>
     </div>

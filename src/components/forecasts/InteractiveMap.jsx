@@ -1,57 +1,5 @@
-import React, { useState, useCallback } from 'react';
-
-const statePositions = {
-  'Alabama': { x: 700, y: 420 },
-  'Alaska': { x: 120, y: 550 },
-  'Arizona': { x: 180, y: 380 },
-  'Arkansas': { x: 580, y: 400 },
-  'California': { x: 100, y: 320 },
-  'Colorado': { x: 300, y: 320 },
-  'Connecticut': { x: 850, y: 240 },
-  'Delaware': { x: 820, y: 290 },
-  'Florida': { x: 760, y: 500 },
-  'Georgia': { x: 720, y: 430 },
-  'Hawaii': { x: 280, y: 550 },
-  'Idaho': { x: 200, y: 180 },
-  'Illinois': { x: 620, y: 300 },
-  'Indiana': { x: 660, y: 300 },
-  'Iowa': { x: 560, y: 260 },
-  'Kansas': { x: 480, y: 350 },
-  'Kentucky': { x: 690, y: 340 },
-  'Louisiana': { x: 600, y: 470 },
-  'Maine': { x: 870, y: 150 },
-  'Maryland': { x: 800, y: 300 },
-  'Massachusetts': { x: 860, y: 220 },
-  'Michigan': { x: 670, y: 230 },
-  'Minnesota': { x: 540, y: 180 },
-  'Mississippi': { x: 620, y: 450 },
-  'Missouri': { x: 570, y: 340 },
-  'Montana': { x: 280, y: 160 },
-  'Nebraska': { x: 440, y: 280 },
-  'Nevada': { x: 140, y: 300 },
-  'New Hampshire': { x: 860, y: 200 },
-  'New Jersey': { x: 820, y: 270 },
-  'New Mexico': { x: 300, y: 400 },
-  'New York': { x: 800, y: 220 },
-  'North Carolina': { x: 760, y: 370 },
-  'North Dakota': { x: 420, y: 160 },
-  'Ohio': { x: 700, y: 300 },
-  'Oklahoma': { x: 480, y: 390 },
-  'Oregon': { x: 100, y: 180 },
-  'Pennsylvania': { x: 780, y: 270 },
-  'Rhode Island': { x: 870, y: 230 },
-  'South Carolina': { x: 750, y: 400 },
-  'South Dakota': { x: 420, y: 210 },
-  'Tennessee': { x: 660, y: 370 },
-  'Texas': { x: 450, y: 480 },
-  'Utah': { x: 220, y: 300 },
-  'Vermont': { x: 840, y: 190 },
-  'Virginia': { x: 770, y: 330 },
-  'Washington': { x: 120, y: 120 },
-  'West Virginia': { x: 750, y: 310 },
-  'Wisconsin': { x: 600, y: 210 },
-  'Wyoming': { x: 300, y: 230 }
-};
+import React, { useMemo, useState } from 'react';
+import HexUSMap, { NAME_TO_ABBR, ABBR_TO_NAME } from '../maps/HexUSMap';
 
 const ratingColors = {
   'Safe D': '#1046ba',
@@ -63,7 +11,7 @@ const ratingColors = {
   'Lean R': '#FF6B6B',
   'Likely R': '#CC0000',
   'Safe R': '#8B0000',
-  'Not Contested': '#D3D3D3'
+  'Not Contested': '#D3D3D3',
 };
 
 const ratingApprox = {
@@ -75,23 +23,68 @@ const ratingApprox = {
 };
 
 export default function InteractiveMap({ ratings, percentages, majorityNote }) {
-  const [hoveredState, setHoveredState] = useState(null);
   const [hoveredBubble, setHoveredBubble] = useState(null);
 
-  const stateEntries = Object.entries(statePositions);
-
-  // Compute seat counts
-  const ratingBreakdown = {};
-  const allRatings = ['Safe D','Likely D','Lean D','Tilt D','Toss Up','Tilt R','Lean R','Likely R','Safe R'];
-  allRatings.forEach(r => ratingBreakdown[r] = 0);
-  Object.values(ratings).forEach(r => { if (ratingBreakdown[r] !== undefined) ratingBreakdown[r]++; });
-
+  // Count seats
   const counts = Object.values(ratings).reduce((acc, r) => {
-    if (r === 'Safe D' || r === 'Likely D' || r === 'Lean D' || r === 'Tilt D') acc.democrat++;
-    else if (r === 'Safe R' || r === 'Likely R' || r === 'Lean R' || r === 'Tilt R') acc.republican++;
+    if (['Safe D','Likely D','Lean D','Tilt D'].includes(r)) acc.democrat++;
+    else if (['Safe R','Likely R','Lean R','Tilt R'].includes(r)) acc.republican++;
     else if (r === 'Toss Up') acc.tossUp++;
     return acc;
   }, { democrat: 0, republican: 0, tossUp: 0 });
+
+  const ratingBreakdown = {};
+  ['Safe D','Likely D','Lean D','Tilt D','Toss Up','Tilt R','Lean R','Likely R','Safe R'].forEach(r => ratingBreakdown[r] = 0);
+  Object.values(ratings).forEach(r => { if (ratingBreakdown[r] !== undefined) ratingBreakdown[r]++; });
+
+  const colorsByAbbr = useMemo(() => {
+    const map = {};
+    Object.entries(ratings).forEach(([fullName, rating]) => {
+      const abbr = NAME_TO_ABBR[fullName];
+      if (abbr) map[abbr] = ratingColors[rating] || '#4B5563';
+    });
+    return map;
+  }, [ratings]);
+
+  const renderTooltipContent = (abbr) => {
+    const fullName = ABBR_TO_NAME[abbr];
+    if (!fullName) return null;
+    const rating = ratings[fullName] || 'Toss Up';
+    const color = ratingColors[rating];
+    const isNC = rating === 'Not Contested';
+    const pctData = percentages && percentages[fullName];
+    const fallback = ratingApprox[rating];
+    const src = pctData || (!isNC ? fallback : null);
+
+    const bars = [];
+    if (src && !isNC) {
+      const { d, r, i } = src;
+      if (d >= r) {
+        bars.push({ label: 'D', pct: d, color: '#2563EB' });
+        bars.push({ label: 'R', pct: r, color: '#DC2626' });
+      } else {
+        bars.push({ label: 'R', pct: r, color: '#DC2626' });
+        bars.push({ label: 'D', pct: d, color: '#2563EB' });
+      }
+      if (i) bars.push({ label: 'I', pct: i, color: '#9CA3AF' });
+    }
+
+    return (
+      <>
+        <div className="text-white font-bold text-sm mb-1">{fullName}</div>
+        <div className="font-semibold text-xs mb-2" style={{ color }}>{rating}</div>
+        {bars.map(bar => (
+          <div key={bar.label} className="flex items-center gap-2 mb-1">
+            <span style={{ color: bar.color, fontSize: 10, fontWeight: 700, minWidth: 10 }}>{bar.label}</span>
+            <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 6 }}>
+              <div style={{ background: bar.color, height: '100%', width: `${bar.pct}%`, borderRadius: 3 }} />
+            </div>
+            <span style={{ color: bar.color, fontSize: 10, fontWeight: 700, minWidth: 30, textAlign: 'right' }}>{bar.pct}%</span>
+          </div>
+        ))}
+      </>
+    );
+  };
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
@@ -134,95 +127,22 @@ export default function InteractiveMap({ ratings, percentages, majorityNote }) {
           )}
         </div>
       </div>
+
       {majorityNote && (
-        <p className="text-white/60 text-xs text-center mt-3 mb-1">{majorityNote}</p>
+        <p className="text-white/60 text-xs text-center mt-1 mb-4">{majorityNote}</p>
       )}
-      <div className="relative w-full" style={{ paddingBottom: '60%' }}>
-        <svg 
-          viewBox="0 0 960 600" 
-          className="absolute inset-0 w-full h-full"
-          style={{ filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))' }}
-        >
-          {stateEntries.map(([state, { x, y }]) => {
-            const rating = ratings[state] || 'Toss Up';
-            const color = ratingColors[rating];
-            const isHovered = hoveredState === state;
-            
-            return (
-              <circle
-                key={state}
-                cx={x}
-                cy={y}
-                r={isHovered ? 20 : 16}
-                fill={color}
-                stroke="white"
-                strokeWidth={isHovered ? 3 : 2}
-                onMouseEnter={() => setHoveredState(state)}
-                onMouseLeave={() => setHoveredState(null)}
-                style={{ 
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease'
-                }}
-              />
-            );
-          })}
-        </svg>
-        
-        {/* Tooltip - rendered outside SVG to stay on top */}
-        {hoveredState && (() => {
-          const { x, y } = statePositions[hoveredState];
-          const rating = ratings[hoveredState] || 'Toss Up';
-          const color = ratingColors[rating];
-          const isNC = rating === 'Not Contested';
-          const pctData = percentages && percentages[hoveredState];
-          const fallback = ratingApprox[rating] || { d: 50, r: 50 };
-          const src = pctData || (!isNC ? fallback : null);
-          let bars = [];
-          if (src && !isNC) {
-            const { d, r, i } = src;
-            if (d >= r) {
-              bars.push({ label: 'D', pct: d, color: '#2563EB' });
-              bars.push({ label: 'R', pct: r, color: '#DC2626' });
-            } else {
-              bars.push({ label: 'R', pct: r, color: '#DC2626' });
-              bars.push({ label: 'D', pct: d, color: '#2563EB' });
-            }
-            if (i) bars.push({ label: 'I', pct: i, color: '#9CA3AF' });
-          }
-          return (
-            <div 
-              className="absolute pointer-events-none"
-              style={{ left: `${(x / 960) * 100}%`, top: `${(y / 600) * 100}%`, transform: 'translate(-50%, -115%)', zIndex: 9999, minWidth: 200 }}
-            >
-              <div className="border border-white/40 rounded-xl shadow-xl mb-2" style={{ backgroundColor: 'rgba(0,0,0,0.92)', padding: '10px 14px' }}>
-                <div className="text-white font-bold text-base mb-1">{hoveredState}</div>
-                <div className="font-semibold text-sm mb-2" style={{ color }}>{rating}</div>
-                {bars.map(bar => (
-                  <div key={bar.label} className="flex items-center gap-2 mb-1">
-                    <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 12 }}>{bar.label}</span>
-                    <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 7 }}>
-                      <div style={{ background: bar.color, height: '100%', width: `${bar.pct}%`, borderRadius: 3 }} />
-                    </div>
-                    <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 36, textAlign: 'right' }}>{bar.pct}%</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
-        })()}
-      </div>
+
+      <HexUSMap
+        colorsByAbbr={colorsByAbbr}
+        renderTooltipContent={renderTooltipContent}
+      />
 
       {/* Legend */}
-      <div className="mt-6 flex flex-wrap justify-center gap-3 sm:gap-4">
+      <div className="mt-4 flex flex-wrap justify-center gap-3">
         {Object.entries(ratingColors).map(([rating, color]) => (
-          <div key={rating} className="flex items-center gap-2">
-            <div 
-              className="w-4 h-4 rounded-full border-2 border-white" 
-              style={{ backgroundColor: color }}
-            />
-            <span className="text-white text-xs sm:text-sm font-medium">
-              {rating}
-            </span>
+          <div key={rating} className="flex items-center gap-1.5">
+            <div className="w-3 h-3 rounded border border-white/50" style={{ backgroundColor: color }} />
+            <span className="text-white text-xs font-medium">{rating}</span>
           </div>
         ))}
       </div>

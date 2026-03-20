@@ -36,7 +36,10 @@ const forecastLinks = [
 ];
 
 const interactiveLinks = [
-  { label: 'Senate Swingometer', path: '/SenateSwingometer' }
+  { label: 'Senate Swingometer', path: '/SenateSwingometer' },
+  { label: 'House Swingometer', path: '/HouseSwingometer' },
+  { label: 'Governors Swingometer', path: '/GovernorsSwingometer' },
+  { label: 'Presidential Map Builder', path: '/PresidentialMapBuilder' },
 ];
 
 export default function Header() {

@@ -1,65 +1,13 @@
-import React, { useState } from 'react';
-
-const statePositions = {
-  'Alabama': { x: 700, y: 420 },
-  'Alaska': { x: 120, y: 550 },
-  'Arizona': { x: 180, y: 380 },
-  'Arkansas': { x: 580, y: 400 },
-  'California': { x: 100, y: 320 },
-  'Colorado': { x: 300, y: 320 },
-  'Connecticut': { x: 850, y: 240 },
-  'Delaware': { x: 820, y: 290 },
-  'Florida': { x: 760, y: 500 },
-  'Georgia': { x: 720, y: 430 },
-  'Hawaii': { x: 280, y: 550 },
-  'Idaho': { x: 200, y: 180 },
-  'Illinois': { x: 620, y: 300 },
-  'Indiana': { x: 660, y: 300 },
-  'Iowa': { x: 560, y: 260 },
-  'Kansas': { x: 480, y: 350 },
-  'Kentucky': { x: 690, y: 340 },
-  'Louisiana': { x: 600, y: 470 },
-  'Maine': { x: 870, y: 150 },
-  'Maryland': { x: 800, y: 300 },
-  'Massachusetts': { x: 860, y: 220 },
-  'Michigan': { x: 670, y: 230 },
-  'Minnesota': { x: 540, y: 180 },
-  'Mississippi': { x: 620, y: 450 },
-  'Missouri': { x: 570, y: 340 },
-  'Montana': { x: 280, y: 160 },
-  'Nebraska': { x: 440, y: 280 },
-  'Nevada': { x: 140, y: 300 },
-  'New Hampshire': { x: 860, y: 200 },
-  'New Jersey': { x: 820, y: 270 },
-  'New Mexico': { x: 300, y: 400 },
-  'New York': { x: 800, y: 220 },
-  'North Carolina': { x: 760, y: 370 },
-  'North Dakota': { x: 420, y: 160 },
-  'Ohio': { x: 700, y: 300 },
-  'Oklahoma': { x: 480, y: 390 },
-  'Oregon': { x: 100, y: 180 },
-  'Pennsylvania': { x: 780, y: 270 },
-  'Rhode Island': { x: 870, y: 230 },
-  'South Carolina': { x: 750, y: 400 },
-  'South Dakota': { x: 420, y: 210 },
-  'Tennessee': { x: 660, y: 370 },
-  'Texas': { x: 450, y: 480 },
-  'Utah': { x: 220, y: 300 },
-  'Vermont': { x: 840, y: 190 },
-  'Virginia': { x: 770, y: 330 },
-  'Washington': { x: 120, y: 120 },
-  'West Virginia': { x: 750, y: 310 },
-  'Wisconsin': { x: 600, y: 210 },
-  'Wyoming': { x: 300, y: 230 }
-};
+import React, { useMemo, useState } from 'react';
+import HexUSMap, { NAME_TO_ABBR, ABBR_TO_NAME } from '../maps/HexUSMap';
 
 const getRating = (margin) => {
   if (margin === null) return 'Not Contested';
-  const absMargin = Math.abs(margin);
+  const abs = Math.abs(margin);
   if (margin === 0) return 'Toss Up';
-  if (absMargin > 15.0) return margin > 0 ? 'Safe R' : 'Safe D';
-  if (absMargin >= 5.0) return margin > 0 ? 'Likely R' : 'Likely D';
-  if (absMargin >= 1.0) return margin > 0 ? 'Lean R' : 'Lean D';
+  if (abs > 15.0) return margin > 0 ? 'Safe R' : 'Safe D';
+  if (abs >= 5.0) return margin > 0 ? 'Likely R' : 'Likely D';
+  if (abs >= 1.0) return margin > 0 ? 'Lean R' : 'Lean D';
   return margin > 0 ? 'Tilt R' : 'Tilt D';
 };
 
@@ -73,150 +21,103 @@ const ratingColors = {
   'Lean R': '#FF6B6B',
   'Likely R': '#CC0000',
   'Safe R': '#8B0000',
-  'Not Contested': '#808080'
+  'Not Contested': '#808080',
 };
 
-export default function SwingMap({ baseResults, swing, title }) {
-  const [hoveredState, setHoveredState] = useState(null);
+export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34, baseRepSeats = 31 }) {
+  const [hoveredBubble, setHoveredBubble] = useState(null);
 
-  const stateEntries = Object.entries(statePositions);
-  
-  // Calculate seat counts based on swing
-  let demSeats = 34; // Base uncontested seats
-  let repSeats = 31; // Base uncontested seats
+  let demSeats = baseDemSeats;
+  let repSeats = baseRepSeats;
   let tossUpSeats = 0;
-  
+
   Object.entries(baseResults).forEach(([state, baseMargin]) => {
     if (baseMargin !== null) {
       const newMargin = baseMargin + swing;
       const rating = getRating(newMargin);
-      
-      if (rating.includes('D')) {
-        demSeats += 1;
-      } else if (rating.includes('R')) {
-        repSeats += 1;
-      } else if (rating === 'Toss Up') {
-        tossUpSeats += 1;
-      }
+      if (rating.includes('D')) demSeats++;
+      else if (rating.includes('R')) repSeats++;
+      else if (rating === 'Toss Up') tossUpSeats++;
     }
   });
 
+  const colorsByAbbr = useMemo(() => {
+    const map = {};
+    Object.entries(baseResults).forEach(([fullName, baseMargin]) => {
+      const abbr = NAME_TO_ABBR[fullName];
+      if (!abbr) return;
+      const newMargin = baseMargin !== null ? baseMargin + swing : null;
+      map[abbr] = ratingColors[getRating(newMargin)];
+    });
+    return map;
+  }, [baseResults, swing]);
+
+  const renderTooltipContent = (abbr) => {
+    const fullName = ABBR_TO_NAME[abbr];
+    if (!fullName || !(fullName in baseResults)) return null;
+    const baseMargin = baseResults[fullName];
+    const newMargin = baseMargin !== null ? baseMargin + swing : null;
+    const rating = getRating(newMargin);
+    const color = ratingColors[rating];
+
+    return (
+      <>
+        <div className="text-white font-bold text-sm mb-1">{fullName}</div>
+        <div className="font-semibold text-xs mb-2" style={{ color }}>{rating}</div>
+        {newMargin !== null && (() => {
+          const dPct = Math.max(5, Math.min(95, 50 - newMargin / 2));
+          const rPct = Math.max(5, Math.min(95, 50 + newMargin / 2));
+          const bars = dPct >= rPct
+            ? [{ label: 'D', pct: dPct, color: '#2563EB' }, { label: 'R', pct: rPct, color: '#DC2626' }]
+            : [{ label: 'R', pct: rPct, color: '#DC2626' }, { label: 'D', pct: dPct, color: '#2563EB' }];
+          return bars.map(bar => (
+            <div key={bar.label} className="flex items-center gap-2 mb-1">
+              <span style={{ color: bar.color, fontSize: 10, fontWeight: 700, minWidth: 10 }}>{bar.label}</span>
+              <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 6 }}>
+                <div style={{ background: bar.color, height: '100%', width: `${bar.pct}%`, borderRadius: 3 }} />
+              </div>
+              <span style={{ color: bar.color, fontSize: 10, fontWeight: 700, minWidth: 32, textAlign: 'right' }}>{bar.pct.toFixed(1)}%</span>
+            </div>
+          ));
+        })()}
+      </>
+    );
+  };
+
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
-      <h3 className="text-white font-inter font-bold text-xl sm:text-2xl mb-6 text-shadow-teal text-center">
-        {title || '2026 Senate Map'}
-      </h3>
-      
+      {title && (
+        <h3 className="text-white font-inter font-bold text-xl sm:text-2xl mb-6 text-shadow-teal text-center">{title}</h3>
+      )}
+
       {/* Seat Counter */}
       <div className="flex justify-center gap-4 mb-6 flex-wrap">
-        <div className="bg-blue-600 rounded-xl px-6 py-3 shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+        <div className="bg-blue-600/70 rounded-xl px-6 py-3 shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer"
+          onMouseEnter={() => setHoveredBubble('dem')} onMouseLeave={() => setHoveredBubble(null)}>
           <div className="text-white font-bold text-2xl text-center">{demSeats}</div>
           <div className="text-white/90 text-sm text-center">Democrat</div>
         </div>
-        
-        <div className="bg-purple-600 rounded-xl px-6 py-3 shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+        <div className="bg-purple-600/70 rounded-xl px-6 py-3 shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
           <div className="text-white font-bold text-2xl text-center">{tossUpSeats}</div>
           <div className="text-white/90 text-sm text-center">Toss Up</div>
         </div>
-        
-        <div className="bg-red-600 rounded-xl px-6 py-3 shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+        <div className="bg-red-600/70 rounded-xl px-6 py-3 shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
           <div className="text-white font-bold text-2xl text-center">{repSeats}</div>
           <div className="text-white/90 text-sm text-center">Republican</div>
         </div>
       </div>
 
-      <div className="relative w-full" style={{ paddingBottom: '60%' }}>
-        <svg 
-          viewBox="0 0 960 600" 
-          className="absolute inset-0 w-full h-full"
-          style={{ filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))' }}
-        >
-          <g>
-          {stateEntries.map(([state, { x, y }]) => {
-            const baseMargin = baseResults[state];
-            
-            const newMargin = baseMargin !== null ? baseMargin + swing : null;
-            const rating = getRating(newMargin);
-            const color = ratingColors[rating];
-            const isHovered = hoveredState === state;
-            
-            return (
-              <circle
-                key={state}
-                cx={x}
-                cy={y}
-                r={isHovered ? 22 : 16}
-                fill="transparent"
-                stroke="white"
-                strokeWidth={isHovered ? 3 : 2}
-                onMouseEnter={() => setHoveredState(state)}
-                onMouseLeave={() => setHoveredState(null)}
-                style={{ 
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  fill: color
-                }}
-              />
-            );
-          })}
-          </g>
-        </svg>
-        
-        {/* Tooltip - rendered separately to stay on top */}
-        {hoveredState && (() => {
-          const { x, y } = statePositions[hoveredState];
-          const baseMargin = baseResults[hoveredState];
-          const newMargin = baseMargin !== null ? baseMargin + swing : null;
-          const rating = getRating(newMargin);
-          const color = ratingColors[rating];
-          
-          return (
-            <div 
-              className="absolute pointer-events-none"
-              style={{
-                left: `${(x / 960) * 100}%`,
-                top: `${(y / 600) * 100}%`,
-                transform: 'translate(-50%, -100%)',
-                zIndex: 9999
-              }}
-            >
-              <div className="border border-white/40 rounded-xl shadow-xl mb-2" style={{ backgroundColor: 'rgba(0,0,0,0.92)', padding: '10px 14px', minWidth: 210 }}>
-                <div className="text-white font-bold text-base mb-1">{hoveredState}</div>
-                <div className="font-semibold text-sm mb-2" style={{ color }}>{rating}</div>
-                {newMargin !== null && (() => {
-                  const dPct = Math.max(5, Math.min(95, 50 - newMargin / 2));
-                  const rPct = Math.max(5, Math.min(95, 50 + newMargin / 2));
-                  const isDLeading = dPct >= rPct;
-                  const bars = isDLeading
-                    ? [{ label: 'D', pct: dPct, color: '#2563EB' }, { label: 'R', pct: rPct, color: '#DC2626' }]
-                    : [{ label: 'R', pct: rPct, color: '#DC2626' }, { label: 'D', pct: dPct, color: '#2563EB' }];
-                  return bars.map(bar => (
-                    <div key={bar.label} className="flex items-center gap-2 mb-1">
-                      <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 12 }}>{bar.label}</span>
-                      <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 7 }}>
-                        <div style={{ background: bar.color, height: '100%', width: `${bar.pct}%`, borderRadius: 3 }} />
-                      </div>
-                      <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 36, textAlign: 'right' }}>{bar.pct.toFixed(1)}%</span>
-                    </div>
-                  ));
-                })()}
-              </div>
-            </div>
-          );
-        })()}
-      </div>
+      <HexUSMap
+        colorsByAbbr={colorsByAbbr}
+        renderTooltipContent={renderTooltipContent}
+      />
 
       {/* Legend */}
-      <div className="mt-6 flex flex-wrap justify-center gap-3 sm:gap-4">
+      <div className="mt-4 flex flex-wrap justify-center gap-3">
         {Object.entries(ratingColors).map(([rating, color]) => (
           <div key={rating} className="flex items-center gap-2">
-            <div 
-              className="w-4 h-4 rounded-full border-2 border-white" 
-              style={{ backgroundColor: color }}
-            />
-            <span className="text-white text-xs sm:text-sm font-medium">
-              {rating}
-            </span>
+            <div className="w-3 h-3 rounded border border-white/40" style={{ backgroundColor: color }} />
+            <span className="text-white text-xs font-medium">{rating}</span>
           </div>
         ))}
       </div>
