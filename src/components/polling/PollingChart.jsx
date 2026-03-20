@@ -96,7 +96,7 @@ export default function PollingChart({ polls, type }) {
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                         <span style={{ color: e.color, fontSize: 11, fontWeight: 600, width: 90, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flexShrink: 0 }}>{e.name}</span>
                         <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 8, overflow: 'hidden' }}>
-                          <div style={{ background: e.color, height: '100%', width: `${(e.value / maxVal) * 100}%`, borderRadius: 3 }} />
+                          <div style={{ background: e.color, height: '100%', width: `${(e.value / maxVal) * 100}%`, borderRadius: 3, transition: 'width 0.35s ease' }} />
                         </div>
                         <span style={{ color: e.color, fontSize: 11, fontWeight: 700, minWidth: 38, textAlign: 'right' }}>{Number(e.value).toFixed(1)}%</span>
                       </div>

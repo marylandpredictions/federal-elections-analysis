@@ -105,8 +105,7 @@ export default function Header() {
 
           {/* Forecasts Dropdown */}
           <div className="relative flex-shrink-0" onMouseEnter={() => setForecastsOpen(true)} onMouseLeave={() => setForecastsOpen(false)}>
-            <Link
-              to="/Forecasts"
+            <button
               className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
                 forecastLinks.some(l => location.pathname === l.path) || location.pathname === '/Forecasts'
                   ? 'bg-accent text-white'
@@ -116,7 +115,7 @@ export default function Header() {
             >
               Forecasts
               <ChevronDown style={{ width: '16px', height: '16px' }} />
-            </Link>
+            </button>
             {forecastsOpen && (
               <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 py-2 z-50" style={{ minWidth: '220px' }}>
                 <Link to="/Forecasts" className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all" style={{ fontSize: '14px' }}>
@@ -133,9 +132,8 @@ export default function Header() {
 
           {/* Interactives Dropdown */}
           <div className="relative flex-shrink-0" onMouseEnter={() => setInteractivesOpen(true)} onMouseLeave={() => setInteractivesOpen(false)}>
-            <Link
-              to="/Interactives"
-              className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal relative group flex items-center gap-1 ${
+            <button
+              className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
                 location.pathname.includes('/Interactives') || location.pathname.includes('Swingometer')
                   ? 'bg-accent text-white'
                   : 'text-white/80 hover:bg-accent/50 hover:text-white'
@@ -144,7 +142,7 @@ export default function Header() {
             >
               Interactives
               <ChevronDown style={{ width: '16px', height: '16px' }} />
-            </Link>
+            </button>
             {interactivesOpen && (
               <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 py-2 z-50" style={{ minWidth: '200px' }}>
                 {interactiveLinks.map((link) => (

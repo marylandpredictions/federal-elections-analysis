@@ -74,7 +74,7 @@ const ratingApprox = {
   'Safe R':   { d: 35, r: 65 },
 };
 
-export default function InteractiveMap({ ratings }) {
+export default function InteractiveMap({ ratings, percentages }) {
   const [hoveredState, setHoveredState] = useState(null);
   const [hoveredBubble, setHoveredBubble] = useState(null);
 
@@ -170,15 +170,26 @@ export default function InteractiveMap({ ratings }) {
           const { x, y } = statePositions[hoveredState];
           const rating = ratings[hoveredState] || 'Toss Up';
           const color = ratingColors[rating];
-          const approx = ratingApprox[rating] || { d: 50, r: 50 };
-          const isDLeading = approx.d >= approx.r;
-          const bars = isDLeading
-            ? [{ label: 'D', pct: approx.d, color: '#2563EB' }, { label: 'R', pct: approx.r, color: '#DC2626' }]
-            : [{ label: 'R', pct: approx.r, color: '#DC2626' }, { label: 'D', pct: approx.d, color: '#2563EB' }];
+          const isNC = rating === 'Not Contested';
+          const pctData = percentages && percentages[hoveredState];
+          const fallback = ratingApprox[rating] || { d: 50, r: 50 };
+          const src = pctData || (!isNC ? fallback : null);
+          let bars = [];
+          if (src && !isNC) {
+            const { d, r, i } = src;
+            if (d >= r) {
+              bars.push({ label: 'D', pct: d, color: '#2563EB' });
+              bars.push({ label: 'R', pct: r, color: '#DC2626' });
+            } else {
+              bars.push({ label: 'R', pct: r, color: '#DC2626' });
+              bars.push({ label: 'D', pct: d, color: '#2563EB' });
+            }
+            if (i) bars.push({ label: 'I', pct: i, color: '#9CA3AF' });
+          }
           return (
             <div 
               className="absolute pointer-events-none"
-              style={{ left: `${(x / 960) * 100}%`, top: `${(y / 600) * 100}%`, transform: 'translate(-50%, -115%)', zIndex: 9999, minWidth: 210 }}
+              style={{ left: `${(x / 960) * 100}%`, top: `${(y / 600) * 100}%`, transform: 'translate(-50%, -115%)', zIndex: 9999, minWidth: 200 }}
             >
               <div className="border border-white/40 rounded-xl shadow-xl mb-2" style={{ backgroundColor: 'rgba(0,0,0,0.92)', padding: '10px 14px' }}>
                 <div className="text-white font-bold text-base mb-1">{hoveredState}</div>
@@ -189,7 +200,7 @@ export default function InteractiveMap({ ratings }) {
                     <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 7 }}>
                       <div style={{ background: bar.color, height: '100%', width: `${bar.pct}%`, borderRadius: 3 }} />
                     </div>
-                    <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 32, textAlign: 'right' }}>{bar.pct}%</span>
+                    <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 36, textAlign: 'right' }}>{bar.pct}%</span>
                   </div>
                 ))}
               </div>

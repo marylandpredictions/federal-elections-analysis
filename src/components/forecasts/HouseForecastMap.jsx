@@ -181,7 +181,7 @@ export default function HouseForecastMap() {
       <div className="text-white/50 text-xs text-center mb-4">218 seats needed for majority</div>
 
       {/* Semicircle map */}
-      <div className="relative w-full" style={{ transform: 'scaleY(0.8)', transformOrigin: 'top center', marginBottom: '-12%' }}>
+      <div className="relative w-full">
         <svg viewBox={`0 0 1000 ${CY + 20}`} className="w-full" style={{ minWidth: '320px' }}>
           {dots.map(({ x, y, seat }) => {
             const isHovered = hovered === seat.key;
@@ -195,9 +195,9 @@ export default function HouseForecastMap() {
                 stroke="white"
                 strokeWidth={isHovered ? 1.8 : 0.6}
                 opacity={0.95}
-                onMouseEnter={(e) => {
+                onMouseEnter={() => {
                   setHovered(seat.key);
-                  setTooltip({ label: seat.key, rating: seat.rating, x: e.clientX, y: e.clientY });
+                  setTooltip({ label: seat.key, rating: seat.rating, svgX: x, svgY: y });
                 }}
                 onMouseLeave={() => { setHovered(null); setTooltip(null); }}
                 style={{ cursor: 'pointer', transition: 'r 0.1s' }}
@@ -208,34 +208,24 @@ export default function HouseForecastMap() {
           <text x={CX - 80} y={CY + 18} fill="rgba(255,255,255,0.4)" fontSize="11" fontFamily="Inter,sans-serif">← Democrat</text>
           <text x={CX + 12} y={CY + 18} fill="rgba(255,255,255,0.4)" fontSize="11" fontFamily="Inter,sans-serif">Republican →</text>
         </svg>
+        {/* Tooltip - constrained within this container */}
+        {tooltip && (
+          <div
+            className="absolute z-50 pointer-events-none border border-white/40 rounded-xl shadow-xl"
+            style={{
+              left: `${Math.min(Math.max((tooltip.svgX / 1000) * 100, 12), 88)}%`,
+              top: `${Math.max((tooltip.svgY / (CY + 20)) * 100 - 2, 0)}%`,
+              transform: 'translate(-50%, -110%)',
+              backgroundColor: 'rgba(0,0,0,0.92)',
+              minWidth: 140,
+              padding: '8px 12px'
+            }}
+          >
+            <div className="text-white font-bold text-sm mb-1">{tooltip.label}</div>
+            <div className="font-semibold text-xs" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
+          </div>
+        )}
       </div>
-
-      {/* Tooltip */}
-      {tooltip && (
-        <div
-          className="fixed z-50 pointer-events-none border border-white/40 rounded-xl shadow-xl"
-          style={{ left: tooltip.x + 14, top: tooltip.y - 130, backgroundColor: 'rgba(0,0,0,0.92)', minWidth: 210, padding: '10px 14px' }}
-        >
-          <div className="text-white font-bold text-base mb-1">{tooltip.label}</div>
-          <div className="font-semibold text-sm mb-2" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
-          {(() => {
-            const approx = ratingApprox[tooltip.rating] || { d: 50, r: 50 };
-            const isDLeading = approx.d >= approx.r;
-            const bars = isDLeading
-              ? [{ label: 'D', pct: approx.d, color: '#2563EB' }, { label: 'R', pct: approx.r, color: '#DC2626' }]
-              : [{ label: 'R', pct: approx.r, color: '#DC2626' }, { label: 'D', pct: approx.d, color: '#2563EB' }];
-            return bars.map(bar => (
-              <div key={bar.label} className="flex items-center gap-2 mb-1">
-                <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 12 }}>{bar.label}</span>
-                <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 7 }}>
-                  <div style={{ background: bar.color, height: '100%', width: `${bar.pct}%`, borderRadius: 3 }} />
-                </div>
-                <span style={{ color: bar.color, fontSize: 11, fontWeight: 700, minWidth: 32, textAlign: 'right' }}>{bar.pct}%</span>
-              </div>
-            ));
-          })()}
-        </div>
-      )}
 
       {/* Legend */}
       <div className="flex flex-wrap justify-center gap-3 mt-4">
