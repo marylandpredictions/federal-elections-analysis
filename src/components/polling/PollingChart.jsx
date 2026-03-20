@@ -3,22 +3,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { format } from 'date-fns';
 import { computeChartData, pollConfigs } from './pollConfig';
 
-const yDomains = {
-  'generic-congressional-ballot': [25, 60],
-  '2026-senate-generic': [15, 65],
-  'maine-dem-senate': [0, 75],
-  'california-governor': [0, 40],
-  'florida-gop-governor': [0, 55],
-  'georgia-gop-governor': [0, 45],
-  'south-carolina-gop-governor': [0, 35],
-  'arizona-gop-governor': [0, 80],
-  'louisiana-gop-senate': [0, 65],
-  'georgia-gop-senate': [0, 55],
-  'michigan-dem-senate': [0, 50],
-  'minnesota-dem-senate': [0, 65],
-  '2028-dem-primary': [0, 50],
-  '2028-rep-primary': [0, 70],
-};
+
 
 const candidateColors = {
   democrat: '#0047AB',
@@ -53,7 +38,19 @@ export default function PollingChart({ polls, type }) {
   const chartData = useMemo(() => computeChartData(polls, type), [polls, type]);
   const candidates = config ? config.candidates : [];
   const title = config ? `${config.title} Polling Average` : 'Polling Average';
-  const yDomain = yDomains[type] || [0, 100];
+
+  const yDomain = useMemo(() => {
+    if (!chartData || chartData.length === 0 || candidates.length === 0) return [0, 100];
+    let peak = 0;
+    chartData.forEach(point => {
+      candidates.forEach(c => {
+        const v = point[c.key];
+        if (v != null && v > peak) peak = v;
+      });
+    });
+    const top = Math.ceil(peak + 10);
+    return [0, Math.min(top, 100)];
+  }, [chartData, candidates]);
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
