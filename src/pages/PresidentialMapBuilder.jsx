@@ -180,7 +180,7 @@ export default function PresidentialMapBuilder() {
           </p>
           {activeParty && (
             <p className="text-center text-sm mt-2 font-semibold" style={{ color: activeParty === 'D' ? '#93C5FD' : '#FCA5A5' }}>
-              {activeParty === 'D' ? '🔵 Democrat mode active' : '🔴 Republican mode active'} — click states to cycle ratings
+              {activeParty === 'D' ? 'Democrat mode active' : 'Republican mode active'} — click states to cycle ratings
             </p>
           )}
           {!activeParty && (

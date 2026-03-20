@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-const R = 34;
-const COL_STEP = 51;
-const ROW_STEP = 58.9;
-const ODD_OFFSET = 29.45;
+const R = 30;
+const COL_STEP = 64;
+const ROW_STEP = 50;
+const ODD_OFFSET = 25;
 const START_X = 44;
 const START_Y = 44;
-const SVG_W = 605;
-const SVG_H = 545;
+const SVG_W = 760;
+const SVG_H = 490;
 
 // [col, row] positions — flat-top hex grid, odd columns offset down
 const HEX_GRID = {
@@ -107,9 +107,7 @@ export default function HexUSMap({ colorsByAbbr, onClick, renderTooltipContent, 
             </g>
           );
         })}
-        {/* AK/HI separator labels */}
-        <text x={70} y={530} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.4)">AK (separate)</text>
-        <text x={165} y={530} textAnchor="middle" fontSize={7} fill="rgba(255,255,255,0.4)">HI (separate)</text>
+
       </svg>
 
       {hovered && renderTooltipContent && (
