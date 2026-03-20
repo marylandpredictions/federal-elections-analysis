@@ -44,7 +44,6 @@ export const pollConfigs = {
   },
   'generic-congressional-ballot': {
     title: 'Generic Congressional Ballot',
-    title: 'Generic Congressional Ballot',
     candidates: [
       { key: 'democrat', name: 'Democrat', color: '#1E90FF' },
       { key: 'republican', name: 'Republican', color: '#FF2020' },

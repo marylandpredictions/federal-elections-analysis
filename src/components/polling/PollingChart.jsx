@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area } from 'recharts';
 import { format } from 'date-fns';
 import { computeChartData, pollConfigs } from './pollConfig';
@@ -50,7 +50,7 @@ const candidateColors = {
 
 export default function PollingChart({ polls, type }) {
   const config = pollConfigs[type];
-  const chartData = computeChartData(polls, type);
+  const chartData = useMemo(() => computeChartData(polls, type), [polls, type]);
   const candidates = config ? config.candidates : [];
   const title = config ? `${config.title} Polling Average` : 'Polling Average';
   const yDomain = yDomains[type] || [0, 100];
