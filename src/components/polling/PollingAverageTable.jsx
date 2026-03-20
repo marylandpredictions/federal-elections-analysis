@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { parsePollDate, pollConfigs } from './pollConfig';
 
 function getPollWeight(pollDate, referenceDate, pollsterName) {
@@ -27,6 +27,8 @@ function weightedAvg(polls, key, referenceDate) {
 
 export default function PollingAverageTable({ polls, type }) {
   const config = pollConfigs[type];
+  const [hoveredKey, setHoveredKey] = useState(null);
+
   if (!config || !polls || polls.length === 0) return null;
 
   const now = new Date();
@@ -34,12 +36,15 @@ export default function PollingAverageTable({ polls, type }) {
   oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
   const pastPolls = polls.filter(p => parsePollDate(p.date) <= oneMonthAgo);
 
-  // Sort candidates by current average descending
   const candidates = [...config.candidates].sort((a, b) => {
     const avgA = weightedAvg(polls, a.key, now) ?? -1;
     const avgB = weightedAvg(polls, b.key, now) ?? -1;
     return avgB - avgA;
   });
+
+  // For bar scaling: max avg among all candidates
+  const avgs = candidates.map(c => weightedAvg(polls, c.key, now) ?? 0);
+  const maxAvg = Math.max(...avgs, 1);
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 mt-8">
@@ -51,7 +56,7 @@ export default function PollingAverageTable({ polls, type }) {
           <thead>
             <tr>
               <th className="text-left text-white font-inter font-semibold text-sm pb-3 pr-4">Candidate</th>
-              <th className="text-center text-white font-inter font-semibold text-sm pb-3 px-4">Average</th>
+              <th className="text-left text-white font-inter font-semibold text-sm pb-3 px-4">Average</th>
               <th className="text-center text-white font-inter font-semibold text-sm pb-3 pl-4">Trend (30 days)</th>
             </tr>
           </thead>
@@ -59,6 +64,7 @@ export default function PollingAverageTable({ polls, type }) {
             {candidates.map(c => {
               const avg = weightedAvg(polls, c.key, now);
               const prev = pastPolls.length > 0 ? weightedAvg(pastPolls, c.key, oneMonthAgo) : null;
+              const isHovered = hoveredKey === c.key;
 
               let trendEl;
               if (avg == null || prev == null) {
@@ -84,10 +90,31 @@ export default function PollingAverageTable({ polls, type }) {
                       {c.name}
                     </span>
                   </td>
-                  <td className="py-3 px-4 text-center">
-                    <span className="bg-black/80 text-white font-inter font-semibold text-sm px-4 py-2 rounded inline-block min-w-[60px] transition-transform duration-200 hover:scale-110 cursor-default">
-                      {avg != null ? `${avg.toFixed(1)}%` : '—'}
-                    </span>
+                  <td className="py-3 px-4">
+                    <div
+                      className="relative flex items-center gap-2 cursor-pointer group"
+                      onMouseEnter={() => setHoveredKey(c.key)}
+                      onMouseLeave={() => setHoveredKey(null)}
+                    >
+                      {/* Bar */}
+                      <div className="flex-1 bg-white/10 rounded h-6 overflow-hidden relative min-w-[80px]">
+                        <div
+                          className="h-full rounded transition-all duration-300"
+                          style={{
+                            width: avg != null ? `${(avg / maxAvg) * 100}%` : '0%',
+                            backgroundColor: c.color,
+                            opacity: 0.85
+                          }}
+                        />
+                      </div>
+                      {/* Percentage label */}
+                      <span
+                        className="font-inter font-bold text-sm min-w-[42px] text-right"
+                        style={{ color: c.color }}
+                      >
+                        {avg != null ? `${avg.toFixed(1)}%` : '—'}
+                      </span>
+                    </div>
                   </td>
                   <td className="py-3 pl-4 text-center">
                     <span className="bg-black/80 px-4 py-2 rounded inline-block min-w-[80px] font-inter font-semibold text-sm transition-transform duration-200 hover:scale-110 cursor-default">
