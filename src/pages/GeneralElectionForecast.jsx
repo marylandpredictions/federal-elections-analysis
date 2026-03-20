@@ -94,10 +94,11 @@ export default function GeneralElectionForecast() {
           <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
             Senate Forecast
           </h2>
-          <InteractiveMap ratings={senateRatings} percentages={senatePercentages} />
-          <p className="text-white/60 text-xs text-center mt-3">
-            Democrats need <span className="text-blue-300 font-semibold">50 seats</span> for majority &nbsp;•&nbsp; Republicans need <span className="text-red-300 font-semibold">51 seats</span> for majority
-          </p>
+          <InteractiveMap
+            ratings={senateRatings}
+            percentages={senatePercentages}
+            majorityNote={<>Democrats need <span style={{color:'#93C5FD',fontWeight:600}}>50 seats</span> for majority &nbsp;•&nbsp; Republicans need <span style={{color:'#FCA5A5',fontWeight:600}}>51 seats</span> for majority</>}
+          />
           <SenateControl democratChance={43} republicanChance={57} />
           <div className="mt-8">
             <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">

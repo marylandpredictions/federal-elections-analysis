@@ -178,7 +178,9 @@ export default function HouseForecastMap() {
         </div>
       </div>
 
-      <div className="text-white/50 text-xs text-center mb-4">218 seats needed for majority</div>
+      <p className="text-white/60 text-xs text-center mb-4">
+        Democrats need <span className="text-blue-300 font-semibold">218</span> seats for majority &nbsp;•&nbsp; Republicans need <span className="text-red-300 font-semibold">218</span> seats for majority
+      </p>
 
       {/* Semicircle map */}
       <div className="relative w-full">

@@ -74,7 +74,7 @@ const ratingApprox = {
   'Safe R':   { d: 35, r: 65 },
 };
 
-export default function InteractiveMap({ ratings, percentages }) {
+export default function InteractiveMap({ ratings, percentages, majorityNote }) {
   const [hoveredState, setHoveredState] = useState(null);
   const [hoveredBubble, setHoveredBubble] = useState(null);
 
@@ -134,6 +134,9 @@ export default function InteractiveMap({ ratings, percentages }) {
           )}
         </div>
       </div>
+      {majorityNote && (
+        <p className="text-white/60 text-xs text-center mt-3 mb-1">{majorityNote}</p>
+      )}
       <div className="relative w-full" style={{ paddingBottom: '60%' }}>
         <svg 
           viewBox="0 0 960 600" 
