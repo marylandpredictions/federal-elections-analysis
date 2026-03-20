@@ -15,8 +15,7 @@ const pollingOptions = [
   { value: 'florida-gop-governor', label: 'Florida Republican Governor Primary', party: 'rep' },
   { value: 'georgia-gop-governor', label: 'Georgia Republican Governor Primary', party: 'rep' },
   { value: 'georgia-gop-senate', label: 'Georgia Republican Senate Primary', party: 'rep' },
-  { value: 'illinois-dem-primary', label: 'Illinois Democratic Senate Primary', party: 'dem' },
-  { value: 'illinois-9th-house', label: 'Illinois 9th House Democratic Primary', party: 'dem' },
+
   { value: 'kentucky-gop-senate', label: 'Kentucky Republican Senate Primary', party: 'rep' },
   { value: 'louisiana-gop-senate', label: 'Louisiana Republican Senate Primary', party: 'rep' },
   { value: 'maine-dem-senate', label: 'Maine Democratic Senate Primary', party: 'dem' },
