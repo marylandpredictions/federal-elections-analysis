@@ -76,7 +76,7 @@ const ratingColors = {
   'Not Contested': '#808080'
 };
 
-export default function SwingMap({ baseResults, swing }) {
+export default function SwingMap({ baseResults, swing, title }) {
   const [hoveredState, setHoveredState] = useState(null);
 
   const stateEntries = Object.entries(statePositions);
@@ -104,7 +104,7 @@ export default function SwingMap({ baseResults, swing }) {
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
       <h3 className="text-white font-inter font-bold text-xl sm:text-2xl mb-6 text-shadow-teal text-center">
-        2026 Senate Map
+        {title || '2026 Senate Map'}
       </h3>
       
       {/* Seat Counter */}

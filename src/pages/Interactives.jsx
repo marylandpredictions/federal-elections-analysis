@@ -7,7 +7,22 @@ const interactives = [
     title: 'Senate Swingometer',
     path: '/SenateSwingometer',
     description: 'Swing the 2026 Senate map based on 2024 presidential results'
-  }
+  },
+  {
+    title: 'House Swingometer',
+    path: '/HouseSwingometer',
+    description: 'Swing the 2026 House map based on Cook Partisan Voting Index'
+  },
+  {
+    title: 'Governors Swingometer',
+    path: '/GovernorsSwingometer',
+    description: 'Swing the 2026 Governors map based on 2024 presidential results'
+  },
+  {
+    title: 'Presidential Map Builder',
+    path: '/PresidentialMapBuilder',
+    description: 'Build your own 2028 presidential electoral map'
+  },
 ];
 
 export default function Interactives() {

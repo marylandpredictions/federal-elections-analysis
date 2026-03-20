@@ -16,6 +16,9 @@ import Articles from './pages/Articles';
 import ArticleView from './pages/ArticleView';
 import Interactives from './pages/Interactives';
 import SenateSwingometer from './pages/SenateSwingometer';
+import HouseSwingometer from './pages/HouseSwingometer';
+import GovernorsSwingometer from './pages/GovernorsSwingometer';
+import PresidentialMapBuilder from './pages/PresidentialMapBuilder';
 
 import GeneralElectionForecast from './pages/GeneralElectionForecast';
 
@@ -52,6 +55,9 @@ const AuthenticatedApp = () => {
         <Route path="/ArticleView/:id" element={<ArticleView />} />
         <Route path="/Interactives" element={<Interactives />} />
         <Route path="/SenateSwingometer" element={<SenateSwingometer />} />
+        <Route path="/HouseSwingometer" element={<HouseSwingometer />} />
+        <Route path="/GovernorsSwingometer" element={<GovernorsSwingometer />} />
+        <Route path="/PresidentialMapBuilder" element={<PresidentialMapBuilder />} />
 
         <Route path="/GeneralElectionForecast" element={<GeneralElectionForecast />} />
       </Route>
