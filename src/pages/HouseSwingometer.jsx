@@ -216,12 +216,6 @@ export default function HouseSwingometer() {
                   </div>
                 </div>
               );
-            })()}
-                <div className="font-semibold text-xs mb-1" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
-                <div className="text-white/60 text-xs">
-                  2024: {(() => { const d = housePVIData.find(([k])=>k===tooltip.key); if(!d) return '—'; const adj = d[1]+swing; return adj > 0 ? `R+${Math.abs(adj).toFixed(1)}` : adj < 0 ? `D+${Math.abs(adj).toFixed(1)}` : 'EVEN'; })()}
-                </div>
-              </div>
             )}
           </div>
 
