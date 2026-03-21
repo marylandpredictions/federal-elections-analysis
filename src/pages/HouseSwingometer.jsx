@@ -70,31 +70,12 @@ export default function HouseSwingometer() {
   const [tooltip, setTooltip] = useState(null);
   const [hoveredBubble, setHoveredBubble] = useState(null);
   const [highlightRating, setHighlightRating] = useState(null);
-  const [highlightFlips, setHighlightFlips] = useState(false);
-
-  const flipped = useMemo(() => {
-    const s = new Set();
-    housePVIData.forEach(([dist]) => {
-      const incumbent = houseIncumbents[normalizeDistrict(dist)];
-      if (!incumbent) return;
-      const incumbentParty = incumbent.split('(')[1]?.charAt(0);
-      const pvi = housePVIData.find(([k]) => k === dist)?.[1] || 0;
-      const rating = getRating(pvi + swing);
-      if (rating === 'Toss Up' ||
-        (incumbentParty === 'R' && rating.includes('D')) ||
-        (incumbentParty === 'D' && rating.includes('R'))) {
-        s.add(dist);
-      }
-    });
-    return s;
-  }, [swing]);
 
   const { seats, totals, positions } = useMemo(() => {
     const rated = housePVIData.map(([dist, pvi]) => ({
       key: dist,
       adj: pvi + swing,
       rating: getRating(pvi + swing),
-      isFlipped: flipped.has(dist),
     }));
     rated.sort((a, b) => a.adj - b.adj);
     const pos = buildLayout(rated.length);
@@ -105,7 +86,7 @@ export default function HouseSwingometer() {
     rated.forEach(s => { if (tot[s.rating] !== undefined) tot[s.rating]++; });
 
     return { seats: dots, totals: tot, positions: pos };
-  }, [swing, flipped]);
+  }, [swing]);
 
   const demSeats = (totals['Safe D']||0)+(totals['Likely D']||0)+(totals['Lean D']||0)+(totals['Tilt D']||0);
   const repSeats = (totals['Safe R']||0)+(totals['Likely R']||0)+(totals['Lean R']||0)+(totals['Tilt R']||0);
@@ -179,37 +160,22 @@ export default function HouseSwingometer() {
           {/* Parliament chart */}
           <div className="relative w-full">
             <svg viewBox={`0 0 1000 ${svgH}`} className="w-full" style={{ minWidth: '320px' }}>
-              <defs>
-                <pattern id="houseDotStripes" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
-                  <line x1="0" y1="0" x2="0" y2="6" stroke="white" strokeWidth="1.2" />
-                </pattern>
-              </defs>
-              {seats.map(({ key, x, y, rating, isFlipped }) => {
+              {seats.map(({ key, x, y, rating }) => {
                 const isHovered = hovered === key;
                 const isHighlighted = !highlightRating || rating === highlightRating;
                 return (
-                  <g key={key}>
-                    <circle
-                      cx={x} cy={y}
-                      r={isHovered ? dotR * 1.9 : dotR}
-                      fill={ratingColors[rating]}
-                      stroke="white"
-                      strokeWidth={isHovered ? 1.8 : 0.6}
-                      opacity={isHighlighted || (highlightFlips && isFlipped) ? 0.95 : 0.15}
-                      onMouseEnter={() => { setHovered(key); setTooltip({ key, rating, svgX: x, svgY: y }); }}
-                      onMouseLeave={() => { setHovered(null); setTooltip(null); }}
-                      style={{ cursor: 'pointer', transition: 'r 0.1s' }}
-                    />
-                    {isFlipped && (
-                      <circle
-                        cx={x} cy={y}
-                        r={isHovered ? dotR * 1.9 : dotR}
-                        fill="url(#houseDotStripes)"
-                        opacity={isHighlighted || highlightFlips ? 0.95 : 0.15}
-                        style={{ pointerEvents: 'none' }}
-                      />
-                    )}
-                  </g>
+                  <circle
+                    key={key}
+                    cx={x} cy={y}
+                    r={isHovered ? dotR * 1.9 : dotR}
+                    fill={ratingColors[rating]}
+                    stroke="white"
+                    strokeWidth={isHovered ? 1.8 : 0.6}
+                    opacity={isHighlighted ? 0.95 : 0.15}
+                    onMouseEnter={() => { setHovered(key); setTooltip({ key, rating, svgX: x, svgY: y }); }}
+                    onMouseLeave={() => { setHovered(null); setTooltip(null); }}
+                    style={{ cursor: 'pointer', transition: 'r 0.1s' }}
+                  />
                 );
               })}
               <line x1={CX} y1={50} x2={CX} y2={CY+8} stroke="rgba(255,255,255,0.15)" strokeWidth="1" strokeDasharray="4,4" />
@@ -293,22 +259,6 @@ export default function HouseSwingometer() {
                 <span className="text-white/70 text-xs">{r}</span>
               </button>
             ))}
-            <button
-              onMouseEnter={() => setHighlightFlips(true)}
-              onMouseLeave={() => setHighlightFlips(false)}
-              className="flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all"
-              style={{ background: highlightFlips ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)' }}
-            >
-              <svg className="w-3 h-3" viewBox="0 0 12 12" style={{ overflow: 'visible' }}>
-                <defs>
-                  <pattern id="flipLegendHouse" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
-                    <line x1="0" y1="0" x2="0" y2="3" stroke="white" strokeWidth="0.8" />
-                  </pattern>
-                </defs>
-                <rect width="12" height="12" fill="url(#flipLegendHouse)" stroke="white" strokeWidth="0.5" />
-              </svg>
-              <span className="text-white/70 text-xs">Flips</span>
-            </button>
           </div>
         </div>
       </div>
