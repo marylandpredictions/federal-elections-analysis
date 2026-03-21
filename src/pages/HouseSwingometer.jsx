@@ -261,9 +261,6 @@ export default function HouseSwingometer() {
               </button>
             ))}
           </div>
-          <p className="text-white/40 text-xs text-center mt-2">
-            Safe (&gt;15) · Likely (10–15) · Lean (5–10) · Tilt (2–5) · Toss Up (&lt;2)
-          </p>
         </div>
       </div>
     </div>
