@@ -126,7 +126,7 @@ export default function SenateSwingometer() {
         <SwingBar swing={swing} setSwing={setSwing} />
         
         <div className="mt-8">
-          <SwingMap baseResults={baseResults} swing={swing} incumbents={senateIncumbents} />
+          <SwingMap baseResults={baseResults} swing={swing} incumbents={senateIncumbents} showIncumbents={true} />
         </div>
       </div>
     </div>

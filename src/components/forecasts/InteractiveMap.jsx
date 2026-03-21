@@ -98,7 +98,7 @@ export default function InteractiveMap({ ratings, percentages, majorityNote, inc
       {/* Seat count bubbles */}
       <div className="flex justify-center gap-4 mb-6 flex-wrap">
         <div className="relative" onMouseEnter={() => setHoveredBubble('dem')} onMouseLeave={() => setHoveredBubble(null)}>
-          <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+          <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
             <div className="text-3xl font-bold text-blue-300">{counts.democrat}</div>
             <div className="text-blue-200/70 text-sm mt-1">Democrat</div>
           </div>
@@ -113,22 +113,10 @@ export default function InteractiveMap({ ratings, percentages, majorityNote, inc
             </div>
           )}
         </div>
-        <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+        <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
           <div className="text-3xl font-bold text-purple-300">{counts.tossUp}</div>
           <div className="text-purple-200/70 text-sm mt-1">Toss Up</div>
         </div>
-        <div className="relative" onMouseEnter={() => setHoveredBubble('rep')} onMouseLeave={() => setHoveredBubble(null)}>
-          <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
-            <div className="text-3xl font-bold text-red-300">{counts.republican}</div>
-            <div className="text-red-200/70 text-sm mt-1">Republican</div>
-          </div>
-          {hoveredBubble === 'rep' && (
-            <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 z-50 bg-black/90 border border-white/20 rounded-xl p-2 flex gap-2 shadow-xl">
-              {[['Safe R','#8B0000','white'],['Likely R','#CC0000','white'],['Lean R','#FF6B6B','white'],['Tilt R','#FF7F7F','#8B0000']].map(([r,bg,tc]) => ratingBreakdown[r] > 0 && (
-                <div key={r} className="rounded-lg px-2 py-1 text-center" style={{backgroundColor:bg,color:tc,minWidth:56}}>
-                  <div className="text-lg font-bold">{ratingBreakdown[r]}</div>
-                  <div className="text-xs whitespace-nowrap">{r}</div>
-                </div>
               ))}
             </div>
           )}
@@ -142,6 +130,15 @@ export default function InteractiveMap({ ratings, percentages, majorityNote, inc
       <HexUSMap
         colorsByAbbr={colorsByAbbr}
         renderTooltipContent={renderTooltipContent}
+        highlightRating={highlightRating}
+        ratingsByAbbr={useMemo(() => {
+          const m = {};
+          Object.entries(ratings).forEach(([fullName, rating]) => {
+            const abbr = NAME_TO_ABBR[fullName];
+            if (abbr) m[abbr] = rating;
+          });
+          return m;
+        }, [ratings])}
       />
 
       {/* Legend */}

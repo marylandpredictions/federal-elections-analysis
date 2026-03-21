@@ -102,6 +102,7 @@ export default function GeneralElectionForecast() {
             majorityNote={<>Democrats need <span style={{color:'#93C5FD',fontWeight:600}}>50 seats</span> for majority &nbsp;•&nbsp; Republicans need <span style={{color:'#FCA5A5',fontWeight:600}}>51 seats</span> for majority</>}
             baseDemSeats={34}
             baseRepSeats={31}
+            showIncumbents={true}
           />
           <SenateControl democratChance={43} republicanChance={57} />
           <div className="mt-8">
@@ -121,7 +122,7 @@ export default function GeneralElectionForecast() {
           <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
             Governors Forecast
           </h2>
-          <InteractiveMap ratings={governorsRatings} percentages={governorPercentages} />
+          <InteractiveMap ratings={governorsRatings} percentages={governorPercentages} showIncumbents={true} />
         </motion.div>
       </div>
     </div>
