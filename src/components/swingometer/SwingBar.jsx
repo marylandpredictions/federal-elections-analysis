@@ -50,7 +50,7 @@ export default function SwingBar({ swing, setSwing }) {
   const knobPosition = ((swing + 20) / 40) * 100;
 
   return (
-    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8" style={{ border: '2px solid white' }}>
+    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
       <div className="mb-6 text-center">
         <span className="text-white font-inter font-bold text-2xl sm:text-3xl">
           {swing > 0 ? `R +${swing.toFixed(1)}%` : swing < 0 ? `D +${Math.abs(swing).toFixed(1)}%` : 'No Swing'}
@@ -61,7 +61,8 @@ export default function SwingBar({ swing, setSwing }) {
         ref={barRef}
         className="relative h-12 rounded-full cursor-pointer overflow-hidden"
         style={{
-          background: 'linear-gradient(to right, #2663EB 0%, #9334EB 50%, #DC2627 100%)'
+          background: 'linear-gradient(to right, #2663EB 0%, #9334EB 50%, #DC2627 100%)',
+          border: '2px solid white'
         }}
         onMouseDown={handleMouseDown}
         onTouchStart={handleMouseDown}

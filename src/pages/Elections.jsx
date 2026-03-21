@@ -1,0 +1,102 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+
+const BG = 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png)';
+
+export const electionsData = [
+  {
+    id: 'wi-supreme-court-2026',
+    state: 'Wisconsin',
+    stateAbbr: 'WI',
+    stateIcon: 'https://media.base44.com/images/public/69b6f149a83e2b792ef60e35/8083f15d5_FEABLMLogo.png',
+    electionType: 'Supreme Court',
+    date: '4/7/26',
+    candidates: [
+      { name: 'Maria Lazar', party: 'NPA', color: '#FCA5A5' },
+      { name: 'Chris Taylor', party: 'NPA', color: '#93C5FD' },
+    ],
+    preview: 'In the race to replace retiring conservative-aligning Wisconsin Supreme Court Justice Rebecca Bradley, liberal-aligned judge Chris Taylor is likely to win...',
+    fullDescription: `In the race to replace retiring conservative-aligning Wisconsin Supreme Court Justice Rebecca Bradley, liberal-aligned judge Chris Taylor is likely to win against her right-wing opponent, Maria Lazar. In last year's supreme court election located in the swing state, liberal candidate Susan Crawford beat MAGA funded Brad Schimel by over double digits in a state that Trump carried in 2024, even with Elon Musk pouring millions into the race. Without Elon Musk's financial backing this time around and a much more low-profile race and a different environment, can conservatives hold this seat or will the liberals pull of another massive victory, potentially outrunning their 2025 result?`,
+  },
+];
+
+export default function Elections() {
+  const navigate = useNavigate();
+
+  const aprilElections = electionsData.filter(e => e.date.startsWith('4/'));
+
+  return (
+    <div
+      className="min-h-[calc(100vh-4rem)] px-4 py-16 sm:py-24"
+      style={{ backgroundImage: BG, backgroundSize: 'cover', backgroundPosition: 'center' }}
+    >
+      <div className="max-w-4xl mx-auto">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-white font-inter font-bold text-3xl sm:text-4xl text-center mb-12 text-shadow-teal"
+        >
+          Upcoming Elections
+        </motion.h1>
+
+        {/* April separator */}
+        {aprilElections.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <h2 className="text-white font-inter font-extrabold text-5xl sm:text-6xl mb-6">April</h2>
+
+            <div className="space-y-4">
+              {aprilElections.map((election, i) => (
+                <motion.div
+                  key={election.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 cursor-pointer hover:bg-white/20 transition-all duration-200 border border-white/10"
+                  onClick={() => navigate(`/ElectionDetail/${election.id}`)}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      {/* Row 1: State + icon */}
+                      <div className="flex items-center gap-3 mb-1">
+                        <span className="text-white font-inter font-bold text-2xl leading-tight">{election.state}</span>
+                      </div>
+                      {/* Row 2: Election type */}
+                      <div className="text-white font-inter font-bold text-base mb-0.5">{election.electionType}</div>
+                      {/* Row 3: Date */}
+                      <div className="text-white font-inter font-bold text-sm mb-2">{election.date}</div>
+                      {/* Candidates */}
+                      <div className="flex gap-3 flex-wrap mb-2">
+                        {election.candidates.map(c => (
+                          <span key={c.name} className="font-inter text-sm font-medium" style={{ color: c.color }}>
+                            {c.name} ({c.party})
+                          </span>
+                        ))}
+                      </div>
+                      {/* Preview text - 2 lines */}
+                      <p className="text-white/70 font-inter text-sm line-clamp-2">{election.preview}</p>
+                    </div>
+                    {/* State icon aligned to top-right */}
+                    {election.stateIcon && (
+                      <img
+                        src={election.stateIcon}
+                        alt={election.state}
+                        className="flex-shrink-0 object-contain opacity-80"
+                        style={{ width: '48px', height: '48px', marginTop: '2px' }}
+                      />
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </div>
+    </div>
+  );
+}

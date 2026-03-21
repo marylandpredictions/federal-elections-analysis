@@ -21,6 +21,8 @@ import GovernorsSwingometer from './pages/GovernorsSwingometer';
 import PresidentialMapBuilder from './pages/PresidentialMapBuilder';
 
 import GeneralElectionForecast from './pages/GeneralElectionForecast';
+import Elections from './pages/Elections';
+import ElectionDetail from './pages/ElectionDetail';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -60,6 +62,8 @@ const AuthenticatedApp = () => {
         <Route path="/PresidentialMapBuilder" element={<PresidentialMapBuilder />} />
 
         <Route path="/GeneralElectionForecast" element={<GeneralElectionForecast />} />
+        <Route path="/Elections" element={<Elections />} />
+        <Route path="/ElectionDetail/:id" element={<ElectionDetail />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>

@@ -65,7 +65,7 @@ export default function Home() {
         <h1 className="text-white font-inter font-extrabold text-4xl sm:text-5xl md:text-7xl leading-tight mt-2 text-shadow-teal">
           Federal Elections Analysis
         </h1>
-        <p className="text-white font-inter text-lg sm:text-xl md:text-2xl mt-6 text-shadow-teal bg-primary/90 rounded-3xl px-8 py-4 inline-block transition-all duration-300 hover:scale-102 cursor-pointer">
+        <p className="text-white font-inter font-bold text-lg sm:text-xl md:text-2xl mt-6 text-shadow-teal bg-primary/90 rounded-3xl px-8 py-4 inline-block transition-all duration-300 hover:scale-102 cursor-pointer">
           A Haven for Political Fatigue
         </p>
       </motion.div>
@@ -115,8 +115,8 @@ export default function Home() {
               </ResponsiveContainer>
             </div>
             <div className="flex gap-4">
-              <span className="text-sm font-inter font-semibold" style={{ color: '#0047AB' }}>Dem: 47%</span>
-              <span className="text-sm font-inter font-semibold" style={{ color: '#8B0000' }}>Rep: 43%</span>
+              <span className="text-sm font-inter font-semibold" style={{ color: '#0047AB' }}>Dem: 45.3%</span>
+              <span className="text-sm font-inter font-semibold" style={{ color: '#8B0000' }}>Rep: 42.7%</span>
             </div>
             <p className="text-black font-inter font-semibold text-sm mt-2">View all polls →</p>
           </Link>

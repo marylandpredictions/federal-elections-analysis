@@ -705,7 +705,29 @@ export default function Polling() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-8"
         >
-          <PollSelector options={pollingOptions} value={selectedPoll} onChange={setSelectedPoll} />
+          <div className="flex items-start gap-4 flex-wrap">
+            <div className="flex-1 min-w-[200px]">
+              <PollSelector options={pollingOptions} value={selectedPoll} onChange={setSelectedPoll} />
+            </div>
+            <div className="flex gap-3 flex-wrap">
+              {[
+                { value: 'alaska-senate', label: 'AK Sen. General' },
+                { value: 'louisiana-gop-senate', label: 'LA GOP Sen.' },
+              ].map(pill => (
+                <button
+                  key={pill.value}
+                  onClick={() => setSelectedPoll(pill.value)}
+                  className={`rounded-2xl px-4 py-3 font-inter font-semibold text-sm transition-all border ${
+                    selectedPoll === pill.value
+                      ? 'bg-white/25 text-white border-white/60'
+                      : 'bg-white/10 text-white/80 border-white/20 hover:bg-white/20 hover:text-white'
+                  }`}
+                >
+                  {pill.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </motion.div>
 
         <motion.div

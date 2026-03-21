@@ -1,6 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
+
+const forecastLinks = [
+  { label: '2026 General Forecast', path: '/GeneralElectionForecast' }
+];
+
+const interactiveLinks = [
+  { label: 'Senate Swingometer', path: '/SenateSwingometer' },
+  { label: 'House Swingometer', path: '/HouseSwingometer' },
+  { label: 'Governors Swingometer', path: '/GovernorsSwingometer' },
+  { label: 'Presidential Map Builder', path: '/PresidentialMapBuilder' },
+];
+
+const moreLinks = [
+  { label: 'About Us', path: '/AboutUs' },
+  { label: 'Articles', path: '/Articles' },
+  { label: 'Contact Us', path: '/ContactUs' },
+];
 
 function useTheme() {
   const [dark, setDark] = useState(() => {
@@ -24,40 +41,101 @@ function useTheme() {
   return [dark, setDark];
 }
 
-const navLinks = [
-  { label: 'Home', path: '/Home' },
-  { label: 'Polling', path: '/Polling' }
-];
+function Dropdown({ label, links, isActive }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
 
-const forecastLinks = [
-  { label: '2026 General Forecast', path: '/GeneralElectionForecast' }
-];
+  useEffect(() => {
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
 
-const interactiveLinks = [
-  { label: 'Senate Swingometer', path: '/SenateSwingometer' },
-  { label: 'House Swingometer', path: '/HouseSwingometer' },
-  { label: 'Governors Swingometer', path: '/GovernorsSwingometer' },
-  { label: 'Presidential Map Builder', path: '/PresidentialMapBuilder' },
-];
+  return (
+    <div ref={ref} className="relative flex-shrink-0">
+      <button
+        onClick={() => setOpen(o => !o)}
+        className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
+          isActive || open ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'
+        }`}
+        style={{ padding: '8px 16px', fontSize: '14px' }}
+      >
+        {label}
+        <ChevronDown style={{ width: '16px', height: '16px', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+      </button>
+      {open && (
+        <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 py-2 z-50" style={{ minWidth: '200px' }}>
+          {links.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              onClick={() => setOpen(false)}
+              className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all"
+              style={{ fontSize: '14px' }}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
-const moreLinks = [
-  { label: 'About Us', path: '/AboutUs' },
-  { label: 'Articles', path: '/Articles' },
-  { label: 'Contact Us', path: '/ContactUs' },
-];
+function DropdownButton({ label, links, isActive }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative flex-shrink-0">
+      <button
+        onClick={() => setOpen(o => !o)}
+        className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
+          isActive || open ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'
+        }`}
+        style={{ padding: '8px 16px', fontSize: '14px' }}
+      >
+        {label}
+        <ChevronDown style={{ width: '16px', height: '16px', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+      </button>
+      {open && (
+        <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 py-2 z-50" style={{ minWidth: '160px' }}>
+          {links.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              onClick={() => setOpen(false)}
+              className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all"
+              style={{ fontSize: '14px' }}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Header() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [forecastsOpen, setForecastsOpen] = useState(false);
-  const [interactivesOpen, setInteractivesOpen] = useState(false);
-  const [moreOpen, setMoreOpen] = useState(false);
   const [dark, setDark] = useTheme();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-primary shadow-lg" style={{ fontSize: '16px' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center" style={{ height: '64px' }}>
-        {/* Left side: Logo and social */}
+        {/* Logo */}
         <div className="flex items-center gap-3 flex-shrink-0">
           <Link to="/Home" className="flex items-center gap-3">
             <img
@@ -71,7 +149,6 @@ export default function Header() {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
             </span>
           </Link>
-
           <div className="hidden sm:flex items-center gap-2 ml-2 flex-shrink-0">
             <a href="https://www.youtube.com/@FedElections/featured" target="_blank" rel="noopener noreferrer" className="transition-transform duration-200 hover:scale-110">
               <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/27c9e4340_youtube-app-white-icon.png" alt="YouTube" style={{ width: '24px', height: '24px' }} className="object-contain" />
@@ -91,9 +168,12 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Center: Desktop Nav */}
+        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-1 mx-auto flex-shrink-0">
-          {navLinks.map((link) => {
+          {[
+            { label: 'Polling', path: '/Polling' },
+            { label: 'Elections', path: '/Elections' },
+          ].map((link) => {
             const isActive = location.pathname === link.path;
             return (
               <Link
@@ -110,82 +190,24 @@ export default function Header() {
             );
           })}
 
-          {/* Forecasts Dropdown */}
-          <div className="relative flex-shrink-0" onMouseEnter={() => setForecastsOpen(true)} onMouseLeave={() => setForecastsOpen(false)}>
-            <Link
-              to="/Forecasts"
-              className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
-                forecastLinks.some(l => location.pathname === l.path) || location.pathname === '/Forecasts'
-                  ? 'bg-accent text-white'
-                  : 'text-white/80 hover:bg-accent/50 hover:text-white'
-              }`}
-              style={{ padding: '8px 16px', fontSize: '14px', whiteSpace: 'nowrap' }}
-            >
-              Forecasts
-              <ChevronDown style={{ width: '16px', height: '16px' }} />
-            </Link>
-            {forecastsOpen && (
-              <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 py-2 z-50" style={{ minWidth: '220px' }}>
-                {forecastLinks.map((link) => (
-                  <Link key={link.path} to={link.path} className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all" style={{ fontSize: '14px' }}>
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Interactives Dropdown */}
-          <div className="relative flex-shrink-0" onMouseEnter={() => setInteractivesOpen(true)} onMouseLeave={() => setInteractivesOpen(false)}>
-            <Link
-              to="/Interactives"
-              className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
-                location.pathname.includes('/Interactives') || location.pathname.includes('Swingometer') || location.pathname.includes('MapBuilder')
-                  ? 'bg-accent text-white'
-                  : 'text-white/80 hover:bg-accent/50 hover:text-white'
-              }`}
-              style={{ padding: '8px 16px', fontSize: '14px', whiteSpace: 'nowrap' }}
-            >
-              Interactives
-              <ChevronDown style={{ width: '16px', height: '16px' }} />
-            </Link>
-            {interactivesOpen && (
-              <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 py-2 z-50" style={{ minWidth: '200px' }}>
-                {interactiveLinks.map((link) => (
-                  <Link key={link.path} to={link.path} className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all" style={{ fontSize: '14px' }}>
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* More Dropdown */}
-          <div className="relative flex-shrink-0" onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>
-            <button
-              className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
-                moreLinks.some(l => location.pathname === l.path)
-                  ? 'bg-accent text-white'
-                  : 'text-white/80 hover:bg-accent/50 hover:text-white'
-              }`}
-              style={{ padding: '8px 16px', fontSize: '14px' }}
-            >
-              More
-              <ChevronDown style={{ width: '16px', height: '16px' }} />
-            </button>
-            {moreOpen && (
-              <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 py-2 z-50" style={{ minWidth: '160px' }}>
-                {moreLinks.map((link) => (
-                  <Link key={link.path} to={link.path} className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all" style={{ fontSize: '14px' }}>
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
+          <Dropdown
+            label="Forecasts"
+            links={forecastLinks}
+            isActive={forecastLinks.some(l => location.pathname === l.path) || location.pathname === '/Forecasts'}
+          />
+          <Dropdown
+            label="Interactives"
+            links={interactiveLinks}
+            isActive={location.pathname.includes('Swingometer') || location.pathname.includes('MapBuilder') || location.pathname === '/Interactives'}
+          />
+          <DropdownButton
+            label="More"
+            links={moreLinks}
+            isActive={moreLinks.some(l => location.pathname === l.path)}
+          />
         </nav>
 
-        {/* Right side: Mobile toggle */}
+        {/* Mobile toggle */}
         <div className="flex items-center gap-1 ml-auto flex-shrink-0">
           <button
             className="md:hidden text-white"
@@ -200,52 +222,42 @@ export default function Header() {
       {/* Mobile Nav */}
       {mobileOpen && (
         <div className="md:hidden bg-primary border-t border-white/10 px-4 pb-4">
-          {navLinks.map((link) => {
-            const isActive = location.pathname === link.path;
-            return (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setMobileOpen(false)}
-                className={`block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal ${
-                  isActive ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'
-                }`}
-                style={{ fontSize: '14px' }}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-          <Link to="/Forecasts" onClick={() => setMobileOpen(false)}
-            className={`block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal ${location.pathname === '/Forecasts' ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'}`}
-            style={{ fontSize: '14px' }}>
-            Forecasts
-          </Link>
-          {forecastLinks.map((link) => (
-            <Link key={link.path} to={link.path} onClick={() => setMobileOpen(false)}
-              className={`block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal ml-4 ${location.pathname === link.path ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'}`}
-              style={{ fontSize: '14px' }}>
-              • {link.label}
+          {[
+            { label: 'Polling', path: '/Polling' },
+            { label: 'Elections', path: '/Elections' },
+          ].map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              onClick={() => setMobileOpen(false)}
+              className={`block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal ${
+                location.pathname === link.path ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'
+              }`}
+              style={{ fontSize: '14px' }}
+            >
+              {link.label}
             </Link>
           ))}
-          <Link to="/Interactives" onClick={() => setMobileOpen(false)}
-            className={`block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal ${location.pathname.includes('/Interactives') || location.pathname.includes('Swingometer') ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'}`}
-            style={{ fontSize: '14px' }}>
-            Interactives
-          </Link>
-          {interactiveLinks.map((link) => (
+          <Link to="/Forecasts" onClick={() => setMobileOpen(false)}
+            className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-white/80 hover:bg-accent/50 hover:text-white"
+            style={{ fontSize: '14px' }}>Forecasts</Link>
+          {forecastLinks.map(link => (
             <Link key={link.path} to={link.path} onClick={() => setMobileOpen(false)}
               className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-white/80 hover:bg-accent/50 hover:text-white ml-4"
-              style={{ fontSize: '14px' }}>
-              • {link.label}
-            </Link>
+              style={{ fontSize: '14px' }}>• {link.label}</Link>
           ))}
-          {moreLinks.map((link) => (
+          <Link to="/Interactives" onClick={() => setMobileOpen(false)}
+            className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-white/80 hover:bg-accent/50 hover:text-white"
+            style={{ fontSize: '14px' }}>Interactives</Link>
+          {interactiveLinks.map(link => (
             <Link key={link.path} to={link.path} onClick={() => setMobileOpen(false)}
-              className={`block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal ml-4 ${location.pathname === link.path ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'}`}
-              style={{ fontSize: '14px' }}>
-              • {link.label}
-            </Link>
+              className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-white/80 hover:bg-accent/50 hover:text-white ml-4"
+              style={{ fontSize: '14px' }}>• {link.label}</Link>
+          ))}
+          {moreLinks.map(link => (
+            <Link key={link.path} to={link.path} onClick={() => setMobileOpen(false)}
+              className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-white/80 hover:bg-accent/50 hover:text-white ml-4"
+              style={{ fontSize: '14px' }}>• {link.label}</Link>
           ))}
         </div>
       )}
