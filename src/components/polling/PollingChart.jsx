@@ -118,6 +118,7 @@ export default function PollingChart({ polls, type }) {
                   fillOpacity={0.15}
                   legendType="none"
                   name={`${c.name} CI`}
+                  activeDot={false}
                 />
 
                 <Line
