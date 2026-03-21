@@ -711,9 +711,9 @@ export default function Polling() {
             </div>
             <div className="flex gap-3 flex-wrap">
               {[
-                { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot', margin: 'Democrat +2.6%', marginColor: '#2563EB' },
-                { value: '2028-dem-primary', label: '2028 Democratic Primary', margin: 'Harris +2.0%', marginColor: '#2563EB' },
-                { value: '2028-rep-primary', label: '2028 Republican Primary', margin: 'Vance +23.0%', marginColor: '#DC2626' },
+                { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot', margin: 'Democrat +5.0%', marginColor: '#2563EB' },
+                { value: '2028-dem-primary', label: '2028 Democratic Primary', margin: 'Harris +5.1%', marginColor: '#2563EB' },
+                { value: '2028-rep-primary', label: '2028 Republican Primary', margin: 'Vance +29.0%', marginColor: '#DC2626' },
               ].map(pill => (
                 <button
                   key={pill.value}

@@ -17,7 +17,11 @@ const teamMembers = [
 },
 {
   name: 'Ryker',
-  description: 'Chief historical analyst at FEA. The newest addition to the team. Ryker is from the Greater NYC Area and deeply involved in local NY and NJ politics.'
+  description: 'Chief historical analyst at FEA. Interested in alternate history and James Talarico! Ryker is from the Greater NYC Area and deeply involved in local NY and NJ politics.'
+},
+{
+  name: 'User',
+  description: 'The tech manager of Federal Elections Analysis. Helps Nathan work on this site and amazing deep diver of all data and organization. Based in the Chicago area.'
 }];
 
 
