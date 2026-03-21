@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, Brush } from 'recharts';
 import { format } from 'date-fns';
 import { computeChartData, pollConfigs } from './pollConfig';
 
@@ -57,7 +57,7 @@ export default function PollingChart({ polls, type }) {
       <h3 className="text-white font-inter font-bold text-xl sm:text-2xl mb-6 text-shadow-teal">
         {title}
       </h3>
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height={460}>
         <LineChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
           <XAxis
@@ -136,6 +136,15 @@ export default function PollingChart({ polls, type }) {
               </React.Fragment>
             );
           })}
+          <Brush
+            dataKey="timestamp"
+            height={30}
+            stroke="rgba(255,255,255,0.3)"
+            fill="rgba(255,255,255,0.07)"
+            travellerWidth={8}
+            tickFormatter={(ts) => format(new Date(ts), 'MMM yy')}
+            style={{ fontSize: '10px', fill: 'white' }}
+          />
         </LineChart>
       </ResponsiveContainer>
     </div>

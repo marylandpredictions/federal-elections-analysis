@@ -131,7 +131,7 @@ export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34,
       {/* Seat Counter */}
       <div className="flex justify-center gap-4 mb-6 flex-wrap">
         <div className="relative" onMouseEnter={() => setHoveredBubble('dem')} onMouseLeave={() => setHoveredBubble(null)}>
-          <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
+          <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center w-[120px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
             <div className="text-3xl font-bold text-blue-300">{demSeats}</div>
             <div className="text-blue-200/70 text-sm mt-1">Democrat</div>
           </div>
@@ -146,12 +146,12 @@ export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34,
             </div>
           )}
         </div>
-        <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
+        <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center w-[120px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
           <div className="text-3xl font-bold text-purple-300">{tossUpSeats}</div>
           <div className="text-purple-200/70 text-sm mt-1">Toss Up</div>
         </div>
         <div className="relative" onMouseEnter={() => setHoveredBubble('rep')} onMouseLeave={() => setHoveredBubble(null)}>
-          <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
+          <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center w-[120px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
             <div className="text-3xl font-bold text-red-300">{repSeats}</div>
             <div className="text-red-200/70 text-sm mt-1">Republican</div>
           </div>
