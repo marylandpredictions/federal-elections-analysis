@@ -100,6 +100,8 @@ export default function GeneralElectionForecast() {
             ratings={senateRatings}
             percentages={senatePercentages}
             majorityNote={<>Democrats need <span style={{color:'#93C5FD',fontWeight:600}}>50 seats</span> for majority &nbsp;•&nbsp; Republicans need <span style={{color:'#FCA5A5',fontWeight:600}}>51 seats</span> for majority</>}
+            baseDemSeats={34}
+            baseRepSeats={31}
           />
           <SenateControl democratChance={43} republicanChance={57} />
           <div className="mt-8">

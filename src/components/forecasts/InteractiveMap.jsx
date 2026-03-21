@@ -22,7 +22,7 @@ const ratingApprox = {
   'Safe R':   { d: 35, r: 65 },
 };
 
-export default function InteractiveMap({ ratings, percentages, majorityNote, incumbents = {} }) {
+export default function InteractiveMap({ ratings, percentages, majorityNote, incumbents = {}, baseDemSeats = 0, baseRepSeats = 0 }) {
   const [hoveredBubble, setHoveredBubble] = useState(null);
 
   // Count seats
@@ -31,7 +31,7 @@ export default function InteractiveMap({ ratings, percentages, majorityNote, inc
     else if (['Safe R','Likely R','Lean R','Tilt R'].includes(r)) acc.republican++;
     else if (r === 'Toss Up') acc.tossUp++;
     return acc;
-  }, { democrat: 0, republican: 0, tossUp: 0 });
+  }, { democrat: baseDemSeats, republican: baseRepSeats, tossUp: 0 });
 
   const ratingBreakdown = {};
   ['Safe D','Likely D','Lean D','Tilt D','Toss Up','Tilt R','Lean R','Likely R','Safe R'].forEach(r => ratingBreakdown[r] = 0);

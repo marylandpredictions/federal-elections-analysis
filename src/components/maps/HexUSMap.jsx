@@ -32,7 +32,7 @@ export const ABBR_TO_NAME = Object.fromEntries(
   Object.entries(NAME_TO_ABBR).map(([k, v]) => [v, k])
 );
 
-export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent }) {
+export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onClick, stripeAbbrs }) {
   const [tooltip, setTooltip] = useState(null); // { abbr, x, y }
   const containerRef = useRef(null);
 
@@ -71,6 +71,7 @@ export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent }) {
                   }}
                   onMouseMove={(e) => abbr && handleMouseMove(e, abbr)}
                   onMouseLeave={() => setTooltip(null)}
+                  onClick={() => abbr && onClick && onClick(abbr)}
                 />
               );
             })
