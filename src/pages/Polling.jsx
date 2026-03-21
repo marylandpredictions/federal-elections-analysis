@@ -616,6 +616,8 @@ const mockPollingData = {
       { pollster: 'Emerson College', date: 'February 28 – March 2, 2026', sampleSize: 500, husted: 43, brown: 50, other: 1, undecided: 6, margin: 'Brown +7' },
       { pollster: 'Cygnal (R)', date: 'February 5–6, 2026', sampleSize: 800, husted: 44, brown: 46, other: 2, undecided: 8, margin: 'Brown +2' },
       { pollster: 'EMC Research (D)', date: 'February 10–22, 2026', sampleSize: 1343, husted: 47, brown: 51, other: 0, undecided: 2, margin: 'Brown +4' },
+    ]
+  },
   'ohio-governor': {
     chartData: [],
     polls: [
