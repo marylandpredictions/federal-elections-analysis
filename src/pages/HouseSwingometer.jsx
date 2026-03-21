@@ -183,19 +183,40 @@ export default function HouseSwingometer() {
               <text x={CX-80} y={CY+18} fill="rgba(255,255,255,0.4)" fontSize="11" fontFamily="Inter,sans-serif">← Democrat</text>
               <text x={CX+12} y={CY+18} fill="rgba(255,255,255,0.4)" fontSize="11" fontFamily="Inter,sans-serif">Republican →</text>
             </svg>
-            {tooltip && (
-              <div className="absolute z-50 pointer-events-none border border-white/40 rounded-xl shadow-xl"
-                style={{
-                  left: `${Math.min(Math.max((tooltip.svgX/1000)*100,12),88)}%`,
-                  top: `${Math.max((tooltip.svgY/svgH)*100-2,0)}%`,
-                  transform: 'translate(-50%,-110%)',
-                  backgroundColor: 'rgba(0,0,0,0.92)',
-                  minWidth: 140, padding: '8px 12px'
-                }}>
-                <div className="text-white font-bold text-sm mb-1">{tooltip.key}</div>
-                {houseIncumbents[normalizeDistrict(tooltip.key)] && (
-                  <div className="text-white/70 text-xs mb-1">{houseIncumbents[normalizeDistrict(tooltip.key)]}</div>
-                )}
+            {tooltip && (() => {
+              const d = housePVIData.find(([k])=>k===tooltip.key);
+              const adj = d ? d[1]+swing : 0;
+              const dPct = (50 - adj/2);
+              const rPct = (50 + adj/2);
+              const marginText = adj > 0 ? `R+${adj.toFixed(1)}` : adj < 0 ? `D+${Math.abs(adj).toFixed(1)}` : 'EVEN';
+              return (
+                <div className="absolute z-50 pointer-events-none border border-white/40 rounded-xl shadow-xl"
+                  style={{
+                    left: `${Math.min(Math.max((tooltip.svgX/1000)*100,12),88)}%`,
+                    top: `${Math.max((tooltip.svgY/svgH)*100-2,0)}%`,
+                    transform: 'translate(-50%,-110%)',
+                    backgroundColor: 'rgba(0,0,0,0.92)',
+                    minWidth: 160, padding: '8px 12px'
+                  }}>
+                  <div className="text-white font-bold text-sm mb-1">{tooltip.key}</div>
+                  {houseIncumbents[normalizeDistrict(tooltip.key)] && (
+                    <div className="text-white/70 text-xs mb-1">{houseIncumbents[normalizeDistrict(tooltip.key)]}</div>
+                  )}
+                  <div className="font-semibold text-xs mb-2" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
+                  <div className="text-white/70 text-xs mb-2">{marginText}</div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="flex-1 flex gap-0.5 items-center h-4 bg-white/10 rounded overflow-hidden">
+                      <div style={{width:`${dPct}%`,backgroundColor:'#2563EB',height:'100%'}} />
+                      <div style={{width:`${rPct}%`,backgroundColor:'#DC2626',height:'100%'}} />
+                    </div>
+                  </div>
+                  <div className="flex justify-between text-xs text-white/60">
+                    <span>D {dPct.toFixed(1)}%</span>
+                    <span>R {rPct.toFixed(1)}%</span>
+                  </div>
+                </div>
+              );
+            })()}
                 <div className="font-semibold text-xs mb-1" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
                 <div className="text-white/60 text-xs">
                   2024: {(() => { const d = housePVIData.find(([k])=>k===tooltip.key); if(!d) return '—'; const adj = d[1]+swing; return adj > 0 ? `R+${Math.abs(adj).toFixed(1)}` : adj < 0 ? `D+${Math.abs(adj).toFixed(1)}` : 'EVEN'; })()}
