@@ -777,35 +777,10 @@ export default function Polling() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-8"
         >
-          <div className="flex items-start gap-4 flex-wrap">
-            <div className="flex-1 min-w-[200px]">
-              <PollSelector options={pollingOptions} value={selectedPoll} onChange={setSelectedPoll} />
-            </div>
-            <div className="flex gap-3 flex-wrap">
-              {[
-                { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot' },
-                { value: '2028-dem-primary', label: '2028 Democratic Primary' },
-                { value: '2028-rep-primary', label: '2028 Republican Primary' },
-                ...(randomPoll ? [randomPollOptions.find(p => p.value === randomPoll)] : []),
-              ].map(pill => {
-                const info = pillInfos[pill.value];
-                const marginText = info?.margin != null ? `${info.leader} +${info.margin.toFixed(1)}%` : '';
-                return (
-                <button
-                  key={pill.value}
-                  onClick={() => setSelectedPoll(pill.value)}
-                  className={`rounded-2xl px-4 py-3 font-inter font-semibold text-sm transition-all border text-left ${
-                    selectedPoll === pill.value
-                      ? 'bg-white/25 text-white border-white/60'
-                      : 'bg-white/10 text-white/80 border-white/20 hover:bg-white/20 hover:text-white'
-                  }`}
-                >
-                  <div>{pill.label}</div>
-                  {marginText && <div className="text-xs font-bold mt-0.5" style={{ color: info.marginColor }}>{marginText}</div>}
-                </button>
-              )})}
-            </div>
+          <div className="flex-1 min-w-[200px] mb-4">
+            <PollSelector options={pollingOptions} value={selectedPoll} onChange={setSelectedPoll} />
           </div>
+          <div className="flex gap-3 flex-wrap">
         </motion.div>
 
         <motion.div
