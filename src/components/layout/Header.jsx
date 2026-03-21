@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 
 function useTheme() {
   const [dark, setDark] = useState(() => {
     const stored = localStorage.getItem('theme');
     const isDark = stored ? stored === 'dark' : true;
-    // Apply class synchronously before first paint
     if (isDark) document.documentElement.classList.add('dark');
     else document.documentElement.classList.remove('dark');
     return isDark;
@@ -39,6 +38,12 @@ const interactiveLinks = [
   { label: 'House Swingometer', path: '/HouseSwingometer' },
   { label: 'Governors Swingometer', path: '/GovernorsSwingometer' },
   { label: 'Presidential Map Builder', path: '/PresidentialMapBuilder' },
+];
+
+const moreLinks = [
+  { label: 'About Us', path: '/AboutUs' },
+  { label: 'Articles', path: '/Articles' },
+  { label: 'Contact Us', path: '/ContactUs' },
 ];
 
 export default function Header() {
@@ -135,7 +140,7 @@ export default function Header() {
             <Link
               to="/Interactives"
               className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
-                location.pathname.includes('/Interactives') || location.pathname.includes('Swingometer')
+                location.pathname.includes('/Interactives') || location.pathname.includes('Swingometer') || location.pathname.includes('MapBuilder')
                   ? 'bg-accent text-white'
                   : 'text-white/80 hover:bg-accent/50 hover:text-white'
               }`}
@@ -159,7 +164,7 @@ export default function Header() {
           <div className="relative flex-shrink-0" onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>
             <button
               className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
-                location.pathname === '/Articles' || location.pathname === '/ContactUs' || location.pathname === '/AboutUs'
+                moreLinks.some(l => location.pathname === l.path)
                   ? 'bg-accent text-white'
                   : 'text-white/80 hover:bg-accent/50 hover:text-white'
               }`}
@@ -167,25 +172,21 @@ export default function Header() {
             >
               More
               <ChevronDown style={{ width: '16px', height: '16px' }} />
-            </button>`}
-              style={{ padding: '8px 16px', fontSize: '14px' }}
-            >
-              More
-              <ChevronDown style={{ width: '16px', height: '16px' }} />
             </button>
             {moreOpen && (
               <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 py-2 z-50" style={{ minWidth: '160px' }}>
-                <Link to="/AboutUs" className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all" style={{ fontSize: '14px' }}>About Us</Link>
-                <Link to="/Articles" className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all" style={{ fontSize: '14px' }}>Articles</Link>
-                <Link to="/ContactUs" className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all" style={{ fontSize: '14px' }}>Contact Us</Link>
+                {moreLinks.map((link) => (
+                  <Link key={link.path} to={link.path} className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all" style={{ fontSize: '14px' }}>
+                    {link.label}
+                  </Link>
+                ))}
               </div>
             )}
           </div>
         </nav>
 
-        {/* Right side: Theme toggle + Mobile toggle */}
+        {/* Right side: Mobile toggle */}
         <div className="flex items-center gap-1 ml-auto flex-shrink-0">
-  
           <button
             className="md:hidden text-white"
             style={{ padding: '8px' }}
@@ -215,6 +216,11 @@ export default function Header() {
               </Link>
             );
           })}
+          <Link to="/Forecasts" onClick={() => setMobileOpen(false)}
+            className={`block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal ${location.pathname === '/Forecasts' ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'}`}
+            style={{ fontSize: '14px' }}>
+            Forecasts
+          </Link>
           {forecastLinks.map((link) => (
             <Link key={link.path} to={link.path} onClick={() => setMobileOpen(false)}
               className={`block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal ml-4 ${location.pathname === link.path ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'}`}
@@ -234,16 +240,13 @@ export default function Header() {
               • {link.label}
             </Link>
           ))}
-          <Link to="/Articles" onClick={() => setMobileOpen(false)}
-            className={`block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal ml-4 ${location.pathname === '/Articles' ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'}`}
-            style={{ fontSize: '14px' }}>
-            • Articles
-          </Link>
-          <Link to="/ContactUs" onClick={() => setMobileOpen(false)}
-            className={`block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal ml-4 ${location.pathname === '/ContactUs' ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'}`}
-            style={{ fontSize: '14px' }}>
-            • Contact Us
-          </Link>
+          {moreLinks.map((link) => (
+            <Link key={link.path} to={link.path} onClick={() => setMobileOpen(false)}
+              className={`block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal ml-4 ${location.pathname === link.path ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'}`}
+              style={{ fontSize: '14px' }}>
+              • {link.label}
+            </Link>
+          ))}
         </div>
       )}
     </header>
