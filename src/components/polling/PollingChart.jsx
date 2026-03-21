@@ -142,8 +142,8 @@ export default function PollingChart({ polls, type }) {
             stroke="rgba(255,255,255,0.3)"
             fill="rgba(255,255,255,0.07)"
             travellerWidth={8}
-            tickFormatter={(ts) => format(new Date(ts), 'MMM yy')}
-            style={{ fontSize: '10px', fill: 'white' }}
+            tickFormatter={(ts) => format(new Date(ts), 'MMM d, yyyy')}
+            style={{ fontSize: '10px', fontWeight: 'bold', fill: 'white', color: 'white' }}
           />
         </LineChart>
       </ResponsiveContainer>
