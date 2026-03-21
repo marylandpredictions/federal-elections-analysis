@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { houseIncumbents, normalizeDistrict } from '../components/swingometer/houseIncumbents';
 import { motion } from 'framer-motion';
 import SwingBar from '../components/swingometer/SwingBar';
 import { housePVIData } from '../components/swingometer/houseData';
@@ -192,6 +193,9 @@ export default function HouseSwingometer() {
                   minWidth: 140, padding: '8px 12px'
                 }}>
                 <div className="text-white font-bold text-sm mb-1">{tooltip.key}</div>
+                {houseIncumbents[normalizeDistrict(tooltip.key)] && (
+                  <div className="text-white/70 text-xs mb-1">{houseIncumbents[normalizeDistrict(tooltip.key)]}</div>
+                )}
                 <div className="font-semibold text-xs mb-1" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
                 <div className="text-white/60 text-xs">
                   PVI: {(() => { const d = housePVIData.find(([k])=>k===tooltip.key); if(!d) return '—'; const adj = d[1]+swing; return adj > 0 ? `R+${adj.toFixed(0)}` : adj < 0 ? `D+${Math.abs(adj).toFixed(0)}` : 'EVEN'; })()}

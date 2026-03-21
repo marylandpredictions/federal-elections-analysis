@@ -39,9 +39,18 @@ export default function ElectionDetail() {
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/10">
             <div className="flex items-start justify-between gap-4 mb-6">
               <div>
-                <h1 className="text-white font-inter font-bold text-3xl sm:text-4xl mb-1 hover:underline cursor-default">{election.state}</h1>
-                <div className="text-white font-inter font-bold text-xl mb-1 hover:underline cursor-default">{election.electionType}</div>
-                <div className="text-white font-inter font-bold text-base text-white/80 hover:underline cursor-default">{election.date}</div>
+                <h1 className="text-white font-inter font-bold text-3xl sm:text-4xl mb-1 relative inline-block group cursor-default">
+                  {election.state}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                </h1>
+                <div className="text-white font-inter font-bold text-xl mb-1 relative inline-block group cursor-default">
+                  {election.electionType}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                </div>
+                <div className="text-white font-inter font-bold text-base text-white/80 relative inline-block group cursor-default">
+                  {election.date}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                </div>
               </div>
               {election.stateIcon && (
                 <img

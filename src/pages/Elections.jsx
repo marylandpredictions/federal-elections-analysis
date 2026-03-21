@@ -19,6 +19,20 @@ export const electionsData = [
     preview: 'In the race to replace retiring conservative-aligning Wisconsin Supreme Court Justice Rebecca Bradley, liberal-aligned judge Chris Taylor is likely to win...',
     fullDescription: `In the race to replace retiring conservative-aligning Wisconsin Supreme Court Justice Rebecca Bradley, liberal-aligned judge Chris Taylor is likely to win against her right-wing opponent, Maria Lazar. In last year's supreme court election located in the swing state, liberal candidate Susan Crawford beat MAGA funded Brad Schimel by over double digits in a state that Trump carried in 2024, even with Elon Musk pouring millions into the race. Without Elon Musk's financial backing this time around and a much more low-profile race and a different environment, can conservatives hold this seat or will the liberals pull of another massive victory, potentially outrunning their 2025 result?`,
   },
+  {
+    id: 'ga-house-14-special-runoff-2026',
+    state: 'Georgia',
+    stateAbbr: 'GA',
+    stateIcon: null,
+    electionType: 'U.S. House 14th Special Runoff',
+    date: '4/7/26',
+    candidates: [
+      { name: 'Clay Fuller', party: 'R', color: '#FCA5A5' },
+      { name: 'Shawn Harris', party: 'D', color: '#93C5FD' },
+    ],
+    preview: 'After the first round on March 10th to replace MTG, no candidate hit 50%+1. Clay Fuller (R, 34.9%) and Shawn Harris (D, 37.3%) advance to the runoff...',
+    fullDescription: `After the first round election held on March 10th to replace Marjorie Taylor Greene, there was no candidate who achieved 50% + 1 votes. This meant that the top two candidates in this race would advance. That would be Democrat Shawn Harris, MTG's 2024 opponent who lost by over 30% in this super republican district, that came out on top of the massive field of candidates with 37.3% of the vote and Trump endorsed Clay Fuller who grasped 34.9% of the vote in the first round. We have seen some massive Democratic overperformances in special state legislative and U.S. House elections but none of those come near to the 28.7 percentage gap that Harris must hurdle to become the next representative from the Peach State.`,
+  },
 ];
 
 export default function Elections() {
@@ -48,7 +62,10 @@ export default function Elections() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h2 className="text-white font-inter font-extrabold text-5xl sm:text-6xl mb-6">April</h2>
+            <h2 className="text-white font-inter font-extrabold text-5xl sm:text-6xl mb-6 relative inline-block group cursor-default">
+              April
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+            </h2>
 
             <div className="space-y-4">
               {aprilElections.map((election, i) => (

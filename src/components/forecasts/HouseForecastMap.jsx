@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { houseIncumbents } from '../swingometer/houseIncumbents';
 
 const ratingColors = {
   'Safe D':    '#1E3A8A',
@@ -226,6 +227,9 @@ export default function HouseForecastMap() {
             }}
           >
             <div className="text-white font-bold text-sm mb-1">{tooltip.label}</div>
+            {houseIncumbents[tooltip.label] && (
+              <div className="text-white/70 text-xs mb-1">{houseIncumbents[tooltip.label]}</div>
+            )}
             <div className="font-semibold text-xs" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
           </div>
         )}
