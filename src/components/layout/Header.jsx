@@ -171,8 +171,8 @@ export default function Header() {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-1 mx-auto flex-shrink-0">
           {[
-            { label: 'Polling', path: '/Polling' },
             { label: 'Elections', path: '/Elections' },
+            { label: 'Polling', path: '/Polling' },
           ].map((link) => {
             const isActive = location.pathname === link.path;
             return (

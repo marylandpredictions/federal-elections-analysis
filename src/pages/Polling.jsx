@@ -711,19 +711,21 @@ export default function Polling() {
             </div>
             <div className="flex gap-3 flex-wrap">
               {[
-                { value: 'alaska-senate', label: 'AK Sen. General' },
-                { value: 'louisiana-gop-senate', label: 'LA GOP Sen.' },
+                { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot', margin: 'Democrat +4.7%', marginColor: '#2563EB' },
+                { value: '2028-dem-primary', label: '2028 Democratic Primary', margin: 'Harris +2%', marginColor: '#2563EB' },
+                { value: '2028-rep-primary', label: '2028 Republican Primary', margin: 'Vance +23%', marginColor: '#DC2626' },
               ].map(pill => (
                 <button
                   key={pill.value}
                   onClick={() => setSelectedPoll(pill.value)}
-                  className={`rounded-2xl px-4 py-3 font-inter font-semibold text-sm transition-all border ${
+                  className={`rounded-2xl px-4 py-3 font-inter font-semibold text-sm transition-all border text-left ${
                     selectedPoll === pill.value
                       ? 'bg-white/25 text-white border-white/60'
                       : 'bg-white/10 text-white/80 border-white/20 hover:bg-white/20 hover:text-white'
                   }`}
                 >
-                  {pill.label}
+                  <div>{pill.label}</div>
+                  <div className="text-xs font-bold mt-0.5" style={{ color: pill.marginColor }}>{pill.margin}</div>
                 </button>
               ))}
             </div>
