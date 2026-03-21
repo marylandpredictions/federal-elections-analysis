@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import HexUSMap, { NAME_TO_ABBR, ABBR_TO_NAME } from '../maps/HexUSMap';
 
 const getRating = (margin) => {
