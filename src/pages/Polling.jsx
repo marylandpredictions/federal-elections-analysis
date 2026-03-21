@@ -781,6 +781,29 @@ export default function Polling() {
             <PollSelector options={pollingOptions} value={selectedPoll} onChange={setSelectedPoll} />
           </div>
           <div className="flex gap-3 flex-wrap">
+            {[
+              { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot' },
+              { value: '2028-dem-primary', label: '2028 Democratic Primary' },
+              { value: '2028-rep-primary', label: '2028 Republican Primary' },
+              ...(randomPoll ? [randomPollOptions.find(p => p.value === randomPoll)] : []),
+            ].map(pill => {
+              const info = pillInfos[pill.value];
+              const marginText = info?.margin != null ? `${info.leader} +${info.margin.toFixed(1)}%` : '';
+              return (
+              <button
+                key={pill.value}
+                onClick={() => setSelectedPoll(pill.value)}
+                className={`rounded-2xl px-4 py-3 font-inter font-semibold text-sm transition-all border text-left ${pill.value === randomPoll ? 'min-w-[280px]' : ''} ${
+                  selectedPoll === pill.value
+                    ? 'bg-white/25 text-white border-white/60'
+                    : 'bg-white/10 text-white/80 border-white/20 hover:bg-white/20 hover:text-white'
+                }`
+              >
+                <div>{pill.label}</div>
+                {marginText && <div className="text-xs font-bold mt-0.5" style={{ color: info.marginColor }}>{marginText}</div>}
+              </button>
+            )})}}
+          </div>
         </motion.div>
 
         <motion.div
