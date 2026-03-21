@@ -32,54 +32,112 @@ export const ABBR_TO_NAME = Object.fromEntries(
   Object.entries(NAME_TO_ABBR).map(([k, v]) => [v, k])
 );
 
-export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onClick, stripeAbbrs }) {
-  const [tooltip, setTooltip] = useState(null); // { abbr, x, y }
+export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onClick, stripeAbbrs, highlightRating, ratingsByAbbr }) {
+  const [tooltip, setTooltip] = useState(null);
   const containerRef = useRef(null);
+  const innerRef = useRef(null);
 
-  const handleMouseMove = (e, abbr) => {
+  // Zoom / pan state
+  const [zoom, setZoom] = useState(1);
+  const [translate, setTranslate] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState(null);
+  const [dragTranslateStart, setDragTranslateStart] = useState(null);
+
+  const handleZoomIn = () => setZoom(z => Math.min(z + 0.5, 5));
+  const handleZoomOut = () => {
+    const next = Math.max(zoom - 0.5, 1);
+    setZoom(next);
+    if (next === 1) setTranslate({ x: 0, y: 0 });
+  };
+
+  const handleMouseDown = (e) => {
+    if (zoom <= 1) return;
+    setIsDragging(true);
+    setDragStart({ x: e.clientX, y: e.clientY });
+    setDragTranslateStart({ ...translate });
+    e.preventDefault();
+  };
+  const handleMouseMove = (e) => {
+    if (!isDragging || !dragStart) return;
+    setTranslate({
+      x: dragTranslateStart.x + (e.clientX - dragStart.x),
+      y: dragTranslateStart.y + (e.clientY - dragStart.y),
+    });
+  };
+  const handleMouseUp = () => { setIsDragging(false); setDragStart(null); };
+
+  const handleMouseMoveTooltip = (e, abbr) => {
     const rect = containerRef.current?.getBoundingClientRect();
     if (!rect) return;
-    setTooltip({
-      abbr,
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+    setTooltip({ abbr, x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
   return (
-    <div ref={containerRef} className="relative w-full select-none">
-      <ComposableMap
-        projection="geoAlbersUsa"
-        style={{ width: '100%', height: 'auto' }}
-      >
-        <Geographies geography={GEO_URL}>
-          {({ geographies }) =>
-            geographies.map(geo => {
-              const abbr = FIPS_TO_ABBR[geo.id];
-              const fill = (abbr && colorsByAbbr[abbr]) || '#4B5563';
-              return (
-                <Geography
-                  key={geo.rsmKey}
-                  geography={geo}
-                  fill={fill}
-                  stroke="#ffffff"
-                  strokeWidth={0.6}
-                  style={{
-                    default: { outline: 'none' },
-                    hover:   { outline: 'none', filter: 'brightness(1.25)', cursor: 'pointer' },
-                    pressed: { outline: 'none' },
-                  }}
-                  onMouseMove={(e) => abbr && handleMouseMove(e, abbr)}
-                  onMouseLeave={() => setTooltip(null)}
-                  onClick={() => abbr && onClick && onClick(abbr)}
-                />
-              );
-            })
-          }
-        </Geographies>
-      </ComposableMap>
+    <div ref={containerRef} className="relative w-full select-none" style={{ overflow: 'hidden' }}>
+      {/* Zoom buttons */}
+      <div className="absolute top-2 right-2 z-20 flex flex-col gap-1">
+        <button
+          onClick={handleZoomIn}
+          className="w-7 h-7 rounded bg-black text-white font-bold text-base flex items-center justify-center hover:bg-gray-800 border border-white/30 transition-colors"
+          title="Zoom in"
+        >+</button>
+        <button
+          onClick={handleZoomOut}
+          className="w-7 h-7 rounded bg-black text-white font-bold text-base flex items-center justify-center hover:bg-gray-800 border border-white/30 transition-colors"
+          title="Zoom out"
+        >−</button>
+      </div>
 
-      {/* Tooltip — same dark card style as the original */}
+      {/* Pannable / zoomable inner */}
+      <div
+        ref={innerRef}
+        style={{
+          transform: `translate(${translate.x}px, ${translate.y}px) scale(${zoom})`,
+          transformOrigin: 'center center',
+          cursor: isDragging ? 'grabbing' : zoom > 1 ? 'grab' : 'default',
+          transition: isDragging ? 'none' : 'transform 0.15s ease',
+        }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+      >
+        <ComposableMap
+          projection="geoAlbersUsa"
+          style={{ width: '100%', height: 'auto' }}
+        >
+          <Geographies geography={GEO_URL}>
+            {({ geographies }) =>
+              geographies.map(geo => {
+                const abbr = FIPS_TO_ABBR[geo.id];
+                const fill = (abbr && colorsByAbbr[abbr]) || '#4B5563';
+                const dimmed = highlightRating && ratingsByAbbr && ratingsByAbbr[abbr] !== highlightRating;
+                return (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    fill={fill}
+                    fillOpacity={dimmed ? 0.2 : 1}
+                    stroke="#ffffff"
+                    strokeWidth={0.6}
+                    style={{
+                      default: { outline: 'none' },
+                      hover:   { outline: 'none', filter: 'brightness(1.25)', cursor: onClick ? 'pointer' : 'default' },
+                      pressed: { outline: 'none' },
+                    }}
+                    onMouseMove={(e) => abbr && handleMouseMoveTooltip(e, abbr)}
+                    onMouseLeave={() => setTooltip(null)}
+                    onClick={() => abbr && onClick && onClick(abbr)}
+                  />
+                );
+              })
+            }
+          </Geographies>
+        </ComposableMap>
+      </div>
+
+      {/* Tooltip */}
       {tooltip && renderTooltipContent && (() => {
         const content = renderTooltipContent(tooltip.abbr);
         if (!content) return null;

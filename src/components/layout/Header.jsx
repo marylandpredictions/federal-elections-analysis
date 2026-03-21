@@ -27,7 +27,6 @@ function useTheme() {
 
 const navLinks = [
   { label: 'Home', path: '/Home' },
-  { label: 'About Us', path: '/AboutUs' },
   { label: 'Polling', path: '/Polling' }
 ];
 
@@ -160,7 +159,7 @@ export default function Header() {
           <div className="relative flex-shrink-0" onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>
             <button
               className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
-                location.pathname === '/Articles' || location.pathname === '/ContactUs'
+                location.pathname === '/Articles' || location.pathname === '/ContactUs' || location.pathname === '/AboutUs'
                   ? 'bg-accent text-white'
                   : 'text-white/80 hover:bg-accent/50 hover:text-white'
               }`}
@@ -168,9 +167,15 @@ export default function Header() {
             >
               More
               <ChevronDown style={{ width: '16px', height: '16px' }} />
+            </button>`}
+              style={{ padding: '8px 16px', fontSize: '14px' }}
+            >
+              More
+              <ChevronDown style={{ width: '16px', height: '16px' }} />
             </button>
             {moreOpen && (
               <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 py-2 z-50" style={{ minWidth: '160px' }}>
+                <Link to="/AboutUs" className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all" style={{ fontSize: '14px' }}>About Us</Link>
                 <Link to="/Articles" className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all" style={{ fontSize: '14px' }}>Articles</Link>
                 <Link to="/ContactUs" className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all" style={{ fontSize: '14px' }}>Contact Us</Link>
               </div>
