@@ -79,6 +79,7 @@ export default function HouseForecastMap() {
   const [hovered, setHovered] = useState(null);
   const [tooltip, setTooltip] = useState(null);
   const [hoveredBubble, setHoveredBubble] = useState(null);
+  const [highlightRating, setHighlightRating] = useState(null);
 
   // Group by rating in order, stable within each group
   const groups = {};
@@ -141,7 +142,7 @@ export default function HouseForecastMap() {
       {/* Seat count bubbles */}
       <div className="flex justify-center gap-4 mb-6 flex-wrap">
         <div className="relative" onMouseEnter={() => setHoveredBubble('dem')} onMouseLeave={() => setHoveredBubble(null)}>
-          <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+          <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
             <div className="text-3xl font-bold text-blue-300">{demSeats}</div>
             <div className="text-blue-200/70 text-sm mt-1">Democrat</div>
           </div>
@@ -156,12 +157,12 @@ export default function HouseForecastMap() {
             </div>
           )}
         </div>
-        <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+        <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
           <div className="text-3xl font-bold text-purple-300">{tossUp}</div>
           <div className="text-purple-200/70 text-sm mt-1">Toss Up</div>
         </div>
         <div className="relative" onMouseEnter={() => setHoveredBubble('rep')} onMouseLeave={() => setHoveredBubble(null)}>
-          <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+          <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
             <div className="text-3xl font-bold text-red-300">{repSeats}</div>
             <div className="text-red-200/70 text-sm mt-1">Republican</div>
           </div>
@@ -186,6 +187,7 @@ export default function HouseForecastMap() {
       <div className="relative w-full">
         <svg viewBox={`0 0 1000 ${CY + 20}`} className="w-full" style={{ minWidth: '320px' }}>
           {dots.map(({ x, y, seat }) => {
+            const isHighlighted = !highlightRating || seat.rating === highlightRating;
             const isHovered = hovered === seat.key;
             return (
               <circle
@@ -196,7 +198,7 @@ export default function HouseForecastMap() {
                 fill={ratingColors[seat.rating]}
                 stroke="white"
                 strokeWidth={isHovered ? 1.8 : 0.6}
-                opacity={0.95}
+                opacity={isHighlighted ? 0.95 : 0.15}
                 onMouseEnter={() => {
                   setHovered(seat.key);
                   setTooltip({ label: seat.key, rating: seat.rating, svgX: x, svgY: y });
@@ -232,10 +234,16 @@ export default function HouseForecastMap() {
       {/* Legend */}
       <div className="flex flex-wrap justify-center gap-3 mt-4">
         {ratingOrder.map(r => (
-          <div key={r} className="flex items-center gap-1.5">
+          <button
+            key={r}
+            onMouseEnter={() => setHighlightRating(r)}
+            onMouseLeave={() => setHighlightRating(null)}
+            className="flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all"
+            style={{ background: highlightRating === r ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)' }}
+          >
             <span className="w-3 h-3 rounded-full border border-white/40" style={{ backgroundColor: ratingColors[r] }} />
             <span className="text-white/70 text-xs">{r}</span>
-          </div>
+          </button>
         ))}
       </div>
     </div>

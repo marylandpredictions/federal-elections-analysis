@@ -68,6 +68,7 @@ export default function HouseSwingometer() {
   const [hovered, setHovered] = useState(null);
   const [tooltip, setTooltip] = useState(null);
   const [hoveredBubble, setHoveredBubble] = useState(null);
+  const [highlightRating, setHighlightRating] = useState(null);
 
   const { seats, totals, positions } = useMemo(() => {
     const rated = housePVIData.map(([dist, pvi]) => ({
@@ -115,7 +116,7 @@ export default function HouseSwingometer() {
           {/* Seat count bubbles */}
           <div className="flex justify-center gap-4 mb-4 flex-wrap">
             <div className="relative" onMouseEnter={() => setHoveredBubble('dem')} onMouseLeave={() => setHoveredBubble(null)}>
-              <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+              <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
                 <div className="text-3xl font-bold text-blue-300">{demSeats}</div>
                 <div className="text-blue-200/70 text-sm mt-1">Democrat</div>
               </div>
@@ -130,12 +131,12 @@ export default function HouseSwingometer() {
                 </div>
               )}
             </div>
-            <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg">
+            <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg" style={{ border: '2px solid white' }}>
               <div className="text-3xl font-bold text-purple-300">{tossUp}</div>
               <div className="text-purple-200/70 text-sm mt-1">Toss Up</div>
             </div>
             <div className="relative" onMouseEnter={() => setHoveredBubble('rep')} onMouseLeave={() => setHoveredBubble(null)}>
-              <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer">
+              <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
                 <div className="text-3xl font-bold text-red-300">{repSeats}</div>
                 <div className="text-red-200/70 text-sm mt-1">Republican</div>
               </div>
@@ -161,6 +162,7 @@ export default function HouseSwingometer() {
             <svg viewBox={`0 0 1000 ${svgH}`} className="w-full" style={{ minWidth: '320px' }}>
               {seats.map(({ key, x, y, rating }) => {
                 const isHovered = hovered === key;
+                const isHighlighted = !highlightRating || rating === highlightRating;
                 return (
                   <circle
                     key={key}
@@ -169,7 +171,7 @@ export default function HouseSwingometer() {
                     fill={ratingColors[rating]}
                     stroke="white"
                     strokeWidth={isHovered ? 1.8 : 0.6}
-                    opacity={0.95}
+                    opacity={isHighlighted ? 0.95 : 0.15}
                     onMouseEnter={() => { setHovered(key); setTooltip({ key, rating, svgX: x, svgY: y }); }}
                     onMouseLeave={() => { setHovered(null); setTooltip(null); }}
                     style={{ cursor: 'pointer', transition: 'r 0.1s' }}
@@ -201,10 +203,16 @@ export default function HouseSwingometer() {
           {/* Legend with margin labels */}
           <div className="flex flex-wrap justify-center gap-3 mt-4">
             {ratingOrder.map(r => (
-              <div key={r} className="flex items-center gap-1.5">
+              <button
+                key={r}
+                onMouseEnter={() => setHighlightRating(r)}
+                onMouseLeave={() => setHighlightRating(null)}
+                className="flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all"
+                style={{ background: highlightRating === r ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)' }}
+              >
                 <span className="w-3 h-3 rounded-full border border-white/40" style={{ backgroundColor: ratingColors[r] }} />
                 <span className="text-white/70 text-xs">{r}</span>
-              </div>
+              </button>
             ))}
           </div>
           <p className="text-white/40 text-xs text-center mt-2">
