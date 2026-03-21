@@ -25,6 +25,7 @@ const ratingApprox = {
 export default function InteractiveMap({ ratings, percentages, majorityNote, incumbents = {}, baseDemSeats = 0, baseRepSeats = 0, showIncumbents = false }) {
   const [hoveredBubble, setHoveredBubble] = useState(null);
   const [highlightRating, setHighlightRating] = useState(null);
+  const [highlightFlips, setHighlightFlips] = useState(false);
 
   // Count seats
   const counts = Object.values(ratings).reduce((acc, r) => {
@@ -55,6 +56,22 @@ export default function InteractiveMap({ ratings, percentages, majorityNote, inc
     });
     return m;
   }, [ratings]);
+
+  const stripeAbbrs = useMemo(() => {
+    const s = new Set();
+    Object.entries(ratings).forEach(([fullName, rating]) => {
+      const incumbent = incumbents[fullName];
+      if (!incumbent || rating === 'Not Contested') return;
+      const incumbentParty = incumbent.split('(')[1]?.charAt(0);
+      if (rating === 'Toss Up' ||
+        (incumbentParty === 'R' && rating.includes('D')) ||
+        (incumbentParty === 'D' && rating.includes('R'))) {
+        const abbr = NAME_TO_ABBR[fullName];
+        if (abbr) s.add(abbr);
+      }
+    });
+    return s;
+  }, [ratings, incumbents]);
 
   const renderTooltipContent = (abbr) => {
     const fullName = ABBR_TO_NAME[abbr];
@@ -153,6 +170,7 @@ export default function InteractiveMap({ ratings, percentages, majorityNote, inc
         renderTooltipContent={renderTooltipContent}
         highlightRating={highlightRating}
         ratingsByAbbr={ratingsByAbbr}
+        stripeAbbrs={highlightFlips ? stripeAbbrs : undefined}
       />
 
       {/* Legend */}
@@ -169,6 +187,22 @@ export default function InteractiveMap({ ratings, percentages, majorityNote, inc
             <span className="text-white text-xs font-medium">{rating}</span>
           </button>
         ))}
+        <button
+          onMouseEnter={() => setHighlightFlips(true)}
+          onMouseLeave={() => setHighlightFlips(false)}
+          className="flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all"
+          style={{ background: highlightFlips ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)' }}
+        >
+          <svg className="w-3 h-3" viewBox="0 0 12 12" style={{ overflow: 'visible' }}>
+            <defs>
+              <pattern id="flipLegend" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+                <line x1="0" y1="0" x2="0" y2="3" stroke="white" strokeWidth="0.8" />
+              </pattern>
+            </defs>
+            <rect width="12" height="12" fill="url(#flipLegend)" stroke="white" strokeWidth="0.5" />
+          </svg>
+          <span className="text-white text-xs font-medium">Flips</span>
+        </button>
       </div>
     </div>
   );
