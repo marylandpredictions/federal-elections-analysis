@@ -59,6 +59,44 @@ const govBaseResults = {
   'Wyoming': null,
 };
 
+const govIncumbents = {
+  'Alabama': 'Kay Ivey (R)',
+  'Alaska': 'Mike Dunleavy (R)',
+  'Arizona': 'Katie Hobbs (D)',
+  'Arkansas': 'Sarah Huckabee Sanders (R)',
+  'California': 'Gavin Newsom (D)',
+  'Colorado': 'Jared Polis (D)',
+  'Connecticut': 'Ned Lamont (D)',
+  'Florida': 'Ron DeSantis (R)',
+  'Georgia': 'Brian Kemp (R)',
+  'Hawaii': 'Josh Green (D)',
+  'Idaho': 'Brad Little (R)',
+  'Illinois': 'JB Pritzker (D)',
+  'Iowa': 'Kim Reynolds (R)',
+  'Kansas': 'Laura Kelly (D)',
+  'Maine': 'Janet Mills (D)',
+  'Maryland': 'Wes Moore (D)',
+  'Massachusetts': 'Maura Healey (D)',
+  'Michigan': 'Gretchen Whitmer (D)',
+  'Minnesota': 'Tim Walz (D)',
+  'Nebraska': 'Jim Pillen (R)',
+  'Nevada': 'Joe Lombardo (R)',
+  'New Hampshire': 'Kelly Ayotte (R)',
+  'New Mexico': 'Michelle Lujan Grisham (D)',
+  'New York': 'Kathy Hochul (D)',
+  'Ohio': 'Mike DeWine (R)',
+  'Oklahoma': 'Kevin Stitt (R)',
+  'Oregon': 'Tina Kotek (D)',
+  'Pennsylvania': 'Josh Shapiro (D)',
+  'Rhode Island': 'Helena Foulkes (D)',
+  'South Carolina': 'Henry McMaster (R)',
+  'South Dakota': 'Tony Venhuizen (R)',
+  'Tennessee': 'Bill Lee (R)',
+  'Texas': 'Greg Abbott (R)',
+  'Vermont': 'Phil Scott (R)',
+  'Wisconsin': 'Tony Evers (D)',
+};
+
 export default function GovernorsSwingometer() {
   const [swing, setSwing] = useState(0);
 
@@ -83,7 +121,7 @@ export default function GovernorsSwingometer() {
         <SwingBar swing={swing} setSwing={setSwing} />
 
         <div className="mt-8">
-          <SwingMap baseResults={govBaseResults} swing={swing} title="2026 Governors Map" baseDemSeats={0} baseRepSeats={0} />
+          <SwingMap baseResults={govBaseResults} swing={swing} title="2026 Governors Map" baseDemSeats={0} baseRepSeats={0} incumbents={govIncumbents} />
         </div>
       </div>
     </div>

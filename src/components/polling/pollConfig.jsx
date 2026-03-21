@@ -238,7 +238,7 @@ export function computeChartData(polls, type) {
   const maxTs = result[result.length - 1].timestamp;
   const daily = [];
   let ri = 0;
-  for (let ts = minTs; ts <= maxTs; ts += oneDay) {
+  for (let ts = minTs; ts <= maxTs + oneDay; ts += oneDay) {
     while (ri + 1 < result.length && result[ri + 1].timestamp <= ts) ri++;
     daily.push({ ...result[ri], timestamp: ts });
   }

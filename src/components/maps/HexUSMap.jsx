@@ -61,7 +61,7 @@ function getCenter(col, row) {
   };
 }
 
-export default function HexUSMap({ colorsByAbbr, onClick, renderTooltipContent, secondaryLabel }) {
+export default function HexUSMap({ colorsByAbbr, onClick, renderTooltipContent, secondaryLabel, stripeAbbrs }) {
   const [hovered, setHovered] = useState(null);
 
   const states = [
@@ -72,6 +72,11 @@ export default function HexUSMap({ colorsByAbbr, onClick, renderTooltipContent, 
   return (
     <div className="relative w-full">
       <svg viewBox={`0 0 ${SVG_W} ${SVG_H}`} className="w-full">
+          <defs>
+            <pattern id="hex-stripe" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="8" stroke="rgba(255,255,255,0.45)" strokeWidth="2.5"/>
+            </pattern>
+          </defs>
         {states.map(({ abbr, x, y }) => {
           const color = colorsByAbbr[abbr] || '#4B5563';
           const isHov = hovered?.abbr === abbr;
@@ -103,6 +108,14 @@ export default function HexUSMap({ colorsByAbbr, onClick, renderTooltipContent, 
                   style={{ pointerEvents: 'none', userSelect: 'none' }}>
                   {secondaryLabel(abbr)}
                 </text>
+              )}
+              {stripeAbbrs?.has(abbr) && (
+                <polygon
+                  points={hexPoints(x, y, R - 1)}
+                  fill="url(#hex-stripe)"
+                  stroke="none"
+                  style={{ pointerEvents: 'none' }}
+                />
               )}
             </g>
           );

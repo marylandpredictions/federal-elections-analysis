@@ -22,7 +22,7 @@ const ratingApprox = {
   'Safe R':   { d: 35, r: 65 },
 };
 
-export default function InteractiveMap({ ratings, percentages, majorityNote }) {
+export default function InteractiveMap({ ratings, percentages, majorityNote, incumbents = {} }) {
   const [hoveredBubble, setHoveredBubble] = useState(null);
 
   // Count seats
@@ -72,6 +72,7 @@ export default function InteractiveMap({ ratings, percentages, majorityNote }) {
     return (
       <>
         <div className="text-white font-bold text-sm mb-1">{fullName}</div>
+        {incumbents[fullName] && <div className="text-white/70 text-xs mb-1">{incumbents[fullName]}</div>}
         <div className="font-semibold text-xs mb-2" style={{ color }}>{rating}</div>
         {bars.map(bar => (
           <div key={bar.label} className="flex items-center gap-2 mb-1">
@@ -82,6 +83,11 @@ export default function InteractiveMap({ ratings, percentages, majorityNote }) {
             <span style={{ color: bar.color, fontSize: 10, fontWeight: 700, minWidth: 30, textAlign: 'right' }}>{bar.pct}%</span>
           </div>
         ))}
+        {bars.length >= 2 && !isNC && (
+          <div style={{ color: bars[0].color, fontSize: 10, fontWeight: 700, marginTop: 4 }}>
+            {bars[0].label} +{Math.abs(bars[0].pct - bars[1].pct).toFixed(1)}%
+          </div>
+        )}
       </>
     );
   };

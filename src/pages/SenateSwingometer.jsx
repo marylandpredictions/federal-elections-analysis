@@ -57,6 +57,41 @@ const baseResults = {
   'Maine': -6.9
 };
 
+const senateIncumbents = {
+  'Alaska': 'Dan Sullivan (R)',
+  'Oregon': 'Jeff Merkley (D)',
+  'Louisiana': 'Bill Cassidy (R)',
+  'Arkansas': 'Tom Cotton (R)',
+  'Montana': 'Tim Sheehy (R)',
+  'Wyoming': 'Cynthia Lummis (R)',
+  'South Dakota': 'Mike Rounds (R)',
+  'Nebraska': 'Deb Fischer (R)',
+  'Kansas': 'Jerry Moran (R)',
+  'Oklahoma': 'Markwayne Mullin (R)',
+  'Texas': 'John Cornyn (R)',
+  'Iowa': 'Joni Ernst (R)',
+  'Minnesota': 'Tina Smith (D)',
+  'Illinois': 'Dick Durbin (D)',
+  'Michigan': 'Gary Peters (D)',
+  'Ohio': 'Jon Husted (R)',
+  'Kentucky': 'Rand Paul (R)',
+  'Tennessee': 'Marsha Blackburn (R)',
+  'Mississippi': 'Roger Wicker (R)',
+  'Alabama': 'Katie Britt (R)',
+  'Florida': 'Rick Scott (R)',
+  'Georgia': 'Jon Ossoff (D)',
+  'South Carolina': 'Lindsey Graham (R)',
+  'North Carolina': 'Thom Tillis (R)',
+  'Virginia': 'Mark Warner (D)',
+  'West Virginia': 'Jim Justice (R)',
+  'Delaware': 'Chris Coons (D)',
+  'New Jersey': 'Andy Kim (D)',
+  'New Hampshire': 'Jeanne Shaheen (D)',
+  'Massachusetts': 'Ed Markey (D)',
+  'Rhode Island': 'Jack Reed (D)',
+  'Maine': 'Susan Collins (R)',
+};
+
 export default function SenateSwingometer() {
   const [swing, setSwing] = useState(0);
 
@@ -91,7 +126,7 @@ export default function SenateSwingometer() {
         <SwingBar swing={swing} setSwing={setSwing} />
         
         <div className="mt-8">
-          <SwingMap baseResults={baseResults} swing={swing} />
+          <SwingMap baseResults={baseResults} swing={swing} incumbents={senateIncumbents} />
         </div>
       </div>
     </div>
