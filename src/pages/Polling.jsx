@@ -627,7 +627,9 @@ const mockPollingData = {
       { pollster: 'Cygnal (R)', date: 'February 5–6, 2026', sampleSize: 800, ramaswamy: 46, acton: 45, other: 3, undecided: 6, margin: 'Ramaswamy +1' },
       { pollster: 'EMC Research (D)', date: 'February 10–22, 2026', sampleSize: 1343, ramaswamy: 43, acton: 53, other: 0, undecided: 4, margin: 'Acton +10' },
       { pollster: 'Emerson College', date: 'December 6–8, 2025', sampleSize: 850, ramaswamy: 45, acton: 46, other: 0, undecided: 9, margin: 'Acton +1' },
-  '2028-rep-primary': {
+      ]
+      },
+      '2028-rep-primary': {
     chartData: [],
     polls: [
       { pollster: 'Echelon Insights', date: 'February 19–23, 2026', sampleSize: 429, vance: 37, trumpjr: 14, rubio: 11, cruz: 3, haley: 3, desantis: 8, rfk: 3, ramaswamy: 3, other: 11, undecided: 8, margin: 'Vance +23' },
