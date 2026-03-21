@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
@@ -76,6 +76,15 @@ export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onCl
 
   return (
     <div ref={containerRef} className="relative w-full select-none" style={{ overflow: 'hidden' }}>
+      {/* SVG Defs for Stripe Pattern */}
+      <svg width="0" height="0">
+        <defs>
+          <pattern id="flipStripes" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+            <line x1="0" y1="0" x2="0" y2="8" stroke="white" strokeWidth="2" />
+          </pattern>
+        </defs>
+      </svg>
+
       {/* Zoom buttons */}
       <div className="absolute top-2 right-2 z-20 flex flex-col gap-1">
         <button
@@ -112,7 +121,8 @@ export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onCl
             {({ geographies }) =>
               geographies.map(geo => {
                 const abbr = FIPS_TO_ABBR[geo.id];
-                const fill = (abbr && colorsByAbbr[abbr]) || '#4B5563';
+                const isFlipped = stripeAbbrs && stripeAbbrs.has(abbr);
+                const fill = isFlipped ? 'url(#flipStripes)' : ((abbr && colorsByAbbr[abbr]) || '#4B5563');
                 const dimmed = highlightRating && ratingsByAbbr && ratingsByAbbr[abbr] !== highlightRating;
                 return (
                   <Geography
