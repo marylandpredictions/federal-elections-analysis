@@ -37,27 +37,15 @@ export default function ElectionDetail() {
           </Link>
 
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/10">
-            <div className="flex items-start justify-between gap-4 mb-6">
-              <div>
-                <h1 className="text-white font-inter font-bold text-3xl sm:text-4xl mb-1">{election.state}</h1>
-                <div className="text-white font-inter font-bold text-xl mb-1">{election.electionType}</div>
-                <div className="text-white font-inter font-bold text-base text-white/80">{election.date}</div>
-              </div>
-              {election.stateIcon && (
-                <img
-                  src={election.stateIcon}
-                  alt={election.state}
-                  className="flex-shrink-0 object-contain opacity-80"
-                  style={{ width: '64px', height: '64px' }}
-                />
-              )}
-            </div>
-
-            <div className="flex gap-4 flex-wrap mb-6">
+          <div className="flex items-start justify-between gap-4 mb-6">
+            <div>
+              <h1 className="text-white font-inter font-bold text-3xl sm:text-4xl mb-1 hover:underline cursor-default">{election.state}</h1>
+              <div className="text-white font-inter font-bold text-xl mb-1 hover:underline cursor-default">{election.electionType}</div>
+              <div className="text-white font-inter font-bold text-base text-white/80 hover:underline cursor-default">{election.date}</div>
               {election.candidates.map(c => (
                 <span
                   key={c.name}
-                  className="font-inter text-base font-medium px-3 py-1 rounded-full"
+                  className="font-inter text-base font-medium px-3 py-1 rounded-full transition-transform duration-150 hover:scale-110 cursor-default"
                   style={{ color: c.color, backgroundColor: c.color + '22', border: `1px solid ${c.color}66` }}
                 >
                   {c.name} ({c.party})

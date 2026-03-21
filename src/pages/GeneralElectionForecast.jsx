@@ -103,6 +103,40 @@ export default function GeneralElectionForecast() {
             baseDemSeats={34}
             baseRepSeats={31}
             showIncumbents={true}
+            incumbents={{
+              'Alaska': 'Dan Sullivan (R)',
+              'Oregon': 'Jeff Merkley (D)',
+              'Louisiana': 'Bill Cassidy (R)',
+              'Arkansas': 'Tom Cotton (R)',
+              'Montana': 'Tim Sheehy (R)',
+              'Wyoming': 'Cynthia Lummis (R)',
+              'South Dakota': 'Mike Rounds (R)',
+              'Nebraska': 'Deb Fischer (R)',
+              'Kansas': 'Jerry Moran (R)',
+              'Oklahoma': 'Markwayne Mullin (R)',
+              'Texas': 'John Cornyn (R)',
+              'Iowa': 'Joni Ernst (R)',
+              'Minnesota': 'Tina Smith (D)',
+              'Illinois': 'Dick Durbin (D)',
+              'Michigan': 'Gary Peters (D)',
+              'Ohio': 'Jon Husted (R)',
+              'Kentucky': 'Rand Paul (R)',
+              'Tennessee': 'Marsha Blackburn (R)',
+              'Mississippi': 'Roger Wicker (R)',
+              'Alabama': 'Katie Britt (R)',
+              'Florida': 'Rick Scott (R)',
+              'Georgia': 'Jon Ossoff (D)',
+              'South Carolina': 'Lindsey Graham (R)',
+              'North Carolina': 'Thom Tillis (R)',
+              'Virginia': 'Mark Warner (D)',
+              'West Virginia': 'Jim Justice (R)',
+              'Delaware': 'Chris Coons (D)',
+              'New Jersey': 'Andy Kim (D)',
+              'New Hampshire': 'Jeanne Shaheen (D)',
+              'Massachusetts': 'Ed Markey (D)',
+              'Rhode Island': 'Jack Reed (D)',
+              'Maine': 'Susan Collins (R)',
+            }}
           />
           <SenateControl democratChance={43} republicanChance={57} />
           <div className="mt-8">
@@ -122,7 +156,48 @@ export default function GeneralElectionForecast() {
           <h2 className="text-white font-inter font-bold text-2xl sm:text-3xl text-center mb-6 text-shadow-teal">
             Governors Forecast
           </h2>
-          <InteractiveMap ratings={governorsRatings} percentages={governorPercentages} showIncumbents={true} />
+          <InteractiveMap
+            ratings={governorsRatings}
+            percentages={governorPercentages}
+            showIncumbents={true}
+            incumbents={{
+              'Alabama': 'Kay Ivey (R)',
+              'Alaska': 'Mike Dunleavy (R)',
+              'Arizona': 'Katie Hobbs (D)',
+              'Arkansas': 'Sarah Huckabee Sanders (R)',
+              'California': 'Gavin Newsom (D)',
+              'Colorado': 'Jared Polis (D)',
+              'Connecticut': 'Ned Lamont (D)',
+              'Florida': 'Ron DeSantis (R)',
+              'Georgia': 'Brian Kemp (R)',
+              'Hawaii': 'Josh Green (D)',
+              'Idaho': 'Brad Little (R)',
+              'Illinois': 'JB Pritzker (D)',
+              'Iowa': 'Kim Reynolds (R)',
+              'Kansas': 'Laura Kelly (D)',
+              'Maine': 'Janet Mills (D)',
+              'Maryland': 'Wes Moore (D)',
+              'Massachusetts': 'Maura Healey (D)',
+              'Michigan': 'Gretchen Whitmer (D)',
+              'Minnesota': 'Tim Walz (D)',
+              'Nebraska': 'Jim Pillen (R)',
+              'Nevada': 'Joe Lombardo (R)',
+              'New Hampshire': 'Kelly Ayotte (R)',
+              'New Mexico': 'Michelle Lujan Grisham (D)',
+              'New York': 'Kathy Hochul (D)',
+              'Ohio': 'Mike DeWine (R)',
+              'Oklahoma': 'Kevin Stitt (R)',
+              'Oregon': 'Tina Kotek (D)',
+              'Pennsylvania': 'Josh Shapiro (D)',
+              'Rhode Island': 'Helena Foulkes (D)',
+              'South Carolina': 'Henry McMaster (R)',
+              'South Dakota': 'Tony Venhuizen (R)',
+              'Tennessee': 'Bill Lee (R)',
+              'Texas': 'Greg Abbott (R)',
+              'Vermont': 'Phil Scott (R)',
+              'Wisconsin': 'Tony Evers (D)',
+            }}
+          />
         </motion.div>
       </div>
     </div>
