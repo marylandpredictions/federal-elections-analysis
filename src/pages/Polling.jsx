@@ -798,7 +798,7 @@ export default function Polling() {
               const info = pillInfos[pill.value];
               const marginText = info?.margin != null ? `${info.leader} +${info.margin.toFixed(1)}%` : '';
               return (
-              <button
+                <button
                 key={pill.value}
                 onClick={() => setSelectedPoll(pill.value)}
                 className={`rounded-2xl px-4 py-3 font-inter font-semibold text-sm transition-all border text-left ${pill.value === randomPoll ? 'min-w-[280px]' : ''} ${
