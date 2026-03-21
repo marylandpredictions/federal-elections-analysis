@@ -12,6 +12,19 @@ const getRating = (margin) => {
   return 'Toss Up';
 };
 
+const ratingColors = {
+  'Safe D': '#1046ba',
+  'Likely D': '#2663eb',
+  'Lean D': '#5689f7',
+  'Tilt D': '#82a6f2',
+  'Toss Up': '#9334EB',
+  'Tilt R': '#FF7F7F',
+  'Lean R': '#FF6B6B',
+  'Likely R': '#CC0000',
+  'Safe R': '#8B0000',
+  'Not Contested': '#D3D3D3',
+};
+
 export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34, baseRepSeats = 31, incumbents = {}, showIncumbents = false }) {
   const [hoveredBubble, setHoveredBubble] = useState(null);
   const [highlightRating, setHighlightRating] = useState(null);
