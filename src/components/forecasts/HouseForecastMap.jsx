@@ -81,7 +81,7 @@ export default function HouseForecastMap() {
   const [tooltip, setTooltip] = useState(null);
   const [hoveredBubble, setHoveredBubble] = useState(null);
   const [highlightRating, setHighlightRating] = useState(null);
-  const [highlightFlips, setHighlightFlips] = useState(false);
+  const [highlightFlips, setHighlightFlips] = useState(true);
 
   // Group by rating in order, stable within each group
   const groups = {};
@@ -204,26 +204,43 @@ export default function HouseForecastMap() {
       {/* Semicircle map */}
       <div className="relative w-full">
         <svg viewBox={`0 0 1000 ${CY + 20}`} className="w-full" style={{ minWidth: '320px' }}>
+          <defs>
+            <pattern id="houseForecastFlipStripes" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+              <line x1="0" y1="0" x2="0" y2="4" stroke="white" strokeWidth="1" />
+            </pattern>
+          </defs>
           {dots.map(({ x, y, seat }) => {
             const isHighlighted = !highlightRating || seat.rating === highlightRating;
             const isHovered = hovered === seat.key;
+            const isFlip = flipped.has(seat.key);
             return (
-              <circle
-                key={seat.key}
-                cx={x}
-                cy={y}
-                r={isHovered ? dotR * 1.9 : dotR}
-                fill={ratingColors[seat.rating]}
-                stroke="white"
-                strokeWidth={isHovered ? 1.8 : 0.6}
-                opacity={isHighlighted || (highlightFlips && flipped.has(seat.key)) ? 0.95 : 0.15}
-                onMouseEnter={() => {
-                  setHovered(seat.key);
-                  setTooltip({ label: seat.key, rating: seat.rating, svgX: x, svgY: y });
-                }}
-                onMouseLeave={() => { setHovered(null); setTooltip(null); }}
-                style={{ cursor: 'pointer', transition: 'r 0.1s' }}
-              />
+              <g key={seat.key}>
+                <circle
+                  cx={x}
+                  cy={y}
+                  r={isHovered ? dotR * 1.9 : dotR}
+                  fill={ratingColors[seat.rating]}
+                  stroke="white"
+                  strokeWidth={isHovered ? 1.8 : 0.6}
+                  opacity={isHighlighted ? 0.95 : highlightFlips && !isFlip ? 0.15 : 0.95}
+                  onMouseEnter={() => {
+                    setHovered(seat.key);
+                    setTooltip({ label: seat.key, rating: seat.rating, svgX: x, svgY: y });
+                  }}
+                  onMouseLeave={() => { setHovered(null); setTooltip(null); }}
+                  style={{ cursor: 'pointer', transition: 'r 0.1s' }}
+                />
+                {isFlip && (
+                  <circle
+                    cx={x}
+                    cy={y}
+                    r={isHovered ? dotR * 1.9 : dotR}
+                    fill="url(#houseForecastFlipStripes)"
+                    opacity={isHighlighted ? 0.95 : highlightFlips ? 0.95 : 0.95}
+                    style={{ pointerEvents: 'none' }}
+                  />
+                )}
+              </g>
             );
           })}
           <line x1={CX} y1={svgH} x2={CX} y2={CY + 8} stroke="rgba(255,255,255,0.15)" strokeWidth="1" strokeDasharray="4,4" />
@@ -267,10 +284,10 @@ export default function HouseForecastMap() {
           </button>
         ))}
         <button
-          onMouseEnter={() => setHighlightFlips(true)}
-          onMouseLeave={() => setHighlightFlips(false)}
+          onMouseEnter={() => setHighlightFlips(!highlightFlips)}
+          onMouseLeave={() => setHighlightFlips(true)}
           className="flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all"
-          style={{ background: highlightFlips ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)' }}
+          style={{ background: !highlightFlips ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)' }}
         >
           <svg className="w-3 h-3" viewBox="0 0 12 12" style={{ overflow: 'visible' }}>
             <defs>
