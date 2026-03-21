@@ -130,6 +130,15 @@ export default function PollingTable({ polls, type }) {
       if (m.includes('Barr')) return '#EF4444';
       if (m.includes('Cameron')) return '#FBBF24';
       if (m.includes('Morris')) return '#F97316';
+    } else if (type === 'north-carolina-senate') {
+      if (m.includes('Whatley')) return '#EF4444';
+      if (m.includes('Cooper')) return '#3B82F6';
+    } else if (type === 'ohio-senate') {
+      if (m.includes('Husted')) return '#EF4444';
+      if (m.includes('Brown')) return '#3B82F6';
+    } else if (type === 'ohio-governor') {
+      if (m.includes('Ramaswamy')) return '#EF4444';
+      if (m.includes('Acton')) return '#3B82F6';
     } else {
       if (m.includes('Cornyn')) return '#EF4444';
       if (m.includes('Paxton')) return '#F97316';
