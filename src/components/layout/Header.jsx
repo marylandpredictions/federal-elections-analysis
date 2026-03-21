@@ -41,9 +41,10 @@ function useTheme() {
   return [dark, setDark];
 }
 
-function Dropdown({ label, links, isActive }) {
+function Dropdown({ label, links, isActive, navPath }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
+  const navigate = useNavigate ? undefined : null;
 
   useEffect(() => {
     const handler = (e) => {
@@ -57,34 +58,7 @@ function Dropdown({ label, links, isActive }) {
     <div ref={ref} className="relative flex-shrink-0">
       <button
         onClick={() => setOpen(o => !o)}
-        className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
-          isActive || open ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'
-        }`}
-        style={{ padding: '8px 16px', fontSize: '14px' }}
-      >
-        {label}
-        <ChevronDown style={{ width: '16px', height: '16px', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-      </button>
-      {open && (
-        <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 py-2 z-50" style={{ minWidth: '200px' }}>
-          {links.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              onClick={() => setOpen(false)}
-              className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all"
-              style={{ fontSize: '14px' }}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function DropdownButton({ label, links, isActive }) {
+        onDoubleClick={() => { if (navPath) { window.location.href = navPath; } setOpen(false); }}({ label, links, isActive }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
