@@ -709,14 +709,24 @@ function computePillInfo(type, polls) {
 
 export default function Polling() {
   const [selectedPoll, setSelectedPoll] = useState('generic-congressional-ballot');
+  const [randomPoll, setRandomPoll] = useState(null);
   const currentData = mockPollingData[selectedPoll] || { chartData: [], polls: [] };
   const currentPolls = currentData?.polls || [];
+
+  useEffect(() => {
+    setRandomPoll(randomPollOptions[Math.floor(Math.random() * randomPollOptions.length)].value);
+    const interval = setInterval(() => {
+      setRandomPoll(randomPollOptions[Math.floor(Math.random() * randomPollOptions.length)].value);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   const pillInfos = useMemo(() => ({
     'generic-congressional-ballot': computePillInfo('generic-congressional-ballot', mockPollingData['generic-congressional-ballot']?.polls),
     '2028-dem-primary': computePillInfo('2028-dem-primary', mockPollingData['2028-dem-primary']?.polls),
-    '2028-rep-primary': computePillInfo('2028-rep-primary', mockPollingData['2028-rep-primary']?.polls),
-  }), []);
+    '2028-rep-primary': computePollInfo('2028-rep-primary', mockPollingData['2028-rep-primary']?.polls),
+    ...(randomPoll ? { [randomPoll]: computePollInfo(randomPoll, mockPollingData[randomPoll]?.polls) } : {}),
+  }), [randomPoll]);
 
   return (
     <div 
