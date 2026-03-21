@@ -70,6 +70,7 @@ export default function HouseSwingometer() {
   const [tooltip, setTooltip] = useState(null);
   const [hoveredBubble, setHoveredBubble] = useState(null);
   const [highlightRating, setHighlightRating] = useState(null);
+  const [highlightFlips, setHighlightFlips] = useState(false);
 
   const flipped = useMemo(() => {
     const s = new Set();
@@ -194,7 +195,7 @@ export default function HouseSwingometer() {
                       fill={ratingColors[rating]}
                       stroke="white"
                       strokeWidth={isHovered ? 1.8 : 0.6}
-                      opacity={isHighlighted ? 0.95 : 0.15}
+                      opacity={isHighlighted || (highlightFlips && isFlipped) ? 0.95 : 0.15}
                       onMouseEnter={() => { setHovered(key); setTooltip({ key, rating, svgX: x, svgY: y }); }}
                       onMouseLeave={() => { setHovered(null); setTooltip(null); }}
                       style={{ cursor: 'pointer', transition: 'r 0.1s' }}
@@ -204,7 +205,7 @@ export default function HouseSwingometer() {
                         cx={x} cy={y}
                         r={isHovered ? dotR * 1.9 : dotR}
                         fill="url(#houseDotStripes)"
-                        opacity={isHighlighted ? 0.95 : 0.15}
+                        opacity={isHighlighted || highlightFlips ? 0.95 : 0.15}
                         style={{ pointerEvents: 'none' }}
                       />
                     )}
@@ -292,6 +293,22 @@ export default function HouseSwingometer() {
                 <span className="text-white/70 text-xs">{r}</span>
               </button>
             ))}
+            <button
+              onMouseEnter={() => setHighlightFlips(true)}
+              onMouseLeave={() => setHighlightFlips(false)}
+              className="flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all"
+              style={{ background: highlightFlips ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)' }}
+            >
+              <svg className="w-3 h-3" viewBox="0 0 12 12" style={{ overflow: 'visible' }}>
+                <defs>
+                  <pattern id="flipLegendHouse" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+                    <line x1="0" y1="0" x2="0" y2="3" stroke="white" strokeWidth="0.8" />
+                  </pattern>
+                </defs>
+                <rect width="12" height="12" fill="url(#flipLegendHouse)" stroke="white" strokeWidth="0.5" />
+              </svg>
+              <span className="text-white/70 text-xs">Flips</span>
+            </button>
           </div>
         </div>
       </div>
