@@ -22,9 +22,9 @@ export const electionsData = [
     fullDescription: `In the race to replace retiring conservative-aligning Wisconsin Supreme Court Justice Rebecca Bradley, liberal-aligned judge Chris Taylor is likely to win against her right-wing opponent, Maria Lazar. In last year's supreme court election located in the swing state, liberal candidate Susan Crawford beat MAGA funded Brad Schimel by over double digits in a state that Trump carried in 2024, even with Elon Musk pouring millions into the race. Without Elon Musk's financial backing this time around and a much more low-profile race and a different environment, can conservatives hold this seat or will the liberals pull of another massive victory, potentially outrunning their 2025 result?`,
     probability: {
       leftLabel: 'Chris Taylor',
-      leftChance: 75,
+      leftChance: 68,
       rightLabel: 'Maria Lazar',
-      rightChance: 25,
+      rightChance: 32,
       leftColor: '#2563EB',
       rightColor: '#DC2626',
     },
@@ -57,7 +57,7 @@ export const electionsData = [
     stateAbbr: 'NJ',
     stateIcon: 'https://media.base44.com/images/public/69b6f149a83e2b792ef60e35/af81ba1c4_FEABLMLogo2.png',
     electionType: 'U.S. House 11th Special Election',
-    date: 'TBD',
+    date: '4/16/26',
     candidates: [
       { name: 'Joe Hathaway', party: 'R', color: '#DC2626' },
       { name: 'Analilia Mejia', party: 'D', color: '#2563EB' },
@@ -66,9 +66,9 @@ export const electionsData = [
     fullDescription: `Analilia Mejia, who came on top after an extremely divisive democratic primary to replace now New Jersey Governor Mikie Sherrill, will be the Democratic nominee in this district. She is likely to join the progressive squad once in congress as this is a solid blue district. However, Joe Hathaway is not giving up so fast, he has challenged Mejia to numerous debates and is distancing himself from the President. Hathaway maintains a solid MAGA agenda just not incorporating it completely into the platform. Even so, Mejia is still likely to win as this district went to Sherrill by double digits in 2024.`,
     probability: {
       leftLabel: 'Analilia Mejia',
-      leftChance: 87,
+      leftChance: 98,
       rightLabel: 'Joe Hathaway',
-      rightChance: 13,
+      rightChance: 2,
       leftColor: '#2563EB',
       rightColor: '#DC2626',
     },
@@ -79,7 +79,7 @@ export const electionsData = [
     stateAbbr: 'VA',
     stateIcon: 'https://media.base44.com/images/public/69b6f149a83e2b792ef60e35/1b45c9e0f_FEABLMLogo3.png',
     electionType: 'Redistricting Amendment',
-    date: '11/3/26',
+    date: '4/21/26',
     candidates: [
       { name: 'Yes', party: '', color: '#16A34A' },
       { name: 'No', party: '', color: '#DC2626' },
@@ -88,9 +88,9 @@ export const electionsData = [
     fullDescription: `Joining in on the redistricting wars this cycle, Virginia, like California has left it up to their voters to decide. This map would make the district make up of Virginia go from a 6-5 edge for Democrats to a massive 10-1 edge. It would not let the independent redistricting commission, which usually draws districts in this state, draw the maps until the next redistricting cycle in 2030. This race is crucial for both parties in their pursuit of control to the House. In a state that voted for Kamala Harris by just 5.8%, can they convince the voters to gerrymander their maps?`,
     probability: {
       leftLabel: 'Yes',
-      leftChance: 52,
+      leftChance: 86,
       rightLabel: 'No',
-      rightChance: 48,
+      rightChance: 14,
       leftColor: '#16A34A',
       rightColor: '#DC2626',
     },
