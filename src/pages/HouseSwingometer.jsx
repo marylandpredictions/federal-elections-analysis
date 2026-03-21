@@ -221,11 +221,6 @@ export default function HouseSwingometer() {
                   <div style={{color: ratingColors[tooltip.rating], fontSize: '11px', fontWeight: 700, marginTop: '4px'}}>
                     {marginText}
                   </div>
-                  </div>
-                  <div className="flex justify-between text-xs text-white/60">
-                    <span>D {dPct.toFixed(1)}%</span>
-                    <span>R {rPct.toFixed(1)}%</span>
-                  </div>
                 </div>
               );
             })()}
