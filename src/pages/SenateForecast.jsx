@@ -49,7 +49,7 @@ const senateIncumbents = {
   'Virginia': 'Mark Warner (D)', 'West Virginia': 'Shelley Moore Capito (R)', 'Delaware': 'Chris Coons (D)',
   'New Jersey': 'Cory Booker (D)', 'New Hampshire': 'Jeanne Shaheen (D)', 'Massachusetts': 'Ed Markey (D)',
   'Rhode Island': 'Jack Reed (D)', 'Maine': 'Susan Collins (R)', 'Colorado': 'John Hickenlooper (D)',
-  'New Mexico': 'Ben Ray Luján (D)', 'Idaho': 'Jim Risch (R)', 'Indiana': 'Todd Young (R)',
+  'New Mexico': 'Ben Ray Luján (D)', 'Idaho': 'Jim Risch (R)',
 };
 
 const ratingOrder = ['Safe D','Likely D','Lean D','Tilt D','Toss Up','Tilt R','Lean R','Likely R','Safe R'];
