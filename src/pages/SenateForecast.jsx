@@ -39,28 +39,24 @@ const senatePercentages = {
 
 const senateIncumbents = {
   'Alaska': 'Dan Sullivan (R)', 'Oregon': 'Jeff Merkley (D)', 'Louisiana': 'Bill Cassidy (R)',
-  'Arkansas': 'Tom Cotton (R)', 'Montana': 'Tim Sheehy (R)', 'Wyoming': 'Cynthia Lummis (R)',
-  'South Dakota': 'Mike Rounds (R)', 'Nebraska': 'Deb Fischer (R)', 'Kansas': 'Jerry Moran (R)',
+  'Arkansas': 'Tom Cotton (R)', 'Montana': 'Steve Daines (R)', 'Wyoming': 'Cynthia Lummis (R)',
+  'South Dakota': 'Mike Rounds (R)', 'Nebraska': 'Pete Ricketts (R)', 'Kansas': 'Jerry Moran (R)',
   'Oklahoma': 'Markwayne Mullin (R)', 'Texas': 'John Cornyn (R)', 'Iowa': 'Joni Ernst (R)',
   'Minnesota': 'Tina Smith (D)', 'Illinois': 'Dick Durbin (D)', 'Michigan': 'Gary Peters (D)',
-  'Ohio': 'Jon Husted (R)', 'Kentucky': 'Rand Paul (R)', 'Tennessee': 'Marsha Blackburn (R)',
-  'Mississippi': 'Roger Wicker (R)', 'Alabama': 'Katie Britt (R)', 'Florida': 'Rick Scott (R)',
+  'Ohio': 'Jon Husted (R)', 'Kentucky': 'Mitch McConnell (R)', 'Tennessee': 'Marsha Blackburn (R)',
+  'Mississippi': 'Cindy Hyde-Smith (R)', 'Alabama': 'Tommy Tuberville (R)', 'Florida': 'Ashley Moody (R)',
   'Georgia': 'Jon Ossoff (D)', 'South Carolina': 'Lindsey Graham (R)', 'North Carolina': 'Thom Tillis (R)',
-  'Virginia': 'Mark Warner (D)', 'West Virginia': 'Jim Justice (R)', 'Delaware': 'Chris Coons (D)',
-  'New Jersey': 'Andy Kim (D)', 'New Hampshire': 'Jeanne Shaheen (D)', 'Massachusetts': 'Ed Markey (D)',
+  'Virginia': 'Mark Warner (D)', 'West Virginia': 'Shelley Moore Capito (R)', 'Delaware': 'Chris Coons (D)',
+  'New Jersey': 'Cory Booker (D)', 'New Hampshire': 'Jeanne Shaheen (D)', 'Massachusetts': 'Ed Markey (D)',
   'Rhode Island': 'Jack Reed (D)', 'Maine': 'Susan Collins (R)', 'Colorado': 'John Hickenlooper (D)',
-  'New Mexico': 'Martin Heinrich (D)',
+  'New Mexico': 'Ben Ray Luján (D)', 'Idaho': 'Jim Risch (R)', 'Indiana': 'Todd Young (R)',
 };
 
 const ratingOrder = ['Safe D','Likely D','Lean D','Tilt D','Toss Up','Tilt R','Lean R','Likely R','Safe R'];
 
 const contestedRows = Object.entries(senateRatings)
   .filter(([, r]) => r !== 'Not Contested')
-  .sort((a, b) => {
-    const ai = ratingOrder.indexOf(a[1]), bi = ratingOrder.indexOf(b[1]);
-    if (ai !== bi) return ai - bi;
-    return a[0].localeCompare(b[0]);
-  })
+  .sort((a, b) => a[0].localeCompare(b[0]))
   .map(([state, rating]) => {
     const pct = senatePercentages[state];
     return {

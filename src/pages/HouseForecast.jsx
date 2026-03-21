@@ -62,8 +62,14 @@ const rawSeats = [
 
 const ratingOrder = ['Safe D','Likely D','Lean D','Tilt D','Toss Up','Tilt R','Lean R','Likely R','Safe R'];
 
-const houseRows = rawSeats
-  .sort((a, b) => a[0].localeCompare(b[0]))
+const houseRows = [...rawSeats]
+  .sort((a, b) => {
+    const parse = k => { const [s, n] = k.split('-'); return [s, n === 'AL' ? 0 : parseInt(n, 10)]; };
+    const [as, an] = parse(a[0]);
+    const [bs, bn] = parse(b[0]);
+    if (as !== bs) return as.localeCompare(bs);
+    return an - bn;
+  })
   .map(([key, rating]) => ({
     state: key,
     incumbent: houseIncumbents[key] || '—',
@@ -84,7 +90,7 @@ export default function HouseForecast() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
           <HouseForecastMap />
           <SenateControl democratChance={73} republicanChance={27} title="House Control Probability" />
-          <ForecastRaceTable rows={houseRows} title="All House Races" showPcts={false} />
+          <ForecastRaceTable rows={houseRows} title="All House Races" showPcts={false} stateLabel="District" />
         </motion.div>
       </div>
     </div>

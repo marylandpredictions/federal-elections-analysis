@@ -109,7 +109,7 @@ export default function HouseSwingometer() {
           className="text-white font-inter font-bold text-3xl sm:text-4xl text-center mb-4 text-shadow-teal">
           House Swingometer
         </motion.h1>
-        <p className="text-white/70 text-center mb-8 text-sm">Swing the 2026 House map based on Cook Partisan Voting Index</p>
+        <p className="text-white/70 text-center mb-8 text-sm">Swing the 2026 House map based on 2024 Presidential Results</p>
 
         <SwingBar swing={swing} setSwing={setSwing} />
 
@@ -198,7 +198,7 @@ export default function HouseSwingometer() {
                 )}
                 <div className="font-semibold text-xs mb-1" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
                 <div className="text-white/60 text-xs">
-                  PVI: {(() => { const d = housePVIData.find(([k])=>k===tooltip.key); if(!d) return '—'; const adj = d[1]+swing; return adj > 0 ? `R+${adj.toFixed(0)}` : adj < 0 ? `D+${Math.abs(adj).toFixed(0)}` : 'EVEN'; })()}
+                  2024: {(() => { const d = housePVIData.find(([k])=>k===tooltip.key); if(!d) return '—'; const adj = d[1]+swing; return adj > 0 ? `R+${Math.abs(adj).toFixed(1)}` : adj < 0 ? `D+${Math.abs(adj).toFixed(1)}` : 'EVEN'; })()}
                 </div>
               </div>
             )}

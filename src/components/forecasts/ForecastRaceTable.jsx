@@ -18,7 +18,7 @@ const ratingTextColors = {
 const PAGE_SIZE = 20;
 
 // rows: [{ state, incumbent, rating, dPct, rPct, showPcts }]
-export default function ForecastRaceTable({ rows, title, showPcts = true }) {
+export default function ForecastRaceTable({ rows, title, showPcts = true, stateLabel = 'State' }) {
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(rows.length / PAGE_SIZE);
   const current = rows.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -45,7 +45,7 @@ export default function ForecastRaceTable({ rows, title, showPcts = true }) {
         <Table>
           <TableHeader>
             <TableRow className="border-white/20 hover:bg-white/5">
-              <TableHead className="text-white font-bold">State</TableHead>
+              <TableHead className="text-white font-bold">{stateLabel}</TableHead>
               <TableHead className="text-white font-bold">Incumbent</TableHead>
               <TableHead className="text-white font-bold">Rating</TableHead>
               {showPcts && <TableHead className="text-white font-bold">D%</TableHead>}
@@ -71,9 +71,9 @@ export default function ForecastRaceTable({ rows, title, showPcts = true }) {
                       {row.rating}
                     </span>
                   </TableCell>
-                  {showPcts && <TableCell style={{ color: '#60A5FA' }} className="font-semibold">{row.dPct != null ? `${row.dPct}%` : '—'}</TableCell>}
-                  {showPcts && <TableCell style={{ color: '#F87171' }} className="font-semibold">{row.rPct != null ? `${row.rPct}%` : '—'}</TableCell>}
-                  {showPcts && <TableCell style={{ color: marginColor }} className="font-semibold">{margin != null ? `${leader} +${margin}%` : '—'}</TableCell>}
+                  {showPcts && <TableCell style={{ color: '#60A5FA' }} className={leader === 'D' ? 'font-bold' : 'font-semibold'}>{row.dPct != null ? `${row.dPct}%` : '—'}</TableCell>}
+                  {showPcts && <TableCell style={{ color: '#F87171' }} className={leader === 'R' ? 'font-bold' : 'font-semibold'}>{row.rPct != null ? `${row.rPct}%` : '—'}</TableCell>}
+                  {showPcts && <TableCell style={{ color: marginColor }} className="font-bold">{margin != null ? `${leader} +${margin}%` : '—'}</TableCell>}
                 </TableRow>
               );
             })}
