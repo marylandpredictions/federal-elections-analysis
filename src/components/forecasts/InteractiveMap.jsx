@@ -22,8 +22,9 @@ const ratingApprox = {
   'Safe R':   { d: 35, r: 65 },
 };
 
-export default function InteractiveMap({ ratings, percentages, majorityNote, incumbents = {}, baseDemSeats = 0, baseRepSeats = 0 }) {
+export default function InteractiveMap({ ratings, percentages, majorityNote, incumbents = {}, baseDemSeats = 0, baseRepSeats = 0, showIncumbents = false }) {
   const [hoveredBubble, setHoveredBubble] = useState(null);
+  const [highlightRating, setHighlightRating] = useState(null);
 
   // Count seats
   const counts = Object.values(ratings).reduce((acc, r) => {
@@ -72,7 +73,7 @@ export default function InteractiveMap({ ratings, percentages, majorityNote, inc
     return (
       <>
         <div className="text-white font-bold text-sm mb-1">{fullName}</div>
-        {incumbents[fullName] && <div className="text-white/70 text-xs mb-1">{incumbents[fullName]}</div>}
+        {showIncumbents && incumbents[fullName] && <div className="text-white/70 text-xs mb-1">{incumbents[fullName]}</div>}
         <div className="font-semibold text-xs mb-2" style={{ color }}>{rating}</div>
         {bars.map(bar => (
           <div key={bar.label} className="flex items-center gap-2 mb-1">
@@ -146,10 +147,16 @@ export default function InteractiveMap({ ratings, percentages, majorityNote, inc
       {/* Legend */}
       <div className="mt-4 flex flex-wrap justify-center gap-3">
         {Object.entries(ratingColors).map(([rating, color]) => (
-          <div key={rating} className="flex items-center gap-1.5">
+          <button
+            key={rating}
+            onMouseEnter={() => setHighlightRating(rating)}
+            onMouseLeave={() => setHighlightRating(null)}
+            className="flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all"
+            style={{ background: highlightRating === rating ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)' }}
+          >
             <div className="w-3 h-3 rounded border border-white/50" style={{ backgroundColor: color }} />
             <span className="text-white text-xs font-medium">{rating}</span>
-          </div>
+          </button>
         ))}
       </div>
     </div>

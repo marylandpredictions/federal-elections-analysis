@@ -24,8 +24,9 @@ const ratingColors = {
   'Not Contested': '#808080',
 };
 
-export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34, baseRepSeats = 31, incumbents = {} }) {
+export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34, baseRepSeats = 31, incumbents = {}, showIncumbents = false }) {
   const [hoveredBubble, setHoveredBubble] = useState(null);
+  const [highlightRating, setHighlightRating] = useState(null);
 
   const { demSeats, repSeats, tossUpSeats, ratingBreakdown } = useMemo(() => {
     let d = baseDemSeats, r = baseRepSeats, t = 0;
@@ -76,7 +77,7 @@ export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34,
     const newMargin = baseMargin !== null ? baseMargin + swing : null;
     const rating = getRating(newMargin);
     const color = ratingColors[rating];
-    const incumbent = incumbents[fullName];
+    const incumbent = showIncumbents ? incumbents[fullName] : null;
 
     return (
       <>
@@ -167,10 +168,16 @@ export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34,
       {/* Legend */}
       <div className="mt-4 flex flex-wrap justify-center gap-3">
         {Object.entries(ratingColors).map(([rating, color]) => (
-          <div key={rating} className="flex items-center gap-2">
+          <button
+            key={rating}
+            onMouseEnter={() => setHighlightRating(rating)}
+            onMouseLeave={() => setHighlightRating(null)}
+            className="flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all"
+            style={{ background: highlightRating === rating ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)' }}
+          >
             <div className="w-3 h-3 rounded border border-white/40" style={{ backgroundColor: color }} />
             <span className="text-white text-xs font-medium">{rating}</span>
-          </div>
+          </button>
         ))}
       </div>
     </div>
