@@ -44,23 +44,6 @@ export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34,
     return { demSeats: d, repSeats: r, tossUpSeats: t, ratingBreakdown: bd };
   }, [baseResults, swing, baseDemSeats, baseRepSeats]);
 
-  const stripeAbbrs = useMemo(() => {
-    const s = new Set();
-    Object.entries(baseResults).forEach(([fullName, baseMargin]) => {
-      const abbr = NAME_TO_ABBR[fullName];
-      if (!abbr || baseMargin === null) return;
-      const incumbent = showIncumbents ? incumbents[fullName] : null;
-      const incumbentParty = incumbent ? incumbent.split('(')[1]?.charAt(0) : null;
-      const rating = getRating(baseMargin + swing);
-      if (rating === 'Toss Up' ||
-        (incumbentParty === 'R' && rating.includes('D')) ||
-        (incumbentParty === 'D' && rating.includes('R'))) {
-        s.add(abbr);
-      }
-    });
-    return s;
-  }, [baseResults, swing, incumbents, showIncumbents]);
-
   const colorsByAbbr = useMemo(() => {
     const map = {};
     Object.entries(baseResults).forEach(([fullName, baseMargin]) => {
@@ -173,7 +156,6 @@ export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34,
       <HexUSMap
         colorsByAbbr={colorsByAbbr}
         renderTooltipContent={renderTooltipContent}
-        stripeAbbrs={stripeAbbrs}
         highlightRating={highlightRating}
         ratingsByAbbr={ratingsByAbbr}
       />
@@ -192,20 +174,6 @@ export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34,
             <span className="text-white text-xs font-medium">{rating}</span>
           </button>
         ))}
-        <button
-          className="flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all"
-          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)' }}
-        >
-          <svg className="w-3 h-3" viewBox="0 0 12 12" style={{ overflow: 'visible' }}>
-            <defs>
-              <pattern id="flipLegendSwing" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
-                <line x1="0" y1="0" x2="0" y2="3" stroke="white" strokeWidth="0.8" />
-              </pattern>
-            </defs>
-            <rect width="12" height="12" fill="url(#flipLegendSwing)" stroke="white" strokeWidth="0.5" />
-          </svg>
-          <span className="text-white text-xs font-medium">Flips</span>
-        </button>
       </div>
     </div>
   );
