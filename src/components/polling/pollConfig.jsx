@@ -186,6 +186,27 @@ export const pollConfigs = {
       { key: 'ramaswamy', name: 'Vivek Ramaswamy', color: '#D4956A' },
     ]
   },
+  'north-carolina-senate': {
+    title: 'North Carolina Senate General',
+    candidates: [
+      { key: 'whatley', name: 'Michael Whatley', color: '#EF4444' },
+      { key: 'cooper', name: 'Roy Cooper', color: '#3B82F6' },
+    ]
+  },
+  'ohio-senate': {
+    title: 'Ohio Senate General',
+    candidates: [
+      { key: 'husted', name: 'Jon Husted', color: '#EF4444' },
+      { key: 'brown', name: 'Sherrod Brown', color: '#3B82F6' },
+    ]
+  },
+  'ohio-governor': {
+    title: 'Ohio Governor General',
+    candidates: [
+      { key: 'ramaswamy', name: 'Vivek Ramaswamy', color: '#EF4444' },
+      { key: 'acton', name: 'Amy Acton', color: '#3B82F6' },
+    ]
+  },
 };
 
 export function computeChartData(polls, type) {
