@@ -79,14 +79,27 @@ export default function Elections() {
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
-                      {/* Row 1: State + icon */}
-                      <div className="flex items-center gap-3 mb-1">
-                        <span className="text-white font-inter font-bold text-2xl leading-tight">{election.state}</span>
+                      {/* Row 1: State */}
+                      <div className="mb-1">
+                        <span className="text-white font-inter font-bold text-2xl leading-tight relative inline-block group cursor-default">
+                          {election.state}
+                          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                        </span>
                       </div>
                       {/* Row 2: Election type */}
-                      <div className="text-white font-inter font-bold text-base mb-0.5">{election.electionType}</div>
+                      <div className="mb-0.5">
+                        <span className="text-white font-inter font-bold text-base relative inline-block group cursor-default">
+                          {election.electionType}
+                          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                        </span>
+                      </div>
                       {/* Row 3: Date */}
-                      <div className="text-white font-inter font-bold text-sm mb-2">{election.date}</div>
+                      <div className="mb-2">
+                        <span className="text-white font-inter font-bold text-sm relative inline-block group cursor-default">
+                          {election.date}
+                          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                        </span>
+                      </div>
                       {/* Candidates */}
                       <div className="flex gap-3 flex-wrap mb-2">
                         {election.candidates.map(c => (
