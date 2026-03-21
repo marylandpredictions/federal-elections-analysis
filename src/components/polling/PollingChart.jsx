@@ -127,7 +127,7 @@ export default function PollingChart({ polls, type }) {
                   strokeWidth={3}
                   name={c.name}
                   dot={{ r: 3, fill: color, strokeWidth: 0 }}
-                  activeDot={false}
+                  activeDot={{ r: 6, fill: color, stroke: 'white', strokeWidth: 2 }}
                 />
               </React.Fragment>
             );
