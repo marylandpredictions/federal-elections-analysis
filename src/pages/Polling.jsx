@@ -597,6 +597,30 @@ const mockPollingData = {
       { pollster: 'SurveyUSA', date: 'February 13–16, 2025', sampleSize: 835, harris: 37, newsom: 9, buttigieg: 11, aoc: 7, pritzker: 0, shapiro: 6, booker: 0, other: 30, margin: 'Harris +26' },
     ]
   },
+  'north-carolina-senate': {
+    chartData: [],
+    polls: [
+      { pollster: 'Public Policy Polling (D)', date: 'March 13–14, 2026', sampleSize: 556, whatley: 44, cooper: 47, other: 0, undecided: 9, margin: 'Cooper +3' },
+      { pollster: 'Change Research (D)', date: 'January 31 – February 4, 2026', sampleSize: 1069, whatley: 40, cooper: 50, other: 4, undecided: 7, margin: 'Cooper +10' },
+      { pollster: 'TIPP Insights (R)', date: 'January 12–15, 2026', sampleSize: 1512, whatley: 24, cooper: 48, other: 0, undecided: 27, margin: 'Cooper +24' },
+    ]
+  },
+  'ohio-senate': {
+    chartData: [],
+    polls: [
+      { pollster: 'Quantus Insights (R)', date: 'March 13–14, 2026', sampleSize: 784, husted: 46, brown: 44, other: 4, undecided: 6, margin: 'Husted +2' },
+      { pollster: 'OnMessage Public Strategies (R)', date: 'March 3–8, 2026', sampleSize: 600, husted: 45, brown: 47, other: 0, undecided: 8, margin: 'Brown +2' },
+      { pollster: 'EMC Research (D)', date: 'February 10–22, 2026', sampleSize: 1343, husted: 47, brown: 51, other: 0, undecided: 2, margin: 'Brown +4' },
+    ]
+  },
+  'ohio-governor': {
+    chartData: [],
+    polls: [
+      { pollster: 'Quantus Insights (R)', date: 'March 13–14, 2026', sampleSize: 809, ramaswamy: 45, acton: 46, other: 3, undecided: 6, margin: 'Acton +1' },
+      { pollster: 'EMC Research (D)', date: 'February 10–22, 2026', sampleSize: 1343, ramaswamy: 43, acton: 53, other: 0, undecided: 4, margin: 'Acton +10' },
+      { pollster: 'Emerson College', date: 'December 6–8, 2025', sampleSize: 850, ramaswamy: 45, acton: 46, other: 0, undecided: 9, margin: 'Acton +1' },
+    ]
+  },
   '2028-rep-primary': {
     chartData: [],
     polls: [
@@ -724,8 +748,8 @@ export default function Polling() {
   const pillInfos = useMemo(() => ({
     'generic-congressional-ballot': computePillInfo('generic-congressional-ballot', mockPollingData['generic-congressional-ballot']?.polls),
     '2028-dem-primary': computePillInfo('2028-dem-primary', mockPollingData['2028-dem-primary']?.polls),
-    '2028-rep-primary': computePollInfo('2028-rep-primary', mockPollingData['2028-rep-primary']?.polls),
-    ...(randomPoll ? { [randomPoll]: computePollInfo(randomPoll, mockPollingData[randomPoll]?.polls) } : {}),
+    '2028-rep-primary': computePillInfo('2028-rep-primary', mockPollingData['2028-rep-primary']?.polls),
+    ...(randomPoll ? { [randomPoll]: computePillInfo(randomPoll, mockPollingData[randomPoll]?.polls) } : {}),
   }), [randomPoll]);
 
   return (
