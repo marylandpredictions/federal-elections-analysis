@@ -39,10 +39,22 @@ const senateRatings = {
 
 const forecastGallery = [
   {
-    title: '2026 General Election Forecast',
-    description: 'Senate, House & Governors race projections with interactive maps and control probabilities.',
+    title: '2026 Senate Election Forecast',
+    description: 'Senate race projections with interactive map, seat counts, and control probability.',
     image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png',
-    link: '/GeneralElectionForecast'
+    link: '/SenateForecast'
+  },
+  {
+    title: '2026 House Election Forecast',
+    description: 'House race projections with parliament map, seat counts, and control probability.',
+    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png',
+    link: '/HouseForecast'
+  },
+  {
+    title: '2026 Governors Election Forecast',
+    description: 'Governors race projections with interactive map and contested race breakdowns.',
+    image: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png',
+    link: '/GovernorsForecast'
   },
 ];
 

@@ -20,7 +20,9 @@ import HouseSwingometer from './pages/HouseSwingometer';
 import GovernorsSwingometer from './pages/GovernorsSwingometer';
 import PresidentialMapBuilder from './pages/PresidentialMapBuilder';
 
-import GeneralElectionForecast from './pages/GeneralElectionForecast';
+import SenateForecast from './pages/SenateForecast';
+import HouseForecast from './pages/HouseForecast';
+import GovernorsForecast from './pages/GovernorsForecast';
 import Elections from './pages/Elections';
 import ElectionDetail from './pages/ElectionDetail';
 
@@ -61,7 +63,9 @@ const AuthenticatedApp = () => {
         <Route path="/GovernorsSwingometer" element={<GovernorsSwingometer />} />
         <Route path="/PresidentialMapBuilder" element={<PresidentialMapBuilder />} />
 
-        <Route path="/GeneralElectionForecast" element={<GeneralElectionForecast />} />
+        <Route path="/SenateForecast" element={<SenateForecast />} />
+        <Route path="/HouseForecast" element={<HouseForecast />} />
+        <Route path="/GovernorsForecast" element={<GovernorsForecast />} />
         <Route path="/Elections" element={<Elections />} />
         <Route path="/ElectionDetail/:id" element={<ElectionDetail />} />
       </Route>
