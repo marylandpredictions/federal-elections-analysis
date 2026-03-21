@@ -54,18 +54,11 @@ function Dropdown({ label, links, isActive, galleryPath }) {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  const handleDoubleClick = () => {
-    if (galleryPath) {
-      navigate(galleryPath);
-      setOpen(false);
-    }
-  };
-
   return (
     <div ref={ref} className="relative flex-shrink-0">
       <button
         onClick={() => setOpen(o => !o)}
-        onDoubleClick={handleDoubleClick}
+        onDoubleClick={() => { if (galleryPath) navigate(galleryPath); setOpen(false); }}
         className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
           isActive || open ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'
         }`}
@@ -144,7 +137,6 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-primary shadow-lg" style={{ fontSize: '16px' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center" style={{ height: '64px' }}>
-        {/* Logo */}
         <div className="flex items-center gap-3 flex-shrink-0">
           <Link to="/Home" className="flex items-center gap-3">
             <img
@@ -177,7 +169,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-1 mx-auto flex-shrink-0">
           {[
             { label: 'Elections', path: '/Elections' },
@@ -218,7 +209,6 @@ export default function Header() {
           />
         </nav>
 
-        {/* Mobile toggle */}
         <div className="flex items-center gap-1 ml-auto flex-shrink-0">
           <button
             className="md:hidden text-white"
@@ -230,7 +220,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Nav */}
       {mobileOpen && (
         <div className="md:hidden bg-primary border-t border-white/10 px-4 pb-4">
           {[
