@@ -762,6 +762,7 @@ export default function Polling() {
                 { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot' },
                 { value: '2028-dem-primary', label: '2028 Democratic Primary' },
                 { value: '2028-rep-primary', label: '2028 Republican Primary' },
+                ...(randomPoll ? [randomPollOptions.find(p => p.value === randomPoll)] : []),
               ].map(pill => {
                 const info = pillInfos[pill.value];
                 const marginText = info?.margin != null ? `${info.leader} +${info.margin.toFixed(1)}%` : '';
