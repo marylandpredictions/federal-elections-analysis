@@ -128,29 +128,6 @@ export default function PresidentialMapBuilder() {
           Presidential Map Builder
         </motion.h1>
 
-        {/* Special District Buttons */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 mb-4">
-          <p className="text-white/60 text-xs text-center mb-3">Special Districts / Split EVs</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {specialDistricts.map(d => {
-              const r = getDistrictRating(d.key);
-              const color = ratingColors[r];
-              return (
-                <button
-                  key={d.key}
-                  onClick={() => handleDistrictClick(d.key)}
-                  className="rounded-xl px-4 py-2 text-center shadow transition-all duration-200 hover:scale-110 border border-white/20"
-                  style={{ backgroundColor: color + '55', minWidth: 72 }}
-                >
-                  <div className="text-white font-bold text-base">{d.label}</div>
-                  <div className="text-white/70 text-xs">{d.ev} EV{d.ev > 1 ? 's' : ''}</div>
-                  <div className="text-xs mt-0.5 font-semibold" style={{ color }}>{r}</div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
         {/* EV Counter + Bar */}
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6">
           {/* Party selector buttons */}
@@ -234,6 +211,28 @@ export default function PresidentialMapBuilder() {
 
         {/* Map */}
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+          {/* Special District Buttons */}
+          <div className="mb-4">
+            <p className="text-white/60 text-xs text-center mb-3">Special Districts / Split EVs</p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {specialDistricts.map(d => {
+                const r = getDistrictRating(d.key);
+                const color = ratingColors[r];
+                return (
+                  <button
+                    key={d.key}
+                    onClick={() => handleDistrictClick(d.key)}
+                    className="rounded-xl px-4 py-2 text-center shadow transition-all duration-200 hover:scale-110 border border-white/20"
+                    style={{ backgroundColor: color + '55', minWidth: 72 }}
+                  >
+                    <div className="text-white font-bold text-base">{d.label}</div>
+                    <div className="text-white/70 text-xs">{d.ev} EV{d.ev > 1 ? 's' : ''}</div>
+                    <div className="text-xs mt-0.5 font-semibold" style={{ color }}>{r}</div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
           <HexUSMap
             colorsByAbbr={colorsByAbbr}
             onClick={handleStateClick}
