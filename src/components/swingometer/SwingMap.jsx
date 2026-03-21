@@ -21,7 +21,7 @@ const ratingColors = {
   'Lean R': '#FF6B6B',
   'Likely R': '#CC0000',
   'Safe R': '#8B0000',
-  'Not Contested': '#808080',
+  'Not Contested': '#D3D3D3',
 };
 
 export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34, baseRepSeats = 31, incumbents = {}, showIncumbents = false }) {

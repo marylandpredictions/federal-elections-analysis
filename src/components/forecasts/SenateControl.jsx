@@ -3,13 +3,13 @@ import { motion } from 'framer-motion';
 
 export default function SenateControl({ democratChance, republicanChance, title = "Senate Control Probability" }) {
   return (
-    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 mt-8" style={{ border: '2px solid white' }}>
+    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 mt-8">
       <h3 className="text-white font-inter font-bold text-xl sm:text-2xl text-center mb-6 text-shadow-teal">
         {title}
       </h3>
       
       <div className="flex items-center gap-4 mb-6">
-        <div className="flex-1 bg-white/10 rounded-full h-12 overflow-hidden flex transition-transform duration-200 hover:scale-[1.02] cursor-default">
+        <div className="flex-1 bg-white/10 rounded-full h-12 overflow-hidden flex transition-transform duration-200 hover:scale-[1.02] cursor-default" style={{ border: '2px solid white' }}>
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${democratChance}%` }}
