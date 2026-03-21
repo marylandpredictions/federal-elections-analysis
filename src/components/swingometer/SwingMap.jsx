@@ -49,16 +49,17 @@ export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34,
     Object.entries(baseResults).forEach(([fullName, baseMargin]) => {
       const abbr = NAME_TO_ABBR[fullName];
       if (!abbr || baseMargin === null) return;
-      const currentParty = baseMargin > 0 ? 'R' : 'D';
+      const incumbent = showIncumbents ? incumbents[fullName] : null;
+      const incumbentParty = incumbent ? incumbent.split('(')[1]?.charAt(0) : null;
       const rating = getRating(baseMargin + swing);
       if (rating === 'Toss Up' ||
-        (currentParty === 'R' && rating.includes('D')) ||
-        (currentParty === 'D' && rating.includes('R'))) {
+        (incumbentParty === 'R' && rating.includes('D')) ||
+        (incumbentParty === 'D' && rating.includes('R'))) {
         s.add(abbr);
       }
     });
     return s;
-  }, [baseResults, swing]);
+  }, [baseResults, swing, incumbents, showIncumbents]);
 
   const colorsByAbbr = useMemo(() => {
     const map = {};
