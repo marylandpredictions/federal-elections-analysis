@@ -5,6 +5,38 @@ import InteractiveMap from '../components/forecasts/InteractiveMap';
 import SenateControl from '../components/forecasts/SenateControl';
 import SeatCounter from '../components/forecasts/SeatCounter';
 
+const senateIncumbents = {
+  'Alabama': 'Tommy Tuberville (R)', 'Alaska': 'Dan Sullivan (R)', 'Arizona': 'Jeff Flake (R)', 'Arkansas': 'Tom Cotton (R)',
+  'California': 'Dianne Feinstein (D)', 'Colorado': 'Michael Bennet (D)', 'Connecticut': 'Chris Murphy (D)', 'Delaware': 'Chris Coons (D)',
+  'Florida': 'Marco Rubio (R)', 'Georgia': 'Jon Ossoff (D)', 'Hawaii': 'Mazie Hirono (D)', 'Idaho': 'Jim Risch (R)',
+  'Illinois': 'Dick Durbin (D)', 'Indiana': 'Todd Young (R)', 'Iowa': 'Joni Ernst (R)', 'Kansas': 'Jerry Moran (R)',
+  'Kentucky': 'Mitch McConnell (R)', 'Louisiana': 'Bill Cassidy (R)', 'Maine': 'Susan Collins (R)', 'Maryland': 'Ben Cardin (D)',
+  'Massachusetts': 'Elizabeth Warren (D)', 'Michigan': 'Gary Peters (D)', 'Minnesota': 'Tina Smith (D)', 'Mississippi': 'Roger Wicker (R)',
+  'Missouri': 'Josh Hawley (R)', 'Montana': 'Jon Tester (D)', 'Nebraska': 'Pete Ricketts (R)', 'Nevada': 'Catherine Cortez Masto (D)',
+  'New Hampshire': 'Jeanne Shaheen (D)', 'New Jersey': 'Cory Booker (D)', 'New Mexico': 'Ben Ray Luján (D)', 'New York': 'Kirsten Gillibrand (D)',
+  'North Carolina': 'Thom Tillis (R)', 'North Dakota': 'John Hoeven (R)', 'Ohio': 'J.D. Vance (R)', 'Oklahoma': 'James Inhofe (R)',
+  'Oregon': 'Ron Wyden (D)', 'Pennsylvania': 'John Fetterman (D)', 'Rhode Island': 'Jack Reed (D)', 'South Carolina': 'Lindsey Graham (R)',
+  'South Dakota': 'Mike Rounds (R)', 'Tennessee': 'Marsha Blackburn (R)', 'Texas': 'John Cornyn (R)', 'Utah': 'Mitt Romney (R)',
+  'Vermont': 'Bernie Sanders (I)', 'Virginia': 'Mark Warner (D)', 'Washington': 'Patty Murray (D)', 'West Virginia': 'Shelley Moore Capito (R)',
+  'Wisconsin': 'Tammy Baldwin (D)', 'Wyoming': 'John Barrasso (R)',
+};
+
+const govIncumbents = {
+  'Alabama': 'Kay Ivey (R)', 'Alaska': 'Mike Dunleavy (R)', 'Arizona': 'Katie Hobbs (D)', 'Arkansas': 'Sarah Huckabee Sanders (R)',
+  'California': 'Gavin Newsom (D)', 'Colorado': 'Jared Polis (D)', 'Connecticut': 'Ned Lamont (D)', 'Delaware': 'John Carney (D)',
+  'Florida': 'Ron DeSantis (R)', 'Georgia': 'Brian Kemp (R)', 'Hawaii': 'Josh Green (D)', 'Idaho': 'Brad Little (R)',
+  'Illinois': 'J.B. Pritzker (D)', 'Indiana': 'Eric Holcomb (R)', 'Iowa': 'Kim Reynolds (R)', 'Kansas': 'Laura Kelly (D)',
+  'Kentucky': 'Andy Beshear (D)', 'Louisiana': 'Jeff Landry (R)', 'Maine': 'Janet Mills (D)', 'Maryland': 'Wes Moore (D)',
+  'Massachusetts': 'Maura Healey (D)', 'Michigan': 'Gretchen Whitmer (D)', 'Minnesota': 'Tim Walz (D)', 'Mississippi': 'Tate Reeves (R)',
+  'Missouri': 'Mike Kehoe (R)', 'Montana': 'Greg Gianforte (R)', 'Nebraska': 'Jim Pillen (R)', 'Nevada': 'Joe Lombardo (R)',
+  'New Hampshire': 'Chris Sununu (R)', 'New Jersey': 'Phil Murphy (D)', 'New Mexico': 'Michelle Lujan Grisham (D)', 'New York': 'Kathy Hochul (D)',
+  'North Carolina': 'Roy Cooper (D)', 'North Dakota': 'Doug Burgum (R)', 'Ohio': 'Mike DeWine (R)', 'Oklahoma': 'Kevin Stitt (R)',
+  'Oregon': 'Tina Kotek (D)', 'Pennsylvania': 'Josh Shapiro (D)', 'Rhode Island': 'Daniel McKee (D)', 'South Carolina': 'Henry McMaster (R)',
+  'South Dakota': 'Kristi Noem (R)', 'Tennessee': 'Bill Lee (R)', 'Texas': 'Greg Abbott (R)', 'Utah': 'Spencer Cox (R)',
+  'Vermont': 'Phil Scott (R)', 'Virginia': 'Glenn Youngkin (R)', 'Washington': 'Jay Inslee (D)', 'West Virginia': 'Jim Justice (R)',
+  'Wisconsin': 'Tony Evers (D)', 'Wyoming': 'Mark Gordon (R)',
+};
+
 const governorsRatings = {
   'Alabama': 'Safe R', 'Alaska': 'Lean R', 'Arizona': 'Tilt D', 'Arkansas': 'Safe R',
   'California': 'Safe D', 'Colorado': 'Safe D', 'Connecticut': 'Safe D', 'Delaware': 'Not Contested',
@@ -120,7 +152,7 @@ export default function Forecasts() {
                   Senate Forecast
                 </h2>
                 <SeatCounter ratings={senateRatings} />
-                <InteractiveMap ratings={senateRatings} baseDemSeats={34} baseRepSeats={31} />
+                <InteractiveMap ratings={senateRatings} baseDemSeats={34} baseRepSeats={31} incumbents={senateIncumbents} showIncumbents={true} />
                 <SenateControl democratChance={42} republicanChance={58} />
                 <SenateControl democratChance={71} republicanChance={29} title="House Control Probability" />
               </motion.div>
@@ -134,7 +166,7 @@ export default function Forecasts() {
                   Governors Forecast
                 </h2>
                 <SeatCounter ratings={governorsRatings} />
-                <InteractiveMap ratings={governorsRatings} />
+                <InteractiveMap ratings={governorsRatings} incumbents={govIncumbents} showIncumbents={true} />
               </motion.div>
             </div>
           </>
