@@ -71,13 +71,30 @@ export default function HouseSwingometer() {
   const [hoveredBubble, setHoveredBubble] = useState(null);
   const [highlightRating, setHighlightRating] = useState(null);
 
+  const flipped = useMemo(() => {
+    const s = new Set();
+    housePVIData.forEach(([dist]) => {
+      const incumbent = houseIncumbents[normalizeDistrict(dist)];
+      if (!incumbent) return;
+      const incumbentParty = incumbent.split('(')[1]?.charAt(0);
+      const pvi = housePVIData.find(([k]) => k === dist)?.[1] || 0;
+      const rating = getRating(pvi + swing);
+      if (rating === 'Toss Up' ||
+        (incumbentParty === 'R' && rating.includes('D')) ||
+        (incumbentParty === 'D' && rating.includes('R'))) {
+        s.add(dist);
+      }
+    });
+    return s;
+  }, [swing]);
+
   const { seats, totals, positions } = useMemo(() => {
     const rated = housePVIData.map(([dist, pvi]) => ({
       key: dist,
       adj: pvi + swing,
       rating: getRating(pvi + swing),
+      isFlipped: flipped.has(dist),
     }));
-    // Sort: most D (lowest adj) to most R (highest adj)
     rated.sort((a, b) => a.adj - b.adj);
     const pos = buildLayout(rated.length);
     const dots = rated.map((s, i) => ({ ...s, ...pos[i] }));
@@ -87,7 +104,7 @@ export default function HouseSwingometer() {
     rated.forEach(s => { if (tot[s.rating] !== undefined) tot[s.rating]++; });
 
     return { seats: dots, totals: tot, positions: pos };
-  }, [swing]);
+  }, [swing, flipped]);
 
   const demSeats = (totals['Safe D']||0)+(totals['Likely D']||0)+(totals['Lean D']||0)+(totals['Tilt D']||0);
   const repSeats = (totals['Safe R']||0)+(totals['Likely R']||0)+(totals['Lean R']||0)+(totals['Tilt R']||0);
@@ -161,22 +178,37 @@ export default function HouseSwingometer() {
           {/* Parliament chart */}
           <div className="relative w-full">
             <svg viewBox={`0 0 1000 ${svgH}`} className="w-full" style={{ minWidth: '320px' }}>
-              {seats.map(({ key, x, y, rating }) => {
+              <defs>
+                <pattern id="houseDotStripes" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+                  <line x1="0" y1="0" x2="0" y2="6" stroke="white" strokeWidth="1.2" />
+                </pattern>
+              </defs>
+              {seats.map(({ key, x, y, rating, isFlipped }) => {
                 const isHovered = hovered === key;
                 const isHighlighted = !highlightRating || rating === highlightRating;
                 return (
-                  <circle
-                    key={key}
-                    cx={x} cy={y}
-                    r={isHovered ? dotR * 1.9 : dotR}
-                    fill={ratingColors[rating]}
-                    stroke="white"
-                    strokeWidth={isHovered ? 1.8 : 0.6}
-                    opacity={isHighlighted ? 0.95 : 0.15}
-                    onMouseEnter={() => { setHovered(key); setTooltip({ key, rating, svgX: x, svgY: y }); }}
-                    onMouseLeave={() => { setHovered(null); setTooltip(null); }}
-                    style={{ cursor: 'pointer', transition: 'r 0.1s' }}
-                  />
+                  <g key={key}>
+                    <circle
+                      cx={x} cy={y}
+                      r={isHovered ? dotR * 1.9 : dotR}
+                      fill={ratingColors[rating]}
+                      stroke="white"
+                      strokeWidth={isHovered ? 1.8 : 0.6}
+                      opacity={isHighlighted ? 0.95 : 0.15}
+                      onMouseEnter={() => { setHovered(key); setTooltip({ key, rating, svgX: x, svgY: y }); }}
+                      onMouseLeave={() => { setHovered(null); setTooltip(null); }}
+                      style={{ cursor: 'pointer', transition: 'r 0.1s' }}
+                    />
+                    {isFlipped && (
+                      <circle
+                        cx={x} cy={y}
+                        r={isHovered ? dotR * 1.9 : dotR}
+                        fill="url(#houseDotStripes)"
+                        opacity={isHighlighted ? 0.95 : 0.15}
+                        style={{ pointerEvents: 'none' }}
+                      />
+                    )}
+                  </g>
                 );
               })}
               <line x1={CX} y1={50} x2={CX} y2={CY+8} stroke="rgba(255,255,255,0.15)" strokeWidth="1" strokeDasharray="4,4" />
