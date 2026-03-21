@@ -23,7 +23,7 @@ export const electionsData = [
     id: 'ga-house-14-special-runoff-2026',
     state: 'Georgia',
     stateAbbr: 'GA',
-    stateIcon: null,
+    stateIcon: 'https://media.base44.com/images/public/69b6f149a83e2b792ef60e35/6bb4c1ac8_FEABLMLogo1.png',
     electionType: 'U.S. House 14th Special Runoff',
     date: '4/7/26',
     candidates: [
