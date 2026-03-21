@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { Helmet } from 'react-helmet';
 import articles from '../lib/articlesData';
 
 export default function ArticleView() {
@@ -19,26 +18,14 @@ export default function ArticleView() {
   }
 
   return (
-    <>
-      <Helmet>
-        <title>{article.title} - Federal Elections Analysis</title>
-        <meta property="og:title" content={article.title} />
-        <meta property="og:description" content={article.content.substring(0, 200) + '...'} />
-        <meta property="og:image" content={article.image} />
-        <meta property="og:type" content="article" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={article.title} />
-        <meta name="twitter:description" content={article.content.substring(0, 200) + '...'} />
-        <meta name="twitter:image" content={article.image} />
-      </Helmet>
-      <div 
-        className="min-h-[calc(100vh-4rem)] px-4 py-16 sm:py-24 bg-black"
-        style={{
-          backgroundImage: 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      >
+    <div 
+      className="min-h-[calc(100vh-4rem)] px-4 py-16 sm:py-24 bg-black"
+      style={{
+        backgroundImage: 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
       <div className="max-w-4xl mx-auto">
         <motion.button
           initial={{ opacity: 0, x: -20 }}
@@ -84,7 +71,6 @@ export default function ArticleView() {
           </div>
         </motion.article>
       </div>
-      </div>
-    </>
+    </div>
   );
 }
