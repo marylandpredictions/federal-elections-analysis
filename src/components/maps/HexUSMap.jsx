@@ -1,6 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { MapContainer, GeoJSON } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import React, { useState, useRef } from 'react';
+import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
+
+const GEO_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
+
+const FIPS_TO_ABBR = {
+  '01':'AL','02':'AK','04':'AZ','05':'AR','06':'CA','08':'CO','09':'CT','10':'DE',
+  '12':'FL','13':'GA','15':'HI','16':'ID','17':'IL','18':'IN','19':'IA','20':'KS',
+  '21':'KY','22':'LA','23':'ME','24':'MD','25':'MA','26':'MI','27':'MN','28':'MS',
+  '29':'MO','30':'MT','31':'NE','32':'NV','33':'NH','34':'NJ','35':'NM','36':'NY',
+  '37':'NC','38':'ND','39':'OH','40':'OK','41':'OR','42':'PA','44':'RI','45':'SC',
+  '46':'SD','47':'TN','48':'TX','49':'UT','50':'VT','51':'VA','53':'WA','54':'WV',
+  '55':'WI','56':'WY',
+};
 
 export const NAME_TO_ABBR = {
   'Alabama':'AL','Alaska':'AK','Arizona':'AZ','Arkansas':'AR',
@@ -21,77 +32,63 @@ export const ABBR_TO_NAME = Object.fromEntries(
   Object.entries(NAME_TO_ABBR).map(([k, v]) => [v, k])
 );
 
-const GEO_URL = 'https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json';
-
 export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onClick, stripeAbbrs }) {
-  const [geoData, setGeoData] = useState(null);
-  const [tooltip, setTooltip] = useState(null);
+  const [tooltip, setTooltip] = useState(null); // { abbr, x, y }
   const containerRef = useRef(null);
 
-  useEffect(() => {
-    fetch(GEO_URL)
-      .then(r => r.json())
-      .then(setGeoData);
-  }, []);
-
-  const getAbbr = (feature) => NAME_TO_ABBR[feature.properties.name] || null;
-
-  const style = (feature) => {
-    const abbr = getAbbr(feature);
-    return {
-      fillColor: (abbr && colorsByAbbr[abbr]) || '#4B5563',
-      weight: 1,
-      color: '#ffffff',
-      fillOpacity: 1,
-    };
-  };
-
-  const onEachFeature = (feature, layer) => {
-    const abbr = getAbbr(feature);
-    if (!abbr) return;
-
-    layer.on({
-      mousemove: (e) => {
-        const rect = containerRef.current?.getBoundingClientRect();
-        if (!rect) return;
-        setTooltip({ abbr, x: e.originalEvent.clientX - rect.left, y: e.originalEvent.clientY - rect.top });
-      },
-      mouseout: () => setTooltip(null),
-      click: () => onClick && onClick(abbr),
+  const handleMouseMove = (e, abbr) => {
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setTooltip({
+      abbr,
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
     });
   };
 
   return (
-    <div ref={containerRef} className="relative w-full select-none" style={{ height: 420 }}>
-      <MapContainer
-        center={[38, -96]}
-        zoom={4}
-        zoomControl={false}
-        scrollWheelZoom={false}
-        dragging={false}
-        doubleClickZoom={false}
-        attributionControl={false}
-        style={{ height: '100%', width: '100%', background: 'transparent', cursor: onClick ? 'pointer' : 'default' }}
+    <div ref={containerRef} className="relative w-full select-none">
+      <ComposableMap
+        projection="geoAlbersUsa"
+        style={{ width: '100%', height: 'auto' }}
       >
-        {geoData && (
-          <GeoJSON
-            key={JSON.stringify(colorsByAbbr)}
-            data={geoData}
-            style={style}
-            onEachFeature={onEachFeature}
-          />
-        )}
-      </MapContainer>
+        <Geographies geography={GEO_URL}>
+          {({ geographies }) =>
+            geographies.map(geo => {
+              const abbr = FIPS_TO_ABBR[geo.id];
+              const fill = (abbr && colorsByAbbr[abbr]) || '#4B5563';
+              return (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  fill={fill}
+                  stroke="#ffffff"
+                  strokeWidth={0.6}
+                  style={{
+                    default: { outline: 'none' },
+                    hover:   { outline: 'none', filter: 'brightness(1.25)', cursor: 'pointer' },
+                    pressed: { outline: 'none' },
+                  }}
+                  onMouseMove={(e) => abbr && handleMouseMove(e, abbr)}
+                  onMouseLeave={() => setTooltip(null)}
+                  onClick={() => abbr && onClick && onClick(abbr)}
+                />
+              );
+            })
+          }
+        </Geographies>
+      </ComposableMap>
 
+      {/* Tooltip — same dark card style as the original */}
       {tooltip && renderTooltipContent && (() => {
         const content = renderTooltipContent(tooltip.abbr);
         if (!content) return null;
         return (
           <div
-            className="absolute z-[1000] pointer-events-none bg-black/90 border border-white/20 rounded-xl p-3 shadow-xl min-w-[160px]"
+            className="absolute z-50 pointer-events-none bg-black/90 border border-white/20 rounded-xl p-3 shadow-xl min-w-[160px]"
             style={{
               left: tooltip.x + 12,
-              top: tooltip.y - 10,
+              top:  tooltip.y - 10,
               transform: tooltip.x > 600 ? 'translateX(-110%)' : undefined,
             }}
           >
