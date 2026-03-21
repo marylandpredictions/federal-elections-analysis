@@ -38,7 +38,6 @@ export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onCl
   const containerRef = useRef(null);
   const innerRef = useRef(null);
 
-  // Zoom / pan state
   const [zoom, setZoom] = useState(1);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -76,7 +75,6 @@ export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onCl
 
   return (
     <div ref={containerRef} className="relative w-full select-none" style={{ overflow: 'hidden' }}>
-      {/* SVG Defs for Stripe Pattern */}
       <svg width="0" height="0">
         <defs>
           <pattern id="flipStripes" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
@@ -85,7 +83,6 @@ export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onCl
         </defs>
       </svg>
 
-      {/* Zoom buttons */}
       <div className="absolute top-2 right-2 z-20 flex flex-col gap-1">
         <button
           onClick={handleZoomIn}
@@ -99,7 +96,6 @@ export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onCl
         >−</button>
       </div>
 
-      {/* Pannable / zoomable inner */}
       <div
         ref={innerRef}
         style={{
@@ -113,20 +109,17 @@ export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onCl
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
       >
-        <ComposableMap
-          projection="geoAlbersUsa"
-          style={{ width: '100%', height: 'auto' }}
-        >
+        <ComposableMap projection="geoAlbersUsa" style={{ width: '100%', height: 'auto' }}>
           <Geographies geography={GEO_URL}>
             {({ geographies }) =>
-              geographies.map(geo => {
+              geographies.flatMap(geo => {
                 const abbr = FIPS_TO_ABBR[geo.id];
                 const isFlipped = stripeAbbrs && stripeAbbrs.has(abbr);
-                const fill = isFlipped ? 'url(#flipStripes)' : ((abbr && colorsByAbbr[abbr]) || '#4B5563');
+                const fill = (abbr && colorsByAbbr[abbr]) || '#4B5563';
                 const dimmed = highlightRating && ratingsByAbbr && ratingsByAbbr[abbr] !== highlightRating;
-                return (
+                const geoms = [
                   <Geography
-                   key={geo.rsmKey}
+                   key={`${geo.rsmKey}-base`}
                    geography={geo}
                    fill={fill}
                    fillOpacity={dimmed ? 0.2 : 1}
@@ -141,14 +134,26 @@ export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onCl
                    onMouseLeave={() => { setTooltip(null); setHoveredAbbr(null); }}
                    onClick={() => abbr && onClick && onClick(abbr)}
                   />
-                );
+                ];
+                if (isFlipped) {
+                  geoms.push(
+                    <Geography
+                     key={`${geo.rsmKey}-stripe`}
+                     geography={geo}
+                     fill="url(#flipStripes)"
+                     fillOpacity={dimmed ? 0.2 : 1}
+                     stroke="none"
+                     style={{ default: { outline: 'none' }, hover: { outline: 'none' }, pressed: { outline: 'none' } }}
+                    />
+                  );
+                }
+                return geoms;
               })
             }
           </Geographies>
         </ComposableMap>
       </div>
 
-      {/* Tooltip */}
       {tooltip && renderTooltipContent && (() => {
         const content = renderTooltipContent(tooltip.abbr);
         if (!content) return null;
