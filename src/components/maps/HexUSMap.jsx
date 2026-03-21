@@ -79,8 +79,8 @@ export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onCl
       {/* SVG Defs for Stripe Pattern */}
       <svg width="0" height="0">
         <defs>
-          <pattern id="flipStripes" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
-            <line x1="0" y1="0" x2="0" y2="8" stroke="white" strokeWidth="2" />
+          <pattern id="flipStripes" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+            <line x1="0" y1="0" x2="0" y2="16" stroke="white" strokeWidth="2" />
           </pattern>
         </defs>
       </svg>
