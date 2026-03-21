@@ -204,11 +204,23 @@ export default function HouseSwingometer() {
                   )}
                   <div className="font-semibold text-xs mb-2" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
                   <div className="text-white/70 text-xs mb-2">{marginText}</div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="flex-1 flex gap-0.5 items-center h-4 bg-white/10 rounded overflow-hidden">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs font-semibold" style={{color:'#2563EB'}}>D</span>
+                    <div className="flex-1 bg-white/10 rounded h-3" style={{overflow:'hidden'}}>
                       <div style={{width:`${dPct}%`,backgroundColor:'#2563EB',height:'100%'}} />
+                    </div>
+                    <span className="text-xs font-semibold" style={{color:'#2563EB'}}>{dPct.toFixed(1)}%</span>
+                  </div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs font-semibold" style={{color:'#DC2626'}}>R</span>
+                    <div className="flex-1 bg-white/10 rounded h-3" style={{overflow:'hidden'}}>
                       <div style={{width:`${rPct}%`,backgroundColor:'#DC2626',height:'100%'}} />
                     </div>
+                    <span className="text-xs font-semibold" style={{color:'#DC2626'}}>{rPct.toFixed(1)}%</span>
+                  </div>
+                  <div style={{color: ratingColors[tooltip.rating], fontSize: '11px', fontWeight: 700, marginTop: '4px'}}>
+                    {marginText}
+                  </div>
                   </div>
                   <div className="flex justify-between text-xs text-white/60">
                     <span>D {dPct.toFixed(1)}%</span>
