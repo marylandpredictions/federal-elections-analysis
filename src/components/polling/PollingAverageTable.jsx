@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { parsePollDate, pollConfigs } from './pollConfig';
 
-function getPollWeight(pollDate, referenceDate, pollsterName) {
+export function getPollWeight(pollDate, referenceDate, pollsterName) {
   const diffDays = (referenceDate - pollDate) / (1000 * 60 * 60 * 24);
   let weight;
   if (diffDays <= 60) weight = 1.0;
@@ -12,7 +12,7 @@ function getPollWeight(pollDate, referenceDate, pollsterName) {
   return weight;
 }
 
-function weightedAvg(polls, key, referenceDate) {
+export function weightedAvg(polls, key, referenceDate) {
   let sum = 0, total = 0;
   polls.forEach(p => {
     const val = p[key];
