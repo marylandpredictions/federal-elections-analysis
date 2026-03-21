@@ -34,6 +34,7 @@ export const ABBR_TO_NAME = Object.fromEntries(
 
 export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onClick, stripeAbbrs, highlightRating, ratingsByAbbr }) {
   const [tooltip, setTooltip] = useState(null);
+  const [hoveredAbbr, setHoveredAbbr] = useState(null);
   const containerRef = useRef(null);
   const innerRef = useRef(null);
 
@@ -115,20 +116,20 @@ export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onCl
                 const dimmed = highlightRating && ratingsByAbbr && ratingsByAbbr[abbr] !== highlightRating;
                 return (
                   <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    fill={fill}
-                    fillOpacity={dimmed ? 0.2 : 1}
-                    stroke="#ffffff"
-                    strokeWidth={0.6}
-                    style={{
-                      default: { outline: 'none' },
-                      hover:   { outline: 'none', filter: 'brightness(1.25)', cursor: onClick ? 'pointer' : 'default' },
-                      pressed: { outline: 'none' },
-                    }}
-                    onMouseMove={(e) => abbr && handleMouseMoveTooltip(e, abbr)}
-                    onMouseLeave={() => setTooltip(null)}
-                    onClick={() => abbr && onClick && onClick(abbr)}
+                   key={geo.rsmKey}
+                   geography={geo}
+                   fill={fill}
+                   fillOpacity={dimmed ? 0.2 : 1}
+                   stroke="#ffffff"
+                   strokeWidth={hoveredAbbr === abbr ? 1.2 : 0.6}
+                   style={{
+                     default: { outline: 'none' },
+                     hover:   { outline: 'none', filter: 'brightness(1.25)', cursor: onClick ? 'pointer' : 'default' },
+                     pressed: { outline: 'none' },
+                   }}
+                   onMouseMove={(e) => { if (abbr) { handleMouseMoveTooltip(e, abbr); setHoveredAbbr(abbr); } }}
+                   onMouseLeave={() => { setTooltip(null); setHoveredAbbr(null); }}
+                   onClick={() => abbr && onClick && onClick(abbr)}
                   />
                 );
               })
@@ -143,7 +144,7 @@ export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onCl
         if (!content) return null;
         return (
           <div
-            className="absolute z-50 pointer-events-none bg-black/90 border border-white/20 rounded-xl p-3 shadow-xl min-w-[160px]"
+            className="absolute z-50 pointer-events-none bg-black/80 border border-white/20 rounded-xl p-3 shadow-xl min-w-[160px]"
             style={{
               left: tooltip.x + 12,
               top:  tooltip.y - 10,
