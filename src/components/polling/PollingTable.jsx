@@ -342,6 +342,30 @@ export default function PollingTable({ polls, type }) {
         <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
+    if (type === 'north-carolina-senate') return (
+      <>
+        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.whatley > 0 ? `${poll.whatley}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#3B82F6' }} className="font-semibold">{poll.cooper > 0 ? `${poll.cooper}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
+      </>
+    );
+    if (type === 'ohio-senate') return (
+      <>
+        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.husted > 0 ? `${poll.husted}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#3B82F6' }} className="font-semibold">{poll.brown > 0 ? `${poll.brown}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
+      </>
+    );
+    if (type === 'ohio-governor') return (
+      <>
+        <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.ramaswamy > 0 ? `${poll.ramaswamy}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#3B82F6' }} className="font-semibold">{poll.acton > 0 ? `${poll.acton}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
+      </>
+    );
     // Default: Texas Senate
     return (
       <>
