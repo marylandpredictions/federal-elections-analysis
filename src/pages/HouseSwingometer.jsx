@@ -216,7 +216,7 @@ export default function HouseSwingometer() {
                   </div>
                 </div>
               );
-            )}
+            })()}
           </div>
 
           {/* Legend with margin labels */}
