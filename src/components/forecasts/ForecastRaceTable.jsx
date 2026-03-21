@@ -48,9 +48,9 @@ export default function ForecastRaceTable({ rows, title, showPcts = true, stateL
               <TableHead className="text-white font-bold">{stateLabel}</TableHead>
               <TableHead className="text-white font-bold">Incumbent</TableHead>
               <TableHead className="text-white font-bold">Rating</TableHead>
-              {showPcts && <TableHead className="text-white font-bold">D%</TableHead>}
-              {showPcts && <TableHead className="text-white font-bold">R%</TableHead>}
-              {showPcts && <TableHead className="text-white font-bold">Margin</TableHead>}
+              <TableHead className="text-white font-bold">D%</TableHead>
+              <TableHead className="text-white font-bold">R%</TableHead>
+              <TableHead className="text-white font-bold">Margin</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -71,9 +71,9 @@ export default function ForecastRaceTable({ rows, title, showPcts = true, stateL
                       {row.rating}
                     </span>
                   </TableCell>
-                  {showPcts && <TableCell style={{ color: '#60A5FA' }} className={leader === 'D' ? 'font-bold' : 'font-semibold'}>{row.dPct != null ? `${row.dPct}%` : '—'}</TableCell>}
-                  {showPcts && <TableCell style={{ color: '#F87171' }} className={leader === 'R' ? 'font-bold' : 'font-semibold'}>{row.rPct != null ? `${row.rPct}%` : '—'}</TableCell>}
-                  {showPcts && <TableCell style={{ color: marginColor }} className="font-bold">{margin != null ? `${leader} +${margin}%` : '—'}</TableCell>}
+                  <TableCell style={{ color: '#60A5FA' }} className={leader === 'D' ? 'font-bold' : 'font-semibold'}>{row.dPct != null ? `${row.dPct}%` : '—'}</TableCell>
+                  <TableCell style={{ color: '#F87171' }} className={leader === 'R' ? 'font-bold' : 'font-semibold'}>{row.rPct != null ? `${row.rPct}%` : '—'}</TableCell>
+                  <TableCell style={{ color: marginColor }} className="font-bold">{margin != null ? `${leader} +${margin}%` : '—'}</TableCell>
                 </TableRow>
               );
             })}

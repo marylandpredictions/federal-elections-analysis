@@ -132,7 +132,7 @@ export default function HouseSwingometer() {
                 </div>
               )}
             </div>
-            <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg" style={{ border: '2px solid white' }}>
+            <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
               <div className="text-3xl font-bold text-purple-300">{tossUp}</div>
               <div className="text-purple-200/70 text-sm mt-1">Toss Up</div>
             </div>
