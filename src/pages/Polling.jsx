@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import PollingChart from '../components/polling/PollingChart';
 import PollingAverageTable, { weightedAvg } from '../components/polling/PollingAverageTable';
