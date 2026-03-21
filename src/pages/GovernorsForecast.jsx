@@ -47,7 +47,7 @@ const governorIncumbents = {
   'Minnesota': 'Tim Walz (D)', 'Nebraska': 'Jim Pillen (R)', 'Nevada': 'Joe Lombardo (R)',
   'New Hampshire': 'Kelly Ayotte (R)', 'New Mexico': 'Michelle Lujan Grisham (D)',
   'New York': 'Kathy Hochul (D)', 'Ohio': 'Mike DeWine (R)', 'Oklahoma': 'Kevin Stitt (R)',
-  'Oregon': 'Tina Kotek (D)', 'Pennsylvania': 'Josh Shapiro (D)', 'Rhode Island': 'Helena Foulkes (D)',
+  'Oregon': 'Tina Kotek (D)', 'Pennsylvania': 'Josh Shapiro (D)', 'Rhode Island': 'Dan McKee (D)',
   'South Carolina': 'Henry McMaster (R)', 'South Dakota': 'Tony Venhuizen (R)', 'Tennessee': 'Bill Lee (R)',
   'Texas': 'Greg Abbott (R)', 'Vermont': 'Phil Scott (R)', 'Wisconsin': 'Tony Evers (D)',
   'Wyoming': 'Mark Gordon (R)',
@@ -57,11 +57,7 @@ const ratingOrder = ['Safe D','Likely D','Lean D','Tilt D','Toss Up','Tilt R','L
 
 const contestedRows = Object.entries(governorsRatings)
   .filter(([, r]) => r !== 'Not Contested')
-  .sort((a, b) => {
-    const ai = ratingOrder.indexOf(a[1]), bi = ratingOrder.indexOf(b[1]);
-    if (ai !== bi) return ai - bi;
-    return a[0].localeCompare(b[0]);
-  })
+  .sort((a, b) => a[0].localeCompare(b[0]))
   .map(([state, rating]) => {
     const pct = governorPercentages[state];
     return {
