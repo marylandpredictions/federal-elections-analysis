@@ -22,10 +22,15 @@ const pollingOptions = [
   { value: 'massachusetts-dem-senate', label: 'Massachusetts Democratic Senate Primary', party: 'dem' },
   { value: 'michigan-dem-senate', label: 'Michigan Democratic Senate Primary', party: 'dem' },
   { value: 'minnesota-dem-senate', label: 'Minnesota Democratic Senate Primary', party: 'dem' },
+  { value: 'north-carolina-senate', label: 'North Carolina Senate General', party: 'general' },
+  { value: 'ohio-senate', label: 'Ohio Senate General', party: 'general' },
+  { value: 'ohio-governor', label: 'Ohio Governor General', party: 'general' },
   { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary', party: 'rep' },
   { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff', party: 'rep' },
   { value: 'wisconsin-dem-governor', label: 'Wisconsin Democratic Governor Primary', party: 'dem' },
 ];
+
+const randomPollOptions = pollingOptions.filter(p => !['generic-congressional-ballot', '2028-dem-primary', '2028-rep-primary'].includes(p.value));
 
 const alaskaSenateData = {
   chartData: [],
