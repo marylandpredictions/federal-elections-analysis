@@ -63,11 +63,7 @@ const rawSeats = [
 const ratingOrder = ['Safe D','Likely D','Lean D','Tilt D','Toss Up','Tilt R','Lean R','Likely R','Safe R'];
 
 const houseRows = rawSeats
-  .sort((a, b) => {
-    const ai = ratingOrder.indexOf(a[1]), bi = ratingOrder.indexOf(b[1]);
-    if (ai !== bi) return ai - bi;
-    return a[0].localeCompare(b[0]);
-  })
+  .sort((a, b) => a[0].localeCompare(b[0]))
   .map(([key, rating]) => ({
     state: key,
     incumbent: houseIncumbents[key] || '—',

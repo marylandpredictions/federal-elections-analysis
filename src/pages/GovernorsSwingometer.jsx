@@ -88,7 +88,7 @@ const govIncumbents = {
   'Oklahoma': 'Kevin Stitt (R)',
   'Oregon': 'Tina Kotek (D)',
   'Pennsylvania': 'Josh Shapiro (D)',
-  'Rhode Island': 'Helena Foulkes (D)',
+  'Rhode Island': 'Dan McKee (D)',
   'South Carolina': 'Henry McMaster (R)',
   'South Dakota': 'Tony Venhuizen (R)',
   'Tennessee': 'Bill Lee (R)',
