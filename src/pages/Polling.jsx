@@ -77,6 +77,7 @@ const mainePollingData = {
 const californiaGovData = {
   chartData: [],
   polls: [
+    { pollster: 'Berkeley IGS', date: 'March 9-14, 2026', sampleSize: 3889, becerra: 5, bianco: 16, hilton: 17, mahan: 4, porter: 13, steyer: 10, swalwell: 13, other: 16, undecided: 6, margin: 'Hilton +1' },
     { pollster: 'Emerson College', date: 'March 7-9, 2026', sampleSize: 1000, becerra: 3, bianco: 11, hilton: 13, mahan: 3, porter: 8, steyer: 11, swalwell: 17, other: 7, undecided: 25, margin: 'Swalwell +4' },
     { pollster: 'Politico/UC Berkeley/TrueDot', date: 'February 25-March 3, 2026', sampleSize: 1004, becerra: 5, bianco: 11, hilton: 19, mahan: 3, porter: 11, steyer: 13, swalwell: 11, other: 10, undecided: 17, margin: 'Hilton +6' },
     { pollster: 'Global Strategy Group (D)', date: 'February 27-March 2, 2026', sampleSize: 1340, becerra: 5, bianco: 15, hilton: 20, mahan: 3, porter: 13, steyer: 16, swalwell: 11, other: 2, undecided: 15, margin: 'Hilton +4' },
@@ -152,6 +153,9 @@ const mockPollingData = {
       { date: '2026-03-14', democrat: 45.3, republican: 42.7 }
     ],
     polls: [
+      { pollster: 'Quantus (B-)', date: 'Mar 17 - 18, 2026', sampleSize: 1053, democrat: 47, republican: 42, margin: 'Generic D +5' },
+      { pollster: 'Emerson College (A+)', date: 'Mar 16 - 17, 2026', sampleSize: 1000, democrat: 49, republican: 41, margin: 'Generic D +8' },
+      { pollster: 'YouGov (Yahoo) (B+)', date: 'Mar 12 - 16, 2026', sampleSize: 1699, democrat: 44, republican: 40, margin: 'Generic D +4' },
       { pollster: 'YouGov (Economist) (B+)', date: 'Mar 13 - 16, 2026', sampleSize: 1529, democrat: 39, republican: 35, margin: 'Generic D +4' },
       { pollster: 'Morning Consult (C-)', date: 'Mar 13 - 16, 2026', sampleSize: 2201, democrat: 48, republican: 40, margin: 'Generic D +8' },
       { pollster: 'Morning Consult (C-)', date: 'Mar 9 - 15, 2026', sampleSize: 26634, democrat: 45, republican: 42, margin: 'Generic D +3' },
@@ -320,6 +324,9 @@ const mockPollingData = {
       { date: '2026-03-08', cornyn: 41.5, paxton: 49.6, cornyinMin: 38.5, cornyinMax: 44.5, paxtonMin: 46.6, paxtonMax: 52.6 }
     ],
     polls: [
+      { pollster: 'Change Research (D)', date: 'March 17–19, 2026', sampleSize: 807, cornyn: 39, paxton: 42, other: 0, undecided: 19, margin: 'Paxton +3' },
+      { pollster: 'Impact Research (D)', date: 'March 12–17, 2026', sampleSize: 0, cornyn: 37, paxton: 53, other: 0, undecided: 10, margin: 'Paxton +16' },
+      { pollster: 'Peak Insights (R)', date: 'March 9–12, 2026', sampleSize: 800, cornyn: 45, paxton: 45, other: 0, undecided: 10, margin: 'Tie' },
       { pollster: 'Slingshot Strategies (D)', date: 'March 7–8, 2026', sampleSize: 781, cornyn: 41, paxton: 49, other: 0, undecided: 10, margin: 'Paxton +8' },
       { pollster: 'Public Policy Polling (D)', date: 'March 5–6, 2026', sampleSize: 565, cornyn: 42, paxton: 45, other: 0, undecided: 12, margin: 'Paxton +3' },
       { pollster: 'Blueprint Polling (D)', date: 'February 23–24, 2026', sampleSize: 529, cornyn: 36, paxton: 49, other: 0, undecided: 15, margin: 'Paxton +13' },
@@ -484,6 +491,7 @@ const mockPollingData = {
   'kentucky-gop-senate': {
     chartData: [],
     polls: [
+      { pollster: 'Public Opinion Strategies (R)', date: 'March 10-12, 2026', sampleSize: 600, barr: 29, cameron: 31, morris: 13, other: 0, undecided: 27, margin: 'Cameron +2' },
       { pollster: 'Quantus Insights (R)', date: 'February 4, 2026', sampleSize: 870, barr: 28, cameron: 27, morris: 17, other: 9, undecided: 19, margin: 'Barr +1' },
       { pollster: 'Emerson College', date: 'January 31 – February 2, 2026', sampleSize: 523, barr: 24, cameron: 21, morris: 14, other: 4, undecided: 37, margin: 'Barr +3' },
       { pollster: 'Fabrizio, Lee & Associates (R)', date: 'January 27–29, 2026', sampleSize: 800, barr: 21, cameron: 29, morris: 18, other: 0, undecided: 42, margin: 'Cameron +8' },
@@ -513,6 +521,9 @@ const mockPollingData = {
     chartData: [],
     polls: [
       { pollster: 'Echelon Insights', date: 'March 12–16, 2026', sampleSize: 1033, harris: 21, newsom: 19, buttigieg: 9, aoc: 11, pritzker: 2, shapiro: 5, booker: 4, other: 29, margin: 'Harris +2' },
+      { pollster: 'Focaldata', date: 'March 6–10, 2026', sampleSize: 1782, harris: 39, newsom: 22, buttigieg: 8, aoc: 11, pritzker: 4, shapiro: 6, booker: 0, other: 10, margin: 'Harris +17' },
+      { pollster: 'McLaughlin & Associates', date: 'March 4–9, 2026', sampleSize: 456, harris: 20, newsom: 19, buttigieg: 9, aoc: 11, pritzker: 2, shapiro: 5, booker: 2, other: 14, margin: 'Harris +1' },
+      { pollster: 'Noble Predictive Insights', date: 'March 2–5, 2026', sampleSize: 1152, harris: 31, newsom: 16, buttigieg: 7, aoc: 6, pritzker: 2, shapiro: 5, booker: 3, other: 30, margin: 'Harris +15' },
       { pollster: 'McLaughlin & Associates', date: 'March 4–9, 2026', sampleSize: 1000, harris: 20, newsom: 19, buttigieg: 9, aoc: 11, pritzker: 2, shapiro: 5, booker: 2, other: 32, margin: 'Harris +1' },
       { pollster: 'Focaldata', date: 'March 6–10, 2026', sampleSize: 1782, harris: 39, newsom: 22, buttigieg: 8, aoc: 11, pritzker: 4, shapiro: 6, booker: 0, other: 10, margin: 'Harris +17' },
       { pollster: 'Harvard Harris', date: 'February 25–26, 2026', sampleSize: 1999, harris: 39, newsom: 24, buttigieg: 0, aoc: 14, pritzker: 6, shapiro: 10, booker: 0, other: 7, margin: 'Harris +15' },
