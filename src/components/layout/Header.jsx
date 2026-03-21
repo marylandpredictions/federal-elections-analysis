@@ -3,7 +3,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
 const forecastLinks = [
-  { label: '2026 General Forecast', path: '/GeneralElectionForecast' }
+  { label: '2026 Senate Forecast', path: '/SenateForecast' },
+  { label: '2026 House Forecast', path: '/HouseForecast' },
+  { label: '2026 Governors Forecast', path: '/GovernorsForecast' },
 ];
 
 const interactiveLinks = [
