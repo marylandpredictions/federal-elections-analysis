@@ -112,9 +112,10 @@ export default function PollingChart({ polls, type }) {
                 <Area
                   type="linear"
                   dataKey={`${c.key}Max`}
+                  baseDataKey={c.key}
                   stroke="none"
                   fill={color}
-                  fillOpacity={0.1}
+                  fillOpacity={0.15}
                   legendType="none"
                   name={`${c.name} CI`}
                 />
