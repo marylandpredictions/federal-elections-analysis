@@ -606,7 +606,9 @@ const mockPollingData = {
       { pollster: 'Quantus Insights (R)', date: 'February 17–18, 2026', sampleSize: 900, whatley: 39, cooper: 48, other: 0, undecided: 13, margin: 'Cooper +9' },
       { pollster: 'Change Research (D)', date: 'January 31 – February 4, 2026', sampleSize: 1069, whatley: 40, cooper: 50, other: 4, undecided: 7, margin: 'Cooper +10' },
       { pollster: 'TIPP Insights (R)', date: 'January 12–15, 2026', sampleSize: 1512, whatley: 24, cooper: 48, other: 0, undecided: 27, margin: 'Cooper +24' },
-  'ohio-senate': {
+      ]
+      },
+      'ohio-senate': {
     chartData: [],
     polls: [
       { pollster: 'Quantus Insights (R)', date: 'March 13–14, 2026', sampleSize: 784, husted: 46, brown: 44, other: 4, undecided: 6, margin: 'Husted +2' },
@@ -804,7 +806,8 @@ export default function Polling() {
                 <div>{pill.label}</div>
                 {marginText && <div className="text-xs font-bold mt-0.5" style={{ color: info.marginColor }}>{marginText}</div>}
               </button>
-            )})}}
+              );
+            })}
           </div>
         </motion.div>
 
