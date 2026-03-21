@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import PollingChart from '../components/polling/PollingChart';
-import PollingAverageTable from '../components/polling/PollingAverageTable';
+import PollingAverageTable, { weightedAvg } from '../components/polling/PollingAverageTable';
 import PollingTable from '../components/polling/PollingTable';
 import PollSelector from '../components/polling/PollSelector';
+import { parsePollDate, pollConfigs } from '../components/polling/pollConfig';
 
 const pollingOptions = [
   { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot', party: 'general' },
@@ -686,10 +687,31 @@ const mockPollingData = {
   }
 };
 
+function computePillInfo(type, polls) {
+  const config = pollConfigs[type];
+  if (!config || !polls || polls.length === 0) return { margin: null, marginColor: '#ffffff', leader: '' };
+  const now = new Date();
+  const sorted = [...config.candidates].sort((a, b) => {
+    const avgA = weightedAvg(polls, a.key, now) ?? -1;
+    const avgB = weightedAvg(polls, b.key, now) ?? -1;
+    return avgB - avgA;
+  });
+  const avg0 = weightedAvg(polls, sorted[0].key, now);
+  const avg1 = sorted.length > 1 ? weightedAvg(polls, sorted[1].key, now) : null;
+  const margin = (avg0 != null && avg1 != null) ? avg0 - avg1 : null;
+  return { leader: sorted[0].name, margin, marginColor: sorted[0].color };
+}
+
 export default function Polling() {
   const [selectedPoll, setSelectedPoll] = useState('generic-congressional-ballot');
   const currentData = mockPollingData[selectedPoll] || { chartData: [], polls: [] };
   const currentPolls = currentData?.polls || [];
+
+  const pillInfos = useMemo(() => ({
+    'generic-congressional-ballot': computePillInfo('generic-congressional-ballot', mockPollingData['generic-congressional-ballot']?.polls),
+    '2028-dem-primary': computePillInfo('2028-dem-primary', mockPollingData['2028-dem-primary']?.polls),
+    '2028-rep-primary': computePillInfo('2028-rep-primary', mockPollingData['2028-rep-primary']?.polls),
+  }), []);
 
   return (
     <div 
@@ -722,10 +744,13 @@ export default function Polling() {
             </div>
             <div className="flex gap-3 flex-wrap">
               {[
-                { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot', margin: 'Democrat +5.0%', marginColor: '#2563EB' },
-                { value: '2028-dem-primary', label: '2028 Democratic Primary', margin: 'Harris +5.1%', marginColor: '#2563EB' },
-                { value: '2028-rep-primary', label: '2028 Republican Primary', margin: 'Vance +29.0%', marginColor: '#DC2626' },
-              ].map(pill => (
+                { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot' },
+                { value: '2028-dem-primary', label: '2028 Democratic Primary' },
+                { value: '2028-rep-primary', label: '2028 Republican Primary' },
+              ].map(pill => {
+                const info = pillInfos[pill.value];
+                const marginText = info?.margin != null ? `${info.leader} +${info.margin.toFixed(1)}%` : '';
+                return (
                 <button
                   key={pill.value}
                   onClick={() => setSelectedPoll(pill.value)}
@@ -736,9 +761,9 @@ export default function Polling() {
                   }`}
                 >
                   <div>{pill.label}</div>
-                  <div className="text-xs font-bold mt-0.5" style={{ color: pill.marginColor }}>{pill.margin}</div>
+                  {marginText && <div className="text-xs font-bold mt-0.5" style={{ color: info.marginColor }}>{marginText}</div>}
                 </button>
-              ))}
+              )})}
             </div>
           </div>
         </motion.div>
