@@ -1,143 +1,100 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 
-const R = 30;
-const COL_STEP = 64;
-const ROW_STEP = 50;
-const ODD_OFFSET = 25;
-const START_X = 44;
-const START_Y = 44;
-const SVG_W = 760;
-const SVG_H = 490;
+const GEO_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
-// [col, row] positions — flat-top hex grid, odd columns offset down
-const HEX_GRID = {
-  'WA': [0,0], 'OR': [0,1], 'CA': [0,2],
-  'ID': [1,0], 'NV': [1,1], 'UT': [1,2], 'AZ': [1,3],
-  'MT': [2,0], 'WY': [2,1], 'CO': [2,2], 'NM': [2,3],
-  'ND': [3,0], 'SD': [3,1], 'NE': [3,2], 'KS': [3,3], 'OK': [3,4], 'TX': [3,5],
-  'MN': [4,0], 'IA': [4,1], 'MO': [4,2], 'AR': [4,3], 'LA': [4,4],
-  'WI': [5,0], 'IL': [5,1], 'IN': [5,2], 'KY': [5,3], 'TN': [5,4], 'MS': [5,5], 'AL': [5,6], 'FL': [5,7],
-  'MI': [6,0], 'OH': [6,1], 'WV': [6,2], 'VA': [6,3], 'NC': [6,4], 'SC': [6,5], 'GA': [6,6],
-  'NY': [7,0], 'PA': [7,1], 'MD': [7,2], 'DC': [7,3],
-  'VT': [8,0], 'NJ': [8,1], 'DE': [8,2],
-  'NH': [9,0], 'MA': [9,1], 'CT': [9,2], 'RI': [9,3],
-  'ME': [10,0],
-};
-
-// AK and HI placed separately at bottom-left
-const SEPARATE = {
-  'AK': { x: 70, y: 445 },
-  'HI': { x: 145, y: 445 },
+const FIPS_TO_ABBR = {
+  '01':'AL','02':'AK','04':'AZ','05':'AR','06':'CA','08':'CO','09':'CT','10':'DE',
+  '12':'FL','13':'GA','15':'HI','16':'ID','17':'IL','18':'IN','19':'IA','20':'KS',
+  '21':'KY','22':'LA','23':'ME','24':'MD','25':'MA','26':'MI','27':'MN','28':'MS',
+  '29':'MO','30':'MT','31':'NE','32':'NV','33':'NH','34':'NJ','35':'NM','36':'NY',
+  '37':'NC','38':'ND','39':'OH','40':'OK','41':'OR','42':'PA','44':'RI','45':'SC',
+  '46':'SD','47':'TN','48':'TX','49':'UT','50':'VT','51':'VA','53':'WA','54':'WV',
+  '55':'WI','56':'WY',
 };
 
 export const NAME_TO_ABBR = {
-  'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR',
-  'California': 'CA', 'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE',
-  'Florida': 'FL', 'Georgia': 'GA', 'Hawaii': 'HI', 'Idaho': 'ID',
-  'Illinois': 'IL', 'Indiana': 'IN', 'Iowa': 'IA', 'Kansas': 'KS',
-  'Kentucky': 'KY', 'Louisiana': 'LA', 'Maine': 'ME', 'Maryland': 'MD',
-  'Massachusetts': 'MA', 'Michigan': 'MI', 'Minnesota': 'MN', 'Mississippi': 'MS',
-  'Missouri': 'MO', 'Montana': 'MT', 'Nebraska': 'NE', 'Nevada': 'NV',
-  'New Hampshire': 'NH', 'New Jersey': 'NJ', 'New Mexico': 'NM', 'New York': 'NY',
-  'North Carolina': 'NC', 'North Dakota': 'ND', 'Ohio': 'OH', 'Oklahoma': 'OK',
-  'Oregon': 'OR', 'Pennsylvania': 'PA', 'Rhode Island': 'RI', 'South Carolina': 'SC',
-  'South Dakota': 'SD', 'Tennessee': 'TN', 'Texas': 'TX', 'Utah': 'UT',
-  'Vermont': 'VT', 'Virginia': 'VA', 'Washington': 'WA', 'West Virginia': 'WV',
-  'Wisconsin': 'WI', 'Wyoming': 'WY', 'District of Columbia': 'DC',
+  'Alabama':'AL','Alaska':'AK','Arizona':'AZ','Arkansas':'AR',
+  'California':'CA','Colorado':'CO','Connecticut':'CT','Delaware':'DE',
+  'Florida':'FL','Georgia':'GA','Hawaii':'HI','Idaho':'ID',
+  'Illinois':'IL','Indiana':'IN','Iowa':'IA','Kansas':'KS',
+  'Kentucky':'KY','Louisiana':'LA','Maine':'ME','Maryland':'MD',
+  'Massachusetts':'MA','Michigan':'MI','Minnesota':'MN','Mississippi':'MS',
+  'Missouri':'MO','Montana':'MT','Nebraska':'NE','Nevada':'NV',
+  'New Hampshire':'NH','New Jersey':'NJ','New Mexico':'NM','New York':'NY',
+  'North Carolina':'NC','North Dakota':'ND','Ohio':'OH','Oklahoma':'OK',
+  'Oregon':'OR','Pennsylvania':'PA','Rhode Island':'RI','South Carolina':'SC',
+  'South Dakota':'SD','Tennessee':'TN','Texas':'TX','Utah':'UT',
+  'Vermont':'VT','Virginia':'VA','Washington':'WA','West Virginia':'WV',
+  'Wisconsin':'WI','Wyoming':'WY','District of Columbia':'DC',
 };
-export const ABBR_TO_NAME = Object.fromEntries(Object.entries(NAME_TO_ABBR).map(([k, v]) => [v, k]));
+export const ABBR_TO_NAME = Object.fromEntries(
+  Object.entries(NAME_TO_ABBR).map(([k, v]) => [v, k])
+);
 
-function hexPoints(cx, cy, r) {
-  return Array.from({ length: 6 }, (_, i) => {
-    const angle = (i * 60) * Math.PI / 180;
-    return `${(cx + r * Math.cos(angle)).toFixed(1)},${(cy + r * Math.sin(angle)).toFixed(1)}`;
-  }).join(' ');
-}
+export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent }) {
+  const [tooltip, setTooltip] = useState(null); // { abbr, x, y }
+  const containerRef = useRef(null);
 
-function getCenter(col, row) {
-  return {
-    x: col * COL_STEP + START_X,
-    y: row * ROW_STEP + (col % 2 === 1 ? ODD_OFFSET : 0) + START_Y,
+  const handleMouseMove = (e, abbr) => {
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setTooltip({
+      abbr,
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
   };
-}
-
-export default function HexUSMap({ colorsByAbbr, onClick, renderTooltipContent, secondaryLabel, stripeAbbrs }) {
-  const [hovered, setHovered] = useState(null);
-
-  const states = [
-    ...Object.entries(HEX_GRID).map(([abbr, [col, row]]) => ({ abbr, ...getCenter(col, row) })),
-    ...Object.entries(SEPARATE).map(([abbr, pos]) => ({ abbr, ...pos })),
-  ];
 
   return (
-    <div className="relative w-full">
-      <svg viewBox={`0 0 ${SVG_W} ${SVG_H}`} className="w-full">
-          <defs>
-            <pattern id="hex-stripe" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-              <line x1="0" y1="0" x2="0" y2="8" stroke="rgba(255,255,255,0.45)" strokeWidth="2.5"/>
-            </pattern>
-          </defs>
-        {states.map(({ abbr, x, y }) => {
-          const color = colorsByAbbr[abbr] || '#4B5563';
-          const isHov = hovered?.abbr === abbr;
-          const textY = secondaryLabel ? y - 5 : y + 1;
-          return (
-            <g key={abbr}
-              onMouseEnter={() => setHovered({ abbr, x, y })}
-              onMouseLeave={() => setHovered(null)}
-              onClick={() => onClick?.(abbr)}
-              style={{ cursor: onClick ? 'pointer' : 'default' }}
-            >
-              <polygon
-                points={hexPoints(x, y, R - 1)}
-                fill={color}
-                stroke="rgba(255,255,255,0.65)"
-                strokeWidth={isHov ? 2.5 : 1}
-                style={{ transition: 'all 0.1s', filter: isHov ? 'brightness(1.2)' : 'none' }}
-              />
-              <text x={x} y={textY}
-                textAnchor="middle" dominantBaseline="middle"
-                fontSize={8} fontWeight="bold" fill="white"
-                style={{ pointerEvents: 'none', userSelect: 'none' }}>
-                {abbr}
-              </text>
-              {secondaryLabel && (
-                <text x={x} y={y + 9}
-                  textAnchor="middle" dominantBaseline="middle"
-                  fontSize={7} fill="rgba(255,255,255,0.85)"
-                  style={{ pointerEvents: 'none', userSelect: 'none' }}>
-                  {secondaryLabel(abbr)}
-                </text>
-              )}
-              {stripeAbbrs?.has(abbr) && (
-                <polygon
-                  points={hexPoints(x, y, R - 1)}
-                  fill="url(#hex-stripe)"
-                  stroke="none"
-                  style={{ pointerEvents: 'none' }}
+    <div ref={containerRef} className="relative w-full select-none">
+      <ComposableMap
+        projection="geoAlbersUsa"
+        style={{ width: '100%', height: 'auto' }}
+      >
+        <Geographies geography={GEO_URL}>
+          {({ geographies }) =>
+            geographies.map(geo => {
+              const abbr = FIPS_TO_ABBR[geo.id];
+              const fill = (abbr && colorsByAbbr[abbr]) || '#4B5563';
+              return (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  fill={fill}
+                  stroke="#ffffff"
+                  strokeWidth={0.6}
+                  style={{
+                    default: { outline: 'none' },
+                    hover:   { outline: 'none', filter: 'brightness(1.25)', cursor: 'pointer' },
+                    pressed: { outline: 'none' },
+                  }}
+                  onMouseMove={(e) => abbr && handleMouseMove(e, abbr)}
+                  onMouseLeave={() => setTooltip(null)}
                 />
-              )}
-            </g>
-          );
-        })}
+              );
+            })
+          }
+        </Geographies>
+      </ComposableMap>
 
-      </svg>
-
-      {hovered && renderTooltipContent && (
-        <div
-          className="absolute z-50 pointer-events-none border border-white/40 rounded-xl shadow-xl"
-          style={{
-            left: `${Math.min(Math.max((hovered.x / SVG_W) * 100, 12), 86)}%`,
-            top: `${Math.max(((hovered.y - R - 8) / SVG_H) * 100, 0)}%`,
-            transform: 'translate(-50%, -100%)',
-            backgroundColor: 'rgba(0,0,0,0.92)',
-            minWidth: 150,
-            padding: '8px 12px',
-          }}
-        >
-          {renderTooltipContent(hovered.abbr)}
-        </div>
-      )}
+      {/* Tooltip — same dark card style as the original */}
+      {tooltip && renderTooltipContent && (() => {
+        const content = renderTooltipContent(tooltip.abbr);
+        if (!content) return null;
+        return (
+          <div
+            className="absolute z-50 pointer-events-none bg-black/90 border border-white/20 rounded-xl p-3 shadow-xl min-w-[160px]"
+            style={{
+              left: tooltip.x + 12,
+              top:  tooltip.y - 10,
+              transform: tooltip.x > 600 ? 'translateX(-110%)' : undefined,
+            }}
+          >
+            {content}
+          </div>
+        );
+      })()}
     </div>
   );
 }
