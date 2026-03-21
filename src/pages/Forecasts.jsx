@@ -108,7 +108,7 @@ export default function Forecasts() {
                   Senate Forecast
                 </h2>
                 <SeatCounter ratings={senateRatings} />
-                <InteractiveMap ratings={senateRatings} />
+                <InteractiveMap ratings={senateRatings} baseDemSeats={34} baseRepSeats={31} />
                 <SenateControl democratChance={42} republicanChance={58} />
                 <SenateControl democratChance={71} republicanChance={29} title="House Control Probability" />
               </motion.div>
