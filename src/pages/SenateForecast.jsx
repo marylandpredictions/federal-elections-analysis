@@ -10,7 +10,7 @@ const senateRatings = {
   'Alabama': 'Safe R', 'Alaska': 'Toss Up', 'Arizona': 'Not Contested', 'Arkansas': 'Safe R',
   'California': 'Not Contested', 'Colorado': 'Safe D', 'Connecticut': 'Not Contested', 'Delaware': 'Safe D',
   'Florida': 'Likely R', 'Georgia': 'Lean D', 'Hawaii': 'Not Contested', 'Idaho': 'Safe R',
-  'Illinois': 'Safe D', 'Indiana': 'Likely R', 'Iowa': 'Lean R', 'Kansas': 'Likely R',
+  'Illinois': 'Safe D', 'Indiana': 'Not Contested', 'Iowa': 'Lean R', 'Kansas': 'Likely R',
   'Kentucky': 'Safe R', 'Louisiana': 'Safe R', 'Maine': 'Tilt D', 'Maryland': 'Not Contested',
   'Massachusetts': 'Safe D', 'Michigan': 'Lean D', 'Minnesota': 'Safe D', 'Mississippi': 'Likely R',
   'Missouri': 'Not Contested', 'Montana': 'Safe R', 'Nebraska': 'Safe R', 'Nevada': 'Not Contested',
