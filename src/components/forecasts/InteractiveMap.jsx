@@ -47,6 +47,15 @@ export default function InteractiveMap({ ratings, percentages, majorityNote, inc
     return map;
   }, [ratings]);
 
+  const ratingsByAbbr = useMemo(() => {
+    const m = {};
+    Object.entries(ratings).forEach(([fullName, rating]) => {
+      const abbr = NAME_TO_ABBR[fullName];
+      if (abbr) m[abbr] = rating;
+    });
+    return m;
+  }, [ratings]);
+
   const renderTooltipContent = (abbr) => {
     const fullName = ABBR_TO_NAME[abbr];
     if (!fullName) return null;
@@ -131,14 +140,7 @@ export default function InteractiveMap({ ratings, percentages, majorityNote, inc
         colorsByAbbr={colorsByAbbr}
         renderTooltipContent={renderTooltipContent}
         highlightRating={highlightRating}
-        ratingsByAbbr={useMemo(() => {
-          const m = {};
-          Object.entries(ratings).forEach(([fullName, rating]) => {
-            const abbr = NAME_TO_ABBR[fullName];
-            if (abbr) m[abbr] = rating;
-          });
-          return m;
-        }, [ratings])}
+        ratingsByAbbr={ratingsByAbbr}
       />
 
       {/* Legend */}

@@ -70,6 +70,15 @@ export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34,
     return map;
   }, [baseResults, swing]);
 
+  const ratingsByAbbr = useMemo(() => {
+    const m = {};
+    Object.entries(baseResults).forEach(([fullName, baseMargin]) => {
+      const abbr = NAME_TO_ABBR[fullName];
+      if (abbr) m[abbr] = getRating(baseMargin !== null ? baseMargin + swing : null);
+    });
+    return m;
+  }, [baseResults, swing]);
+
   const renderTooltipContent = (abbr) => {
     const fullName = ABBR_TO_NAME[abbr];
     if (!fullName || !(fullName in baseResults)) return null;
@@ -164,14 +173,7 @@ export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34,
         renderTooltipContent={renderTooltipContent}
         stripeAbbrs={stripeAbbrs}
         highlightRating={highlightRating}
-        ratingsByAbbr={useMemo(() => {
-          const m = {};
-          Object.entries(baseResults).forEach(([fullName, baseMargin]) => {
-            const abbr = NAME_TO_ABBR[fullName];
-            if (abbr) m[abbr] = getRating(baseMargin !== null ? baseMargin + swing : null);
-          });
-          return m;
-        }, [baseResults, swing])}
+        ratingsByAbbr={ratingsByAbbr}
       />
 
       {/* Legend */}
