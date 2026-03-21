@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
-import { ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, Brush, Scatter } from 'recharts';
-import { parsePollDate } from './pollConfig';
+import { ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, Brush } from 'recharts';
 import { format } from 'date-fns';
 import { computeChartData, pollConfigs } from './pollConfig';
 
@@ -38,23 +37,7 @@ export default function PollingChart({ polls, type }) {
   const config = pollConfigs[type];
   const chartData = useMemo(() => computeChartData(polls, type), [polls, type]);
 
-  // Build raw poll scatter data per candidate
-  const scatterData = useMemo(() => {
-    if (!config || !polls) return {};
-    const result = {};
-    config.candidates.forEach(c => { result[c.key] = []; });
-    polls.forEach(poll => {
-      const ts = parsePollDate(poll.date).getTime();
-      if (!ts || ts <= 0) return;
-      config.candidates.forEach(c => {
-        const val = poll[c.key];
-        if (val != null && val > 0) {
-          result[c.key].push({ timestamp: ts, value: val });
-        }
-      });
-    });
-    return result;
-  }, [polls, config]);
+
   const candidates = config ? config.candidates : [];
   const title = config ? `${config.title} Polling Average` : 'Polling Average';
 
@@ -151,23 +134,6 @@ export default function PollingChart({ polls, type }) {
                   strokeWidth={3}
                   name={c.name}
                   dot={false}
-                />
-                <Scatter
-                  key={`scatter-${c.key}`}
-                  name={`${c.name} polls`}
-                  data={scatterData[c.key] || []}
-                  dataKey="value"
-                  fill={color}
-                  opacity={0.45}
-                  legendType="none"
-                  xAxisId={0}
-                  yAxisId={0}
-                  line={false}
-                  shape={(props) => {
-                    const { cx, cy } = props;
-                    if (cx == null || cy == null) return null;
-                    return <circle cx={cx} cy={cy} r={4} fill={color} opacity={0.45} />;
-                  }}
                 />
               </React.Fragment>
             );
