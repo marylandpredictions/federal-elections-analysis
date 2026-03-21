@@ -5,23 +5,11 @@ const getRating = (margin) => {
   if (margin === null) return 'Not Contested';
   const abs = Math.abs(margin);
   if (margin === 0) return 'Toss Up';
-  if (abs > 15.0) return margin > 0 ? 'Safe R' : 'Safe D';
-  if (abs >= 5.0) return margin > 0 ? 'Likely R' : 'Likely D';
-  if (abs >= 1.0) return margin > 0 ? 'Lean R' : 'Lean D';
-  return margin > 0 ? 'Tilt R' : 'Tilt D';
-};
-
-const ratingColors = {
-  'Safe D': '#1046ba',
-  'Likely D': '#2663eb',
-  'Lean D': '#5689f7',
-  'Tilt D': '#82a6f2',
-  'Toss Up': '#9334EB',
-  'Tilt R': '#FF7F7F',
-  'Lean R': '#FF6B6B',
-  'Likely R': '#CC0000',
-  'Safe R': '#8B0000',
-  'Not Contested': '#D3D3D3',
+  if (abs > 15) return margin > 0 ? 'Safe R' : 'Safe D';
+  if (abs >= 10) return margin > 0 ? 'Likely R' : 'Likely D';
+  if (abs >= 5) return margin > 0 ? 'Lean R' : 'Lean D';
+  if (abs >= 1) return margin > 0 ? 'Tilt R' : 'Tilt D';
+  return 'Toss Up';
 };
 
 export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34, baseRepSeats = 31, incumbents = {}, showIncumbents = false }) {
