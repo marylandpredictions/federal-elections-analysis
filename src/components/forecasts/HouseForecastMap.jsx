@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { houseIncumbents } from '../swingometer/houseIncumbents';
+import React, { useState, useCallback, useMemo } from 'react';
+import { houseIncumbents, normalizeDistrict } from '../swingometer/houseIncumbents';
 
 const ratingColors = {
   'Safe D':    '#1E3A8A',
@@ -81,6 +81,7 @@ export default function HouseForecastMap() {
   const [tooltip, setTooltip] = useState(null);
   const [hoveredBubble, setHoveredBubble] = useState(null);
   const [highlightRating, setHighlightRating] = useState(null);
+  const [highlightFlips, setHighlightFlips] = useState(false);
 
   // Group by rating in order, stable within each group
   const groups = {};
@@ -90,6 +91,23 @@ export default function HouseForecastMap() {
     if (groups[r]) groups[r].push(key);
   });
   const allSeats = ratingOrder.flatMap(r => groups[r].map(key => ({ key, rating: r })));
+
+  // Calculate flips
+  const flipped = useMemo(() => {
+    const s = new Set();
+    allSeats.forEach(seat => {
+      const incumbent = houseIncumbents[seat.key];
+      if (!incumbent) return;
+      const incumbentParty = incumbent.split('(')[1]?.charAt(0);
+      if (seat.rating === 'Toss Up' ||
+        (incumbentParty === 'R' && seat.rating.includes('D')) ||
+        (incumbentParty === 'D' && seat.rating.includes('R'))) {
+        s.add(seat.key);
+      }
+    });
+    return s;
+  }, [allSeats]);
+
   const total = allSeats.length;
 
   // Count totals
@@ -101,7 +119,6 @@ export default function HouseForecastMap() {
   const tossUp = totals['Toss Up']||0;
 
   // Parliament semicircle layout
-  // Generate all dot positions, sort by x (left→right), assign seats in order
   const CX = 500, CY = 560;
   const dotR = 6.5;
   const spacing = dotR * 2.9;
@@ -199,7 +216,7 @@ export default function HouseForecastMap() {
                 fill={ratingColors[seat.rating]}
                 stroke="white"
                 strokeWidth={isHovered ? 1.8 : 0.6}
-                opacity={isHighlighted ? 0.95 : 0.15}
+                opacity={isHighlighted || (highlightFlips && flipped.has(seat.key)) ? 0.95 : 0.15}
                 onMouseEnter={() => {
                   setHovered(seat.key);
                   setTooltip({ label: seat.key, rating: seat.rating, svgX: x, svgY: y });
@@ -249,6 +266,22 @@ export default function HouseForecastMap() {
             <span className="text-white/70 text-xs">{r}</span>
           </button>
         ))}
+        <button
+          onMouseEnter={() => setHighlightFlips(true)}
+          onMouseLeave={() => setHighlightFlips(false)}
+          className="flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all"
+          style={{ background: highlightFlips ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)' }}
+        >
+          <svg className="w-3 h-3" viewBox="0 0 12 12" style={{ overflow: 'visible' }}>
+            <defs>
+              <pattern id="flipLegendHouseForecast" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+                <line x1="0" y1="0" x2="0" y2="3" stroke="white" strokeWidth="0.8" />
+              </pattern>
+            </defs>
+            <rect width="12" height="12" fill="url(#flipLegendHouseForecast)" stroke="white" strokeWidth="0.5" />
+          </svg>
+          <span className="text-white/70 text-xs">Flips</span>
+        </button>
       </div>
     </div>
   );
