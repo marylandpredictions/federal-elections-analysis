@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
-<<<<<<< Updated upstream
-import { houseIncumbents } from '../swingometer/houseIncumbents';
-import { housePercentages } from '../swingometer/housePercentages';
-=======
 import { districtPaths } from './districtPaths';
 import { houseIncumbents } from '../swingometer/houseIncumbents';
->>>>>>> Stashed changes
 
 const ratingColors = {
   'Safe D':    '#1E3A8A',
@@ -82,19 +77,12 @@ export default function HouseForecastMap() {
   const [tooltip, setTooltip] = useState(null);
   const [hoveredBubble, setHoveredBubble] = useState(null);
   const [highlightRating, setHighlightRating] = useState(null);
-<<<<<<< Updated upstream
-=======
   const [mapTooltip, setMapTooltip] = useState(null);
->>>>>>> Stashed changes
 
   const groups = {};
   ratingOrder.forEach(r => groups[r] = []);
   rawSeats.forEach(([key, rating]) => { if (groups[rating.trim()]) groups[rating.trim()].push(key); });
   const allSeats = ratingOrder.flatMap(r => groups[r].map(key => ({ key, rating: r })));
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
   const total = allSeats.length;
   const totals = {};
   ratingOrder.forEach(r => totals[r] = 0);
@@ -171,88 +159,12 @@ export default function HouseForecastMap() {
         Democrats need <span className="text-blue-300 font-semibold">218</span> seats for majority &nbsp;•&nbsp; Republicans need <span className="text-red-300 font-semibold">218</span> seats for majority
       </p>
 
-<<<<<<< Updated upstream
-      {/* Semicircle map */}
-      <div className="relative w-full">
-        <svg viewBox={`0 0 1000 ${CY + 20}`} className="w-full" style={{ minWidth: '320px' }}>
-          {dots.map(({ x, y, seat }) => {
-            const isHighlighted = !highlightRating || seat.rating === highlightRating;
-            const isHovered = hovered === seat.key;
-            return (
-              <circle
-                key={seat.key}
-                cx={x}
-                cy={y}
-                r={isHovered ? dotR * 1.9 : dotR}
-                fill={ratingColors[seat.rating]}
-                stroke="white"
-                strokeWidth={isHovered ? 1.8 : 0.6}
-                opacity={isHighlighted ? 0.95 : 0.15}
-                onMouseEnter={() => {
-                  setHovered(seat.key);
-                  const dPct = housePercentages[seat.key];
-                  const rPct = dPct != null ? parseFloat((100 - dPct).toFixed(1)) : null;
-                  setTooltip({ label: seat.key, rating: seat.rating, svgX: x, svgY: y, dPct, rPct });
-                }}
-                onMouseLeave={() => { setHovered(null); setTooltip(null); }}
-                style={{ cursor: 'pointer', transition: 'r 0.1s' }}
-              />
-            );
-          })}
-          <line x1={CX} y1={svgH} x2={CX} y2={CY + 8} stroke="rgba(255,255,255,0.15)" strokeWidth="1" strokeDasharray="4,4" />
-          <text x={CX - 80} y={CY + 18} fill="rgba(255,255,255,0.4)" fontSize="11" fontFamily="Inter,sans-serif">← Democrat</text>
-          <text x={CX + 12} y={CY + 18} fill="rgba(255,255,255,0.4)" fontSize="11" fontFamily="Inter,sans-serif">Republican →</text>
-        </svg>
-        {/* Tooltip - constrained within this container */}
-        {tooltip && (
-          <div
-            className="absolute z-50 pointer-events-none border border-white/40 rounded-xl shadow-xl"
-            style={{
-              left: `${Math.min(Math.max((tooltip.svgX / 1000) * 100, 12), 88)}%`,
-              top: `${Math.max((tooltip.svgY / (CY + 20)) * 100 - 2, 0)}%`,
-              transform: 'translate(-50%, -110%)',
-              backgroundColor: 'rgba(0,0,0,0.92)',
-              minWidth: 140,
-              padding: '8px 12px'
-            }}
-          >
-            <div className="text-white font-bold text-sm mb-1">{tooltip.label}</div>
-            {houseIncumbents[tooltip.label] && (
-              <div className="text-white/70 text-xs mb-1">{houseIncumbents[tooltip.label]}</div>
-            )}
-            <div className="font-semibold text-xs mb-2" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
-            {tooltip.dPct != null && (() => {
-              const bars = tooltip.dPct >= tooltip.rPct
-                ? [{ label: 'D', pct: tooltip.dPct, color: '#2563EB' }, { label: 'R', pct: tooltip.rPct, color: '#DC2626' }]
-                : [{ label: 'R', pct: tooltip.rPct, color: '#DC2626' }, { label: 'D', pct: tooltip.dPct, color: '#2563EB' }];
-              const leader = bars[0];
-              return (
-                <>
-                  {bars.map(bar => (
-                    <div key={bar.label} className="flex items-center gap-2 mb-1">
-                      <span style={{ color: bar.color, fontSize: 10, fontWeight: 700, minWidth: 10 }}>{bar.label}</span>
-                      <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 6 }}>
-                        <div style={{ background: bar.color, height: '100%', width: `${bar.pct}%`, borderRadius: 3 }} />
-                      </div>
-                      <span style={{ color: bar.color, fontSize: 10, fontWeight: 700, minWidth: 32, textAlign: 'right' }}>{bar.pct}%</span>
-                    </div>
-                  ))}
-                  <div style={{ color: leader.color, fontSize: 10, fontWeight: 700, marginTop: 4 }}>
-                    {leader.label} +{Math.abs(tooltip.dPct - tooltip.rPct).toFixed(1)}%
-                  </div>
-                </>
-              );
-            })()}
-          </div>
-        )}
-=======
       {/* Toggle */}
       <div className="flex justify-center mb-6">
         <div className="bg-black/30 rounded-xl p-1 flex gap-1 border border-white/10">
           <button onClick={() => setViewMode('chart')} className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all ${viewMode === 'chart' ? 'bg-white/20 text-white' : 'text-white/50 hover:text-white/80'}`}>Chart View</button>
           <button onClick={() => setViewMode('map')} className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all ${viewMode === 'map' ? 'bg-white/20 text-white' : 'text-white/50 hover:text-white/80'}`}>Map View</button>
         </div>
->>>>>>> Stashed changes
       </div>
 
       {/* Chart View */}
