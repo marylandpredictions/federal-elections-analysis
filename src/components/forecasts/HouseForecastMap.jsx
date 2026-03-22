@@ -183,8 +183,11 @@ export default function HouseForecastMap() {
       </div>
 
       <p className="text-white/60 text-xs text-center mb-4">
-        Democrats need <span className="text-blue-300 font-semibold">218</span> seats for majority &nbsp;•&nbsp; Republicans need <span className="text-red-300 font-semibold">218</span> seats for majority
-      </p>
+  Democrats need <span className="text-blue-300 font-semibold">218</span> seats for majority &nbsp;•&nbsp; Republicans need <span className="text-red-300 font-semibold">218</span> seats for majority
+</p>
+<p className="text-white/40 text-xs text-center mb-4 italic">
+  Map view uses 119th Congress district boundaries. Post-redistricting maps are not yet available.
+</p>
 
       {/* Toggle */}
       <div className="flex justify-center mb-6">
