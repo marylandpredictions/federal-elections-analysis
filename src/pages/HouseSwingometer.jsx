@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { houseIncumbents, normalizeDistrict } from '../components/swingometer/houseIncumbents';
+import { housePercentages } from '../components/swingometer/housePercentages';
 import { motion } from 'framer-motion';
 import SwingBar from '../components/swingometer/SwingBar';
 import { housePVIData } from '../components/swingometer/houseData';
@@ -183,11 +184,15 @@ export default function HouseSwingometer() {
               <text x={CX+12} y={CY+18} fill="rgba(255,255,255,0.4)" fontSize="11" fontFamily="Inter,sans-serif">Republican →</text>
             </svg>
             {tooltip && (() => {
+              const normKey = normalizeDistrict(tooltip.key);
+              const baseDPct = housePercentages[normKey];
               const d = housePVIData.find(([k])=>k===tooltip.key);
               const adj = d ? d[1]+swing : 0;
-              const dPct = (50 - adj/2);
-              const rPct = (50 + adj/2);
-              const marginText = adj > 0 ? `R+${adj.toFixed(1)}` : adj < 0 ? `D+${Math.abs(adj).toFixed(1)}` : 'EVEN';
+              const dPct = baseDPct != null ? Math.max(0, Math.min(100, baseDPct - adj / 2)) : (50 - adj/2);
+              const rPct = parseFloat((100 - dPct).toFixed(1));
+              const dPctR = parseFloat(dPct.toFixed(1));
+              const leader = dPctR >= rPct ? 'D' : 'R';
+              const marginText = `${leader} +${Math.abs(dPctR - rPct).toFixed(1)}%`;
               return (
                 <div className="absolute z-50 pointer-events-none border border-white/40 rounded-xl shadow-xl"
                   style={{
