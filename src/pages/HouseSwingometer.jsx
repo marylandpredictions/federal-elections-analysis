@@ -224,6 +224,7 @@ export default function HouseSwingometer() {
                   <div style={{color: ratingColors[tooltip.rating], fontSize: '11px', fontWeight: 700}}>
                     {marginText}
                   </div>
+                </div>
               );
             })()}
           </div>
