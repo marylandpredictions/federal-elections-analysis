@@ -72,12 +72,39 @@ const rawSeats = [
 const ratingsMap = Object.fromEntries(rawSeats);
 
 export default function HouseForecastMap() {
-  const [viewMode, setViewMode] = useState('chart');
+  const [viewMode, setViewMode] = useState('map');
   const [hovered, setHovered] = useState(null);
   const [tooltip, setTooltip] = useState(null);
   const [hoveredBubble, setHoveredBubble] = useState(null);
   const [highlightRating, setHighlightRating] = useState(null);
   const [mapTooltip, setMapTooltip] = useState(null);
+  const [zoom, setZoom] = useState(1);
+  const [translate, setTranslate] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState(null);
+  const [dragTranslateStart, setDragTranslateStart] = useState(null);
+
+  const handleZoomIn = () => setZoom(z => Math.min(z + 0.5, 5));
+  const handleZoomOut = () => {
+    const next = Math.max(zoom - 0.5, 1);
+    setZoom(next);
+    if (next === 1) setTranslate({ x: 0, y: 0 });
+  };
+  const handleMouseDown = (e) => {
+    if (zoom <= 1) return;
+    setIsDragging(true);
+    setDragStart({ x: e.clientX, y: e.clientY });
+    setDragTranslateStart({ ...translate });
+    e.preventDefault();
+  };
+  const handleMouseMove = (e) => {
+    if (!isDragging || !dragStart) return;
+    setTranslate({
+      x: dragTranslateStart.x + (e.clientX - dragStart.x),
+      y: dragTranslateStart.y + (e.clientY - dragStart.y),
+    });
+  };
+  const handleMouseUp = () => { setIsDragging(false); setDragStart(null); };
 
   const groups = {};
   ratingOrder.forEach(r => groups[r] = []);
@@ -203,27 +230,53 @@ export default function HouseForecastMap() {
 
       {/* Map View */}
       {viewMode === 'map' && (
-        <div className="relative w-full">
-          <svg viewBox="0 0 960 620" style={{ width: '100%', height: 'auto' }}>
-            {Object.entries(districtPaths).map(([key, d]) => {
-              const rating = ratingsMap[key];
-              const fill = rating ? ratingColors[rating] : '#4B5563';
-              const dimmed = highlightRating && rating !== highlightRating;
-              return (
-                <path
-                  key={key}
-                  d={d}
-                  fill={fill}
-                  stroke="#ffffff"
-                  strokeWidth={0.4}
-                  opacity={dimmed ? 0.15 : 0.92}
-                  style={{ cursor: 'pointer' }}
-                  onMouseEnter={() => setMapTooltip({ key, rating })}
-                  onMouseLeave={() => setMapTooltip(null)}
-                />
-              );
-            })}
-          </svg>
+        <div className="relative w-full" style={{ overflow: 'hidden' }}>
+          {/* Zoom buttons */}
+          <div className="absolute top-2 right-2 z-20 flex flex-col gap-1">
+            <button
+              onClick={handleZoomIn}
+              className="w-7 h-7 rounded bg-black text-white font-bold text-base flex items-center justify-center hover:bg-gray-800 border border-white/30 transition-colors"
+              title="Zoom in"
+            >+</button>
+            <button
+              onClick={handleZoomOut}
+              className="w-7 h-7 rounded bg-black text-white font-bold text-base flex items-center justify-center hover:bg-gray-800 border border-white/30 transition-colors"
+              title="Zoom out"
+            >−</button>
+          </div>
+          <div
+            style={{
+              transform: `translate(${translate.x}px, ${translate.y}px) scale(${zoom})`,
+              transformOrigin: 'center center',
+              cursor: isDragging ? 'grabbing' : zoom > 1 ? 'grab' : 'default',
+              transition: isDragging ? 'none' : 'transform 0.15s ease',
+            }}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+          >
+            <svg viewBox="0 0 960 620" style={{ width: '100%', height: 'auto' }}>
+              {Object.entries(districtPaths).map(([key, d]) => {
+                const rating = ratingsMap[key];
+                const fill = rating ? ratingColors[rating] : '#4B5563';
+                const dimmed = highlightRating && rating !== highlightRating;
+                return (
+                  <path
+                    key={key}
+                    d={d}
+                    fill={fill}
+                    stroke="#ffffff"
+                    strokeWidth={0.4}
+                    opacity={dimmed ? 0.15 : 0.92}
+                    style={{ cursor: zoom > 1 ? 'grab' : 'pointer' }}
+                    onMouseEnter={() => !isDragging && setMapTooltip({ key, rating })}
+                    onMouseLeave={() => setMapTooltip(null)}
+                  />
+                );
+              })}
+            </svg>
+          </div>
           {mapTooltip && (
             <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none bg-black/90 border border-white/20 rounded-xl px-3 py-2 shadow-xl min-w-[160px] text-center">
               <div className="text-white font-bold text-sm mb-0.5">{mapTooltip.key}</div>
