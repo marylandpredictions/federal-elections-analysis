@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+<<<<<<< Updated upstream
 import { houseIncumbents } from '../swingometer/houseIncumbents';
 import { housePercentages } from '../swingometer/housePercentages';
+=======
+import { districtPaths } from './districtPaths';
+import { houseIncumbents } from '../swingometer/houseIncumbents';
+>>>>>>> Stashed changes
 
 const ratingColors = {
   'Safe D':    '#1E3A8A',
@@ -69,32 +74,28 @@ const rawSeats = [
   ['WY-AL','Safe R'],
 ];
 
-const ratingApprox = {
-  'Safe D':   { d: 65, r: 35 }, 'Likely D': { d: 58, r: 42 },
-  'Lean D':   { d: 54, r: 46 }, 'Tilt D':   { d: 52, r: 48 },
-  'Toss Up':  { d: 50, r: 50 }, 'Tilt R':   { d: 48, r: 52 },
-  'Lean R':   { d: 46, r: 54 }, 'Likely R': { d: 42, r: 58 },
-  'Safe R':   { d: 35, r: 65 },
-};
+const ratingsMap = Object.fromEntries(rawSeats);
 
 export default function HouseForecastMap() {
+  const [viewMode, setViewMode] = useState('chart');
   const [hovered, setHovered] = useState(null);
   const [tooltip, setTooltip] = useState(null);
   const [hoveredBubble, setHoveredBubble] = useState(null);
   const [highlightRating, setHighlightRating] = useState(null);
+<<<<<<< Updated upstream
+=======
+  const [mapTooltip, setMapTooltip] = useState(null);
+>>>>>>> Stashed changes
 
-  // Group by rating in order, stable within each group
   const groups = {};
   ratingOrder.forEach(r => groups[r] = []);
-  rawSeats.forEach(([key, rating]) => {
-    const r = rating.trim();
-    if (groups[r]) groups[r].push(key);
-  });
+  rawSeats.forEach(([key, rating]) => { if (groups[rating.trim()]) groups[rating.trim()].push(key); });
   const allSeats = ratingOrder.flatMap(r => groups[r].map(key => ({ key, rating: r })));
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   const total = allSeats.length;
-
-  // Count totals
   const totals = {};
   ratingOrder.forEach(r => totals[r] = 0);
   allSeats.forEach(s => totals[s.rating]++);
@@ -102,17 +103,9 @@ export default function HouseForecastMap() {
   const repSeats = (totals['Safe R']||0)+(totals['Likely R']||0)+(totals['Lean R']||0)+(totals['Tilt R']||0);
   const tossUp = totals['Toss Up']||0;
 
-  // Parliament semicircle layout
-  const CX = 500, CY = 560;
-  const dotR = 6.5;
-  const spacing = dotR * 2.9;
-  const startRadius = 110;
-  const radiusStep = spacing + 1.5;
-
-  // Build rows
+  const CX = 500, CY = 560, dotR = 6.5, spacing = dotR * 2.9, startRadius = 110, radiusStep = spacing + 1.5;
   const rows = [];
-  let remaining = total;
-  let rad = startRadius;
+  let remaining = total, rad = startRadius;
   while (remaining > 0) {
     const capacity = Math.max(1, Math.floor(Math.PI * rad / spacing));
     const count = Math.min(capacity, remaining);
@@ -120,28 +113,21 @@ export default function HouseForecastMap() {
     remaining -= count;
     rad += radiusStep;
   }
-
-  // Generate all positions, sort left→right by x
   const allPositions = [];
   rows.forEach(({ radius, count }) => {
     for (let i = 0; i < count; i++) {
       const angle = Math.PI - (i / Math.max(count - 1, 1)) * Math.PI;
-      const x = CX + radius * Math.cos(angle);
-      const y = CY - radius * Math.sin(angle);
-      allPositions.push({ x, y });
+      allPositions.push({ x: CX + radius * Math.cos(angle), y: CY - radius * Math.sin(angle) });
     }
   });
   allPositions.sort((a, b) => a.x - b.x);
-
-  // Assign seats to sorted positions
   const dots = allPositions.map((pos, i) => ({ ...pos, seat: allSeats[i] })).filter(d => d.seat);
-
   const maxRadius = rows[rows.length - 1]?.radius || 200;
   const svgH = CY - maxRadius + 20;
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
-      {/* Seat count bubbles */}
+      {/* Seat bubbles */}
       <div className="flex justify-center gap-4 mb-6 flex-wrap">
         <div className="relative" onMouseEnter={() => setHoveredBubble('dem')} onMouseLeave={() => setHoveredBubble(null)}>
           <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center w-[120px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
@@ -185,6 +171,7 @@ export default function HouseForecastMap() {
         Democrats need <span className="text-blue-300 font-semibold">218</span> seats for majority &nbsp;•&nbsp; Republicans need <span className="text-red-300 font-semibold">218</span> seats for majority
       </p>
 
+<<<<<<< Updated upstream
       {/* Semicircle map */}
       <div className="relative w-full">
         <svg viewBox={`0 0 1000 ${CY + 20}`} className="w-full" style={{ minWidth: '320px' }}>
@@ -258,18 +245,89 @@ export default function HouseForecastMap() {
             })()}
           </div>
         )}
+=======
+      {/* Toggle */}
+      <div className="flex justify-center mb-6">
+        <div className="bg-black/30 rounded-xl p-1 flex gap-1 border border-white/10">
+          <button onClick={() => setViewMode('chart')} className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all ${viewMode === 'chart' ? 'bg-white/20 text-white' : 'text-white/50 hover:text-white/80'}`}>Chart View</button>
+          <button onClick={() => setViewMode('map')} className={`px-4 py-2 rounded-lg font-inter font-semibold text-sm transition-all ${viewMode === 'map' ? 'bg-white/20 text-white' : 'text-white/50 hover:text-white/80'}`}>Map View</button>
+        </div>
+>>>>>>> Stashed changes
       </div>
+
+      {/* Chart View */}
+      {viewMode === 'chart' && (
+        <div className="relative w-full">
+          <svg viewBox={`0 0 1000 ${CY + 20}`} className="w-full" style={{ minWidth: '320px' }}>
+            {dots.map(({ x, y, seat }) => {
+              const isHighlighted = !highlightRating || seat.rating === highlightRating;
+              const isHovered = hovered === seat.key;
+              return (
+                <circle key={seat.key} cx={x} cy={y}
+                  r={isHovered ? dotR * 1.9 : dotR}
+                  fill={ratingColors[seat.rating]} stroke="white"
+                  strokeWidth={isHovered ? 1.8 : 0.6}
+                  opacity={isHighlighted ? 0.95 : 0.15}
+                  onMouseEnter={() => { setHovered(seat.key); setTooltip({ label: seat.key, rating: seat.rating, svgX: x, svgY: y }); }}
+                  onMouseLeave={() => { setHovered(null); setTooltip(null); }}
+                  style={{ cursor: 'pointer', transition: 'r 0.1s' }}
+                />
+              );
+            })}
+            <line x1={CX} y1={svgH} x2={CX} y2={CY + 8} stroke="rgba(255,255,255,0.15)" strokeWidth="1" strokeDasharray="4,4" />
+            <text x={CX - 80} y={CY + 18} fill="rgba(255,255,255,0.4)" fontSize="11" fontFamily="Inter,sans-serif">← Democrat</text>
+            <text x={CX + 12} y={CY + 18} fill="rgba(255,255,255,0.4)" fontSize="11" fontFamily="Inter,sans-serif">Republican →</text>
+          </svg>
+          {tooltip && (
+            <div className="absolute z-50 pointer-events-none border border-white/40 rounded-xl shadow-xl"
+              style={{ left: `${Math.min(Math.max((tooltip.svgX/1000)*100,12),88)}%`, top: `${Math.max((tooltip.svgY/(CY+20))*100-2,0)}%`, transform: 'translate(-50%,-110%)', backgroundColor: 'rgba(0,0,0,0.92)', minWidth: 140, padding: '8px 12px' }}>
+              <div className="text-white font-bold text-sm mb-1">{tooltip.label}</div>
+              {houseIncumbents[tooltip.label] && <div className="text-white/70 text-xs mb-1">{houseIncumbents[tooltip.label]}</div>}
+              <div className="font-semibold text-xs" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Map View */}
+      {viewMode === 'map' && (
+        <div className="relative w-full">
+          <svg viewBox="0 0 960 620" style={{ width: '100%', height: 'auto' }}>
+            {Object.entries(districtPaths).map(([key, d]) => {
+              const rating = ratingsMap[key];
+              const fill = rating ? ratingColors[rating] : '#4B5563';
+              const dimmed = highlightRating && rating !== highlightRating;
+              return (
+                <path
+                  key={key}
+                  d={d}
+                  fill={fill}
+                  stroke="#ffffff"
+                  strokeWidth={0.4}
+                  opacity={dimmed ? 0.15 : 0.92}
+                  style={{ cursor: 'pointer' }}
+                  onMouseEnter={() => setMapTooltip({ key, rating })}
+                  onMouseLeave={() => setMapTooltip(null)}
+                />
+              );
+            })}
+          </svg>
+          {mapTooltip && (
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none bg-black/90 border border-white/20 rounded-xl px-3 py-2 shadow-xl min-w-[160px] text-center">
+              <div className="text-white font-bold text-sm mb-0.5">{mapTooltip.key}</div>
+              {houseIncumbents[mapTooltip.key] && <div className="text-white/60 text-xs mb-0.5">{houseIncumbents[mapTooltip.key]}</div>}
+              {mapTooltip.rating && <div className="font-semibold text-xs" style={{ color: ratingColors[mapTooltip.rating] }}>{mapTooltip.rating}</div>}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Legend */}
       <div className="flex flex-wrap justify-center gap-3 mt-4">
         {ratingOrder.map(r => (
-          <button
-            key={r}
-            onMouseEnter={() => setHighlightRating(r)}
-            onMouseLeave={() => setHighlightRating(null)}
+          <button key={r} onMouseEnter={() => setHighlightRating(r)} onMouseLeave={() => setHighlightRating(null)}
             className="flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all"
-            style={{ background: highlightRating === r ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)' }}
-          >
+            style={{ background: highlightRating === r ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)' }}>
             <span className="w-3 h-3 rounded-full border border-white/40" style={{ backgroundColor: ratingColors[r] }} />
             <span className="text-white/70 text-xs">{r}</span>
           </button>
