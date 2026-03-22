@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { houseIncumbents } from '../swingometer/houseIncumbents';
+import { housePercentages } from '../swingometer/housePercentages';
 
 const ratingColors = {
   'Safe D':    '#1E3A8A',
@@ -202,7 +203,9 @@ export default function HouseForecastMap() {
                 opacity={isHighlighted ? 0.95 : 0.15}
                 onMouseEnter={() => {
                   setHovered(seat.key);
-                  setTooltip({ label: seat.key, rating: seat.rating, svgX: x, svgY: y });
+                  const dPct = housePercentages[seat.key];
+                  const rPct = dPct != null ? parseFloat((100 - dPct).toFixed(1)) : null;
+                  setTooltip({ label: seat.key, rating: seat.rating, svgX: x, svgY: y, dPct, rPct });
                 }}
                 onMouseLeave={() => { setHovered(null); setTooltip(null); }}
                 style={{ cursor: 'pointer', transition: 'r 0.1s' }}
@@ -230,7 +233,29 @@ export default function HouseForecastMap() {
             {houseIncumbents[tooltip.label] && (
               <div className="text-white/70 text-xs mb-1">{houseIncumbents[tooltip.label]}</div>
             )}
-            <div className="font-semibold text-xs" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
+            <div className="font-semibold text-xs mb-2" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
+            {tooltip.dPct != null && (() => {
+              const bars = tooltip.dPct >= tooltip.rPct
+                ? [{ label: 'D', pct: tooltip.dPct, color: '#2563EB' }, { label: 'R', pct: tooltip.rPct, color: '#DC2626' }]
+                : [{ label: 'R', pct: tooltip.rPct, color: '#DC2626' }, { label: 'D', pct: tooltip.dPct, color: '#2563EB' }];
+              const leader = bars[0];
+              return (
+                <>
+                  {bars.map(bar => (
+                    <div key={bar.label} className="flex items-center gap-2 mb-1">
+                      <span style={{ color: bar.color, fontSize: 10, fontWeight: 700, minWidth: 10 }}>{bar.label}</span>
+                      <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 6 }}>
+                        <div style={{ background: bar.color, height: '100%', width: `${bar.pct}%`, borderRadius: 3 }} />
+                      </div>
+                      <span style={{ color: bar.color, fontSize: 10, fontWeight: 700, minWidth: 32, textAlign: 'right' }}>{bar.pct}%</span>
+                    </div>
+                  ))}
+                  <div style={{ color: leader.color, fontSize: 10, fontWeight: 700, marginTop: 4 }}>
+                    {leader.label} +{Math.abs(tooltip.dPct - tooltip.rPct).toFixed(1)}%
+                  </div>
+                </>
+              );
+            })()}
           </div>
         )}
       </div>
