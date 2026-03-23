@@ -92,16 +92,16 @@ function Modal({ title, content, onClose }) {
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/70" />
       <div
-        className="relative bg-[#1a1a1a] border border-white/20 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col"
+        className="relative bg-card text-card-foreground border border-border rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col"
         onClick={e => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between p-6 border-b border-white/10">
-          <h2 className="text-white font-inter font-bold text-xl">{title}</h2>
-          <button onClick={onClose} className="text-white/60 hover:text-white transition-colors">
+        <div className="flex items-center justify-between p-6 border-b border-border">
+          <h2 className="text-card-foreground font-inter font-bold text-xl">{title}</h2>
+          <button onClick={onClose} className="text-card-foreground/60 hover:text-card-foreground transition-colors">
             <X size={20} />
           </button>
         </div>
-        <div className="overflow-y-auto p-6 text-white/80 font-inter text-sm leading-relaxed whitespace-pre-wrap">
+        <div className="overflow-y-auto p-6 text-card-foreground/80 font-inter text-sm leading-relaxed whitespace-pre-wrap">
           {content}
         </div>
       </div>
@@ -110,11 +110,11 @@ function Modal({ title, content, onClose }) {
 }
 
 function FooterLink({ href, to, children, onClick }) {
-  const cls = "text-white/60 hover:text-white transition-colors cursor-pointer relative group w-fit";
+  const cls = "text-primary-foreground/60 hover:text-primary-foreground transition-colors cursor-pointer relative group w-fit";
   const inner = (
     <>
       {children}
-      <span className="absolute bottom-0 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full" />
+      <span className="absolute bottom-0 left-0 w-0 h-px bg-primary-foreground transition-all duration-300 group-hover:w-full" />
     </>
   );
 
@@ -130,7 +130,7 @@ export default function Footer() {
     <>
       <footer className="bg-primary py-12 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-white font-inter font-bold text-xl md:text-2xl text-shadow-teal text-center mb-10">
+          <h2 className="text-primary-foreground font-inter font-bold text-xl md:text-2xl text-shadow-teal text-center mb-10">
             Welcome to Federal Elections Analysis
           </h2>
 
@@ -138,14 +138,14 @@ export default function Footer() {
           <div className="flex flex-wrap justify-center gap-12 mb-10 text-sm">
             {/* Site */}
             <div className="flex flex-col gap-3 min-w-[120px]">
-              <span className="text-white font-inter font-bold text-base">Site</span>
+              <span className="text-primary-foreground font-inter font-bold text-base">Site</span>
               <FooterLink onClick={() => setModal('privacy')}>Privacy Policy</FooterLink>
               <FooterLink onClick={() => setModal('tos')}>Terms of Service</FooterLink>
             </div>
 
             {/* Explore */}
             <div className="flex flex-col gap-3 min-w-[120px]">
-              <span className="text-white font-inter font-bold text-base">Explore</span>
+              <span className="text-primary-foreground font-inter font-bold text-base">Explore</span>
               <FooterLink to="/Home">Home</FooterLink>
               <FooterLink to="/Polling">Polling</FooterLink>
               <FooterLink to="/Forecasts">Forecasts</FooterLink>
@@ -154,7 +154,7 @@ export default function Footer() {
 
             {/* More */}
             <div className="flex flex-col gap-3 min-w-[120px]">
-              <span className="text-white font-inter font-bold text-base">More</span>
+              <span className="text-primary-foreground font-inter font-bold text-base">More</span>
               <FooterLink href="https://www.youtube.com/@FedElections/featured">YouTube</FooterLink>
               <FooterLink href="https://discord.gg/jYYGrgEaMX">Discord</FooterLink>
               <FooterLink href="https://www.youtube.com/@FedElections/membership">Membership</FooterLink>
@@ -162,7 +162,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <p className="text-white/50 font-inter text-sm text-center">
+          <p className="text-primary-foreground/50 font-inter text-sm text-center">
             © {new Date().getFullYear()} Federal Elections Analysis. All rights reserved.
           </p>
         </div>
