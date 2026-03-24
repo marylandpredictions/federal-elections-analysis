@@ -200,6 +200,14 @@ export const pollConfigs = {
       { key: 'brown', name: 'Sherrod Brown', color: '#3B82F6' },
     ]
   },
+  'new-hampshire-gop-senate': {
+    title: 'New Hampshire Republican Senate Primary',
+    candidates: [
+      { key: 'sununu', name: 'Chris Sununu', color: '#F97316' },
+      { key: 'brown', name: 'Scott Brown', color: '#8B4513' },
+      { key: 'innis', name: 'Dan Innis', color: '#EAB308' },
+    ]
+  },
   'ohio-governor': {
     title: 'Ohio Governor General',
     candidates: [

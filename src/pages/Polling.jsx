@@ -28,6 +28,7 @@ const pollingOptions = [
   { value: 'south-carolina-gop-governor', label: 'South Carolina Republican Governor Primary', party: 'rep' },
   { value: '2026-senate-generic', label: 'Texas Republican Senate Runoff', party: 'rep' },
   { value: 'wisconsin-dem-governor', label: 'Wisconsin Democratic Governor Primary', party: 'dem' },
+  { value: 'new-hampshire-gop-senate', label: 'New Hampshire Republican Senate Primary', party: 'rep' },
 ];
 
 const randomPollOptions = pollingOptions.filter(p => !['generic-congressional-ballot', '2028-dem-primary', '2028-rep-primary'].includes(p.value));
@@ -626,7 +627,19 @@ const mockPollingData = {
           { pollster: 'Bowling Green State University/YouGov', date: 'February 14–21, 2025', sampleSize: 800, husted: 47, brown: 41, other: 0, undecided: 12, margin: 'Husted +6' }
         ]
       },
-      'ohio-governor': {
+      'new-hampshire-gop-senate': {
+    chartData: [],
+    polls: [
+      { pollster: 'Saint Anselm College', date: 'March 16–18, 2026', sampleSize: 673, sununu: 49, brown: 28, innis: null, other: null, undecided: 23, margin: 'Sununu +21' },
+      { pollster: 'University of New Hampshire', date: 'January 15–19, 2026', sampleSize: 967, sununu: 48, brown: 25, innis: null, other: 1, undecided: 26, margin: 'Sununu +23' },
+      { pollster: 'Guidant Polling and Strategy (R)', date: 'December 9–11, 2025', sampleSize: 353, sununu: 49, brown: 30, innis: null, other: null, undecided: 21, margin: 'Sununu +19' },
+      { pollster: 'Saint Anselm College', date: 'November 18–19, 2025', sampleSize: 1000, sununu: 39, brown: 30, innis: null, other: null, undecided: 31, margin: 'Sununu +9' },
+      { pollster: 'University of New Hampshire', date: 'November 13–17, 2025', sampleSize: 593, sununu: 40, brown: 27, innis: null, other: 1, undecided: 31, margin: 'Sununu +13' },
+      { pollster: 'University of New Hampshire', date: 'September 17–23, 2025', sampleSize: 555, sununu: 42, brown: 19, innis: 7, other: 4, undecided: 28, margin: 'Sununu +23' },
+      { pollster: 'co/efficient (R)', date: 'September 10–12, 2025', sampleSize: 346, sununu: 40, brown: 23, innis: 8, other: 5, undecided: 24, margin: 'Sununu +17' },
+    ]
+  },
+  'ohio-governor': {
     chartData: [],
     polls: [
       { pollster: 'Quantus Insights (R)', date: 'March 13–14, 2026', sampleSize: 809, ramaswamy: 45, acton: 46, other: 3, undecided: 6, margin: 'Acton +1' },
@@ -769,6 +782,7 @@ export default function Polling() {
     'generic-congressional-ballot': computePillInfo('generic-congressional-ballot', mockPollingData['generic-congressional-ballot']?.polls),
     '2028-dem-primary': computePillInfo('2028-dem-primary', mockPollingData['2028-dem-primary']?.polls),
     '2028-rep-primary': computePillInfo('2028-rep-primary', mockPollingData['2028-rep-primary']?.polls),
+    'new-hampshire-gop-senate': computePillInfo('new-hampshire-gop-senate', mockPollingData['new-hampshire-gop-senate']?.polls),
     ...(randomPoll ? { [randomPoll]: computePillInfo(randomPoll, mockPollingData[randomPoll]?.polls) } : {}),
   }), [randomPoll]);
 
@@ -800,6 +814,7 @@ export default function Polling() {
               { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot' },
               { value: '2028-dem-primary', label: '2028 Democratic Primary' },
               { value: '2028-rep-primary', label: '2028 Republican Primary' },
+              { value: 'new-hampshire-gop-senate', label: 'NH GOP Senate Primary' },
               ...(randomPoll ? [randomPollOptions.find(p => p.value === randomPoll)] : []),
             ].map(pill => {
               const info = pillInfos[pill.value];
@@ -808,7 +823,7 @@ export default function Polling() {
                 <button
                   key={pill.value}
                   onClick={() => setSelectedPoll(pill.value)}
-                  className={`rounded-2xl px-4 py-3 font-inter font-semibold text-sm transition-all border text-left ${pill.value === randomPoll ? 'min-w-[280px]' : ''} ${selectedPoll === pill.value ? 'bg-white/25 text-white border-white/60' : 'bg-white/10 text-white/80 border-white/20 hover:bg-white/20 hover:text-white'}`}
+                  className={`rounded-2xl px-3 py-2 font-inter font-semibold text-sm transition-all border text-left ${pill.value === randomPoll ? 'min-w-[200px]' : ''} ${selectedPoll === pill.value ? 'bg-white/25 text-white border-white/60' : 'bg-white/10 text-white/80 border-white/20 hover:bg-white/20 hover:text-white'}`}
                 >
                 <div>{pill.label}</div>
                 {marginText && <div className="text-xs font-bold mt-0.5" style={{ color: info.marginColor }}>{marginText}</div>}
