@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 
 const forecastLinks = [
   { label: '2026 Senate Forecast', path: '/SenateForecast' },
@@ -62,7 +62,7 @@ function Dropdown({ label, links, isActive, galleryPath }) {
         onClick={() => setOpen(o => !o)}
         onDoubleClick={() => { if (galleryPath) navigate(galleryPath); setOpen(false); }}
         className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
-          isActive || open ? 'bg-accent text-primary-foreground' : 'text-primary-foreground/80 hover:bg-accent/50 hover:text-primary-foreground'
+          isActive || open ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'
         }`}
         style={{ padding: '8px 16px', fontSize: '14px' }}
       >
@@ -70,13 +70,13 @@ function Dropdown({ label, links, isActive, galleryPath }) {
         <ChevronDown style={{ width: '16px', height: '16px', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-primary-foreground/10 py-2 z-50" style={{ minWidth: '200px' }}>
+        <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 py-2 z-50" style={{ minWidth: '200px' }}>
           {links.map((link) => (
             <Link
               key={link.path}
               to={link.path}
               onClick={() => setOpen(false)}
-              className="block px-4 py-2 text-primary-foreground/80 hover:bg-accent/50 hover:text-primary-foreground font-inter font-semibold transition-all"
+              className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all"
               style={{ fontSize: '14px' }}
             >
               {link.label}
@@ -105,7 +105,7 @@ function DropdownMore({ label, links, isActive }) {
       <button
         onClick={() => setOpen(o => !o)}
         className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal flex items-center gap-1 ${
-          isActive || open ? 'bg-accent text-primary-foreground' : 'text-primary-foreground/80 hover:bg-accent/50 hover:text-primary-foreground'
+          isActive || open ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'
         }`}
         style={{ padding: '8px 16px', fontSize: '14px' }}
       >
@@ -113,13 +113,13 @@ function DropdownMore({ label, links, isActive }) {
         <ChevronDown style={{ width: '16px', height: '16px', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-primary-foreground/10 py-2 z-50" style={{ minWidth: '160px' }}>
+        <div className="absolute top-full left-0 mt-1 bg-primary rounded-lg shadow-lg border border-white/10 py-2 z-50" style={{ minWidth: '160px' }}>
           {links.map((link) => (
             <Link
               key={link.path}
               to={link.path}
               onClick={() => setOpen(false)}
-              className="block px-4 py-2 text-primary-foreground/80 hover:bg-accent/50 hover:text-primary-foreground font-inter font-semibold transition-all"
+              className="block px-4 py-2 text-white/80 hover:bg-accent/50 hover:text-white font-inter font-semibold transition-all"
               style={{ fontSize: '14px' }}
             >
               {link.label}
@@ -147,23 +147,23 @@ export default function Header() {
               style={{ width: '44px', height: '44px', flexShrink: 0 }}
               className="object-contain transition-transform duration-200 hover:scale-110"
             />
-            <span className="bg-transparent text-primary-foreground font-bold hidden sm:block text-shadow-teal relative group" style={{ fontSize: '18px', whiteSpace: 'nowrap' }}>
+            <span className="bg-transparent text-white font-bold hidden sm:block text-shadow-teal relative group" style={{ fontSize: '18px', whiteSpace: 'nowrap' }}>
               Federal Elections Analysis
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-foreground transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
             </span>
           </Link>
           <div className="hidden sm:flex items-center gap-2 ml-2 flex-shrink-0">
             <a href="https://www.youtube.com/@FedElections/featured" target="_blank" rel="noopener noreferrer" className="transition-transform duration-200 hover:scale-110">
-              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/27c9e4340_youtube-app-white-icon.png" alt="YouTube" style={{ width: '24px', height: '24px' }} className={`object-contain ${dark ? '' : 'invert'}`} />
+              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/27c9e4340_youtube-app-white-icon.png" alt="YouTube" style={{ width: '24px', height: '24px' }} className="object-contain" />
             </a>
             <a href="https://discord.gg/jYYGrgEaMX" target="_blank" rel="noopener noreferrer" className="transition-transform duration-200 hover:scale-110">
-              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/23208f02a_discord-white-icon.png" alt="Discord" style={{ width: '24px', height: '24px' }} className={`object-contain ${dark ? '' : 'invert'}`} />
+              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/23208f02a_discord-white-icon.png" alt="Discord" style={{ width: '24px', height: '24px' }} className="object-contain" />
             </a>
             <a
               href="https://www.youtube.com/@FedElections/membership"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-foreground text-background font-inter font-semibold hover:opacity-90 transition-transform duration-200 hover:scale-110 ml-2"
+              className="bg-white text-primary font-inter font-semibold hover:bg-white/90 transition-transform duration-200 hover:scale-110 ml-2"
               style={{ fontSize: '14px', padding: '8px 16px', borderRadius: '8px', whiteSpace: 'nowrap', flexShrink: 0 }}
             >
               Membership
@@ -182,12 +182,12 @@ export default function Header() {
                 key={link.path}
                 to={link.path}
                 className={`rounded-lg font-inter font-semibold transition-all duration-200 text-shadow-teal relative group ${
-                  isActive ? 'bg-accent text-primary-foreground' : 'text-primary-foreground/80 hover:bg-accent/50 hover:text-primary-foreground'
+                  isActive ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'
                 }`}
                 style={{ padding: '8px 16px', fontSize: '14px', whiteSpace: 'nowrap' }}
               >
                 {link.label}
-                <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-primary-foreground scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-white scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
               </Link>
             );
           })}
@@ -213,17 +213,7 @@ export default function Header() {
 
         <div className="flex items-center gap-1 ml-auto flex-shrink-0">
           <button
-            type="button"
-            className="rounded-lg border border-primary-foreground/15 bg-background/10 text-primary-foreground hover:bg-background/20 transition-colors"
-            style={{ padding: '8px' }}
-            onClick={() => setDark(!dark)}
-            aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-            title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {dark ? <Sun style={{ width: '20px', height: '20px' }} /> : <Moon style={{ width: '20px', height: '20px' }} />}
-          </button>
-          <button
-            className="md:hidden text-primary-foreground"
+            className="md:hidden text-white"
             style={{ padding: '8px' }}
             onClick={() => setMobileOpen(!mobileOpen)}
           >
@@ -233,7 +223,7 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden bg-primary border-t border-primary-foreground/10 px-4 pb-4">
+        <div className="md:hidden bg-primary border-t border-white/10 px-4 pb-4">
           {[
             { label: 'Elections', path: '/Elections' },
             { label: 'Polling', path: '/Polling' },
@@ -243,7 +233,7 @@ export default function Header() {
               to={link.path}
               onClick={() => setMobileOpen(false)}
               className={`block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal ${
-                location.pathname === link.path ? 'bg-accent text-primary-foreground' : 'text-primary-foreground/80 hover:bg-accent/50 hover:text-primary-foreground'
+                location.pathname === link.path ? 'bg-accent text-white' : 'text-white/80 hover:bg-accent/50 hover:text-white'
               }`}
               style={{ fontSize: '14px' }}
             >
@@ -251,24 +241,24 @@ export default function Header() {
             </Link>
           ))}
           <Link to="/Forecasts" onClick={() => setMobileOpen(false)}
-            className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-primary-foreground/80 hover:bg-accent/50 hover:text-primary-foreground"
+            className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-white/80 hover:bg-accent/50 hover:text-white"
             style={{ fontSize: '14px' }}>Forecasts</Link>
           {forecastLinks.map(link => (
             <Link key={link.path} to={link.path} onClick={() => setMobileOpen(false)}
-              className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-primary-foreground/80 hover:bg-accent/50 hover:text-primary-foreground ml-4"
+              className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-white/80 hover:bg-accent/50 hover:text-white ml-4"
               style={{ fontSize: '14px' }}>• {link.label}</Link>
           ))}
           <Link to="/Interactives" onClick={() => setMobileOpen(false)}
-            className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-primary-foreground/80 hover:bg-accent/50 hover:text-primary-foreground"
+            className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-white/80 hover:bg-accent/50 hover:text-white"
             style={{ fontSize: '14px' }}>Interactives</Link>
           {interactiveLinks.map(link => (
             <Link key={link.path} to={link.path} onClick={() => setMobileOpen(false)}
-              className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-primary-foreground/80 hover:bg-accent/50 hover:text-primary-foreground ml-4"
+              className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-white/80 hover:bg-accent/50 hover:text-white ml-4"
               style={{ fontSize: '14px' }}>• {link.label}</Link>
           ))}
           {moreLinks.map(link => (
             <Link key={link.path} to={link.path} onClick={() => setMobileOpen(false)}
-              className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-primary-foreground/80 hover:bg-accent/50 hover:text-primary-foreground ml-4"
+              className="block px-4 py-3 rounded-lg font-inter font-semibold transition-all mt-1 text-shadow-teal text-white/80 hover:bg-accent/50 hover:text-white ml-4"
               style={{ fontSize: '14px' }}>• {link.label}</Link>
           ))}
         </div>

@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import { houseIncumbents, normalizeDistrict } from '../components/swingometer/houseIncumbents';
-import { housePercentages } from '../components/swingometer/housePercentages';
 import { motion } from 'framer-motion';
 import SwingBar from '../components/swingometer/SwingBar';
 import { housePVIData } from '../components/swingometer/houseData';
@@ -184,15 +183,11 @@ export default function HouseSwingometer() {
               <text x={CX+12} y={CY+18} fill="rgba(255,255,255,0.4)" fontSize="11" fontFamily="Inter,sans-serif">Republican →</text>
             </svg>
             {tooltip && (() => {
-              const normKey = normalizeDistrict(tooltip.key);
-              const baseDPct = housePercentages[normKey];
               const d = housePVIData.find(([k])=>k===tooltip.key);
               const adj = d ? d[1]+swing : 0;
-              const dPct = baseDPct != null ? Math.max(0, Math.min(100, baseDPct - adj / 2)) : (50 - adj/2);
-              const rPct = parseFloat((100 - dPct).toFixed(1));
-              const dPctR = parseFloat(dPct.toFixed(1));
-              const leader = dPctR >= rPct ? 'D' : 'R';
-              const marginText = `${leader} +${Math.abs(dPctR - rPct).toFixed(1)}%`;
+              const dPct = (50 - adj/2);
+              const rPct = (50 + adj/2);
+              const marginText = adj > 0 ? `R+${adj.toFixed(1)}` : adj < 0 ? `D+${Math.abs(adj).toFixed(1)}` : 'EVEN';
               return (
                 <div className="absolute z-50 pointer-events-none border border-white/40 rounded-xl shadow-xl"
                   style={{
@@ -207,22 +202,43 @@ export default function HouseSwingometer() {
                     <div className="text-white/70 text-xs mb-1">{houseIncumbents[normalizeDistrict(tooltip.key)]}</div>
                   )}
                   <div className="font-semibold text-xs mb-2" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
-                  {(() => {
-                    const bars = dPctR >= rPct
-                      ? [{ label: 'D', pct: dPctR, color: '#2563EB' }, { label: 'R', pct: rPct, color: '#DC2626' }]
-                      : [{ label: 'R', pct: rPct, color: '#DC2626' }, { label: 'D', pct: dPctR, color: '#2563EB' }];
-                    return bars.map(bar => (
-                      <div key={bar.label} className="flex items-center gap-2 mb-1">
-                        <span className="text-xs font-semibold" style={{color: bar.color}}>{bar.label}</span>
+                  {rPct > dPct ? (
+                    <>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-xs font-semibold" style={{color: '#DC2626'}}>R</span>
                         <div className="flex-1 bg-white/10 rounded" style={{overflow:'hidden', height:'5px'}}>
-                          <div style={{width:`${bar.pct}%`,backgroundColor:bar.color,height:'100%'}} />
+                          <div style={{width:`${rPct}%`,backgroundColor:'#DC2626',height:'100%'}} />
                         </div>
-                        <span className="text-xs font-semibold" style={{color: bar.color}}>{bar.pct.toFixed(1)}%</span>
+                        <span className="text-xs font-semibold" style={{color:'#DC2626'}}>{rPct.toFixed(1)}%</span>
                       </div>
-                    ));
-                  })()}
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xs font-semibold" style={{color: '#2563EB'}}>D</span>
+                        <div className="flex-1 bg-white/10 rounded" style={{overflow:'hidden', height:'5px'}}>
+                          <div style={{width:`${dPct}%`,backgroundColor:'#2563EB',height:'100%'}} />
+                        </div>
+                        <span className="text-xs font-semibold" style={{color:'#2563EB'}}>{dPct.toFixed(1)}%</span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-xs font-semibold" style={{color: '#2563EB'}}>D</span>
+                        <div className="flex-1 bg-white/10 rounded" style={{overflow:'hidden', height:'5px'}}>
+                          <div style={{width:`${dPct}%`,backgroundColor:'#2563EB',height:'100%'}} />
+                        </div>
+                        <span className="text-xs font-semibold" style={{color:'#2563EB'}}>{dPct.toFixed(1)}%</span>
+                      </div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xs font-semibold" style={{color: '#DC2626'}}>R</span>
+                        <div className="flex-1 bg-white/10 rounded" style={{overflow:'hidden', height:'5px'}}>
+                          <div style={{width:`${rPct}%`,backgroundColor:'#DC2626',height:'100%'}} />
+                        </div>
+                        <span className="text-xs font-semibold" style={{color:'#DC2626'}}>{rPct.toFixed(1)}%</span>
+                      </div>
+                    </>
+                  )}
                   <div style={{color: ratingColors[tooltip.rating], fontSize: '11px', fontWeight: 700}}>
-                    {marginText}
+                    {marginText}%
                   </div>
                 </div>
               );
