@@ -97,8 +97,10 @@ export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34,
                   <span style={{ color: bar.color, fontSize: 10, fontWeight: 700, minWidth: 32, textAlign: 'right' }}>{bar.pct.toFixed(1)}%</span>
                 </div>
               ))}
-              <div style={{ color: leading.color, fontSize: 10, fontWeight: 700, marginTop: 4 }}>
-                {leading.label} +{margin.toFixed(1)}%
+              <div style={{ marginTop: 6, display: 'flex', justifyContent: 'center' }}>
+                <span style={{ backgroundColor: color, color: 'white', fontSize: 11, fontWeight: 700, padding: '2px 10px', borderRadius: 999 }}>
+                  {leading.label} +{margin.toFixed(1)}%
+                </span>
               </div>
             </>
           );
@@ -116,8 +118,8 @@ export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34,
       {/* Seat Counter */}
       <div className="flex justify-center gap-4 mb-6 flex-wrap">
         <div className="relative" onMouseEnter={() => setHoveredBubble('dem')} onMouseLeave={() => setHoveredBubble(null)}>
-          <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center w-[120px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
-            <div className="text-3xl font-bold text-blue-300">{demSeats}</div>
+          <div className="bg-blue-900/60 rounded-xl px-8 py-4 text-center w-[160px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
+            <div className="text-4xl font-bold text-blue-300">{demSeats}</div>
             <div className="text-blue-200/70 text-sm mt-1">Democrat</div>
           </div>
           {hoveredBubble === 'dem' && (
@@ -131,13 +133,13 @@ export default function SwingMap({ baseResults, swing, title, baseDemSeats = 34,
             </div>
           )}
         </div>
-        <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center w-[120px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
-          <div className="text-3xl font-bold text-purple-300">{tossUpSeats}</div>
+        <div className="bg-purple-900/60 rounded-xl px-8 py-4 text-center w-[160px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
+          <div className="text-4xl font-bold text-purple-300">{tossUpSeats}</div>
           <div className="text-purple-200/70 text-sm mt-1">Toss Up</div>
         </div>
         <div className="relative" onMouseEnter={() => setHoveredBubble('rep')} onMouseLeave={() => setHoveredBubble(null)}>
-          <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center w-[120px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
-            <div className="text-3xl font-bold text-red-300">{repSeats}</div>
+          <div className="bg-red-900/60 rounded-xl px-8 py-4 text-center w-[160px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
+            <div className="text-4xl font-bold text-red-300">{repSeats}</div>
             <div className="text-red-200/70 text-sm mt-1">Republican</div>
           </div>
           {hoveredBubble === 'rep' && (

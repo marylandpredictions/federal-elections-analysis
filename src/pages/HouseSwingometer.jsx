@@ -112,8 +112,8 @@ export default function HouseSwingometer() {
           {/* Seat count bubbles */}
           <div className="flex justify-center gap-4 mb-4 flex-wrap">
             <div className="relative" onMouseEnter={() => setHoveredBubble('dem')} onMouseLeave={() => setHoveredBubble(null)}>
-              <div className="bg-blue-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
-                <div className="text-3xl font-bold text-blue-300">{demSeats}</div>
+              <div className="bg-blue-900/60 rounded-xl px-8 py-4 text-center w-[160px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
+                <div className="text-4xl font-bold text-blue-300">{demSeats}</div>
                 <div className="text-blue-200/70 text-sm mt-1">Democrat</div>
               </div>
               {hoveredBubble === 'dem' && (
@@ -127,13 +127,13 @@ export default function HouseSwingometer() {
                 </div>
               )}
             </div>
-            <div className="bg-purple-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
-              <div className="text-3xl font-bold text-purple-300">{tossUp}</div>
+            <div className="bg-purple-900/60 rounded-xl px-8 py-4 text-center w-[160px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
+              <div className="text-4xl font-bold text-purple-300">{tossUp}</div>
               <div className="text-purple-200/70 text-sm mt-1">Toss Up</div>
             </div>
             <div className="relative" onMouseEnter={() => setHoveredBubble('rep')} onMouseLeave={() => setHoveredBubble(null)}>
-              <div className="bg-red-900/60 rounded-xl px-6 py-3 text-center min-w-[100px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
-                <div className="text-3xl font-bold text-red-300">{repSeats}</div>
+              <div className="bg-red-900/60 rounded-xl px-8 py-4 text-center w-[160px] shadow-lg transition-transform duration-200 hover:scale-110 cursor-pointer" style={{ border: '2px solid white' }}>
+                <div className="text-4xl font-bold text-red-300">{repSeats}</div>
                 <div className="text-red-200/70 text-sm mt-1">Republican</div>
               </div>
               {hoveredBubble === 'rep' && (
@@ -191,7 +191,7 @@ export default function HouseSwingometer() {
                     top: `${Math.max((tooltip.svgY/svgH)*100-2,0)}%`,
                     transform: 'translate(-50%,-110%)',
                     backgroundColor: 'rgba(0,0,0,0.92)',
-                    minWidth: 160, padding: '8px 12px'
+                    minWidth: 200, padding: '8px 14px'
                   }}>
                   <div className="text-white font-bold text-sm mb-1">{tooltip.key}</div>
                   {houseIncumbents[normalizeDistrict(tooltip.key)] && (
@@ -233,8 +233,10 @@ export default function HouseSwingometer() {
                       </div>
                     </>
                   )}
-                  <div style={{color: ratingColors[tooltip.rating], fontSize: '11px', fontWeight: 700}}>
-                    {marginText}%
+                  <div style={{ marginTop: 6, display: 'flex', justifyContent: 'center' }}>
+                    <span style={{ backgroundColor: ratingColors[tooltip.rating], color: 'white', fontSize: 11, fontWeight: 700, padding: '2px 10px', borderRadius: 999 }}>
+                      {marginText}
+                    </span>
                   </div>
                 </div>
               );
