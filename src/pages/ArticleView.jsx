@@ -19,12 +19,7 @@ export default function ArticleView() {
 
   return (
     <div 
-      className="min-h-[calc(100vh-4rem)] px-4 py-16 sm:py-24 bg-black"
-      style={{
-        backgroundImage: 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}
+      className="min-h-[calc(100vh-4rem)] px-4 py-16 sm:py-24 bg-background"
     >
       <div className="max-w-4xl mx-auto">
         <motion.button

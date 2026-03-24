@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 
 const forecastLinks = [
   { label: '2026 Senate Forecast', path: '/SenateForecast' },
@@ -212,13 +212,6 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-1 ml-auto flex-shrink-0">
-          <button
-            onClick={() => setDark(d => !d)}
-            className="rounded-lg p-2 text-white hover:bg-accent/50 transition-colors"
-            title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {dark ? <Sun style={{ width: '20px', height: '20px' }} /> : <Moon style={{ width: '20px', height: '20px' }} />}
-          </button>
           <button
             className="md:hidden text-white"
             style={{ padding: '8px' }}

@@ -46,7 +46,7 @@ const baseResults = {
   'New Hampshire': -2.8, 'Maine': -6.9
 };
 
-const bubbleBase = "bg-white/60 backdrop-blur-sm rounded-2xl p-5 shadow-lg hover:bg-white/70 transition-all duration-300 hover:shadow-xl";
+const bubbleBase = "bg-black/50 backdrop-blur-sm rounded-2xl p-5 shadow-lg hover:bg-black/60 transition-all duration-300 hover:shadow-xl border border-white/10";
 
 export default function Home() {
   return (
@@ -79,18 +79,18 @@ export default function Home() {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <Link to={`/ArticleView/${latestArticle.id}`} className={`block ${bubbleBase}`}>
-            <p className="text-xs font-inter font-semibold text-black/60 uppercase tracking-wider mb-2">Latest Article</p>
+            <p className="text-xs font-inter font-semibold text-white/60 uppercase tracking-wider mb-2">Latest Article</p>
             <img
               src={latestArticle.image}
               alt={latestArticle.title}
               className="w-full h-36 object-cover rounded-xl mb-3"
             />
-            <h3 className="font-inter font-bold text-gray-900 text-base sm:text-lg leading-tight mb-1">
+            <h3 className="font-inter font-bold text-white text-base sm:text-lg leading-tight mb-1">
               {latestArticle.title}
             </h3>
-            <p className="text-xs text-gray-500 font-inter mb-2">By {latestArticle.author} · {latestArticle.date}</p>
-            <p className="text-gray-700 font-inter text-sm line-clamp-3">{latestArticle.excerpt || latestArticle.content?.slice(0, 150) + '...'}</p>
-            <p className="text-black font-inter font-semibold text-sm mt-3">Read more →</p>
+            <p className="text-xs text-white/50 font-inter mb-2">By {latestArticle.author} · {latestArticle.date}</p>
+            <p className="text-white/70 font-inter text-sm line-clamp-3">{latestArticle.excerpt || latestArticle.content?.slice(0, 150) + '...'}</p>
+            <p className="text-white font-inter font-semibold text-sm mt-3">Read more →</p>
           </Link>
         </motion.div>
 
@@ -101,8 +101,8 @@ export default function Home() {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <Link to="/Polling" className={`block ${bubbleBase}`}>
-            <p className="text-xs font-inter font-semibold text-black/60 uppercase tracking-wider mb-2">Polling Average</p>
-            <h3 className="font-inter font-bold text-gray-900 text-base sm:text-lg leading-tight mb-3">
+            <p className="text-xs font-inter font-semibold text-white/60 uppercase tracking-wider mb-2">Polling Average</p>
+            <h3 className="font-inter font-bold text-white text-base sm:text-lg leading-tight mb-3">
               Generic Congressional Ballot
             </h3>
             <div className="h-36 w-full mb-3">
@@ -118,7 +118,7 @@ export default function Home() {
               <span className="text-sm font-inter font-semibold" style={{ color: '#0047AB' }}>Dem: 45.3%</span>
               <span className="text-sm font-inter font-semibold" style={{ color: '#8B0000' }}>Rep: 42.7%</span>
             </div>
-            <p className="text-black font-inter font-semibold text-sm mt-2">View all polls →</p>
+            <p className="text-white font-inter font-semibold text-sm mt-2">View all polls →</p>
           </Link>
         </motion.div>
 
@@ -129,19 +129,19 @@ export default function Home() {
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           <Link to="/SenateSwingometer" className={`block ${bubbleBase}`}>
-            <p className="text-xs font-inter font-semibold text-black/60 uppercase tracking-wider mb-2">Interactive</p>
+            <p className="text-xs font-inter font-semibold text-white/60 uppercase tracking-wider mb-2">Interactive</p>
             <div className="w-full rounded-xl mb-3 overflow-hidden pointer-events-none" style={{ height: '144px' }}>
               <div style={{ transform: 'scale(0.45)', transformOrigin: 'top left', width: '222%', height: '222%' }}>
                 <SwingMap baseResults={baseResults} swing={0} />
               </div>
             </div>
-            <h3 className="font-inter font-bold text-gray-900 text-base sm:text-lg leading-tight mb-1">
+            <h3 className="font-inter font-bold text-white text-base sm:text-lg leading-tight mb-1">
               Senate Swingometer
             </h3>
-            <p className="text-gray-700 font-inter text-sm">
+            <p className="text-white/70 font-inter text-sm">
               Swing the 2026 Senate map based on 2024 presidential results.
             </p>
-            <p className="text-black font-inter font-semibold text-sm mt-3">Try it →</p>
+            <p className="text-white font-inter font-semibold text-sm mt-3">Try it →</p>
           </Link>
         </motion.div>
       </div>
@@ -154,11 +154,11 @@ export default function Home() {
           transition={{ duration: 0.6, delay: 0.6 }}
         >
           <Link to="/Forecasts" className={`block ${bubbleBase}`}>
-            <p className="text-xs font-inter font-semibold text-black/60 uppercase tracking-wider mb-2">Forecasts</p>
-            <h3 className="font-inter font-bold text-gray-900 text-xl sm:text-2xl leading-tight mb-2">
+            <p className="text-xs font-inter font-semibold text-white/60 uppercase tracking-wider mb-2">Forecasts</p>
+            <h3 className="font-inter font-bold text-white text-xl sm:text-2xl leading-tight mb-2">
               2026 Election Forecasts
             </h3>
-            <p className="text-gray-700 font-inter text-sm mb-3">
+            <p className="text-white/70 font-inter text-sm mb-3">
               Explore our Senate and Governors race forecasts with interactive maps, seat projections, and control probabilities.
             </p>
             <div className="flex gap-3 flex-wrap">
@@ -166,7 +166,7 @@ export default function Home() {
               <span className="bg-red-100 text-red-800 font-semibold text-xs px-3 py-1 rounded-full">Governors</span>
               <span className="bg-purple-100 text-purple-800 font-semibold text-xs px-3 py-1 rounded-full">Interactive Maps</span>
             </div>
-            <p className="text-black font-inter font-semibold text-sm mt-3">View forecasts →</p>
+            <p className="text-white font-inter font-semibold text-sm mt-3">View forecasts →</p>
           </Link>
         </motion.div>
 
@@ -178,12 +178,12 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.7 }}
           >
             <Link to={`/ElectionDetail/${electionsData[0].id}`} className={`block ${bubbleBase}`}>
-              <p className="text-xs font-inter font-semibold text-black/60 uppercase tracking-wider mb-2">Upcoming Election</p>
+              <p className="text-xs font-inter font-semibold text-white/60 uppercase tracking-wider mb-2">Upcoming Election</p>
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1">
-                  <h3 className="font-inter font-bold text-gray-900 text-xl sm:text-2xl leading-tight mb-1">{electionsData[0].state}</h3>
-                  <p className="font-inter font-bold text-gray-800 text-base mb-0.5">{electionsData[0].electionType}</p>
-                  <p className="font-inter font-bold text-gray-600 text-sm mb-3">{electionsData[0].date}</p>
+                  <h3 className="font-inter font-bold text-white text-xl sm:text-2xl leading-tight mb-1">{electionsData[0].state}</h3>
+                  <p className="font-inter font-bold text-white/80 text-base mb-0.5">{electionsData[0].electionType}</p>
+                  <p className="font-inter font-bold text-white/60 text-sm mb-3">{electionsData[0].date}</p>
                   <div className="flex gap-2 flex-wrap mb-3">
                     {electionsData[0].candidates.map(c => (
                       <span key={c.name} className="text-sm font-inter font-semibold" style={{ color: c.color === '#FCA5A5' ? '#b91c1c' : '#1d4ed8' }}>
@@ -191,13 +191,13 @@ export default function Home() {
                       </span>
                     ))}
                   </div>
-                  <p className="text-gray-700 font-inter text-sm line-clamp-3">{electionsData[0].preview}</p>
+                  <p className="text-white/70 font-inter text-sm line-clamp-3">{electionsData[0].preview}</p>
                 </div>
                 {electionsData[0].stateIcon && (
                   <img src={electionsData[0].stateIcon} alt={electionsData[0].state} className="w-12 h-12 object-contain flex-shrink-0 opacity-80" />
                 )}
               </div>
-              <p className="text-black font-inter font-semibold text-sm mt-3">View details →</p>
+              <p className="text-white font-inter font-semibold text-sm mt-3">View details →</p>
             </Link>
           </motion.div>
         )}

@@ -4,14 +4,12 @@ import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import { electionsData } from './Elections';
 
-const BG = 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png)';
-
-function ProbabilityTracker({ prob, electionName }) {
-  const { leftLabel, leftChance, rightLabel, rightChance, leftColor, rightColor } = prob;
+function ForecastBar({ data, title }) {
+  const { leftLabel, leftChance, rightLabel, rightChance, leftColor, rightColor } = data;
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mt-6">
       <h3 className="text-white font-inter font-bold text-xl mb-6 text-center text-shadow-teal">
-        {electionName} Probability
+        {title}
       </h3>
       <div className="flex items-center gap-4 mb-4">
         <div
@@ -46,9 +44,6 @@ function ProbabilityTracker({ prob, electionName }) {
           <div className="w-4 h-4 rounded-full" style={{ backgroundColor: rightColor }} />
         </div>
       </div>
-      <p className="text-white/70 text-xs text-center mt-4">
-        Updated daily based on latest polling and analysis
-      </p>
     </div>
   );
 }
@@ -59,7 +54,7 @@ export default function ElectionDetail() {
 
   if (!election) {
     return (
-      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center" style={{ backgroundImage: BG, backgroundSize: 'cover' }}>
+      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-background">
         <div className="text-white text-center">
           <p className="text-2xl font-bold mb-4">Election not found</p>
           <Link to="/Elections" className="text-white/70 hover:text-white underline">← Back to Elections</Link>
@@ -67,8 +62,6 @@ export default function ElectionDetail() {
       </div>
     );
   }
-
-  const isAmendment = election.candidates.some(c => c.name === 'Yes' || c.name === 'No');
 
   const getCandidateColor = (c) => {
     if (c.name === 'Yes') return '#16A34A';
@@ -78,11 +71,10 @@ export default function ElectionDetail() {
     return c.color;
   };
 
+  const electionName = `${election.state} ${election.electionType}`;
+
   return (
-    <div
-      className="min-h-[calc(100vh-4rem)] px-4 py-16 sm:py-24"
-      style={{ backgroundImage: BG, backgroundSize: 'cover', backgroundPosition: 'center' }}
-    >
+    <div className="min-h-[calc(100vh-4rem)] px-4 py-16 sm:py-24 bg-background">
       <div className="max-w-3xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <Link
@@ -93,6 +85,7 @@ export default function ElectionDetail() {
             Back to Elections
           </Link>
 
+          {/* Description bubble */}
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/10">
             <div className="flex items-start justify-between gap-4 mb-6">
               <div>
@@ -145,10 +138,19 @@ export default function ElectionDetail() {
             </div>
           </div>
 
+          {/* Forecast bar */}
+          {election.forecast && (
+            <ForecastBar
+              data={election.forecast}
+              title={`${electionName} Forecast`}
+            />
+          )}
+
+          {/* Probability tracker */}
           {election.probability && (
-            <ProbabilityTracker
-              prob={election.probability}
-              electionName={`${election.state} ${election.electionType}`}
+            <ForecastBar
+              data={election.probability}
+              title={`${electionName} Probability`}
             />
           )}
         </motion.div>
