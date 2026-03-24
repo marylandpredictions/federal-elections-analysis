@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
-const BG = 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png)';
+
 
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
@@ -181,7 +181,7 @@ export default function Elections() {
   return (
     <div
       className="min-h-[calc(100vh-4rem)] px-4 py-16 sm:py-24"
-      style={{ backgroundImage: BG, backgroundSize: 'cover', backgroundPosition: 'center' }}
+
     >
       <div className="max-w-4xl mx-auto">
         <motion.h1

@@ -6,7 +6,7 @@ import { LineChart, Line, ResponsiveContainer, YAxis } from 'recharts';
 import SwingMap from '../components/swingometer/SwingMap';
 import articles from '../lib/articlesData';
 
-const BG = 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b6f149a83e2b792ef60e35/ec271415e_Screenshot2026-03-16at44509PM.png)';
+
 
 const latestArticle = articles[0];
 
@@ -51,8 +51,7 @@ const bubbleBase = "bg-white/60 backdrop-blur-sm rounded-2xl p-5 shadow-lg hover
 export default function Home() {
   return (
     <div
-      className="min-h-[calc(100vh-4rem)] px-4 py-16 sm:py-24"
-      style={{ backgroundImage: BG, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      className="min-h-[calc(100vh-4rem)] px-4 py-16 sm:py-24 bg-background"
     >
       <motion.div
         initial={{ opacity: 0, y: 30 }}
