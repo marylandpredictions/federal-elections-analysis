@@ -222,15 +222,19 @@ export default function HouseForecastMap() {
               top: `${Math.max((tooltip.svgY / (CY + 20)) * 100 - 2, 0)}%`,
               transform: 'translate(-50%, -110%)',
               backgroundColor: 'rgba(0,0,0,0.92)',
-              minWidth: 140,
-              padding: '8px 12px'
+              minWidth: 200,
+              padding: '8px 14px'
             }}
           >
             <div className="text-white font-bold text-sm mb-1">{tooltip.label}</div>
             {houseIncumbents[tooltip.label] && (
               <div className="text-white/70 text-xs mb-1">{houseIncumbents[tooltip.label]}</div>
             )}
-            <div className="font-semibold text-xs" style={{ color: ratingColors[tooltip.rating] }}>{tooltip.rating}</div>
+            <div style={{ marginTop: 6, display: 'flex', justifyContent: 'center' }}>
+              <span style={{ backgroundColor: ratingColors[tooltip.rating], color: 'white', fontSize: 11, fontWeight: 700, padding: '2px 10px', borderRadius: 999 }}>
+                {tooltip.rating}
+              </span>
+            </div>
           </div>
         )}
       </div>
