@@ -230,11 +230,32 @@ export default function HouseForecastMap() {
             {houseIncumbents[tooltip.label] && (
               <div className="text-white/70 text-xs mb-1">{houseIncumbents[tooltip.label]}</div>
             )}
-            <div style={{ marginTop: 6, display: 'flex', justifyContent: 'center' }}>
-              <span style={{ backgroundColor: ratingColors[tooltip.rating], color: 'white', fontSize: 11, fontWeight: 700, padding: '2px 10px', borderRadius: 999 }}>
-                {tooltip.rating}
-              </span>
-            </div>
+            {(() => {
+              const pct = ratingApprox[tooltip.rating];
+              if (!pct) return null;
+              const { d, r } = pct;
+              const bars = d >= r
+                ? [{ label: 'D', pct: d, color: '#2563EB' }, { label: 'R', pct: r, color: '#DC2626' }]
+                : [{ label: 'R', pct: r, color: '#DC2626' }, { label: 'D', pct: d, color: '#2563EB' }];
+              return (
+                <>
+                  {bars.map(bar => (
+                    <div key={bar.label} className="flex items-center gap-2 mb-1">
+                      <span style={{ color: bar.color, fontSize: 10, fontWeight: 700, minWidth: 10 }}>{bar.label}</span>
+                      <div style={{ flex: 1, background: 'rgba(255,255,255,0.15)', borderRadius: 3, height: 5 }}>
+                        <div style={{ background: bar.color, height: '100%', width: `${bar.pct}%`, borderRadius: 3 }} />
+                      </div>
+                      <span style={{ color: bar.color, fontSize: 10, fontWeight: 700, minWidth: 30, textAlign: 'right' }}>{bar.pct}%</span>
+                    </div>
+                  ))}
+                  <div style={{ marginTop: 6, display: 'flex', justifyContent: 'center' }}>
+                    <span style={{ backgroundColor: ratingColors[tooltip.rating], color: 'white', fontSize: 11, fontWeight: 700, padding: '2px 10px', borderRadius: 999 }}>
+                      {tooltip.rating} · {bars[0].label} +{Math.abs(bars[0].pct - bars[1].pct).toFixed(1)}%
+                    </span>
+                  </div>
+                </>
+              );
+            })()}
           </div>
         )}
       </div>
