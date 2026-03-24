@@ -159,7 +159,7 @@ export default function HexUSMap({ colorsByAbbr = {}, renderTooltipContent, onCl
         if (!content) return null;
         return (
           <div
-            className="absolute z-50 pointer-events-none bg-black/80 border border-white/20 rounded-xl p-3 shadow-xl min-w-[160px]"
+            className="absolute z-50 pointer-events-none bg-black/80 border border-white/20 rounded-xl p-3 shadow-xl min-w-[200px]"
             style={{
               left: tooltip.x + 12,
               top:  tooltip.y - 10,
