@@ -137,7 +137,7 @@ export default function Header() {
   const [dark, setDark] = useTheme();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-primary shadow-lg" style={{ fontSize: '16px' }}>
+    <header className="fixed top-0 left-0 right-0 z-50 shadow-lg" style={{ fontSize: '16px', backgroundColor: dark ? '#262626' : '#ffffff', transition: 'background-color 0.3s ease' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center" style={{ height: '64px' }}>
         <div className="flex items-center gap-3 flex-shrink-0">
           <Link to="/Home" className="flex items-center gap-3">

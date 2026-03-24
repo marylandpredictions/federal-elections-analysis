@@ -128,7 +128,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-primary py-12 mt-auto">
+      <footer className="py-12 mt-auto" style={{ backgroundColor: 'var(--footer-bg, #262626)', transition: 'background-color 0.3s ease' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-white font-inter font-bold text-xl md:text-2xl text-shadow-teal text-center mb-10">
             Welcome to Federal Elections Analysis
