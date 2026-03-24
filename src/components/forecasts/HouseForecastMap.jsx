@@ -234,11 +234,13 @@ export default function HouseForecastMap() {
               const pct = ratingApprox[tooltip.rating];
               if (!pct) return null;
               const { d, r } = pct;
+              const ratingTextColor = ratingColors[tooltip.rating];
               const bars = d >= r
                 ? [{ label: 'D', pct: d, color: '#2563EB' }, { label: 'R', pct: r, color: '#DC2626' }]
                 : [{ label: 'R', pct: r, color: '#DC2626' }, { label: 'D', pct: d, color: '#2563EB' }];
               return (
                 <>
+                  <div style={{ color: ratingTextColor, fontSize: 11, fontWeight: 700, marginBottom: 4 }}>{tooltip.rating}</div>
                   {bars.map(bar => (
                     <div key={bar.label} className="flex items-center gap-2 mb-1">
                       <span style={{ color: bar.color, fontSize: 10, fontWeight: 700, minWidth: 10 }}>{bar.label}</span>
