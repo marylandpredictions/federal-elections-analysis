@@ -38,6 +38,7 @@ export default function PollingTable({ polls, type }) {
   const isMinnesotaDem = type === 'minnesota-dem-senate';
   const isKentuckyGOP = type === 'kentucky-gop-senate';
   const isWisconsinDem = type === 'wisconsin-dem-governor';
+  const isNHGOP = type === 'new-hampshire-gop-senate';
   const isApproval = type ? type.includes('approval') : false;
 
   function getMarginColor(poll) {
@@ -130,6 +131,10 @@ export default function PollingTable({ polls, type }) {
       if (m.includes('Barr')) return '#EF4444';
       if (m.includes('Cameron')) return '#FBBF24';
       if (m.includes('Morris')) return '#F97316';
+    } else if (isNHGOP) {
+      if (m.includes('Sununu')) return '#F97316';
+      if (m.includes('Brown')) return '#8B4513';
+      if (m.includes('Innis')) return '#EAB308';
     } else if (type === 'north-carolina-senate') {
       if (m.includes('Whatley')) return '#EF4444';
       if (m.includes('Cooper')) return '#3B82F6';
@@ -333,6 +338,15 @@ export default function PollingTable({ polls, type }) {
         <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
       </>
     );
+    if (isNHGOP) return (
+      <>
+        <TableCell style={{ color: '#F97316' }} className="font-semibold">{poll.sununu > 0 ? `${poll.sununu}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#8B4513' }} className="font-semibold">{poll.brown > 0 ? `${poll.brown}%` : '-'}</TableCell>
+        <TableCell style={{ color: '#EAB308' }} className="font-semibold">{poll.innis > 0 ? `${poll.innis}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.other > 0 ? `${poll.other}%` : '-'}</TableCell>
+        <TableCell className="text-gray-400 font-semibold">{poll.undecided > 0 ? `${poll.undecided}%` : '-'}</TableCell>
+      </>
+    );
     if (isKentuckyGOP) return (
       <>
         <TableCell style={{ color: '#EF4444' }} className="font-semibold">{poll.barr > 0 ? `${poll.barr}%` : '-'}</TableCell>
@@ -397,6 +411,7 @@ export default function PollingTable({ polls, type }) {
     if (isMichiganDem) return (<><TableHead className="text-white font-bold">El-Sayed</TableHead><TableHead className="text-white font-bold">McMorrow</TableHead><TableHead className="text-white font-bold">Stevens</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     if (isMinnesotaDem) return (<><TableHead className="text-white font-bold">Craig</TableHead><TableHead className="text-white font-bold">Flanagan</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     if (isWisconsinDem) return (<><TableHead className="text-white font-bold">Barnes</TableHead><TableHead className="text-white font-bold">Rodriguez</TableHead><TableHead className="text-white font-bold">Hong</TableHead><TableHead className="text-white font-bold">Crowley</TableHead><TableHead className="text-white font-bold">Roys</TableHead><TableHead className="text-white font-bold">Hughes</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
+    if (isNHGOP) return (<><TableHead className="text-white font-bold">Sununu</TableHead><TableHead className="text-white font-bold">Brown</TableHead><TableHead className="text-white font-bold">Innis</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     if (isKentuckyGOP) return (<><TableHead className="text-white font-bold">Barr</TableHead><TableHead className="text-white font-bold">Cameron</TableHead><TableHead className="text-white font-bold">Morris</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     if (type === 'north-carolina-senate') return (<><TableHead className="text-white font-bold">Whatley</TableHead><TableHead className="text-white font-bold">Cooper</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);
     if (type === 'ohio-senate') return (<><TableHead className="text-white font-bold">Husted</TableHead><TableHead className="text-white font-bold">Brown</TableHead><TableHead className="text-white font-bold">Other</TableHead><TableHead className="text-white font-bold">Undecided</TableHead></>);

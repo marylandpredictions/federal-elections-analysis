@@ -31,6 +31,7 @@ const pollingOptions = [
   { value: 'new-hampshire-gop-senate', label: 'New Hampshire Republican Senate Primary', party: 'rep' },
 ];
 
+
 const randomPollOptions = pollingOptions.filter(p => !['generic-congressional-ballot', '2028-dem-primary', '2028-rep-primary'].includes(p.value));
 
 const alaskaSenateData = {
@@ -782,7 +783,6 @@ export default function Polling() {
     'generic-congressional-ballot': computePillInfo('generic-congressional-ballot', mockPollingData['generic-congressional-ballot']?.polls),
     '2028-dem-primary': computePillInfo('2028-dem-primary', mockPollingData['2028-dem-primary']?.polls),
     '2028-rep-primary': computePillInfo('2028-rep-primary', mockPollingData['2028-rep-primary']?.polls),
-    'new-hampshire-gop-senate': computePillInfo('new-hampshire-gop-senate', mockPollingData['new-hampshire-gop-senate']?.polls),
     ...(randomPoll ? { [randomPoll]: computePillInfo(randomPoll, mockPollingData[randomPoll]?.polls) } : {}),
   }), [randomPoll]);
 
@@ -812,9 +812,8 @@ export default function Polling() {
           <div className="flex gap-3 flex-wrap">
             {[
               { value: 'generic-congressional-ballot', label: 'Generic Congressional Ballot' },
-              { value: '2028-dem-primary', label: '2028 Democratic Primary' },
-              { value: '2028-rep-primary', label: '2028 Republican Primary' },
-              { value: 'new-hampshire-gop-senate', label: 'NH GOP Senate Primary' },
+              { value: '2028-dem-primary', label: '2028 Democratic Presidential Primary' },
+              { value: '2028-rep-primary', label: '2028 Republican Presidential Primary' },
               ...(randomPoll ? [randomPollOptions.find(p => p.value === randomPoll)] : []),
             ].map(pill => {
               const info = pillInfos[pill.value];
@@ -823,7 +822,7 @@ export default function Polling() {
                 <button
                   key={pill.value}
                   onClick={() => setSelectedPoll(pill.value)}
-                  className={`rounded-2xl px-3 py-2 font-inter font-semibold text-sm transition-all border text-left ${pill.value === randomPoll ? 'min-w-[200px]' : ''} ${selectedPoll === pill.value ? 'bg-white/25 text-white border-white/60' : 'bg-white/10 text-white/80 border-white/20 hover:bg-white/20 hover:text-white'}`}
+                  className={`rounded-2xl px-4 py-3 font-inter font-semibold text-sm transition-all border text-left ${pill.value === randomPoll ? 'min-w-[280px]' : ''} ${selectedPoll === pill.value ? 'bg-white/25 text-white border-white/60' : 'bg-white/10 text-white/80 border-white/20 hover:bg-white/20 hover:text-white'}`}
                 >
                 <div>{pill.label}</div>
                 {marginText && <div className="text-xs font-bold mt-0.5" style={{ color: info.marginColor }}>{marginText}</div>}
