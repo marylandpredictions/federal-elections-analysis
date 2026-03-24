@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown } from 'lucide-react';
 
 const ratingColors = {
   'Safe D': '#5689f7', 'Likely D': '#5689f7', 'Lean D': '#93C5FD', 'Tilt D': '#BFDBFE',
@@ -15,13 +15,57 @@ const ratingTextColors = {
   'Tilt R': '#FECACA', 'Lean R': '#FCA5A5', 'Likely R': '#F87171', 'Safe R': '#FCA5A5',
 };
 
+const ratingOrder = ['Safe D','Likely D','Lean D','Tilt D','Toss Up','Tilt R','Lean R','Likely R','Safe R'];
+
 const PAGE_SIZE = 20;
 
-// rows: [{ state, incumbent, rating, dPct, rPct, showPcts }]
 export default function ForecastRaceTable({ rows, title, showPcts = true, stateLabel = 'State' }) {
   const [page, setPage] = useState(1);
-  const totalPages = Math.ceil(rows.length / PAGE_SIZE);
-  const current = rows.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const [sortField, setSortField] = useState(null);
+  const [sortDir, setSortDir] = useState('asc');
+
+  const handleSort = (field) => {
+    if (sortField === field) {
+      setSortDir(d => d === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortField(field);
+      setSortDir('asc');
+    }
+    setPage(1);
+  };
+
+  const getMargin = (row) => {
+    if (row.dPct != null && row.rPct != null) return row.dPct - row.rPct;
+    return null;
+  };
+
+  const sorted = [...rows].sort((a, b) => {
+    if (!sortField) return 0;
+    let valA, valB;
+    if (sortField === 'state') { valA = a.state; valB = b.state; }
+    else if (sortField === 'incumbent') { valA = a.incumbent || ''; valB = b.incumbent || ''; }
+    else if (sortField === 'rating') { valA = ratingOrder.indexOf(a.rating); valB = ratingOrder.indexOf(b.rating); }
+    else if (sortField === 'dPct') { valA = a.dPct ?? -Infinity; valB = b.dPct ?? -Infinity; }
+    else if (sortField === 'rPct') { valA = a.rPct ?? -Infinity; valB = b.rPct ?? -Infinity; }
+    else if (sortField === 'margin') { valA = getMargin(a) ?? -Infinity; valB = getMargin(b) ?? -Infinity; }
+
+    if (typeof valA === 'string') {
+      return sortDir === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+    }
+    return sortDir === 'asc' ? valA - valB : valB - valA;
+  });
+
+  const totalPages = Math.ceil(sorted.length / PAGE_SIZE);
+  const current = sorted.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  const SortIcon = ({ field }) => {
+    if (sortField !== field) return <ChevronUp className="h-3 w-3 opacity-30 inline ml-1" />;
+    return sortDir === 'asc'
+      ? <ChevronUp className="h-3 w-3 opacity-100 inline ml-1" />
+      : <ChevronDown className="h-3 w-3 opacity-100 inline ml-1" />;
+  };
+
+  const thClass = "text-white font-bold cursor-pointer hover:text-white/70 select-none";
 
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 mt-8">
@@ -45,12 +89,12 @@ export default function ForecastRaceTable({ rows, title, showPcts = true, stateL
         <Table>
           <TableHeader>
             <TableRow className="border-white/20 hover:bg-white/5">
-              <TableHead className="text-white font-bold">{stateLabel}</TableHead>
-              <TableHead className="text-white font-bold">Incumbent</TableHead>
-              <TableHead className="text-white font-bold">Rating</TableHead>
-              <TableHead className="text-white font-bold">D%</TableHead>
-              <TableHead className="text-white font-bold">R%</TableHead>
-              <TableHead className="text-white font-bold">Margin</TableHead>
+              <TableHead className={thClass} onClick={() => handleSort('state')}>{stateLabel}<SortIcon field="state" /></TableHead>
+              <TableHead className={thClass} onClick={() => handleSort('incumbent')}>Incumbent<SortIcon field="incumbent" /></TableHead>
+              <TableHead className={thClass} onClick={() => handleSort('rating')}>Rating<SortIcon field="rating" /></TableHead>
+              <TableHead className={thClass} onClick={() => handleSort('dPct')}>D%<SortIcon field="dPct" /></TableHead>
+              <TableHead className={thClass} onClick={() => handleSort('rPct')}>R%<SortIcon field="rPct" /></TableHead>
+              <TableHead className={thClass} onClick={() => handleSort('margin')}>Margin<SortIcon field="margin" /></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

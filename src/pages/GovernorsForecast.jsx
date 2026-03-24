@@ -84,7 +84,7 @@ export default function GovernorsForecast() {
             showIncumbents={true}
             incumbents={governorIncumbents}
           />
-          <ForecastRaceTable rows={contestedRows} title="Contested Governors Races" />
+          <ForecastRaceTable rows={contestedRows} title="All Governors Races" />
         </motion.div>
       </div>
     </div>

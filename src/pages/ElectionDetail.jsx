@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
@@ -6,6 +6,13 @@ import { electionsData } from './Elections';
 
 function ForecastBar({ data, title }) {
   const { leftLabel, leftChance, rightLabel, rightChance, leftColor, rightColor } = data;
+  const [animated, setAnimated] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setAnimated(true), 100);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mt-6">
       <h3 className="text-white font-inter font-bold text-xl mb-6 text-center text-shadow-teal">
@@ -13,20 +20,28 @@ function ForecastBar({ data, title }) {
       </h3>
       <div className="flex items-center gap-4 mb-4">
         <div
-          className="flex-1 bg-white/10 rounded-full h-12 overflow-hidden flex transition-transform duration-200 hover:scale-[1.02] cursor-default"
-          style={{ border: '2px solid white' }}
+          className="flex-1 bg-white/10 rounded-full h-12 overflow-hidden flex hover:scale-[1.02] cursor-default"
+          style={{ border: '2px solid white', transition: 'transform 0.2s' }}
         >
           <div
-            className="h-full flex items-center justify-end pr-3 transition-all duration-1000"
-            style={{ width: `${leftChance}%`, backgroundColor: leftColor }}
+            className="h-full flex items-center justify-end pr-3"
+            style={{
+              width: animated ? `${leftChance}%` : '50%',
+              backgroundColor: leftColor,
+              transition: 'width 1.2s cubic-bezier(0.4,0,0.2,1)'
+            }}
           >
             {leftChance > 15 && (
               <span className="text-white font-bold text-sm">{leftChance}%</span>
             )}
           </div>
           <div
-            className="h-full flex items-center justify-start pl-3 transition-all duration-1000"
-            style={{ width: `${rightChance}%`, backgroundColor: rightColor }}
+            className="h-full flex items-center justify-start pl-3"
+            style={{
+              width: animated ? `${rightChance}%` : '50%',
+              backgroundColor: rightColor,
+              transition: 'width 1.2s cubic-bezier(0.4,0,0.2,1)'
+            }}
           >
             {rightChance > 15 && (
               <span className="text-white font-bold text-sm">{rightChance}%</span>

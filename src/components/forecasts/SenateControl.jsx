@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 export default function SenateControl({ democratChance, republicanChance, title = "Senate Control Probability" }) {
+  const [animated, setAnimated] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setAnimated(true), 100);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 mt-8">
       <h3 className="text-white font-inter font-bold text-xl sm:text-2xl text-center mb-6 text-shadow-teal">
@@ -9,31 +15,23 @@ export default function SenateControl({ democratChance, republicanChance, title 
       </h3>
       
       <div className="flex items-center gap-4 mb-6">
-        <div className="flex-1 bg-white/10 rounded-full h-12 overflow-hidden flex transition-transform duration-200 hover:scale-[1.02] cursor-default" style={{ border: '2px solid white' }}>
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: `${democratChance}%` }}
-            transition={{ duration: 1, ease: 'easeOut' }}
+        <div className="flex-1 bg-white/10 rounded-full h-12 overflow-hidden flex hover:scale-[1.02] cursor-default" style={{ border: '2px solid white', transition: 'transform 0.2s' }}>
+          <div
             className="h-full bg-blue-600 flex items-center justify-end pr-3"
+            style={{ width: animated ? `${democratChance}%` : '50%', transition: 'width 1.2s cubic-bezier(0.4,0,0.2,1)' }}
           >
             {democratChance > 15 && (
-              <span className="text-white font-bold text-sm">
-                {democratChance}%
-              </span>
+              <span className="text-white font-bold text-sm">{democratChance}%</span>
             )}
-          </motion.div>
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: `${republicanChance}%` }}
-            transition={{ duration: 1, ease: 'easeOut' }}
+          </div>
+          <div
             className="h-full bg-red-600 flex items-center justify-start pl-3"
+            style={{ width: animated ? `${republicanChance}%` : '50%', transition: 'width 1.2s cubic-bezier(0.4,0,0.2,1)' }}
           >
             {republicanChance > 15 && (
-              <span className="text-white font-bold text-sm">
-                {republicanChance}%
-              </span>
+              <span className="text-white font-bold text-sm">{republicanChance}%</span>
             )}
-          </motion.div>
+          </div>
         </div>
       </div>
 

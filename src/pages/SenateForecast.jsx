@@ -87,7 +87,7 @@ export default function SenateForecast() {
             incumbents={senateIncumbents}
           />
           <SenateControl democratChance={43} republicanChance={57} />
-          <ForecastRaceTable rows={contestedRows} title="Contested Senate Races" />
+          <ForecastRaceTable rows={contestedRows} title="All Senate Races" />
         </motion.div>
       </div>
     </div>

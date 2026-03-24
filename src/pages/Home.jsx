@@ -46,7 +46,7 @@ const baseResults = {
   'New Hampshire': -2.8, 'Maine': -6.9
 };
 
-const bubbleBase = "bg-black/50 backdrop-blur-sm rounded-2xl p-5 shadow-lg hover:bg-black/60 transition-all duration-300 hover:shadow-xl border border-white/10";
+const bubbleBase = "bg-black/50 backdrop-blur-sm rounded-2xl p-5 shadow-lg hover:bg-white/15 transition-all duration-300 hover:shadow-xl border border-white/10 hover:border-white/30";
 
 export default function Home() {
   return (
@@ -186,7 +186,7 @@ export default function Home() {
                   <p className="font-inter font-bold text-white/60 text-sm mb-3">{electionsData[0].date}</p>
                   <div className="flex gap-2 flex-wrap mb-3">
                     {electionsData[0].candidates.map(c => (
-                      <span key={c.name} className="text-sm font-inter font-semibold" style={{ color: c.color === '#FCA5A5' ? '#b91c1c' : '#1d4ed8' }}>
+                      <span key={c.name} className="text-sm font-inter font-semibold" style={{ color: c.color }}>
                         {c.name} ({c.party})
                       </span>
                     ))}
