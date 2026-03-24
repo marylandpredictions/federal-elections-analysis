@@ -7,6 +7,7 @@
 @layer base {
   :root {
     --font-inter: 'Inter', sans-serif;
+    --footer-bg: #ffffff;
     /* Light mode */
     --background: 0 0% 91.8%;
     --foreground: 0 0% 7%;
@@ -39,6 +40,7 @@
   }
 
   .dark {
+    --footer-bg: #262626;
     --background: 0 0% 0%;
     --foreground: 0 0% 98%;
     --card: 0 0% 8%;
