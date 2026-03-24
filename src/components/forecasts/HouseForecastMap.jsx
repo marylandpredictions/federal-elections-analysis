@@ -252,7 +252,7 @@ export default function HouseForecastMap() {
                   ))}
                   <div style={{ marginTop: 6, display: 'flex', justifyContent: 'center' }}>
                     <span style={{ backgroundColor: ratingColors[tooltip.rating], color: 'white', fontSize: 11, fontWeight: 700, padding: '2px 10px', borderRadius: 999 }}>
-                      {tooltip.rating} · {bars[0].label} +{Math.abs(bars[0].pct - bars[1].pct).toFixed(1)}%
+                      {bars[0].label} +{Math.abs(bars[0].pct - bars[1].pct).toFixed(1)}%
                     </span>
                   </div>
                 </>
