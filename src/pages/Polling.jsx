@@ -329,9 +329,11 @@ const mockPollingData = {
       { date: '2026-02-12', cornyn: 38, paxton: 50, cornyinMin: 35, cornyinMax: 41, paxtonMin: 47, paxtonMax: 53 },
       { date: '2026-02-24', cornyn: 36, paxton: 49, cornyinMin: 33, cornyinMax: 39, paxtonMin: 46, paxtonMax: 52 },
       { date: '2026-03-06', cornyn: 42.1, paxton: 45.2, cornyinMin: 39.1, cornyinMax: 45.1, paxtonMin: 42.2, paxtonMax: 48.2 },
-      { date: '2026-03-08', cornyn: 41.5, paxton: 49.6, cornyinMin: 38.5, cornyinMax: 44.5, paxtonMin: 46.6, paxtonMax: 52.6 }
+      { date: '2026-03-08', cornyn: 41.5, paxton: 49.6, cornyinMin: 38.5, cornyinMax: 44.5, paxtonMin: 46.6, paxtonMax: 52.6 },
+	  { date: '2026-03-08', cornyn: 39.9, paxton: 47.4, cornyinMin: 36.9, cornyinMax: 42.9, paxtonMin: 44.4, paxtonMax: 50.4 }
     ],
     polls: [
+      { pollster: 'Quantus Insights (R)', date: 'March 21–23, 2026', sampleSize: 1218, cornyn: 41, paxton: 49, other: 0, undecided: 10, margin: 'Paxton +8' },
       { pollster: 'Change Research (D)', date: 'March 17–19, 2026', sampleSize: 807, cornyn: 39, paxton: 42, other: 0, undecided: 19, margin: 'Paxton +3' },
       { pollster: 'Impact Research (D)', date: 'March 12–17, 2026', sampleSize: 0, cornyn: 37, paxton: 53, other: 0, undecided: 10, margin: 'Paxton +16' },
       { pollster: 'Peak Insights (R)', date: 'March 9–12, 2026', sampleSize: 800, cornyn: 45, paxton: 45, other: 0, undecided: 10, margin: 'Tie' },
